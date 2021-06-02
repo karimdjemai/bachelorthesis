@@ -95,7 +95,7 @@ Leider bring das reale gehen (real walking nach[
 ), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
 
 \section{Redirected Walking}
-
+%sind impossible spaces überhaupt redirected walking?
 Eine Art dieses Problem zu Umgehen ist das so genannte \textquote{Redirected Walking}. Dies ist eine Sammlung von Techniken mit denen die Nutzer:in subtilen Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird. Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen. So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
 Im folgenden werde ich nun zwei dieser Techniken genauer vorstellen.
 
@@ -106,11 +106,11 @@ Rotation Gains werden Kopfrotationen hinzugefügt sodass sich die virtuelle Kame
 %TODO: latex formatting
 darstellen, wobei pitch, yaw und roll
 %TODO: latex formatting
-die Eulerschen Winkel der Kopfrotation darstellen. Für alle 3 Winkel kann ein rotation gain angewandt werden. Der rotation gain wird dann als Quotient der virtuellen Winkels und dem realen Winkel definiert also: gR := Rvirtual / Rreal
+die Eulerschen Winkel der Kopfrotation darstellen. Für alle 3 Winkel kann ein rotation gain angewandt werden. Der rotation gain wird dann als Quotient des virtuellen Winkels und des realen Winkels definiert also: gR := Rvirtual / Rreal
 %TODO: latex formatting.
 Dieses Anwenden funktioniert indem der rotation gain gR mit dem Winkel der realen Kopfrotation (alpha) multipliziert wird also: gR * alpha
 %TODO: latex formatting.
-
+Da für jeden Winkel der Kopfrotation ein rotation gain definiert werden kann werden Rotationgains folgendermaßen dargestellt: (gRpitch, gRyaw, gRroll)
 
 
 
