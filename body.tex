@@ -126,30 +126,40 @@ In der Regel wird für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel 
 [
     %quelle steinicke techniken
 ]
+Durch anwenden eines rotation gains kann der virtuelle Trackingspace um den realen Trackingspace mit dem Drehpunkt der Nutzerposition herum rotiert werden.
+Für den Nutzer kann so die Illusion entstehen er würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. (Siehe grafik)
+%TODO: grafik.
+
 \subsection{Impossible Spaces}
 Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern hat sich [
     %TODO: quelle: Suma impossible spaces q
 ] eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispiels weise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
 %TODO: grafik?
+Dafür ist es also notwendig $x$ verschiedene states
+%TODO: übersetzung
+zu setzen sodass immer einer $x$ verschiedener Räume angezeigt wird. Des weiteren ist es Notwendig einen Bereich zu erschaffen in dem zwischen den states gewechselt werden kann, ohne dass die Nutzer:in es merkt.
+
+\subsection{Generierte Level} %prozedural, oder zufällig? oder pseudozufällig?
+
+Klassischer weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern designed. Dies erfordert Zeit und know-how. %TODO: formulierung
+Der Arbeitsaufwand wächst (linear) mit der Größe des Levels, deshalb ist es unmöglich endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist das so genannte \textquote{Prozedurale Generieren}(Auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit endlos große Welten erschaffen.
+%verschiedene Arten von prozeduraler generiung und dazu beispiel wie minecraft, rogue etc. mit quellen.
+
+In dem hier vorgestellten Experiment
 
 
 \chapter{Verwandte Arbeiten}\label{chapter:kapitellabel}
 
-\chapter{Generierte Level}\label{chapter:kapitellabel}
 
 \chapter{Fortbewegungsarten}\label{chapter:kapitellabel}
 
 \chapter{Implementierung}\label{chapter:kapitellabel}
 
 \chapter{Experiment}\label{chapter:kapitellabel}
-
-\chapter{Teilnehmer}\label{chapter:kapitellabel}
-
-\chapter{Materialien}\label{chapter:kapitellabel}
-
-\chapter{Methoden}\label{chapter:kapitellabel}
-
-\chapter{Ergebnisse}\label{chapter:kapitellabel}
+\section{Teilnehmer}\label{chapter:kapitellabel}
+\section{Materialien}\label{chapter:kapitellabel}
+\section{Methoden}\label{chapter:kapitellabel}
+\section{Ergebnisse}\label{chapter:kapitellabel}
 
 \chapter{Diskussion}\label{chapter:kapitellabel}
 
