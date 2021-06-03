@@ -71,7 +71,7 @@
 
 \chapter{Einführung}\label{chapter:kapitellabel}
 
-Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Realität viele Vorteile gegenüber alternativen Fortbewegungsarten.[
+Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten.[
 
     %TODO:Quelle
     ]
@@ -84,37 +84,54 @@ zeigt dass weniger Motion sickness entsteht wenn sich die Nutzer:innen durch die
     %TODO: quelle
 
 ]
-erklärt das beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
+erklärt, dass beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
 Leider bring das reale gehen (real walking nach[
     %TODO: quelle
 
 ]
-) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist. Zwar gibt es dazu auch ausnahmen, ( siehe z.B.[
+) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
+
+Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation des Headsets und der Controller bei einigen Technologien (zum Beispiel den Modellen der \textquote{HTC VIVE}-Produktreihe
+%TODO:quelle%
+), zum anderen durch die Raumgröße der meisten VR-Setups.
+
+Zwar gibt es dazu auch Ausnahmen, ( siehe z.B.[
     %TODO: quelle microsoft studie
 ]
 ), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
 
-\section{Redirected Walking}
+\section{Redirections Techniques} %oder lieber deutsch???
 %sind impossible spaces überhaupt redirected walking?
-Eine Art dieses Problem zu Umgehen ist das so genannte \textquote{Redirected Walking}. Dies ist eine Sammlung von Techniken mit denen die Nutzer:in subtilen Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird. Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen. So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
+Eine Herangehensweise dieses Problem zu Umgehen sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet (nach [
+    %quelle steinicke übersicht paper
+
+])). Dies ist ein Sammelbegriff für Techniken bei denen die Nutzer:in subtilen Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird. Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen. So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
 Im folgenden werde ich nun zwei dieser Techniken genauer vorstellen.
 
-\subsection{Rotation Gains}
+\subsection{Rotationgains}
 %TODO: quelle steinicke zusammenfassung der techniken
-Rotation Gains werden Kopfrotationen hinzugefügt sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale Kopf mit dem VR-Headset. Kopfrotationen lassen sich mit der Schreibweise Rreal :=
-(pitchreal, yawreal, rollreal)
-%TODO: latex formatting
+Rotationgains werden Kopfrotationen hinzugefügt sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
+Kopf mit dem VR-Headset. Kopfrotationen lassen sich mit der Schreibweise
+$$ R_{real} := (pitch_{real}, yaw_{real}, roll_{real}) $$
 darstellen, wobei pitch, yaw und roll
-%TODO: latex formatting
-die Eulerschen Winkel der Kopfrotation darstellen. Für alle 3 Winkel kann ein rotation gain angewandt werden. Der rotation gain wird dann als Quotient des virtuellen Winkels und des realen Winkels definiert also: gR := Rvirtual / Rreal
-%TODO: latex formatting.
-Dieses Anwenden funktioniert indem der rotation gain gR mit dem Winkel der realen Kopfrotation (alpha) multipliziert wird also: gR * alpha
-%TODO: latex formatting.
-Da für jeden Winkel der Kopfrotation ein rotation gain definiert werden kann werden Rotationgains folgendermaßen dargestellt: (gRpitch, gRyaw, gRroll)
-
-
-
+die Eulerschen Winkel der Kopfrotation darstellen. Der Rotationgain wird dann als Quotient des virtuellen Winkels und des realen Winkels definiert also:
+$$ gR := \frac{R_{virtual}}{R_{real}} $$
+Für alle 3 Winkel kann ein Rotationgain angewandt werden.
+Dieses Anwenden funktioniert indem der Rotationgain $gR$ mit dem Winkel der realen Kopfrotation $\alpha$ multipliziert wird also:
+$$ gR * \alpha $$
+Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann werden Rotation gains folgendermaßen dargestellt:
+$$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
+%TODO: inline?
+In der Regel wird für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
+[
+    %quelle steinicke techniken
+]
 \subsection{Impossible Spaces}
+Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern hat sich [
+    %TODO: quelle: Suma impossible spaces q
+] eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispiels weise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
+%TODO: grafik?
+
 
 \chapter{Verwandte Arbeiten}\label{chapter:kapitellabel}
 
