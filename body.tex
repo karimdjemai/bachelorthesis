@@ -105,7 +105,9 @@ Zwar gibt es dazu auch Ausnahmen, ( siehe z.B.[
 Eine Herangehensweise dieses Problem zu Umgehen sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet (nach [
     %quelle steinicke übersicht paper
 
-])). Dies ist ein Sammelbegriff für Techniken bei denen die Nutzer:in subtilen Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird. Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen. So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
+])). Dies ist ein Sammelbegriff für Techniken bei denen die Nutzer:in mit Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird.
+%  Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen.
+So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
 Im folgenden werde ich nun zwei dieser Techniken genauer vorstellen.
 
 \subsection{Rotationgains}
@@ -131,9 +133,7 @@ Für den Nutzer kann so die Illusion entstehen er würde über die Grenzen des T
 %TODO: grafik.
 
 \subsection{Impossible Spaces}
-Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern hat sich [
-    %TODO: quelle: Suma impossible spaces q
-] eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispiels weise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
+Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern haben sich Suma et al. \cite{impossible-spaces-suma} eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispiels weise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
 %TODO: grafik?
 Dafür ist es also notwendig $x$ verschiedene states
 %TODO: übersetzung
@@ -149,17 +149,52 @@ In dem hier vorgestellten Experiment
 
 
 \chapter{Verwandte Arbeiten}\label{chapter:kapitellabel}
-In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Vergleich von Redirection Techniken zur Erweiterung des begehbaren Bereiches in virtuellen Umgebungen beschäftigen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch hier genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren.
+In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Vergleich von Redirection Techniken zur Erweiterung des begehbaren Bereiches in virtuellen Umgebungen beschäftigen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch hier genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren. Die Kombination von generierten Leveln und redirection Techniken führen zu dem sogenannten \textquote{infinite walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
 \section{Redirection Techniken}
-1995 zeigte Slater et al. \cite{taking-steps}, dass Proband:innen eine höheres Präsensgefühl zeigten wenn sie die von ihm vorgestellte Technik \textquote{walking-in-place} nutzen als wenn sie per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine v-walking Technik bei der die Proband:innen ein eine Gehbewegung simulierten die dann digital erfasst und in Virtuell Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{real-walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsensgefühl als bei den beiden anderen Optionen (virtual-walking und push-button-fly).
+1995 zeigen Slater et al. \cite{taking-steps}, dass Proband:innen eine höheres Präsensgefühl zeigten wenn sie die von ihm vorgestellte Technik \textquote{walking-in-place} nutzen als wenn sie per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine v-walking Technik bei der die Proband:innen ein eine Gehbewegung simulierten die dann digital erfasst und in Virtuell Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{real-walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsensgefühl als bei den beiden anderen Optionen (virtual-walking und push-button-fly).
 Des weiteren zeigen Arbeiten wie \cite{benefits-real-walking} und \cite{locomotion-path-integration}, dass virtuelle Fortbewegungsarten, die anders als real-walking nicht den vestibulären Sinn und die Propriozeption stimulieren, wahrscheinlicher die sogenannte \textquote{simulator-sickness} auslösen und, dass die User:innen damit weniger effektiv navigieren.
-Eine vielversprechende Art den begehbaren Bereich zu vergrößern sind Redirection Techniken. Razzaque et al. \cite{rdw-razzaque} stellte 2001 die Technik des redirected walking vor, bei der die Nutzer:innen unwissentlich durch den Trackingspace gelenkt werden, dabei aber die Illusion entsteht, sie würden sich über die Grenzen dessen hinausbewegen. Seit dem gibt es zahlreiche weitere Techniken um den selben Effekt zu erzielen oder um ihn weiterzuentwickeln. Der Ansatz die verschiedenen Manipulationseffekte als \textquote{gains} zu beschreiben findet sich bei Steinicke et al. \cite{detection-thresholds}. Dort wird untersucht wie subtil diese Manipulationen sein müssen um nicht von der Nutzer:in erkannt zu werden.
-Eine Taxonomie über die verschiedenen Redirection Techniken stellte 2012 Suma et al. \cite{taxonomy} vor. Die unterschiedlichen Techniken werden in die Kategorien: \textquote{Repositioning} (Repositionierung) oder \textquote{Reorientation} (Reorientierung), \textquote{Subtle} (subtil) oder \textquote{Overt} (unverborgen), und \textquote{Discrete} (diskret) oder \textquote{Continuous} (kontinuierlich) unterteilt.
+Eine vielversprechende Art den begehbaren Bereich zu vergrößern sind Redirection Techniken. Razzaque et al. \cite{rdw-razzaque} stellten 2001 die Technik des redirected walking vor, bei der die Nutzer:innen unwissentlich durch den Trackingspace gelenkt werden, dabei aber die Illusion entsteht, sie würden sich über die Grenzen dessen hinausbewegen. Seit dem gibt es zahlreiche weitere Techniken um den selben Effekt zu erzielen oder um ihn weiterzuentwickeln. Der Ansatz die verschiedenen Manipulationseffekte als \textquote{gains} zu beschreiben findet sich bei Steinicke et al. \cite{detection-thresholds}. Dort wird untersucht wie subtil diese Manipulationen sein müssen um nicht von der Nutzer:in erkannt zu werden.
+Eine Taxonomie über die verschiedenen Redirection Techniken stellten 2012 Suma et al. \cite{taxonomy} vor. Die unterschiedlichen Techniken werden in die Kategorien: \textquote{Repositioning} (Repositionierung) oder \textquote{Reorientation} (Reorientierung), \textquote{Subtle} (subtil) oder \textquote{Overt} (unverborgen), und \textquote{Discrete} (diskret) oder \textquote{Continuous} (kontinuierlich) unterteilt.
 
 \subsection{Rotation Gains}
 
-Bei Rotationgains handelt es such nach Sumas Taxonomie (\cite{taxonomy}) um eine kontinuierliche, subtile Reorientierungstechnik.
+Bei Rotationgains handelt es such nach Sumas Taxonomie \cite{taxonomy} um eine kontinuierliche, subtile Reorientierungstechnik. In der Arbeit \cite{detection-thresholds} untersuchten Steinicke et al. verschiedene subtile Techniken darauf, wie stark die Manipulation sein darf, bevor Proband:innen erkennen ob sie eingesetzt wurde oder nicht. Dazu teilt er die verschiedenen Elemente, die für redirected walking eingesetzt werden, in drei verschiedene Gains ein: \textquote{translation} gains, \textquote{rotation} gains und \textquote{curvature} gains.
+
+\subsection{Impossible Spaces}
+
+Bei Impossible Spaces handelt es sich um eine von Suma et al. \cite{impossible-spaces-suma} vorgestellte redirection Technik, bei der sich die Architektur der virtuellen Umgebung auf nicht-euklidische Weise verändert, sodass solche Gebiete in der Realität nicht existieren könnten. Die Räume überlappen einander, allerdings wird jeweils nur einer der überlappenden Räume angezeigt. Hierbei handelt es sich nach der schon erwähnten Taxonomie um eine subtile diskrete redirection Technik.
+
+In einer Forschungsdemonstration \cite{redirected-spaces} stellten Langbehn et al. eine Weise vor mit der impossible spaces mit traditionelleren redirected walking Methoden (in diesem Fall curvature gains)
+%TODO: sind bending und curvature games das selbe?
+kombiniert werden können, sodass beide Methoden ihren Effekt beitragen können.
+
+\section{Prozedural generierte Level}
+
+Der Artikel \cite{sbpcg} von Togelius et al. definiert prozedurale Generierung von Spiel-Inhalten (procedural (game-)content generation oder auch PCG) als:
+
+\begin{quotation}
+    \textquote{[...] creating game content automatically, through algorithmic means.}
+\end{quotation}
+
+\begin{quotation}
+    (\textquote{[...] algorithmisch, automatisch, (Computer-)spiel Inhalte erstellen})
+\end{quotation}
+
+In ihrer späteren Arbeit hingegen \cite{what-is-pcg} definieren Togelius et al. PCG folgendermaßen neu:
+\begin{quotation}
+    \textquote{We can therefore tentatively redefine PCG as the algorithmical creation of game content with limited or indirect user input.}
+\end{quotation}
+
+\begin{quotation}
+    (\textquote{Wir können PCG daher versuchsweise als die algorithmische Erstellung von Spielinhalten mit begrenzter oder indirekter Benutzereingabe neu definieren.})
+\end{quotation}
+
+
+um unter anderem miteinzubeziehen, dass einige PCG-Algorithmen Nutzer- oder Designerinput miteinbeziehen können und somit nicht mehr \textquote{automatisch} Inhalte generieren. Ausserdem wollen sie in der Definition festhalten, dass Nutzerinput typischerweise zumindest indirekt (beispielsweise durch Druck eines Startknopfes) erforderlich ist um Inhalte zu generieren.
+Mit (Spiel-)Inhalten sind an dieser die meisten Elemente in Spielen gemeint. Unter anderem Texturen, Musik oder auch die Geschichte des Spiels können mit PCG erstellt werden. Im Rahmen dieser Arbeit hingegen beschäftige ich mich aber lediglich mit PCG zur Erstellung von Leveln.
+
+
 
 
 
