@@ -29,7 +29,7 @@
               bookmarksopen=true,%
               bookmarksnumbered=true,%
               pdfauthor={\autor},%
-              pdftitle={\arbeitstitel},% 
+              pdftitle={\arbeitstitel},%
               pdfsubject={\arbeitstitel},%
               pdfkeywords={\arbeitstitel},%
              ]{hyperref}       % clickabe references
@@ -53,7 +53,7 @@
 \babeltags{de = german, en = english}
 \usepackage{ifthen}
 
-\usepackage[style=alphabetic,citestyle=alphabetic,maxcitenames=5,mincitenames=3,maxbibnames=1000,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backend=biber]{biblatex}
+\usepackage[style=numeric,citestyle=numeric,maxcitenames=5,mincitenames=3,maxbibnames=1000,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backend=biber]{biblatex}
 \addbibresource{references.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
 
@@ -100,43 +100,43 @@
 	%\localedef{en}{english}
 	%\localedef{fr}{frenchb}
 	\pagenumbering{roman} % titlepage does not get a number - that's odd, but good.
-	
-	\ifpdf\pdfbookmark[1]{Title}{label:title}\fi              
-	
+
+	\ifpdf\pdfbookmark[1]{Title}{label:title}\fi
+
 	% do not use titlepage environment, because it does not increase page counter.
-	
+
 	\thispagestyle{empty}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
-	
+
+
 	\begin{center}
-		
+
 		%\Large  Human-Computer Interaction\\
 		\vspace{0.2cm}
 		\begin{figure}[h!] %  figure placement: here, top, bottom, or page
 			\hspace{-2.32cm}
 			\vspace{-2cm}
-			\includegraphics[width=9.22cm]{images/up-uhh-logo-u-2010-u-png.png} 
+			\includegraphics[width=9.22cm]{images/up-uhh-logo-u-2010-u-png.png}
 		\end{figure}
 		\vspace{4cm}
-		
-		
+
+
 		\Huge \textbf{\arbeitstitel} \\
-		
+
 		\vspace{1.0cm}
-		
+
 		\Large
-		
+
 		\vspace{2.0cm}
-		
+
 		\large \IfLanguageName{ngerman}{Autor}{Author}:\\
 		\Large \textbf{\autor} \\
 		\vspace{0.5cm}
 		\large \IfLanguageName{ngerman}{Matrikel}{Matriculation Number}: \matrikel
-		
+
 		\vspace{2.0cm}
-		
+
 		\large
-		
+
 		%\hspace*{1.5cm}
 		Mensch-Computer Interaktion\\
 		\IfLanguageName{ngerman}{Fachbereich Informatik}{Department of Computer Science}~\\
@@ -150,38 +150,38 @@
 			\\ \IfLanguageName{ngerman}{Betreuer}{Supervisor}:	& \betreuer
 			\fi
 		\end{tabular}
-		
+
 		\vspace{1.0cm}
-		
-		
+
+
 		Hamburg, \today
 		%\end{spacing}
-		
+
 	\end{center}
-	
-	
+
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
+
 	%{\doublespacing
 	%\newpage\ifpdf\pdfbookmark[1]{Acknowledgement}{label:ack}\fi\input{acknowledge.tex}
 	\ifthenelse{\equal{#1}{1}}
 	{\newpage\ifpdf\pdfbookmark[1]{Abstract}{label:abst}\fi \input{abstract.tex}}{}
-	
+
 	\ifthenelse{\equal{#2}{1}}
 	{\newpage\ifpdf\pdfbookmark[1]{Zusammenfassung}{label:abstGER}\fi \input{abstractGER.tex}}{}
 	%\newpage\ifpdf\pdfbookmark[1]{Abstract}{label:abst}\fi     \input{abstract.tex}
 	%}
-	
-	
+
+
 	\newpage\ifpdf\pdfbookmark[1]{Table of Contents}{label:toc}\fi \tableofcontents
 	\newpage\ifpdf\pdfbookmark[1]{List of Figures}{label:lof}\fi     \listoffigures
 	\newpage\ifpdf\pdfbookmark[1]{List of Tables}{label:lot}\fi       \listoftables
-	
+
 	{\doublespacing
 		\newpage\pagenumbering{arabic}
 	}
-	
-	
+
+
 }
 \headsep.5cm
 
@@ -203,8 +203,8 @@
 	\section*{Electronic}
 	\addcontentsline{toc}{section}{Electronic}
 	\printbibliography[heading=bibempty,keyword=Bla]
-	
-	
+
+
 %
 %\bibliographystyle{alpha}\bibliography{references}
 %
