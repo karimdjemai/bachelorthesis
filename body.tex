@@ -38,7 +38,7 @@
 %       \hline
 %     \end{tabular}
 % \end{table}
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla hghgh hhghg mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
 % \begin{figure}[!ht]
 % \centering
@@ -139,7 +139,7 @@ Dafür ist es also notwendig $x$ verschiedene states
 %TODO: übersetzung
 zu setzen sodass immer einer $x$ verschiedener Räume angezeigt wird. Des weiteren ist es Notwendig einen Bereich zu erschaffen in dem zwischen den states gewechselt werden kann, ohne dass die Nutzer:in es merkt.
 
-\subsection{Generierte Level} %prozedural, oder zufällig? oder pseudozufällig?
+\section{Generierte Level} %prozedural, oder zufällig? oder pseudozufällig?
 
 Klassischer weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern designed. Dies erfordert Zeit und know-how. %TODO: formulierung
 Der Arbeitsaufwand wächst (linear) mit der Größe des Levels, deshalb ist es unmöglich endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist das so genannte \textquote{Prozedurale Generieren}(Auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit endlos große Welten erschaffen.
@@ -149,6 +149,20 @@ In dem hier vorgestellten Experiment
 
 
 \chapter{Verwandte Arbeiten}\label{chapter:kapitellabel}
+In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Vergleich von Redirection Techniken zur Erweiterung des begehbaren Bereiches in virtuellen Umgebungen beschäftigen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch hier genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren.
+
+\section{Redirection Techniken}
+1995 zeigte Slater et al. \cite{taking-steps}, dass Proband:innen eine höheres Präsensgefühl zeigten wenn sie die von ihm vorgestellte Technik \textquote{walking-in-place} nutzen als wenn sie per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine v-walking Technik bei der die Proband:innen ein eine Gehbewegung simulierten die dann digital erfasst und in Virtuell Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{real-walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsensgefühl als bei den beiden anderen Optionen (virtual-walking und push-button-fly).
+Des weiteren zeigen Arbeiten wie \cite{benefits-real-walking} und \cite{locomotion-path-integration}, dass virtuelle Fortbewegungsarten, die anders als real-walking nicht den vestibulären Sinn und die Propriozeption stimulieren, wahrscheinlicher die sogenannte \textquote{simulator-sickness} auslösen und, dass die User:innen damit weniger effektiv navigieren.
+Eine vielversprechende Art den begehbaren Bereich zu vergrößern sind Redirection Techniken. Razzaque et al. \cite{rdw-razzaque} stellte 2001 die Technik des redirected walking vor, bei der die Nutzer:innen unwissentlich durch den Trackingspace gelenkt werden, dabei aber die Illusion entsteht, sie würden sich über die Grenzen dessen hinausbewegen. Seit dem gibt es zahlreiche weitere Techniken um den selben Effekt zu erzielen oder um ihn weiterzuentwickeln. Der Ansatz die verschiedenen Manipulationseffekte als \textquote{gains} zu beschreiben findet sich bei Steinicke et al. \cite{detection-thresholds}. Dort wird untersucht wie subtil diese Manipulationen sein müssen um nicht von der Nutzer:in erkannt zu werden.
+Eine Taxonomie über die verschiedenen Redirection Techniken stellte 2012 Suma et al. \cite{taxonomy} vor. Die unterschiedlichen Techniken werden in die Kategorien: \textquote{Repositioning} (Repositionierung) oder \textquote{Reorientation} (Reorientierung), \textquote{Subtle} (subtil) oder \textquote{Overt} (unverborgen), und \textquote{Discrete} (diskret) oder \textquote{Continuous} (kontinuierlich) unterteilt.
+
+\subsection{Rotation Gains}
+
+Bei Rotationgains handelt es such nach Sumas Taxonomie (\cite{taxonomy}) um eine kontinuierliche, subtile Reorientierungstechnik.
+
+
+
 
 
 \chapter{Fortbewegungsarten}\label{chapter:kapitellabel}
