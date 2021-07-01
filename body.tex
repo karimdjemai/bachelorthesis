@@ -149,6 +149,7 @@ In dem hier vorgestellten Experiment
 
 
 \chapter{Verwandte Arbeiten}\label{chapter:kapitellabel}
+
 In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Vergleich von Redirection Techniken zur Erweiterung des begehbaren Bereiches in virtuellen Umgebungen beschäftigen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch hier genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren. Die Kombination von generierten Leveln und redirection Techniken führen zu dem sogenannten \textquote{infinite walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
 \section{Redirection Techniken}
@@ -178,7 +179,7 @@ Der Artikel \cite{sbpcg} von Togelius et al. definiert prozedurale Generierung v
 \end{quotation}
 
 \begin{quotation}
-    (\textquote{[...] algorithmisch, automatisch, (Computer-)spiel Inhalte erstellen})
+    (\textquote{[...] algorithmisch, automatisch, (Computer-)spiel Inhalte erstellen.})
 \end{quotation}
 
 In ihrer späteren Arbeit hingegen \cite{what-is-pcg} definieren Togelius et al. PCG folgendermaßen neu:
@@ -192,11 +193,26 @@ In ihrer späteren Arbeit hingegen \cite{what-is-pcg} definieren Togelius et al.
 
 
 um unter anderem miteinzubeziehen, dass einige PCG-Algorithmen Nutzer- oder Designerinput miteinbeziehen können und somit nicht mehr \textquote{automatisch} Inhalte generieren. Ausserdem wollen sie in der Definition festhalten, dass Nutzerinput typischerweise zumindest indirekt (beispielsweise durch Druck eines Startknopfes) erforderlich ist um Inhalte zu generieren.
-Mit (Spiel-)Inhalten sind an dieser die meisten Elemente in Spielen gemeint. Unter anderem Texturen, Musik oder auch die Geschichte des Spiels können mit PCG erstellt werden. Im Rahmen dieser Arbeit hingegen beschäftige ich mich aber lediglich mit PCG zur Erstellung von Leveln.
+Mit (Spiel-)Inhalten sind in diesen Definitionen unterschiedlichste Elemente in Spielen gemeint. Unter anderem Texturen, Musik oder auch die Geschichte des Spiels können mit PCG erstellt werden. Im Rahmen dieser Arbeit hingegen beschäftige ich mich lediglich mit PCG zur Erstellung von Leveln.
 
+In ihrer Arbeit \cite{sbpcg} stellten Togelius et al. eine Taxonomie für PCG vor, die aus folgenden Kategorien besteht:
+\textquote{Online vs offline}, \textquote{Necessary vs optional},
+\textquote{Degree and dimensions of controll}, \textquote{Generic vs adaptive}
+\textquote{Stochastic vs deterministic}, \textquote{Constructive vs generate-and-test} und \textquote{Automatic generation vs mixed authorship}.
 
+Der in dieser Arbeit beschriebene PCG-Algorithmus lässt sich dementsprechend in diese Taxonomie einordnen: Offline, necessary, no degree of control, generic, stochastic, constructive and automatic.
+%TODO: übersetzen
 
+\section{Infinite walking}
+Viele der redirection Techniken ermöglichen das (erlebte) hinaustreten über den Rand des Trackingspaces, doch dennoch bleibt die begehbare Fläche limitiert. Solange die virtuelle Umgebung von menschlichen Designern erschaffen werden muss ist sie begrenzt. Wenn jedoch PCG genutzt wird um die virtuelle Umgebung zu erschaffen lässt sie sich theoretisch endlos weit durchschreiten, weil die Generierung während dem erkunden der Welt fortgeführt werden kann. Kombiniert man also redirection Techniken um über den Trackingspace hinaus gehen zu können mit prozeduraler Levelgenerierung spricht man vom \textquote{Infinite Walking}.
+Ein Beispiel für eine solche Technik stellen Vasylevska et al. in ihrer Arbeit \cite{flexible-spaces} vor. Ihr Algorithmus generiert fortlaufend Räume, innerhalb des Trackingspace, die einander überlappen können (Impossible Spaces) und verbindet sie mit Korridoren, sodass die Nutzer:in von einem Raum zum nächsten gehen kann. Praktisch ist diese Technik besonders bei Umgebungen in denen der Inhalt der Räume mehr im Fokus steht als das spezifische Layout der Räume wie beispielsweise einem Museum.
 
+Einen sehr ähnlichen Ansatz nutzt das VR-Spiel \textquote{Tea for God} \cite{tea-for-god} bei dem die Nutzer:in durch ein endlos scheinendes Labyrinth von Korridoren gehen kann. Der Entwickler Jarosław (Void Room) Ciupiński erklärt in seinen Devlogs (beispielsweise \cite{tea-for-god-devlog-a} oder \cite{tea-for-god-devlog-b}) genauer wie der Ansatz funktioniert.
+Die Welt besteht aus einem prozedural generierten Netz von verbundenen Zellen, die jeweils einen Raum repräsentieren und mit Korridoren verbunden sind. Auch hier basieren die Räume auf den vorher erwähnten Impossible Spaces.
+%In seinem devlog \cite{tea-for-god-devlog-b} erwähnt der Autor die eben erwähnte Arbeit von Vasylevska et al. \cite{flexible-spaces}, was darauf hindeuten könnte, das Spiel wäre von dem Ansatz der flexible spaces inspiriert.
+
+Einen anderen Ansatz verfolgt das in der Arbeit \cite{microsoft} von Cheng et al. vorgestellte Projekt \textquote{VRoamer}.
+Hier erkundet die Nutzer:in eine On-The-Fly generierte virtuelle Umgebung (auch hier besteht diese aus Räumen und Korridoren), während er durch die reale Welt läuft. Die Generierungssoftware erhält einen 3D-Kamera Input und kann so Wände, Säulen, Gegenstände, andere Menschen etc. beachten und dementsprechend die virtuelle Welt anpassen. Dort wird dann ein virtueller Gegenstand platziert, sodass die Nutzer:in nicht mit den Hindernissen der realen Welt kollidiert.
 
 
 
