@@ -261,6 +261,101 @@ Vergleichbar mit den Arbeiten \cite{peck-vergleich-2011} und \cite{langbehn-verg
 
 \chapter{Implementierung}\label{chapter:kapitellabel}
 
+In diesem Kapitel werde ich die technische Umsetzung für das in dieser Arbeit vorgestellte Experiment vorstellen. Dabei werde ich im Detail erklären, wie die unterschiedlichen Module des Quelltext funktionieren und dementsprechend offen legen, wie eine solche Infinite-Walking Umgebung implementiert werden kann. Die gesamte Programmierung für dieses Projekt ist in der Entwicklungsumgebung Unity (Version:) \cite{unity} und dementsprechend mit der Programmiersprache \textquote{C\#} erfolgt. Um die Software während der Entwicklung testen zu können und um damit das Experiment durchführen zu können wurde mir freundlicherweise eine \textquote{Oculus Quest 2} \cite{quest} Datenbrille, vom Arbeitsbereich Mensch-Computer-Interaktion der Universität Hamburg zur Verfügung gestellt. Um mit der Schnittstelle davon zu interagieren nutzt das Projekt das, von Oculus frei zur Nutzung gestellte, \textquote{Oculus Integration SDK} für Unity \cite{integration}.
+%Space extender erwähnen
+
+\section{Scripts}
+\begin{multicols*}{2}
+    Test testsidfjjl
+    sdfkjwlkdjflskdjflksdhflsdhfös
+
+
+    sdfjhskljdfhkjsdhfkjshdfkjshdf
+
+\end{multicols*}
+
+
+\begin{figure}[!ht]
+    \centering
+    \sourcecode{main.cpp}
+    \caption{Hello World Program}\label{figure:helloworld}
+\end{figure}
+
+\section{Class Diagram}
+
+\begin{center}
+\begin{tikzpicture}
+    \begin{umlpackage}{Assets/Scripts}
+
+    \umlclass[x=4,y=1]{GenerateLevel}{}{
+    }
+    \umlclass[x=10,y=-1]{GeneratorOculusInterface}{}{
+    }
+    \umlclass[x=7,y=-5]{RoomGenerator}{}{
+    }
+    \umlclass[x=4,y=-1]{RoomAndProgressManager}{}{
+    }
+
+    \umlclass[x=2,y=-5]{RotationGainMechanism}{}{
+    }
+
+    \umlclass[x=10.8,y=-8]{RotationRedirectorCollision}{}{
+    }
+
+    \umlclass[x=4,y=-7]{SceneLoader}{}{
+    }
+
+    \umlinterface[x=5,y=-9.5]{INumberPadListener}{}{
+    }
+
+    \umlclass[x=2,y=-12]{NumberPadScript}{}{
+    }
+
+    \umlclass[x=8,y=-12]{NumberPadButton}{}{
+    }
+
+    \end{umlpackage}
+
+    \begin{umlpackage}[x=10,y=5]{SpaceExtender}
+    \umlclass{RotationRedirector}{}{}
+    \end{umlpackage}
+
+    \begin{umlpackage}[x=2,y=5]{Oculus Integration SDK}
+    \umlclass{OVRManager}{}{}
+    \end{umlpackage}
+
+    \umldep[geometry=-|, anchors= 0 and -90, align2=left]{GenerateLevel}{RotationRedirector}
+
+    \umldep[geometry=-|, anchors= 0 and 90, align2=left]{GenerateLevel}{RotationRedirectorCollision}
+
+    \umldep[geometry=|-|, weight=0.7, anchors= 140 and -90, align2=left]{GeneratorOculusInterface}{OVRManager}
+
+    \umlinherit[geometry=|-, anchors= 160 and 180]{RotationGainMechanism}{INumberPadListener}
+
+    \umlinherit[geometry=-|, anchors= 180 and 90]{SceneLoader}{INumberPadListener}
+
+    \umluniassoc[geometry=-|-, anchors= 180 and 0]{NumberPadButton}{NumberPadScript}
+
+    \umluniassoc[geometry=|-|, anchors= 90 and -90]{NumberPadScript}{INumberPadListener}
+
+    \umluniassoc[geometry=-|, anchors= 180 and -90]{RotationRedirectorCollision}{RotationGainMechanism}
+
+    \umluniassoc[geometry=|-|, anchors= 110 and -90]{RotationGainMechanism}{RoomAndProgressManager}
+
+    \umluniassoc[geometry=|-|, anchors= -50 and 90]{RoomAndProgressManager}{RoomGenerator}
+
+    \umluniassoc[geometry=|-|, anchors= -90 and 90]{GenerateLevel}{RoomAndProgressManager}
+
+    \umluniassoc[geometry=|-, anchors= 120 and -15]{GeneratorOculusInterface}{GenerateLevel}
+
+    \umluniassoc[geometry=|-|, anchors= 150 and -145, align2=left]{RotationGainMechanism}{RotationRedirector}
+
+    \umluniassoc[geometry=-|, anchors= 180 and 145, align2=left]{SceneLoader}{NumberPadScript}
+
+    \end{tikzpicture}
+\end{center}
+
+
 \chapter{Experiment}\label{chapter:kapitellabel}
 \section{Teilnehmer}\label{chapter:kapitellabel}
 \section{Materialien}\label{chapter:kapitellabel}
