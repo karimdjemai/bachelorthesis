@@ -404,8 +404,16 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 \end{multicols*}
 
 \section{Levelgenerierung}
-An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Zunächst werde ich beschreiben, wie er funktioniert und dann denn wesentlichen Teil des Quellcodes Abbilden, um die Implementierung vorzustellen.
+An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Zunächst werde ich beschreiben, wie er funktioniert und dann den wesentlichen Teil des Quellcodes Abbilden, um die Implementierung vorzustellen.
 
+\subsection{Grundidee hinter dem Algorithmus}
+%Um die durchgehende Weiterführung des Levels zu ermöglichen werden zwei Räume immer genau so angeordnet, dass ein Rotation-Gain, der genau bis zu einer Verdrehung der beiden Realitäten von 90\textdegree\ angewandt wird, während die Nutzer:in an einem bestimmten Punkt in der Ecke des Raumes steht,
+Wenn ein Rotation-Gain angewandt wird verdrehen sich virtuelle und reale Realität um den Drehpunkt, der durch die Position der Nutzer:in bestimmt wird. Wenn diese Position sich in einer Ecke des (rechteckigen) Raumes und zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist,
+Position $P$, und auf die Nutzer:in dann ein Rotation-Gain angewandt wird,
+bis genau 90\textdegree\ Verdrehung erreicht sind, dann steht der aktuelle Bereich in der virtuellen Realität der vom realen Trackingspace begrenzt ist $A$, dem vorherigen Bereich, der durch den Trackingspace begrenzt war $B$ genau orthogonal gegenüber.
+Die beiden Areale $A$ und $B$ überlappen sich in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotation-Gains auch gerade steht, aber ein Großteil von $B$ ist Teil der virtuellen Realität der zuvor nicht zugänglich war. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der Virtuellen Welt begehbar geworden.
+Da ja aber ein Rotation-Gain angewandt wurde hat die Nutzer:in nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie nun also geradeaus geht entsteht dann der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
+Die Grundidee hinter dem hier vorgestellten Raumgenerierungsalgorithmus ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben sind. Um dann also von $A$ zu $B$ zu kommen muss die Nutzer:in sich dann an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden. Danach kann sie mit der Illusion geradeaus gehen einen neuen Bereich zu erkunden während sie eigentlich nur wieder zurück in Richtung Mitte des Trackingspaces geht.
 
 
 \begin{figure}[!ht]
