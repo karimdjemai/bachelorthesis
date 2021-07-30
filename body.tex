@@ -265,14 +265,147 @@ In diesem Kapitel werde ich die technische Umsetzung für das in dieser Arbeit v
 %Space extender erwähnen
 
 \section{Scripts}
+Um die Implementierung vorzustellen wird an dieser Stelle zuerst ein UML-Klassendiagramm vorgestellt, indem die Relationen zwischen den verschiedenen Klassen ersichtlich sind, um danach in einzelnen Absätzen nochmal genauer auf die verschiedenen Klassen, ihre Funktionsweise und ihren Zweck einzugehen.
+
+\subsection{Klassendiagramm}
+Um das Diagramm übersichtlich zu halten beschränkt es sich
+%TODO: fast?
+ausschließlich auf die Relationen zwischen den Klassen, es wird also nicht wie sonst in UML-Klassendiagrammen üblich die gesamte Schnittstelle aller Klassen inklusive ihren Attributen und ihren Methoden aufgelistet.
+%TODO: ausser für sehr zentrale?
+Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig in Unity gearbeitet wird (zum Beispiel \textquote{Vector3}, \textquote{MonoBehaviour} oder \textquote{GameObject}) weggelassen.
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{umlpackage}{Assets/Scripts}
+
+        \umlemptyclass[x=4,y=1]{GenerateLevel}
+
+        \umlclass[x=10,y=-1]{GeneratorOculusInterface}{}{
+        }
+        \umlclass[x=7,y=-5]{RoomGenerator}{}{
+        }
+        \umlclass[x=4,y=-1]{RoomAndProgressManager}{}{
+        }
+
+        \umlclass[x=2,y=-5]{RotationGainMechanism}{}{
+        }
+
+        \umlclass[x=10.8,y=-8]{RotationRedirectorCollision}{}{
+        }
+
+        \umlclass[x=4,y=-7]{SceneLoader}{}{
+        }
+
+        \umlinterface[x=5,y=-9.5]{INumberPadListener}{}{
+        }
+
+        \umlclass[x=2,y=-12]{NumberPadScript}{}{
+        }
+
+        \umlclass[x=8,y=-12]{NumberPadButton}{}{
+        }
+
+        \end{umlpackage}
+
+        \begin{umlpackage}[x=10,y=5]{SpaceExtender}
+        \umlclass{RotationRedirector}{}{}
+        \end{umlpackage}
+
+        \begin{umlpackage}[x=2,y=5]{Oculus Integration SDK}
+        \umlclass{OVRManager}{}{}
+        \end{umlpackage}
+
+        \umldep[geometry=-|, anchors= 5 and -90, align2=left]{GenerateLevel}{RotationRedirector}
+
+        \umldep[geometry=-|, anchors= 0 and 85, align2=left]{GenerateLevel}{RoomGenerator}
+
+        \umldep[geometry=-|, anchors= -5 and 90, align2=left]{GenerateLevel}{RotationRedirectorCollision}
+
+        \umldep[geometry=|-|, weight=0.7, anchors= 160 and -90, align2=left]{GeneratorOculusInterface}{OVRManager}
+
+        \umlinherit[geometry=|-, anchors= 160 and 180]{RotationGainMechanism}{INumberPadListener}
+
+        \umlinherit[geometry=-|, anchors= 180 and 90]{SceneLoader}{INumberPadListener}
+
+        \umluniassoc[geometry=-|-, anchors= 180 and 0]{NumberPadButton}{NumberPadScript}
+
+        \umluniassoc[geometry=|-|, anchors= 90 and -90]{NumberPadScript}{INumberPadListener}
+
+        \umluniassoc[geometry=-|, anchors= 180 and -90]{RotationRedirectorCollision}{RotationGainMechanism}
+
+        \umluniassoc[geometry=|-|, anchors= 110 and -90]{RotationGainMechanism}{RoomAndProgressManager}
+
+        \umluniassoc[geometry=|-|, anchors= -50 and 95]{RoomAndProgressManager}{RoomGenerator}
+
+        \umluniassoc[geometry=|-|, anchors= -90 and 90]{GenerateLevel}{RoomAndProgressManager}
+
+        \umluniassoc[geometry=|-, anchors= 120 and -15]{GeneratorOculusInterface}{GenerateLevel}
+
+        \umluniassoc[geometry=|-|, anchors= 150 and -145, align2=left]{RotationGainMechanism}{RotationRedirector}
+
+        \umluniassoc[geometry=-|, anchors= 180 and 145, align2=left]{SceneLoader}{NumberPadScript}
+
+        \end{tikzpicture}
+        \vspace{4cm}
+\end{center}
+
+\subsection{Vorstellung der Klassen}
 \begin{multicols*}{2}
-    Test testsidfjjl
-    sdfkjwlkdjflskdjflksdhflsdhfös
+    \paragraph{GeneratorOculusInterface}
+    Kommuniziert mit der Schnittstelle des \textquote{Oculus Integration SDK} um Informationen die im Projekt benötigt werden bereitzustellen. Die wichtigsten Informationen die hier geliefert werden sind die Koordinaten der Begrenzungsecken des Trackingspaces. Die Nutzer:in der Oculus Quest 2 stellt im Setup der Brille den sogenannten \textquote{Guardian} ein. Dies ist dann eine Begrenzung die sie um den begehbaren Raum in dem sie sich befindet zieht und der immer dann in der virtuellen Realität eingeblendet wird, wenn sie dieser Begrenzung mit den Hand-Controllern oder der Datenbrille zu nahe kommt. Diese Begrenzung ist allerdings nicht rechteckig, was für den hier vorgestellten Levelgenerierungsalgorithmus aber notwendig wäre. Doch das Oculus SDK bietet in seiner Schnittstelle an, das größte, in diese Begrenzung passende, Rechteck auszugeben, dies ist dann die Grundlage für die Raumgenerierung. Zudem ist diese Klasse dafür zuständig, je nach ausgewählter Testbedingung entsprechende Einstellungen an das Oculus SDK zu übergeben.
+    %Zum Beispiel ist bei der Real-Walking Bedingung erforderlich den \textquote{Tracking Origin Type} der Erfassung auf \textquote{Stage} zu setzen, sodass
+
+    \paragraph{RoomGenerator}
+    Implementiert die Generierung der einzelnen Räume. Dafür liegt in dieser Klasse die zentrale \textquote{Generate}-Methode. Anhand von den vier Eckkoordinaten des Raumes, der Richtung in die der Raum zeigen soll und verschiedener Zusatzeigenschaften wie zum Beispiel, der Tiefe des zu generierenden Korridors, der Höhe der zu generierenden Türen, der Dicke der Wände und der Höhe des zu generierenden Korridors erzeugt diese Methode das GameObject für den zu generierenden Raum, erzeugt das entsprechende Mesh für den Korridor und platziert die ansonsten nötigen Objekte (zum Beispiel Türen, Tafel, Eingabefeld) an den richtigen Positionen. Um die Tür nicht immer mittig zu platzieren bekommt die \textquote{Generate}-Methode ausserdem einen Zufallswert zwischen 0 und 1 übergeben. Dieser bestimmt dann die Position der Tür, die in den Korridor hineinführt. (0 bedeutet ganz links, 1 hingegen ganz rechts).
+    Des weiteren bietet diese Klasse mehrere Methoden an, die Berechnungen über den Raum, den sie generiert haben anstellen können. So kann man sich beispielsweise berechnen lassen ob der Korridor des Raumes auf der längeren, oder der kürzeren Kante des Grundrechtecks liegt, wie die Koordinaten des Mittelpunkts des ganzen Raumes sind und wie die Koordinaten des Mittelpunktes des Bereichs vor dem Korridor sind. (An diese Stelle im ersten Raum wird die Proband:in bei den Testbedingungen, in denen kein real-walking stattfindet, teleportiert.) Die Klasse besteht aus circa 1000 Zeilen Programmierung und ist somit die längste selbst geschriebene Klasse des Projektes.
+
+    \paragraph{GenerateLevel}
+    Diese Klasse implementiert den prozeduralen Levelgenerierungsalgorithmus der genauer in
+    %Todo: kapitel finden
+    beschrieben wird. Sie ist die zentrale Klasse des Projektes. In ihren öffentlichen Attributen können die Einstellungen für die zu generierende Testbedingung verändert werden. In ihrer \textquote{Generate}-Methode implementiert sie den Levelgenerierungsalgorithmus und verbindet darin die restlichen Teilmodule des Projekts. Sie ist also nicht nur dafür verantwortlich die \textquote{Generate}-Methode der \textquote{RoomGenerator}-Klasse mit den richtigen Eingabewerten aufzurufen, sondern platziert auch die Rotation-Gain Funktionalität an die richtige Stelle, und übergibt die Generierten Räume an den \textquote{RoomAndProgressManager}, in dem sie in einer Liste gespeichert werden.
+
+    \paragraph{RoomAndProgressManager}
+    Ist dafür zuständig den Fortschritt der Proband:in zu verfolgen und entsprechend zu reagieren wenn es notwendig ist. Beispielsweise öffnet er die entsprechenden Türen, wenn ein Raum abgeschlossen ist.
+    Des weiteren hält diese Klasse Instanzen der GameObjects für die Räume, in einer Liste, sodass sie dazu in der Lage ist an den zugehörigen RoomGenerator-Instanzen Methoden aufzurufen. Um später vergleichen zu können wie gut die Einschätzung der Proband:innen war misst diese Klasse ausserdem die von der Proband:in fortbewegte Strecke. Wenn der letzte Raum des aktuellen Versuchs erreicht wurde übergibt sie die entsprechenden Daten an den FirebaseHandler der diese dann an eine Cloud-Datenbank verschickt sodass der Versuchsdurchgang im Nachhinein ausgewertet werden kann.
 
 
-    sdfjhskljdfhkjsdhfkjshdfkjshdf
+    \paragraph{RotationGainMechanism}
+    Diese Klasse implementiert den Mechanismus, der in der Real-Walking Bedingung bei den jeweiligen Räumen angewandt wird um den genauen Ablauf des RotationGains zu bestimmen. Er zeigt die Zahlen auf der Tafel an, verwertet die Eingabe des Eingabefelds, startet den Rotation-Gain und beendet ihn auch wieder. Er signalisiert dem RoomAndProgressManager wenn der Rotation-Gain vollständig ist, also sich der Trackingspace also um 90\textdegree\ gedreht hat, und die Proband:in dann eine richtige Eingabe tätigt, dass der Raum abgeschlossen ist, sodass sich die Tür öffnet. In den anderen Bedingungen ist er dafür verantwortlich dies nach einer zufälligen, geringen, Anzahl richtiger Eingaben in das NumberPad zu tun, sodass die Proband:in auch in diesen Bedingungen den selben Ablauf erleben.
+
+    \paragraph{SceneLoader}
+    Bei betreten des Levels sieht die Proband:in ein virtuelles Eingabefeld, in dass sie die verschiedenen Testbedingungen (A1-C3, siehe Kapitel
+    % TODO: kapitel nennen
+    ) eingeben kann um den Versuch zu starten. Der SceneLoader ist dafür zuständig auf diese Eingabe entsprechend zu reagieren und die entsprechende Bedingung zu Laden. Dazu verändert der die Attribute der \textquote{GenerateLevel}-Instanz und ruft dann auf ihre die \textquote{Generate}-Methode auf.
+
+    \paragraph{RotationRedirectorCollision}
+    Kleine Hilfsklasse, die erkennt ob der Nutzer sich gerade in dem entsprechenden Bereich befindet, indem der Rotation-Gain aktiv sein soll.
+
+    \paragraph{Door}
+    Die Türen nutzen dieses Script. Auf ihm kann die Methode \textquote{OpenDoor} aufrufen um sie zu öffnen.
+
+    \paragraph{Dissolvable}
+    Wird von der \textquote{Door}-Klasse genutzt um der Tür die Funktionalität zu geben fließend zu verschwinden. Dafür nutzt sie einen entsprechenden Shader.
+
+    \paragraph{INumberPadListener}
+    Die Klassen die über Eingaben in einem NumberPad informiert werden wollen können dieses Interface implementieren um zu einem NumberPadListener zu werden. Dies geschieht also nach dem \textquote{Observer Pattern}.
+    %TODO: brauch ich dafür ne Quelle?
+
+    \paragraph{NumberPadScript}
+    Dieses Script ist ein Component eines NumPads und ist dafür zuständig die Eingabe zu verarbeiten und dann alle angemeldeten Observer über Änderungen zu informieren.
+
+    \paragraph{NumberPadButton}
+    Verbessert die Knöpfe eines NumberPads indem es ihnen eine \textquote{CoolDown}-Periode gibt,
+    % Cooldown englisch? MCI-QUelle?
+    sodass nicht unbeabsichtigt mehrere Eingaben entstehen und indem es einen Soundeffekt abspielt. % Nach xyz steigerm solche maßnahmen steigern die Immersion
+
+    \paragraph{FireBaseHandler}
+    Bietet die Methode \textquote{PostResult} an, die die Daten des aktuellen Versuchs an eine Cloud-Datenbank verschickt. So werden dann die gelaufene Anzahl Räume, die gelaufene Strecke in Metern, die Fortbewegungsart, und das Datum, inklusive der genauen Uhrzeit des Abschickens gespeichert. Ausserdem wird gespeichert ob das Verschicken im Unity-Editor, also zum Testen, geschehen ist, oder ob es wirklich von der Datenbrille aus versendet wurde.
 
 \end{multicols*}
+
+\section{Levelgenerierung}
+An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Zunächst werde ich beschreiben, wie er funktioniert und dann denn wesentlichen Teil des Quellcodes Abbilden, um die Implementierung vorzustellen.
+
 
 
 \begin{figure}[!ht]
@@ -280,81 +413,6 @@ In diesem Kapitel werde ich die technische Umsetzung für das in dieser Arbeit v
     \sourcecode{main.cpp}
     \caption{Hello World Program}\label{figure:helloworld}
 \end{figure}
-
-\section{Class Diagram}
-
-\begin{center}
-\begin{tikzpicture}
-    \begin{umlpackage}{Assets/Scripts}
-
-    \umlclass[x=4,y=1]{GenerateLevel}{}{
-    }
-    \umlclass[x=10,y=-1]{GeneratorOculusInterface}{}{
-    }
-    \umlclass[x=7,y=-5]{RoomGenerator}{}{
-    }
-    \umlclass[x=4,y=-1]{RoomAndProgressManager}{}{
-    }
-
-    \umlclass[x=2,y=-5]{RotationGainMechanism}{}{
-    }
-
-    \umlclass[x=10.8,y=-8]{RotationRedirectorCollision}{}{
-    }
-
-    \umlclass[x=4,y=-7]{SceneLoader}{}{
-    }
-
-    \umlinterface[x=5,y=-9.5]{INumberPadListener}{}{
-    }
-
-    \umlclass[x=2,y=-12]{NumberPadScript}{}{
-    }
-
-    \umlclass[x=8,y=-12]{NumberPadButton}{}{
-    }
-
-    \end{umlpackage}
-
-    \begin{umlpackage}[x=10,y=5]{SpaceExtender}
-    \umlclass{RotationRedirector}{}{}
-    \end{umlpackage}
-
-    \begin{umlpackage}[x=2,y=5]{Oculus Integration SDK}
-    \umlclass{OVRManager}{}{}
-    \end{umlpackage}
-
-    \umldep[geometry=-|, anchors= 0 and -90, align2=left]{GenerateLevel}{RotationRedirector}
-
-    \umldep[geometry=-|, anchors= 0 and 90, align2=left]{GenerateLevel}{RotationRedirectorCollision}
-
-    \umldep[geometry=|-|, weight=0.7, anchors= 140 and -90, align2=left]{GeneratorOculusInterface}{OVRManager}
-
-    \umlinherit[geometry=|-, anchors= 160 and 180]{RotationGainMechanism}{INumberPadListener}
-
-    \umlinherit[geometry=-|, anchors= 180 and 90]{SceneLoader}{INumberPadListener}
-
-    \umluniassoc[geometry=-|-, anchors= 180 and 0]{NumberPadButton}{NumberPadScript}
-
-    \umluniassoc[geometry=|-|, anchors= 90 and -90]{NumberPadScript}{INumberPadListener}
-
-    \umluniassoc[geometry=-|, anchors= 180 and -90]{RotationRedirectorCollision}{RotationGainMechanism}
-
-    \umluniassoc[geometry=|-|, anchors= 110 and -90]{RotationGainMechanism}{RoomAndProgressManager}
-
-    \umluniassoc[geometry=|-|, anchors= -50 and 90]{RoomAndProgressManager}{RoomGenerator}
-
-    \umluniassoc[geometry=|-|, anchors= -90 and 90]{GenerateLevel}{RoomAndProgressManager}
-
-    \umluniassoc[geometry=|-, anchors= 120 and -15]{GeneratorOculusInterface}{GenerateLevel}
-
-    \umluniassoc[geometry=|-|, anchors= 150 and -145, align2=left]{RotationGainMechanism}{RotationRedirector}
-
-    \umluniassoc[geometry=-|, anchors= 180 and 145, align2=left]{SceneLoader}{NumberPadScript}
-
-    \end{tikzpicture}
-\end{center}
-
 
 \chapter{Experiment}\label{chapter:kapitellabel}
 \section{Teilnehmer}\label{chapter:kapitellabel}
