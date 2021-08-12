@@ -348,6 +348,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
         \end{tikzpicture}
         \vspace{4cm}
 \end{center}
+%TODO: caption
 
 \subsection{Vorstellung der Klassen}
 \begin{multicols*}{2}
@@ -407,13 +408,35 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Zunächst werde ich beschreiben, wie er funktioniert und dann den wesentlichen Teil des Quellcodes Abbilden, um die Implementierung vorzustellen.
 
 \subsection{Grundidee hinter dem Algorithmus}
+
+\ctikzfig{2rooms_a}
+%TODO: caption
+
 %Um die durchgehende Weiterführung des Levels zu ermöglichen werden zwei Räume immer genau so angeordnet, dass ein Rotation-Gain, der genau bis zu einer Verdrehung der beiden Realitäten von 90\textdegree\ angewandt wird, während die Nutzer:in an einem bestimmten Punkt in der Ecke des Raumes steht,
-Wenn ein Rotation-Gain angewandt wird verdrehen sich virtuelle und reale Realität um den Drehpunkt, der durch die Position der Nutzer:in bestimmt wird. Wenn diese Position sich in einer Ecke des (rechteckigen) Raumes und zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist,
-Position $P$, und auf die Nutzer:in dann ein Rotation-Gain angewandt wird,
+Wenn ein Rotation-Gain angewandt wird verdrehen sich virtuelle und reale Realität um den Drehpunkt, der durch die Position der Nutzer:in bestimmt wird. Wenn diese Position $P$ sich in einer Ecke des (rechteckigen) Raumes befindet, zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist und auf die Nutzer:in dann ein Rotation-Gain angewandt wird,
 bis genau 90\textdegree\ Verdrehung erreicht sind, dann steht der aktuelle Bereich in der virtuellen Realität der vom realen Trackingspace begrenzt ist $A$, dem vorherigen Bereich, der durch den Trackingspace begrenzt war $B$ genau orthogonal gegenüber.
-Die beiden Areale $A$ und $B$ überlappen sich in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotation-Gains auch gerade steht, aber ein Großteil von $B$ ist Teil der virtuellen Realität der zuvor nicht zugänglich war. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der Virtuellen Welt begehbar geworden.
+Die beiden Areale $A$ und $B$ überlappen sich in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotation-Gains dann gerade steht, aber ein Großteil von $B$ ist Teil der virtuellen Realität der zuvor nicht zugänglich war. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der Virtuellen Welt begehbar geworden.
 Da ja aber ein Rotation-Gain angewandt wurde hat die Nutzer:in nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie nun also geradeaus geht entsteht dann der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
-Die Grundidee hinter dem hier vorgestellten Raumgenerierungsalgorithmus ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben sind. Um dann also von $A$ zu $B$ zu kommen muss die Nutzer:in sich dann an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden. Danach kann sie mit der Illusion geradeaus gehen einen neuen Bereich zu erkunden während sie eigentlich nur wieder zurück in Richtung Mitte des Trackingspaces geht.
+Ziel des Algorithmus ist es eine Reihe von aufeinander folgenden Räumen zu generieren, sodass die Nutzer:in sich durch ein Dungeon-artiges Level bewegen kann um vom ersten zum letzten Raum zu gelangen.
+Die Grundidee hinter dem hier vorgestellten Raumgenerierungsalgorithmus ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden. Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich dann an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden.
+Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden während sie eigentlich nur wieder zurück in Richtung Mitte des Trackingspaces geht. Der reale Trackingspace umschließt also immer genau den Raum in dem sich die Nutzer:in gerade befindet.
+
+\subsection*{Korridore}
+%TODO: Bild eines Korridors
+Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so designed, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird eine Kante des Grundecks des Raumes ausgewählt, an der ein Korridor erstellt wird. Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des letzten Raums ist.
+Der Korridor hat zwei Türen; Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt. In diesem Korridor werden dann Elemente platziert die gemeinsam für einen Mechanismus sorgen, der die Nutzer:in inzentiviert sich genug zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt.
+
+\section{Der Rotation-Gain Inzentivierungs Mechanismus}
+%TODO: NumPad Picture
+Um diesen Effekt zu erzielen wird ein Nummern-Eingabefeld, an der Wand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $P$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
+Dies sorgt dann sowohl dafür dass die Nutzer:in sich automatisch auf den Punkt $P$ stellt, um möglichst gut die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Y-Achse dreht weil sie abwechselnd ablesen muss welche Zahlen auf der Tafel hinter ihr angezeigt werden und dann die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotation-Gain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt ist es wichtig, dass die Nutzer:in nicht versucht zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
+
+Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Component hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $P$ herum platzierten Collider wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe eines (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörige Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{$\#$}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls nicht, beginnt das ganze von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\-Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
+
+
+
+
+
 
 
 \begin{figure}[!ht]
