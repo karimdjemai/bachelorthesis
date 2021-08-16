@@ -405,9 +405,11 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 \end{multicols*}
 
 \section{Levelgenerierung}
-An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Zunächst werde ich beschreiben, wie er funktioniert und dann den wesentlichen Teil des Quellcodes Abbilden, um die Implementierung vorzustellen.
+An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Nacheinander werde ich die grundlegenden Ideen hinter der Levelgenerierung erörtern und dabei jeweils genauer auf ihre Implementierung eingehen um dann den Algorithmus, der die unterschiedlichen Codeblöcke nutzt um die Levelstruktur zu generieren, zu beschreiben und vorzustellen.
+Zuerst wird besprochen, wie die Räume angeordnet werden müssen damit sie durch den Rotation-Gain verbunden werden können. Dann wird erklärt und vorgestellt wie die Korridore die in den Räumen erstellt werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten erstellt werden.
+Um hinterher dann den Erstell-Algorithmus vorzustellen wird als nächstes Beschrieben an welchen Stellschrauben manipuliert werden kann um heterogene Ergebnisse zu bekommen, erst hier können (Pseudo-)Zufallsfaktoren eine Rolle spielen.
 
-\subsection{Grundidee hinter dem Algorithmus}
+\subsection{Raumplatzierung}
 
 \ctikzfig{2rooms_a}
 %TODO: caption
@@ -418,20 +420,36 @@ bis genau 90\textdegree\ Verdrehung erreicht sind, dann steht der aktuelle Berei
 Die beiden Areale $A$ und $B$ überlappen sich in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotation-Gains dann gerade steht, aber ein Großteil von $B$ ist Teil der virtuellen Realität der zuvor nicht zugänglich war. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der Virtuellen Welt begehbar geworden.
 Da ja aber ein Rotation-Gain angewandt wurde hat die Nutzer:in nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie nun also geradeaus geht entsteht dann der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
 Ziel des Algorithmus ist es eine Reihe von aufeinander folgenden Räumen zu generieren, sodass die Nutzer:in sich durch ein Dungeon-artiges Level bewegen kann um vom ersten zum letzten Raum zu gelangen.
-Die Grundidee hinter dem hier vorgestellten Raumgenerierungsalgorithmus ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden. Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich dann an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden.
-Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden während sie eigentlich nur wieder zurück in Richtung Mitte des Trackingspaces geht. Der reale Trackingspace umschließt also immer genau den Raum in dem sich die Nutzer:in gerade befindet.
+Die Grundidee hinter dem hier vorgestellten Raumgenerierungsalgorithmus ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden.
 
-\subsection*{Korridore}
+Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden.
+Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden während sie sich eigentlich nur weiter innerhalb des Trackingspaces bewegt. Der reale Trackingspace umschließt also immer genau den Raum in dem sich die Nutzer:in gerade befindet. 
+
+\subsection{Korridore}
 %TODO: Bild eines Korridors
 Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so designed, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird eine Kante des Grundecks des Raumes ausgewählt, an der ein Korridor erstellt wird. Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des letzten Raums ist.
-Der Korridor hat zwei Türen; Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt. In diesem Korridor werden dann Elemente platziert die gemeinsam für einen Mechanismus sorgen, der die Nutzer:in inzentiviert sich genug zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt.
+Der Korridor hat zwei Türen; Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt. In diesem Korridor werden dann Elemente platziert die gemeinsam für einen Mechanismus sorgen, der die Nutzer:in inzentiviert sich genug zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt. Dieser Mechanismus wird in \hyperref[sec:rotgaininc]{Section 3.3}
+genauer beschrieben.
+
+\subsection{Zufallsfaktoren in der Levelgenerierung}
+Der hier beschriebene Levelalgorithmus nutzt das Element des (Pseudo-)Zufalls um durch verändern verschiedener Variablen das Ergebnis zu verändern. So ist es möglich viele unterschiedliche Level zu generieren. Welche Variablen sich dafür unterscheiden können werde ich an dieser Stelle vorstellen.
+
+\paragraph*{Korridorrichtung}
+\paragraph*{Türposition}
+\paragraph*{Türposition}
+
+\subsection{Umsetzung der Levelgenerierung}
+
+Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
+In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen muss zunächst die Position $P$ des jeweiligen Vorraums definiert sein. Diese bestimmt sich folgendermaßen: 
 
 \section{Der Rotation-Gain Inzentivierungs Mechanismus}
+\label{sec:rotgaininc}
 %TODO: NumPad Picture
 Um diesen Effekt zu erzielen wird ein Nummern-Eingabefeld, an der Wand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $P$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
 Dies sorgt dann sowohl dafür dass die Nutzer:in sich automatisch auf den Punkt $P$ stellt, um möglichst gut die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Y-Achse dreht weil sie abwechselnd ablesen muss welche Zahlen auf der Tafel hinter ihr angezeigt werden und dann die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotation-Gain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt ist es wichtig, dass die Nutzer:in nicht versucht zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
 
-Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Component hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $P$ herum platzierten Collider wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe eines (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörige Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{$\#$}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls nicht, beginnt das ganze von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\-Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
+Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Component hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $P$ herum platzierten Collider wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe eines (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörige Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{$\#$}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls nicht, beginnt das ganze von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\ Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
 
 
 
