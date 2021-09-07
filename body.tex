@@ -414,6 +414,7 @@ Den krönenden Abschluss dieses Kapitel bekommt dann die Sektion, %TODO:???
 die die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsprechenden Quelltext dann auch noch ausführlich vorstellt.
 
 \subsection{Raumplatzierung}
+\label{subsection:calccorners}
 
 \ctikzfig{2rooms_a}
 %TODO: caption
@@ -438,7 +439,7 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
 
     $$ cP = P + (-1) * sDD * dP $$
 
-    $$ C_a = cP + (-1) * dP * btF $$
+    $$ C_a = cP + (-1) * btF * dP $$
     $$ C_b = C_a + sDD * length $$
     $$ C_c = C_d + sDD * length $$
     $$ C_d = cP + btF * (width - dP) $$
@@ -466,12 +467,26 @@ Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definie
 \label{sec:corridor}
 %paragraph Erklärung
 %TODO: Bild eines Korridors
-Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so designed, dass Korridor erstellt wird. Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des letzten Raums ist.
-Der Korridor hat zwei Türen; Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt. In diesem Korridor werden dann Elemente platziert die gemeinsam für einen Mechanismus sorgen, der die Nutzer:in inzentiviert sich genug zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt. Dieser Mechanismus wird in
+Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so designed, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird eine Kante des Grundecks des Raumes ausgewählt, an der ein Korridor erstellt wird (diese wird (Pseudo)-Zufällig ausgewählt, siehe \autoref{sec:random}). Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des letzten Raums herausragt.
+Der Korridor hat zwei Türen; Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt.
+
+In diesem Korridor werden dann Elemente platziert die gemeinsam für einen Mechanismus sorgen, der die Nutzer:in inzentiviert sich genug zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt. Dieser Mechanismus wird in
 \autoref{sec:rotgaininc}
 genauer beschrieben.
 
-%paragraph berechnung der verschiedenen Punkte
+\paragraph*{Korridor-Meshgenerierung}
+Um einen solchen Korridor zu generieren müssen zunächst die Koordinaten der genutzten Vertices %TODO: genauer erklären?
+bestimmt werden. Zudem müssen dann entsprechende Faces gespannt und für jeden Vertex auch die entsprechenden UV-Koordinaten errechnet werden. All dies geschieht in der \textquote{RoomGenerator}-Klasse.
+
+Ein Korridor besteht aus einem Boden, einer Frontalwand, zwei Seitenwänden und einer Rückwand.
+Bevor die Meshgenerierung stattfinden kann muss zunächst die Variable $D$ bestimmt werden. Dabei handelt es sich um einen Wert zwischen $0$ und $1$, der für jeden Raum (Pseudo-)zufällig generiert wird (siehe \autoref{sec:random}). Mit diesem Wert werden die Türpositionen bestimmt, je geringer er ist desto weiter links liegt die Haupttür in der Frontalwand. Ist der Wert geringer als 0.5 befindet sich die Seitentür in der rechten Seitenwand, sonst in der linken, sodass diese immer auf der gegenüberliegende Seite der Haupttür liegt.
+
+Es gibt zwei Möglichkeiten der Struktur einer Wand, abhängig davon ob in ihr eine Tür liegt oder nicht. Der simplere Fall trifft zu wenn in der Wand keine Tür liegt, dann besteht die Wand aus 8 Vertices.
+Die Wandstruktur der Alternative wird in Abbildung x %TODO: figure
+veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht auf eine Solche Wand gezeigt ist, die Innenseite derselben Wand hat allerdings die selbe Struktur. Zudem sind die Vertices der Tür jeweils mit ihren inneren Gegenspielern durch Faces verbunden, sodass man beim durchschreiten der Tür nicht ins innere der Wand blicken kann.
+
+Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{a-d}$), die Seite des Raumes, an der der Korridor liegen soll $S$, die Türposition $D$, die Tiefe des Korridors, die durch den in \autoref{subsection:calccorners} besprochenen Abstand zu den Wänden der Ecke des Punktes $P$ bestimmt wird: $2 * dP$, und die Dicke der Wände $w$.
+
 
 \subsection{Mauergenerierung}
 %paragraph Erklärung
@@ -484,6 +499,7 @@ genauer beschrieben.
 %bedingung a ausführlich, b oberflächlich
 
 \subsection{Zufallsfaktoren in der Levelgenerierung}
+\label{sec:random}
 %paragraph Erklärungen
 Der hier beschriebene Levelalgorithmus nutzt das Element des (Pseudo-)Zufalls um durch verändern verschiedener Variablen das Ergebnis zu verändern. So ist es möglich viele unterschiedliche Level zu generieren. Welche Variablen sich dafür unterscheiden können werde ich an dieser Stelle vorstellen.
 \paragraph*{Korridorrichtung}

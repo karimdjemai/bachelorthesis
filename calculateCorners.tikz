@@ -15,8 +15,8 @@
 		\node [style=none] (21) at (-1, 7) {};
 		\node [style=none] (45) at (-1, 6) {};
 		\node [style=none] (47) at (-1, 6) {};
-		\node [style=none] (50) at (0.25, 6.5) {$dP$};
-		\node [style=none] (51) at (-0.5, 5.75) {$dP$};
+		% \node [style=none] (50) at (0.25, 6.5) {$dP$};
+		% \node [style=none] (51) at (-0.5, 5.75) {$dP$};
 		\node [style=none] (52) at (0, 6) {};
 		\node [style=none] (53) at (0.25, 5.75) {$P$};
 		\node [style=none] (55) at (-1.25, 6) {$cP$};
@@ -40,9 +40,15 @@
 		\draw [style=arrow] (19.center) to (47.center);
 		\draw [style=arrow] (18.center) to (19.center);
 		\draw [style=arrow] (20.center) to (21.center);
-		\draw [style=dashes] (52.center) to (0.center);
+		% \draw [style=dashes] (52.center) to (0.center);
 		\draw [style=arrow] (45.center) to (52.center);
+        %length brace
         \draw [decorate,decoration={brace,mirror,amplitude=10pt}](-1,-1.5) -- (9,-1.5) node [midway,yshift=-0.25in] {$length$};
+        %width brace
         \draw [decorate,decoration={brace,amplitude=10pt}](-1.5,-1) -- (-1.5,7) node [midway,xshift=-0.40in] {$width$};
+        %vertical dp brace
+        \draw [decorate,decoration={brace,amplitude=5pt}](0.25,7) -- (0.25,6) node [midway,xshift=0.5cm] {$dP$};
+        %horizontal dp brace
+        \draw [decorate,decoration={brace,mirror,amplitude=5pt}](-1,5.75) -- (0,5.75) node [midway,yshift=-0.5cm] {$dP$};
 	\end{pgfonlayer}
 \end{tikzpicture}
