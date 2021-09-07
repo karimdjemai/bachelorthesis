@@ -431,14 +431,39 @@ Die Grundidee hinter der Raumgenerierung ist es also, dass genau die beiden Area
 Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden.
 Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden während sie sich eigentlich nur weiter innerhalb des Trackingspaces bewegt. Der reale Trackingspace umschließt also immer genau den Raum in dem sich die Nutzer:in gerade befindet.
 
-%paragraph berechnung der Ecken
+\paragraph{Berechnung der Ecken}
+
+Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die virtuellen Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
+In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen müssen die Position $P$ sowie der Abstand von $P$ zu den Wänden des jeweiligen Vorraums definiert sein( $dP$ ). Die Berechnung dieser Punkte findet sich in \autoref{sec:corridor}. Für die weiteren Räume berechnen sich die Eckvektoren, dann folgendermaßen. Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
+
+    $$ cP = P + (-1) * sDD * dP $$
+
+    $$ C_a = cP + (-1) * dP * btF $$
+    $$ C_b = C_a + sDD * length $$
+    $$ C_c = C_d + sDD * length $$
+    $$ C_d = cP + btF * (width - dP) $$
+
+    %TODO: alignment?
+Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden.
+%TODO: figure
+\begin{figure}
+    \input{calculateCorners.tikz}
+    \caption{} %TODO:caption
+    \label{figure:calculateCornersFig}
+\end{figure}
 
 
-Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
-In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen muss zunächst die Position $P$ des jeweiligen Vorraums definiert sein. Diese bestimmt sich folgendermaßen:
+
+\begin{figure}[!ht]
+    \centering
+    \sourcecode{calculateNewCorners.cs}
+    \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
+    \label{figure:calculateNewCornersScript}
+\end{figure}
 
 
 \subsection{Korridore}
+\label{sec:corridor}
 %paragraph Erklärung
 %TODO: Bild eines Korridors
 Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so designed, dass Korridor erstellt wird. Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des letzten Raums ist.
