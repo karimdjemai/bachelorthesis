@@ -1,0 +1,259 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (10, 16) {};
+		\node [style=none] (1) at (10, 0) {};
+		\node [style=none] (2) at (-8, -3) {};
+		\node [style=none] (3) at (0, -3) {};
+		\node [style=none] (4) at (-8, -13) {};
+		\node [style=none] (5) at (0, -13) {};
+		\node [style=none] (6) at (-2, -3) {};
+		\node [style=none] (8) at (-2, -11) {};
+		\node [style=none] (10) at (0, -3) {};
+		\node [style=none] (13) at (0, -5) {};
+		\node [style=none] (14) at (-8, -5) {};
+		\node [style=none] (15) at (-5, -5) {};
+		\node [style=none] (16) at (-7, -5) {};
+		\node [style=none] (17) at (-5, -4.75) {};
+		\node [style=none] (18) at (-5, -5.25) {};
+		\node [style=none] (19) at (-7, -4.75) {};
+		\node [style=none] (20) at (-7, -5.25) {};
+		\node [style=none] (21) at (0, -3.25) {};
+		\node [style=none] (22) at (-0.25, -3.25) {};
+		\node [style=none] (23) at (0.25, -3.25) {};
+		\node [style=none] (24) at (0.25, -4.75) {};
+		\node [style=none] (25) at (0, -4.75) {};
+		\node [style=none] (26) at (-0.25, -4.75) {};
+		\node [style=none] (28) at (-2, -11) {};
+		\node [style=none] (32) at (-2, -9) {};
+		\node [style=none] (33) at (3, -9) {};
+		\node [style=none] (34) at (1, -9) {};
+		\node [style=none] (35) at (3, -9.25) {};
+		\node [style=none] (36) at (3, -8.75) {};
+		\node [style=none] (37) at (1, -9.25) {};
+		\node [style=none] (38) at (1, -8.75) {};
+		\node [style=none] (46) at (-8, -3) {};
+		\node [style=none] (47) at (0, -11) {};
+		\node [style=none] (48) at (0, -9) {};
+		\node [style=none] (49) at (-2, -5) {};
+		\node [style=none] (50) at (6, -1) {};
+		\node [style=none] (52) at (6, -11) {};
+		\node [style=none] (58) at (6, -3) {};
+		\node [style=none] (74) at (6, -1) {};
+		\node [style=none] (79) at (10, 0) {};
+		\node [style=none] (80) at (10, -16) {};
+		\node [style=none] (81) at (10, 16) {};
+		\node [style=none] (82) at (10, -1) {};
+		\node [style=none] (83) at (10, -11) {};
+		\node [style=none] (84) at (6, -1) {};
+		\node [style=none] (85) at (10, -1) {};
+		\node [style=none] (87) at (10, -11) {};
+		\node [style=none] (89) at (6, -9) {};
+		\node [style=none] (7) at (8, -3) {};
+		\node [style=none] (90) at (-11, 16) {};
+		\node [style=none] (93) at (-11, 0) {};
+		\node [style=none] (9) at (8, -11) {};
+		\node [style=none] (27) at (8, -11) {};
+		\node [style=none] (31) at (8, -9) {};
+		\node [style=none] (39) at (8, -10.75) {};
+		\node [style=none] (40) at (7.75, -10.75) {};
+		\node [style=none] (41) at (8.25, -10.75) {};
+		\node [style=none] (42) at (8.25, -9.25) {};
+		\node [style=none] (44) at (7.75, -9.25) {};
+		\node [style=none] (86) at (8, -11) {};
+		\node [style=none] (95) at (0, 13) {};
+		\node [style=none] (96) at (-8, 3) {};
+		\node [style=none] (97) at (0, 3) {};
+		\node [style=none] (98) at (-2, 13) {};
+		\node [style=none] (100) at (0, 13) {};
+		\node [style=none] (101) at (0, 11) {};
+		\node [style=none] (102) at (-8, 11) {};
+		\node [style=none] (103) at (-5, 11) {};
+		\node [style=none] (104) at (-7, 11) {};
+		\node [style=none] (105) at (-5, 11.25) {};
+		\node [style=none] (106) at (-5, 10.75) {};
+		\node [style=none] (107) at (-7, 11.25) {};
+		\node [style=none] (108) at (-7, 10.75) {};
+		\node [style=none] (109) at (0, 12.75) {};
+		\node [style=none] (110) at (-0.25, 12.75) {};
+		\node [style=none] (111) at (0.25, 12.75) {};
+		\node [style=none] (112) at (0.25, 11.25) {};
+		\node [style=none] (113) at (0, 11.25) {};
+		\node [style=none] (114) at (-0.25, 11.25) {};
+		\node [style=none] (115) at (-2, 4.75) {};
+		\node [style=none] (116) at (-2, 7) {};
+		\node [style=none] (117) at (3, 7) {};
+		\node [style=none] (118) at (1, 7) {};
+		\node [style=none] (119) at (3, 6.75) {};
+		\node [style=none] (120) at (3, 7.25) {};
+		\node [style=none] (121) at (1, 6.75) {};
+		\node [style=none] (122) at (1, 7.25) {};
+		\node [style=none] (123) at (-0.5, 12) {$P$};
+		\node [style=none] (124) at (-8, 13) {};
+		\node [style=none] (125) at (0, 4.75) {};
+		\node [style=none] (126) at (0, 7) {};
+		\node [style=none] (127) at (-2, 11) {};
+		\node [style=none] (130) at (6, 13) {};
+		\node [style=none] (135) at (10, 15) {};
+		\node [style=none] (136) at (8, 4.75) {};
+		\node [style=none] (137) at (6, 7) {};
+		\node [style=none] (139) at (8, 5) {};
+		\node [style=none] (141) at (8, 7) {};
+		\node [style=none] (142) at (8, 5) {};
+		\node [style=none] (143) at (7.75, 5) {};
+		\node [style=none] (144) at (8.25, 5) {};
+		\node [style=none] (145) at (8.25, 6.75) {};
+		\node [style=none] (146) at (8, 6.75) {};
+		\node [style=none] (147) at (7.75, 6.75) {};
+		\node [style=none] (147) at (7.75, 6.75) {};
+		\node [style=none] (148) at (8, 5) {};
+		\node [style=none] (149) at (8, 13) {};
+		\node [style=none] (129) at (6, 4.75) {};
+		\node [style=none] (131) at (6, 15) {};
+		\node [style=none] (132) at (10, 15) {};
+		\node [style=none] (133) at (10, 4.75) {};
+		\node [style=none] (140) at (8, 4.75) {};
+		\node [style=none] (150) at (0, 11) {};
+		\node [style=Point] (152) at (-1, 12) {};
+		\node [style=none] (153) at (-0.5, -4) {$P$};
+		\node [style=Point] (154) at (-1, -4) {};
+		\node [style=none] (155) at (10, 0) {};
+		\node [style=none] (156) at (8, -9.25) {};
+		\node [style=none] (157) at (10, 0) {};
+		\node [style=none] (158) at (-11, -16) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=new edge style 0] (5.center)
+			 to (4.center)
+			 to (2.center)
+			 to (3.center)
+			 to cycle;
+		\draw [style=new edge style 1] (8.center)
+			 to (6.center)
+			 to (7.center)
+			 to (9.center)
+			 to cycle;
+		\draw [in=360, out=180] (10.center) to (46.center);
+		\draw (17.center) to (18.center);
+		\draw (19.center) to (20.center);
+		\draw (13.center) to (15.center);
+		\draw (16.center) to (14.center);
+		\draw (23.center) to (22.center);
+		\draw (24.center) to (26.center);
+		\draw (10.center) to (21.center);
+		\draw (25.center) to (13.center);
+		\draw (35.center) to (36.center);
+		\draw (37.center) to (38.center);
+		\draw (41.center) to (40.center);
+		\draw (27.center) to (39.center);
+		\draw (46.center) to (14.center);
+		\draw [style=wall] (5.center) to (47.center);
+		\draw [style=wall] (5.center) to (4.center);
+		\draw [style=wall] (14.center) to (4.center);
+		\draw [style=wall] (13.center) to (48.center);
+		\draw [style=dashed wall] (49.center) to (32.center);
+		\draw [style=new edge style 0] (52.center) to (50.center);
+		\draw [style=new edge style 0] (52.center)
+			 to (27.center)
+			 to (83.center)
+			 to [in=270, out=90] (82.center)
+			 to (74.center)
+			 to cycle;
+		\draw [style=wall] (48.center) to (47.center);
+		\draw [style=new edge style 0] (58.center) to (74.center);
+		\draw [style=new edge style 0] (74.center) to (58.center);
+		\draw [style=new edge style 0] (74.center) to (58.center);
+		\draw [style=new edge style 0] (84.center) to (85.center);
+		\draw [style=dashed wall] (84.center) to (85.center);
+		\draw [style=dashed wall, in=90, out=-90] (84.center) to (58.center);
+		\draw [style=dashed wall] (86.center) to (87.center);
+		\draw [style=dashed wall] (7.center) to (31.center);
+		\draw [style=dashed wall] (10.center) to (7.center);
+		\draw (90.center) to (81.center);
+		\draw (1.center) to (93.center);
+		\draw (93.center) to (90.center);
+		\draw (86.center) to (39.center);
+		\draw (41.center) to (40.center);
+		\draw [style=new edge style 0] (97.center) to (96.center);
+		\draw [style=new edge style 0] (95.center) to (97.center);
+		\draw [style=new edge style 0] (150.center)
+			 to (100.center)
+			 to [in=360, out=180] (124.center)
+			 to (102.center)
+			 to (96.center)
+			 to (97.center);
+		\draw (105.center) to (106.center);
+		\draw (107.center) to (108.center);
+		\draw (104.center) to (102.center);
+		\draw (111.center) to (110.center);
+		\draw (112.center) to (114.center);
+		\draw (100.center) to (109.center);
+		\draw (113.center) to (101.center);
+		\draw (119.center) to (120.center);
+		\draw (121.center) to (122.center);
+		\draw (144.center) to (143.center);
+		\draw (145.center) to (147.center);
+		\draw (140.center) to (142.center);
+		\draw (146.center) to (141.center);
+		\draw (116.center) to (115.center);
+		\draw [style=wall] (97.center) to (125.center);
+		\draw [style=new edge style 0] (130.center) to (131.center);
+		\draw [style=new edge style 0] (131.center) to (130.center);
+		\draw [style=new edge style 0] (131.center) to (130.center);
+		\draw (141.center) to (146.center);
+		\draw (145.center) to (147.center);
+		\draw (148.center) to (142.center);
+		\draw (144.center) to (143.center);
+		\draw [style=new edge style 1] (136.center)
+			 to (149.center)
+			 to [in=360, out=180] (98.center)
+			 to (115.center)
+			 to [in=180, out=0] cycle;
+		\draw [style=new edge style 0] (129.center)
+			 to (140.center)
+			 to (133.center)
+			 to [in=270, out=90] (132.center)
+			 to (131.center)
+			 to cycle;
+		\draw [style=new edge style 1] (150.center) to (100.center);
+		\draw [style=new edge style 1] (150.center) to (100.center);
+		\draw [style=wall] (96.center) to (102.center);
+		\draw [style=wall] (96.center) to (97.center);
+		\draw (102.center) to (124.center);
+		\draw (124.center) to (98.center);
+		\draw (98.center) to (100.center);
+		\draw [style=wall] (116.center) to (127.center);
+		\draw [style=wall] (100.center) to (130.center);
+		\draw [style=wall] (131.center) to (132.center);
+		\draw [style=wall] (130.center) to (131.center);
+		\draw (147.center) to (146.center);
+		\draw (145.center) to (147.center);
+		\draw (144.center) to (143.center);
+		\draw (142.center) to (140.center);
+		\draw (141.center) to (146.center);
+		\draw [style=wall] (137.center) to (130.center);
+		\draw (150.center) to (113.center);
+		\draw (112.center) to (114.center);
+		\draw (100.center) to (109.center);
+		\draw (111.center) to (110.center);
+		\draw [style=wall] (140.center) to (133.center);
+		\draw [style=dashed wall] (89.center) to (58.center);
+		\draw (121.center) to (122.center);
+		\draw (119.center) to (120.center);
+		\draw [style=wall] (130.center) to (100.center);
+		\draw (1.center) to (0.center);
+		\draw (33.center) to (31.center);
+		\draw (34.center) to (32.center);
+		\draw (28.center) to (52.center);
+		\draw (52.center) to (86.center);
+		\draw (32.center) to (28.center);
+		\draw (44.center) to (42.center);
+		\draw (31.center) to (156.center);
+		\draw (157.center) to (80.center);
+		\draw (150.center) to (103.center);
+		\draw (118.center) to (116.center);
+		\draw (141.center) to (117.center);
+		\draw (140.center) to (115.center);
+		\draw (93.center) to (158.center);
+		\draw (158.center) to (80.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

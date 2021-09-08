@@ -567,15 +567,26 @@ Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit 
 Natürlich reichen die Meshs der Korridore noch nicht aus um das Gefühl eines Raumes zu vermitteln, zumal diese ja auch nur an einer Seite des Raumes statuiert sind.
 Wie in \autoref{subsection:calccorners} besprochen sollen die Räume von Wänden umgebem sein.
 In dem hier vorgestelten Projekt werden die Wände auf zwei verschiedene Arten generiert. Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in echt existieren könnten.
-Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch runherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt.
+Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch runherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Versuchsbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
 
 Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante gennant, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
-
 
 In der Abbildung x %TODO: figure:
 werden die beiden Varianten miteinander Verglichen.
 
+hallo
+
+\begin{figure}[h!]
+    \centering
+
+    \scalebox{0.4}{\input{wallCompare.tikz}}
+    \caption{hallo} %TODO:caption
+    \label{figure:wallCompare}
+\end{figure}
+
+
 %bedingung a (JS, TP)
+
 %bedingung b (RDW)
 
 %paragraph umsetzung
