@@ -434,6 +434,13 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 
 \paragraph{Berechnung der Ecken}
 
+\begin{figure}
+    \centering
+    \input{calculateCorners.tikz}
+    \caption{} %TODO:caption
+    \label{figure:calculateCornersFig}
+\end{figure}
+
 Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die virtuellen Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
 In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen müssen die Position $P$ sowie der Abstand von $P$ zu den Wänden des jeweiligen Vorraums definiert sein( $dP$ ). Die Berechnung dieser Punkte findet sich in \autoref{sec:corridor}. Für die weiteren Räume berechnen sich die Eckvektoren, dann folgendermaßen. Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
 
@@ -446,21 +453,13 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
 
     %TODO: alignment?
 Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden.
-\begin{figure}
+
+\begin{figure}[!h]
     \centering
-    \input{calculateCorners.tikz}
-    \caption{} %TODO:caption
-    \label{figure:calculateCornersFig}
+    \sourcecode{calculateNewCorners.cs}
+    \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
+    \label{figure:calculateNewCornersScript}
 \end{figure}
-
-
-
-% \begin{figure}[!h]
-%     \centering
-%     \sourcecode{calculateNewCorners.cs}
-%     \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
-%     \label{figure:calculateNewCornersScript}
-% \end{figure}
 
 
 \subsection{Korridore}
@@ -514,10 +513,6 @@ $$T = up * h $$ %TODO: up
 
 Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Prinzip, jeweils mit den beiden Richtungsvektoren, die beide mit $w$ multipliziert werden addiert.
 
-Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür berechnet.
-In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $lTR$ und $rTL$ vertauscht.
-Hierfür ist es zunächst wichtig die entsprechende Achse zu berechnen, auf der die Tür dann erzeugt wird (siehe Abbildung x) %TODO: figure
-
 \begin{figure}[h!]
     \centering
     \input{doorCalc.tikz}
@@ -525,13 +520,23 @@ Hierfür ist es zunächst wichtig die entsprechende Achse zu berechnen, auf der 
     \label{figure:doorCalcFig}
 \end{figure}
 
+Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür ($mD$) berechnet.
+In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $lTR$ und $rTL$ vertauscht.
+Hierfür ist es zunächst wichtig die entsprechende Achse ($mDX$)zu berechnen, auf der die Tür dann erzeugt wird (siehe \autoref{figure:doorCalcFig})
 
+Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinter $P$ berechnet ($xP$). Von da aus spannt sich die Achse dann bis zur anderen Seite des Korridors. Da $mD$ ja den Mittelpunkt der Haupttür darstellen soll, muss an beiden Seiten der Achse $dw / 2$ als padding eingesetzt werden, damit die Tür nicht weiter oder rechts übersteht, falls $D$ einen extremwert annimmt. $mD$ berechnet sich dann folgendermaßen:
 
-Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinter $P$ berechnet um
+$$ mD = xP + D * mDX $$
 
+Die Berechnung von $xP$, und $mDX$ wird aus dem in Abbildung x %TODO: code
+dargestellten quelltext ersichtlich. %kommentare, variablen übersetzen etc.
 
-$$lTR = rTL * (-1)$$
-$$ mD = $$
+\begin{figure}[h!]
+    \centering
+    \sourcecode{calcMainDoor.cs}
+    \caption{} %TODO:caption
+    \label{figure:calcMainDoorCode}
+\end{figure}
 
 
 
