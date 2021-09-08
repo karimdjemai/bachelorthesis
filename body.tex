@@ -528,8 +528,10 @@ Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinte
 
 $$ mD = xP + D * mDX $$
 
-Die Berechnung von $xP$, und $mDX$ wird aus dem in Abbildung x %TODO: code
+Die Berechnung von $xP$, und $mDX$ wird aus dem in \autoref{figure:calcMainDoorCode}
 dargestellten quelltext ersichtlich. %kommentare, variablen übersetzen etc.
+
+Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit der bekannten Methode und wird auch in \autoref{figure:doorCalcFig} ersichtlich. Türhöhe ($dh$), Türbreite ($dw$) und Wandbreite ($w$) werden mit den entsprechenden Richtungsvektoren multipliziert und auf $mD$ addiert.
 
 \begin{figure}[h!]
     \centering
@@ -538,6 +540,19 @@ dargestellten quelltext ersichtlich. %kommentare, variablen übersetzen etc.
     \label{figure:calcMainDoorCode}
 \end{figure}
 
+%paragraph faces und uv
+Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten dür den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Flächen wird auch in \autoref{figure:doorCalcFig} ersichtlich. Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet.
+
+Um die späteren UV Berechnungen nicht zu verunreinugen wird jeder Vertex dem Buffer pro Face einmal hinzugefügt. Die Faces werden dann gespannt indem die jeweiligen Indizes der Vertices im Buffer aufgelistet werden. Dies beides wird dann dem neu erzeugten $MeshFilter$ Objekt übergeben.
+
+Die Berechnung der UV-Koordinaten erfolgt für jeden einzeln und wird nach Triangles geordnet der Reihe nach durchgeführt. Der Quelltext dazu findet sich in der GenerateUV Methode, die in \autoref{figure:uvcode} Abgebildet ist.
+
+\begin{figure}[h!] %TODO: more pages
+    \centering
+    \sourcecode{uvCode.cs}
+    \caption{} %TODO:caption
+    \label{figure:uvcode}
+\end{figure}
 
 
 
