@@ -417,7 +417,7 @@ die die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsp
 \label{subsection:calccorners}
 
 \ctikzfig{2rooms_a}
-%TODO: caption
+%TODO: caption, figure
 
 %paragraph Erklärung
 
@@ -446,8 +446,8 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
 
     %TODO: alignment?
 Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden.
-%TODO: figure
 \begin{figure}
+    \centering
     \input{calculateCorners.tikz}
     \caption{} %TODO:caption
     \label{figure:calculateCornersFig}
@@ -455,12 +455,12 @@ Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definie
 
 
 
-\begin{figure}[!ht]
-    \centering
-    \sourcecode{calculateNewCorners.cs}
-    \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
-    \label{figure:calculateNewCornersScript}
-\end{figure}
+% \begin{figure}[!h]
+%     \centering
+%     \sourcecode{calculateNewCorners.cs}
+%     \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
+%     \label{figure:calculateNewCornersScript}
+% \end{figure}
 
 
 \subsection{Korridore}
@@ -485,7 +485,55 @@ Es gibt zwei Möglichkeiten der Struktur einer Wand, abhängig davon ob in ihr e
 Die Wandstruktur der Alternative wird in Abbildung x %TODO: figure
 veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht auf eine Solche Wand gezeigt ist, die Innenseite derselben Wand hat allerdings die selbe Struktur. Zudem sind die Vertices der Tür jeweils mit ihren inneren Gegenspielern durch Faces verbunden, sodass man beim durchschreiten der Tür nicht ins innere der Wand blicken kann.
 
-Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{a-d}$), die Seite des Raumes, an der der Korridor liegen soll $S$, die Türposition $D$, die Tiefe des Korridors, die durch den in \autoref{subsection:calccorners} besprochenen Abstand zu den Wänden der Ecke des Punktes $P$ bestimmt wird: $2 * dP$, und die Dicke der Wände $w$.
+Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{a-d}$), die Seite des Raumes, an der der Korridor liegen soll $S$ ($_{a-d}$), die Türposition $D$, die Tiefe des Korridors, die durch den in \autoref{subsection:calccorners} besprochenen Abstand zu den Wänden der Ecke des Punktes $P$ bestimmt wird: $2 * dP$, die Höhe $h$ und Dicke der Wände $w$ und die Höhe ($dh$) und die Breite ($dw$) der Tür .
+
+Als erstes werden die unteren, äußeren Punkte berechnet. ($F_{1-4}$)
+Zunächst werden die beiden hinteren, äußeren Punkte des Korridors bestimmt. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich die Ecke des Raumes, die $S$ entspricht und die im Uhrzeigersinn darauf folgende auswählen. %TODO: formulierung
+
+$$ F_1 = C_S $$
+$$ F_2 = C_{(S+1) \% 4} $$ %modulo???
+
+Damit wird der Richtungsvektur $rTL$ bestimmt indem die rechte Ecke von der linken Ecke subtrahiert wird und das Ergebnis dann normalisiert wird.
+
+$$ rTL = F_2 - F_1 $$ %TODO: normalisieren?
+
+Um die beiden vorderen äußeren Ecken zu bestimmen muss nun ein richtungs Vektor $tF$ berechnet werden der von der Seite $S$ in Richtung der gegenüberliegenden Seite des Raumes zeigt. Hierfür wird das Kreuzprodukt von $rTL$ und dem Vektor
+%vektor nach oben einfügen
+berechnet und das Ergebnis normalisiert.
+
+$$ tF = rTL x $$ %TODO: oben vektor, kreuzprodukt, normalisieren
+
+Um nun die vorderen Punkte zu bestimmen wird einfach der neue Richtungsvektor mit $2 * dP$ multipliziert und auf die hinteren Punkte addiert.
+
+$$F_3 = F_1 + tF * dP $$
+$$F_4 = F_2 + tF * dP $$
+
+Nach demselben Prinzip lassen sich nun die äußeren oberen Ecken des Korridors bestimmen, hierfür werden die unteren Ecken mit dem Vektor $T$ addiert, der sich wie folgt berechnet:
+
+$$T = up * h $$ %TODO: up
+
+Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Prinzip, jeweils mit den beiden Richtungsvektoren, die beide mit $w$ multipliziert werden addiert.
+
+Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür berechnet.
+In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $lTR$ und $rTL$ vertauscht.
+Hierfür ist es zunächst wichtig die entsprechende Achse zu berechnen, auf der die Tür dann erzeugt wird (siehe Abbildung x) %TODO: figure
+
+\begin{figure}[h!]
+    \centering
+    \input{doorCalc.tikz}
+    \caption{} %TODO:caption
+    \label{figure:doorCalcFig}
+\end{figure}
+
+
+
+Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinter $P$ berechnet um
+
+
+$$lTR = rTL * (-1)$$
+$$ mD = $$
+
+
 
 
 \subsection{Mauergenerierung}
@@ -524,17 +572,6 @@ Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{Rotat
 
 %code vorstellung?
 
-
-
-
-
-
-
-\begin{figure}[!ht]
-    \centering
-    \sourcecode{main.cpp}
-    \caption{Hello World Program}\label{figure:helloworld}
-\end{figure}
 
 \chapter{Experiment}\label{chapter:kapitellabel}
 \section{Teilnehmer}\label{chapter:kapitellabel}
