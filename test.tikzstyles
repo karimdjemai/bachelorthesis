@@ -13,4 +13,5 @@
 \tikzstyle{new edge style 0}=[-, fill={rgb,255: red,203; green,255; blue,214}, draw=none]
 \tikzstyle{new edge style 1}=[-, fill opacity=0.1, fill={rgb,255: red,255; green,207; blue,208}, draw=none]
 \tikzstyle{dashes}=[-, thick, dashed, dash pattern=on 1mm off 1mm]
-\tikzstyle{arrow}=[{<-|}]
+\tikzstyle{arrow}=[{Stealth[scale=1.5]}-|]
+%\tikzstyle{arrow}=[{Classical TikZ Rightarrow[length=2mm, width=3mm]}-|]

@@ -410,14 +410,17 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Nacheinander werde ich die grundlegenden Ideen hinter der Levelgenerierung erörtern und dabei jeweils genauer auf ihre Implementierung eingehen um dann den Algorithmus, der die unterschiedlichen Codeblöcke nutzt um die Levelstruktur zu generieren, zu beschreiben und vorzustellen.
 Zuerst wird besprochen, wie die Räume angeordnet werden müssen damit sie durch den Rotation-Gain verbunden werden können. Dann wird erklärt und vorgestellt wie die Korridore, die in den Räumen generiert werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten, erstellt werden. Als nächstes beschreibe ich die Vorgänge die für die Generierung der Wände der Räume verantwortlich sind und erkläre wie die entsprechenden Berechnungen stattfinden.
 Um hinterher dann den Generierungs-Algorithmus und den zugehörigen Quelltext vorzustellen wird dann noch Beschrieben an welchen Stellschrauben manipuliert werden kann um heterogene Ergebnisse zu bekommen, erst hier können (Pseudo-)Zufallsfaktoren eine Rolle spielen.
-Den krönenden Abschluss dieses Kapitel bekommt dann die Sektion, %TODO:???
-die die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsprechenden Quelltext dann auch noch ausführlich vorstellt.
+Den krönenden Abschluss dieses Kapitel bekommt dann der Abschnitt,
+der die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsprechenden Quelltext dann auch noch ausführlich vorstellt.
 
 \subsection{Raumplatzierung}
 \label{subsection:calccorners}
 
-\ctikzfig{2rooms_a}
-%TODO: caption, figure
+\begin{figure}
+    \ctikzfig{2rooms_a}
+    \caption{}\label{figure:two_rooms}
+    %TODO: caption
+\end{figure}
 
 %paragraph Erklärung
 
@@ -428,6 +431,7 @@ Die beiden Areale $A$ und $B$ überlappen sich in einem gewissen Bereich, in dem
 Da ja aber ein Rotation-Gain angewandt wurde hat die Nutzer:in nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie nun also geradeaus geht entsteht dann der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
 Ziel des Algorithmus ist es eine Reihe von aufeinander folgenden Räumen zu generieren, sodass die Nutzer:in sich durch ein Dungeon-artiges Level bewegen kann um vom ersten zum letzten Raum zu gelangen.
 Die Grundidee hinter der Raumgenerierung ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden. %TODO: formulierung
+In \autoref{figure:two_rooms} wird ersichtlich, wie die beiden Räume zueinander Stehen.
 
 Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ angewandt werden.
 Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden während sie sich eigentlich nur weiter innerhalb des Trackingspaces bewegt. Der reale Trackingspace umschließt also immer genau den Raum in dem sich die Nutzer:in gerade befindet.
@@ -540,12 +544,14 @@ Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit de
     \label{figure:calcMainDoorCode}
 \end{figure}
 
-%paragraph faces und uv
+%paragraph faces
 Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten dür den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Flächen wird auch in \autoref{figure:doorCalcFig} ersichtlich. Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet.
 
 Um die späteren UV Berechnungen nicht zu verunreinugen wird jeder Vertex dem Buffer pro Face einmal hinzugefügt. Die Faces werden dann gespannt indem die jeweiligen Indizes der Vertices im Buffer aufgelistet werden. Dies beides wird dann dem neu erzeugten $MeshFilter$ Objekt übergeben.
 
+%uv
 Die Berechnung der UV-Koordinaten erfolgt für jeden einzeln und wird nach Triangles geordnet der Reihe nach durchgeführt. Der Quelltext dazu findet sich in der GenerateUV Methode, die in \autoref{figure:uvcode} Abgebildet ist.
+Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit den Richtungsvektoren abzugleichen und die Vektoren der Vertices dann entsprechend zu Rotieren.
 
 \begin{figure}[h!] %TODO: more pages
     \centering
@@ -558,6 +564,16 @@ Die Berechnung der UV-Koordinaten erfolgt für jeden einzeln und wird nach Trian
 
 \subsection{Mauergenerierung}
 %paragraph Erklärung
+Natürlich reichen die Meshs der Korridore noch nicht aus um das Gefühl eines Raumes zu vermitteln, zumal diese ja auch nur an einer Seite des Raumes statuiert sind.
+Wie in \autoref{subsection:calccorners} besprochen sollen die Räume von Wänden umgebem sein.
+In dem hier vorgestelten Projekt werden die Wände auf zwei verschiedene Arten generiert. Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in echt existieren könnten.
+Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch runherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt.
+
+Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante gennant, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
+
+
+In der Abbildung x %TODO: figure:
+werden die beiden Varianten miteinander Verglichen.
 
 %bedingung a (JS, TP)
 %bedingung b (RDW)
