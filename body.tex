@@ -276,9 +276,11 @@ ausschließlich auf die Relationen zwischen den Klassen, es wird also nicht wie 
 %TODO: ausser für sehr zentrale?
 Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig in Unity gearbeitet wird (zum Beispiel \textquote{Vector3}, \textquote{MonoBehaviour} oder \textquote{GameObject}) weggelassen.
 
-\begin{center}
-    \begin{tikzpicture}
-        \begin{umlpackage}{Assets/Scripts}
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{umlpackage}{Assets/Scripts}
 
         \umlemptyclass[x=4,y=1]{GenerateLevel}
 
@@ -348,9 +350,9 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
         \umluniassoc[geometry=-|, anchors= 180 and 145, align2=left]{SceneLoader}{NumberPadScript}
 
         \end{tikzpicture}
-        \vspace{4cm}
-\end{center}
-%TODO: caption
+    \end{center}
+    \caption{Ein Überblick über die Beziehungen der Klassen untereinander in Form eines UML-Klassendiagramms; Für die Übersichtlichkeit wurden Unity-Speizifische Klassen wie zum Beispiel $Vector3$ oder $MonoBehaviour$ herausgelassen}\label{figure:uml}
+\end{figure}
 
 \subsection{Vorstellung der Klassen}
 \begin{multicols*}{2}
@@ -363,8 +365,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     Des weiteren bietet diese Klasse mehrere Methoden an, die Berechnungen über den Raum, den sie generiert haben anstellen können. So kann man sich beispielsweise berechnen lassen ob der Korridor des Raumes auf der längeren, oder der kürzeren Kante des Grundrechtecks liegt, wie die Koordinaten des Mittelpunkts des ganzen Raumes sind und wie die Koordinaten des Mittelpunktes des Bereichs vor dem Korridor sind. (An diese Stelle im ersten Raum wird die Proband:in bei den Testbedingungen, in denen kein real-walking stattfindet, teleportiert.) Die Klasse besteht aus circa 1000 Zeilen Programmierung und ist somit die längste selbst geschriebene Klasse des Projektes.
 
     \paragraph{GenerateLevel}
-    Diese Klasse implementiert den prozeduralen Levelgenerierungsalgorithmus der genauer in
-    %Todo: kapitel finden
+    Diese Klasse implementiert den Levelgenerierungsalgorithmus der genauer in \autoref{section:generate}
     beschrieben wird. Sie ist die zentrale Klasse des Projektes. In ihren öffentlichen Attributen können die Einstellungen für die zu generierende Testbedingung verändert werden. In ihrer \textquote{Generate}-Methode implementiert sie den Levelgenerierungsalgorithmus und verbindet darin die restlichen Teilmodule des Projekts. Sie ist also nicht nur dafür verantwortlich die \textquote{Generate}-Methode der \textquote{RoomGenerator}-Klasse mit den richtigen Eingabewerten aufzurufen, sondern platziert auch die Rotation-Gain Funktionalität an die richtige Stelle, und übergibt die Generierten Räume an den \textquote{RoomAndProgressManager}, in dem sie in einer Liste gespeichert werden.
 
     \paragraph{RoomAndProgressManager}
@@ -373,7 +374,9 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 
 
     \paragraph{RotationGainMechanism}
-    Diese Klasse implementiert den Mechanismus, der in der Real-Walking Bedingung bei den jeweiligen Räumen angewandt wird um den genauen Ablauf des RotationGains zu bestimmen. Er zeigt die Zahlen auf der Tafel an, verwertet die Eingabe des Eingabefelds, startet den Rotation-Gain und beendet ihn auch wieder. Er signalisiert dem RoomAndProgressManager wenn der Rotation-Gain vollständig ist, also sich der Trackingspace also um 90\textdegree\ gedreht hat, und die Proband:in dann eine richtige Eingabe tätigt, dass der Raum abgeschlossen ist, sodass sich die Tür öffnet. In den anderen Bedingungen ist er dafür verantwortlich dies nach einer zufälligen, geringen, Anzahl richtiger Eingaben in das NumberPad zu tun, sodass die Proband:in auch in diesen Bedingungen den selben Ablauf erleben.
+    Diese Klasse implementiert den Mechanismus, der in der Real-Walking Bedingung bei den jeweiligen Räumen angewandt wird um den genauen Ablauf des RotationGains zu bestimmen. Er zeigt die Zahlen auf der Tafel an, verwertet die Eingabe des Eingabefelds, startet den Rotation-Gain und beendet ihn auch wieder. Er signalisiert dem RoomAndProgressManager wenn der Rotation-Gain vollständig ist, also sich der Trackingspace also um
+    90\textdegree\
+    gedreht hat, und die Proband:in dann eine richtige Eingabe tätigt, dass der Raum abgeschlossen ist, sodass sich die Tür öffnet. In den anderen Bedingungen ist er dafür verantwortlich dies nach einer zufälligen, geringen, Anzahl richtiger Eingaben in das NumberPad zu tun, sodass die Proband:in auch in diesen Bedingungen den selben Ablauf erleben.
 
     \paragraph{SceneLoader}
     Bei betreten des Levels sieht die Proband:in ein virtuelles Eingabefeld, in dass sie die verschiedenen Testbedingungen (A1-C3, siehe Kapitel
@@ -390,8 +393,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     Wird von der \textquote{Door}-Klasse genutzt um der Tür die Funktionalität zu geben fließend zu verschwinden. Dafür nutzt sie einen entsprechenden Shader.
 
     \paragraph{INumberPadListener}
-    Die Klassen die über Eingaben in einem NumberPad informiert werden wollen können dieses Interface implementieren um zu einem NumberPadListener zu werden. Dies geschieht also nach dem \textquote{Observer Pattern}.
-    %TODO: brauch ich dafür ne Quelle?
+    Die Klassen die über Eingaben in einem NumberPad informiert werden wollen können dieses Interface implementieren um zu einem NumberPadListener zu werden. Dies geschieht also nach dem \textquote{Observer Pattern} (siehe \cite{design-patterns})
 
     \paragraph{NumberPadScript}
     Dieses Script ist ein Component eines NumPads und ist dafür zuständig die Eingabe zu verarbeiten und dann alle angemeldeten Observer über Änderungen zu informieren.
@@ -399,7 +401,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     \paragraph{NumberPadButton}
     Verbessert die Knöpfe eines NumberPads indem es ihnen eine \textquote{CoolDown}-Periode gibt,
     % Cooldown englisch? MCI-QUelle?
-    sodass nicht unbeabsichtigt mehrere Eingaben entstehen und indem es einen Soundeffekt abspielt. % Nach xyz steigerm solche maßnahmen steigern die Immersion
+    sodass nicht unbeabsichtigt mehrere Eingaben entstehen und indem es einen Soundeffekt abspielt um der Nutzer:in als Feedback zu bestätigen, dass der Knopf gedrückt. % Nach xyz steigerm solche maßnahmen steigern die Immersion
 
     \paragraph{FireBaseHandler}
     Bietet die Methode \textquote{PostResult} an, die die Daten des aktuellen Versuchs an eine Cloud-Datenbank verschickt. So werden dann die gelaufene Anzahl Räume, die gelaufene Strecke in Metern, die Fortbewegungsart, und das Datum, inklusive der genauen Uhrzeit des Abschickens gespeichert. Ausserdem wird gespeichert ob das Verschicken im Unity-Editor, also zum Testen, geschehen ist, oder ob es wirklich von der Datenbrille aus versendet wurde.
@@ -407,6 +409,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 \end{multicols*}
 
 \section{Levelgenerierung}
+\label{section:generate}
 An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioniert. Nacheinander werde ich die grundlegenden Ideen hinter der Levelgenerierung erörtern und dabei jeweils genauer auf ihre Implementierung eingehen um dann den Algorithmus, der die unterschiedlichen Codeblöcke nutzt um die Levelstruktur zu generieren, zu beschreiben und vorzustellen.
 Zuerst wird besprochen, wie die Räume angeordnet werden müssen damit sie durch den Rotation-Gain verbunden werden können. Dann wird erklärt und vorgestellt wie die Korridore, die in den Räumen generiert werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten, erstellt werden. Als nächstes beschreibe ich die Vorgänge die für die Generierung der Wände der Räume verantwortlich sind und erkläre wie die entsprechenden Berechnungen stattfinden.
 Um hinterher dann den Generierungs-Algorithmus und den zugehörigen Quelltext vorzustellen wird dann noch Beschrieben an welchen Stellschrauben manipuliert werden kann um heterogene Ergebnisse zu bekommen, erst hier können (Pseudo-)Zufallsfaktoren eine Rolle spielen.
@@ -418,8 +421,8 @@ der die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsp
 
 \begin{figure}
     \ctikzfig{2rooms_a}
-    \caption{}\label{figure:two_rooms}
-    %TODO: caption
+    \caption{Veranschaulichung der Raumstellung zueinander, sodass $P$ den Drehpunkt kennzeichnet }\label{figure:two_rooms} %TODO: formulierung
+    %TODO: P is a point
 \end{figure}
 
 %paragraph Erklärung
@@ -441,19 +444,47 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 \begin{figure}
     \centering
     \input{calculateCorners.tikz}
-    \caption{} %TODO:caption
+    \caption{Zur Eckenberechnung genutzte Vektoren}
     \label{figure:calculateCornersFig}
 \end{figure}
 
 Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die virtuellen Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
 In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen müssen die Position $P$ sowie der Abstand von $P$ zu den Wänden des jeweiligen Vorraums definiert sein( $dP$ ). Die Berechnung dieser Punkte findet sich in \autoref{sec:corridor}. Für die weiteren Räume berechnen sich die Eckvektoren, dann folgendermaßen. Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
 
-    $$ cP = P + (-1) * sDD * dP $$
+% $$ cP = P + (-1) * sDD * dP $$
 
-    $$ C_a = cP + (-1) * btF * dP $$
-    $$ C_b = C_a + sDD * length $$
-    $$ C_c = C_d + sDD * length $$
-    $$ C_d = cP + btF * (width - dP) $$
+% $$ C_a = cP + (-1) * btF * dP $$
+% $$ C_b = C_a + sDD * length $$
+% $$ C_c = C_d + sDD * length $$
+% $$ C_d = cP + btF * (width - dP) $$
+
+    \begin{align}
+        \begin{split}\label{eq:1}
+            cP ={}& P + (-1) * sDD * dP
+        \end{split}\\ \\
+        \begin{split}\label{eq:2}
+            C_a ={}& cP + (-1) * btF * dP
+        \end{split}\\
+        \begin{split}\label{eq:3}
+            C_b ={}& C_a + sDD * length
+        \end{split}\\
+        \begin{split}\label{eq:4}
+            C_c ={}& C_d + sDD * length
+        \end{split}\\
+            C_d ={}& cP + btF * (width - dP)\label{eq:5}
+        \end{align}
+
+    % \begin{align}
+    %     \begin{split}\label{eq:1}
+    %         a ={}& b + c + d\\
+    %              & + e + f + g
+    %     \end{split}\\
+    %     \begin{split}\label{eq:2}
+    %         k ={}& l + m + n + m + n + m + n\\
+    %              & + o + p + q
+    %     \end{split}\\
+    %         r ={}& s + t (u + v + w)\label{eq:3}
+    %     \end{align}
 
     %TODO: alignment?
 Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden.
