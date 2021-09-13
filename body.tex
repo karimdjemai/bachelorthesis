@@ -414,7 +414,7 @@ An dieser Stelle wird beschrieben wie genau die Generierung des Levels funktioni
 Zuerst wird besprochen, wie die Räume angeordnet werden müssen damit sie durch den Rotation-Gain verbunden werden können. Dann wird erklärt und vorgestellt wie die Korridore, die in den Räumen generiert werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten, erstellt werden. Als nächstes beschreibe ich die Vorgänge die für die Generierung der Wände der Räume verantwortlich sind und erkläre wie die entsprechenden Berechnungen stattfinden.
 Um hinterher dann den Generierungs-Algorithmus und den zugehörigen Quelltext vorzustellen wird dann noch Beschrieben an welchen Stellschrauben manipuliert werden kann um heterogene Ergebnisse zu bekommen, erst hier können (Pseudo-)Zufallsfaktoren eine Rolle spielen.
 Den krönenden Abschluss dieses Kapitel bekommt dann der Abschnitt,
-der die Zusammensetzung des Algoritmusses dann zunächst erklärt und denn entsprechenden Quelltext dann auch noch ausführlich vorstellt.
+der die Zusammensetzung des Algorithmusses dann zunächst erklärt und denn entsprechenden Quelltext dann auch noch ausführlich vorstellt.
 
 \subsection{Raumplatzierung}
 \label{subsection:calccorners}
@@ -444,12 +444,12 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 \begin{figure}
     \centering
     \input{calculateCorners.tikz}
-    \caption{Zur Eckenberechnung genutzte Vektoren}
+    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $C_{0-3}$ werden die Ecken bezeichnet, mit $S_{0-3}$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). }
     \label{figure:calculateCornersFig}
 \end{figure}
 
 Um dies umzusetzen müssen zunächst die Koordinaten der Ecken innerhalb der virtuellen Umgebung bestimmt werden. Für den ersten Raum ist es nicht schwierig, die virtuellen Koordinaten der Ecken der Trackingspace-Boundaries werden vom Oculus Integration SDK geliefert.
-In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen müssen die Position $P$ sowie der Abstand von $P$ zu den Wänden des jeweiligen Vorraums definiert sein( $dP$ ). Die Berechnung dieser Punkte findet sich in \autoref{sec:corridor}. Für die weiteren Räume berechnen sich die Eckvektoren, dann folgendermaßen. Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
+In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Levelgenerierung abgefragt und der \textquote{GenerateLevel}-Klasse zur Verfügung gestellt. Um allerdings die Raumecken der folgenden Räume zu bestimmen müssen die Position $P$ sowie der Abstand von $P$ zu den Wänden des jeweiligen Vorraums definiert sein( $dP$ ). Die Berechnung dieser Punkte findet sich in \autoref{sec:corridor}. Für die weiteren Räume berechnen sich die Eckvektoren, dann folgendermaßen. Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
 
 % $$ cP = P + (-1) * sDD * dP $$
 
@@ -463,15 +463,15 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
             cP ={}& P + (-1) * sDD * dP
         \end{split}\\ \\
         \begin{split}\label{eq:2}
-            C_a ={}& cP + (-1) * btF * dP
+            C_0 ={}& cP + (-1) * btF * dP
         \end{split}\\
         \begin{split}\label{eq:3}
-            C_b ={}& C_a + sDD * length
+            C_1 ={}& C_a + sDD * length
         \end{split}\\
         \begin{split}\label{eq:4}
-            C_c ={}& C_d + sDD * length
+            C_2 ={}& C_d + sDD * length
         \end{split}\\
-            C_d ={}& cP + btF * (width - dP)\label{eq:5}
+            C_3 ={}& cP + btF * (width - dP)\label{eq:5}
         \end{align}
 
     % \begin{align}
@@ -486,13 +486,12 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
     %         r ={}& s + t (u + v + w)\label{eq:3}
     %     \end{align}
 
-    %TODO: alignment?
-Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden.
+Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. $cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$ länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor, der die Richtung des Korridors des letzen Raumes erweitert. $btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht. Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden. Wichtig ist noch zu erwähnen, dass die in der eben erwähnten Abbildung gezeigte Folge von Ecken und Seiten, nicht genau spiegelverkehrt ist wenn der Raum in die andere Richtung generiert würde (siehe \autoref{sec:random}), sondern die Reihenfolge der Ecken genau andersherum läuft. Das ganze ist also nicht nur vertikal, sondern auch horizontal gespiegelt zu der Darstellung.
 
 \begin{figure}[!h]
     \centering
     \sourcecode{calculateNewCorners.cs}
-    \caption{Funktion zur berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
+    \caption{Funktion zur Berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
     \label{figure:calculateNewCornersScript}
 \end{figure}
 
@@ -510,7 +509,7 @@ genauer beschrieben.
 
 \paragraph*{Korridor-Meshgenerierung}
 Um einen solchen Korridor zu generieren müssen zunächst die Koordinaten der genutzten Vertices %TODO: genauer erklären?
-bestimmt werden. Zudem müssen dann entsprechende Faces gespannt und für jeden Vertex auch die entsprechenden UV-Koordinaten errechnet werden. All dies geschieht in der \textquote{RoomGenerator}-Klasse.
+bestimmt werden. Zudem müssen dann entsprechende Faces gespannt und für jeden Vertex dann auch die UV-Koordinaten errechnet werden. All dies geschieht in der \textquote{RoomGenerator}-Klasse.
 
 Ein Korridor besteht aus einem Boden, einer Frontalwand, zwei Seitenwänden und einer Rückwand.
 Bevor die Meshgenerierung stattfinden kann muss zunächst die Variable $D$ bestimmt werden. Dabei handelt es sich um einen Wert zwischen $0$ und $1$, der für jeden Raum (Pseudo-)zufällig generiert wird (siehe \autoref{sec:random}). Mit diesem Wert werden die Türpositionen bestimmt, je geringer er ist desto weiter links liegt die Haupttür in der Frontalwand. Ist der Wert geringer als 0.5 befindet sich die Seitentür in der rechten Seitenwand, sonst in der linken, sodass diese immer auf der gegenüberliegende Seite der Haupttür liegt.
@@ -522,7 +521,7 @@ veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht au
 Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{a-d}$), die Seite des Raumes, an der der Korridor liegen soll $S$ ($_{a-d}$), die Türposition $D$, die Tiefe des Korridors, die durch den in \autoref{subsection:calccorners} besprochenen Abstand zu den Wänden der Ecke des Punktes $P$ bestimmt wird: $2 * dP$, die Höhe $h$ und Dicke der Wände $w$ und die Höhe ($dh$) und die Breite ($dw$) der Tür .
 
 Als erstes werden die unteren, äußeren Punkte berechnet. ($F_{1-4}$)
-Zunächst werden die beiden hinteren, äußeren Punkte des Korridors bestimmt. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich die Ecke des Raumes, die $S$ entspricht und die im Uhrzeigersinn darauf folgende auswählen. %TODO: formulierung
+Dabei wird mit den beiden hinteren, äußeren Punkte des Korridors begonnen. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich die Ecke des Raumes, die $S$ entspricht, und die im Uhrzeigersinn darauf folgende auswählen. %TODO: formulierung
 
 $$ F_1 = C_S $$
 $$ F_2 = C_{(S+1) \% 4} $$ %modulo???
@@ -567,6 +566,7 @@ Die Berechnung von $xP$, und $mDX$ wird aus dem in \autoref{figure:calcMainDoorC
 dargestellten quelltext ersichtlich. %kommentare, variablen übersetzen etc.
 
 Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit der bekannten Methode und wird auch in \autoref{figure:doorCalcFig} ersichtlich. Türhöhe ($dh$), Türbreite ($dw$) und Wandbreite ($w$) werden mit den entsprechenden Richtungsvektoren multipliziert und auf $mD$ addiert.
+%TODO: side door
 
 \begin{figure}[h!]
     \centering
@@ -597,15 +597,17 @@ Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit 
 %paragraph Erklärung
 Natürlich reichen die Meshs der Korridore noch nicht aus um das Gefühl eines Raumes zu vermitteln, zumal diese ja auch nur an einer Seite des Raumes statuiert sind.
 Wie in \autoref{subsection:calccorners} besprochen sollen die Räume von Wänden umgebem sein.
-In dem hier vorgestelten Projekt werden die Wände auf zwei verschiedene Arten generiert. Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in echt existieren könnten.
-Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch runherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Versuchsbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
+In dem hier vorgestelten Projekt werden die Wände auf zwei verschiedene Arten generiert. Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in real existieren könnten.
+Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Versuchsbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
 
 Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante gennant, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
 
-In der Abbildung x %TODO: figure:
-werden die beiden Varianten miteinander Verglichen.
+Die Wandgenerierung erfolgt über ein Prefab, dass instanziiert und dann gestreckt, positioniert und rotiert wird. Es besteht aus einem Würfel mit der entsprechenden Textur, %TODO: siehe section x texturkram
+der der Höhe der Wandhöhe $h$, und der Breite und Tiefe der Wände $w$. Dies geschieht in der Methode \textquote{GenerateWall}. Diese bekommt als Eingabe zwei Punkte, und instanziiert dann eine Wand die von dem einen dieser Punkte zum anderen Reicht. %TODO: code zeigen?
+Abgesehen davon besteht der Prozess der Wandgenerierung also nur noch daraus für jeden Raum für jede Wand jeweils die zwei Endpunkte der Wand zu berechnen.
 
-hallo
+In der \autoref{figure:wallCompare}
+werden die beiden Varianten miteinander Verglichen.
 
 \begin{figure}[h!]
     \centering
@@ -617,22 +619,58 @@ hallo
 
 
 %bedingung a (JS, TP)
+\paragraph{Realistische Wandgenerierung}
+Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwischen die Korridore platziert werden dass der Nachfolgende Raum die Priotität über den Platz hat. Der Bereich $O$ der in der \autoref{figure:two_rooms} zu sehen war, gehört bei dieser Variante also immer dem Raum $B$ und nicht den Raum $A$.
+%TODO: umsetzung?
+
 
 %bedingung b (RDW)
-
-%paragraph umsetzung
+\paragraph{Unmögliche Wandgenerierung}
 
 %bedingung a ausführlich, b oberflächlich
+
 
 \subsection{Zufallsfaktoren in der Levelgenerierung}
 \label{sec:random}
 %paragraph Erklärungen
-Der hier beschriebene Levelalgorithmus nutzt das Element des (Pseudo-)Zufalls um durch verändern verschiedener Variablen das Ergebnis zu verändern. So ist es möglich viele unterschiedliche Level zu generieren. Welche Variablen sich dafür unterscheiden können werde ich an dieser Stelle vorstellen.
+Der hier beschriebene Levelgenerierungsalgorithmus nutzt das Element des (Pseudo-)Zufalls um durch Verändern verschiedener Variablen das Ergebnis zu beeinflussen. So ist es möglich viele unterschiedliche Level zu generieren. Welche Variablen sich dafür unterscheiden können werde ich an dieser Stelle vorstellen.
+
 \paragraph*{Korridorrichtung}
+Zu Beginn der Korridorgenerierung wird eine Seite des Raumes als Korridorseite $S$ bestimmt. Diese wird pseudozufällig ausgewählt. Im ersten Raum ist es noch vollkommen beliebig, welche Seite ausgewählt wird.
+%TODO: Footnote: Im Versuchsaufbau wird dabei immer die Selbe Seite ausgesucht um das Erscheinen im Raum einheitlicher zu gestalten. (Die Nutzer:in guckt nach dem Start des Versuchs in Richtung des Korridors).
+Bei den weiteren Räumen hingegen können bestimmte Seiten nicht ausgewählt werden, weil der Korridor nach der Generierung sonst mit dem Ausgang des Korridors des vorherigen Raumes überlappt.
+Durch die Art und Weise, wie die Eckenberechnung der Räume funktioniert, lässt sich feststellen, dass $S_3$ in allen Umständen immer die Seite ist, aus der der Korridor des letzten Raumes herauszeigt (siehe \autoref{subsection:calccorners}). $S_3$ kann also zur Korridorgenerierung nicht ausgewählt werden.
+Falls die Seitentür des vorherigen Raumes auf der rechten Seite liegt (wie in der \autoref{figure:calculateCornersFig}) muss ausserdem $S_0$ blockiert werden, da die Nutzer:in sonst von einem Korridor direkt in den nächsten läuft. Ist die Seitentür aber auf der linkens Seite ist ja die Ecken- und Seitenbelegung, wie in \autoref{subsection:calccorners} beschrieben, nicht nur horizontal, sondern auch vertikal spiegelverkehrt. Deshalb muss in dem Fall die Seite $S_2$ blockiert werden.
+Damit diese Seiten bei der zufälligen Auswahl ignoriert werden, Funktioniert die Methode dafür (\textquote{RandomDirectionBlocked}, siehe \autoref{figure:randomdirection})
+folgendermaßen. Als Eingabe wird eine Liste mit den blockierten Richtungen übergeben. Alle Richtungen (representiert von Zahlen von 0-3), die darin vorkommen werden aus der Liste aller möglichen Richtungen entfernt.
+Mit dem Unity-Objekt $Random$ lässt sich durch abfrufen der Eigenschaft $value$ eine zufällige Zahl zwischen 0 und 1 generieren. %Footnote: falls 1 dann 0.99999
+Um nun die Zahl aus der Liste verbleibender Richtungen $L$ auszuwählen wird das Ergebnis nun mit $4 - length(L)$ multipliziert um den Index zu berechnen.
+
+\begin{figure}
+    \sourcecode{RandomDirectionBlocked.cs}
+    \caption{}\label{figure:randomdirection}
+\end{figure}
+
 \paragraph*{Türposition}
+Die Frage in welche Richtung der jeweils nächste Raum generiert wird, hängt gänzlich davon ab, wie die Haupttür des Korridors positioniert ist. In Unterabschnitt x %TODO: link
+wird erklärt wie die Haupttür auf der Frontalwand des Korridors generiert wird und abhäng von dem Wert $D$ auf der links-rechts Achse positioniert wird. Falls $D$ einen Wert von $0$ hat wird die Tür ganz links positioniert, bei einem Wert von $1$ ganz rechts. Davon ist dann auch die positionierung der Seitentür Abhängig. Ist $D <= 0.5$ wird die Seitentür in die Rechte Seitenwand des Korridors generiert, sonst in die Linke. Davon ist dann natürlich auch wieder Abhängig in welche Richtung der folgende Raum generiert wird, denn die Nutzer:in soll ja aus der Seitentür heraus-, in den Raum hineintreten.
+Man kann den Wert $D$ also sowohl als einen verstehen, der graduell %TODO: formulierung?
+die position auf der Frontalwand verstellt, als auch als einen wichigen Wert, der die Richtung des folgenden Raumes vorherbestimmt.
 
-%paragraph Berechnungen
+Auch hier müssen wieder einige Varianten ausgeschlossen werden, um die Begehbarkeit der erzeugten Level zu garantieren.
 
+%figures?
+$S_1$ stellt unabhängig der Richtung immer die Seite gegenüber der Seite aus der man kommt dar, wenn man aus dem vorherigen Raum in den aktuellen Raum tritt.
+Wenn der Korridor an diese Seite generiert wurde, kann die Türposition nicht mehr so sein, dass der als nächstes Generierte Raum Überschneiungen mit der Seite des aktuellen Raumes hat, aus der der Korridor des vorherigen Raumes kommt, da sonst der Weg aus dem Korridor des vorherigen Raumes nicht frei ist weil der nachfolgende Raum darüber generiert wurde. Jeh nach Raumdimensionen würden sich dann sogar potientell 3 Räume überlappen.
+
+Genauso wichtig ist, dass das Ende des Korridors des aktuellen Raumes, nicht in Richtung des vorherigen Raumes zeigt.
+
+Diese Varianten werden bei der Levelgenerierung mit Fallunterscheidungen ausgeschlossen. %TODO: zeigen?
+Dazu hat die Methode \textquote{GenerateRandomDoorPosition}, die für die Berechnung von $D$ verantwortlich ist zwei Parameter, $forceLeftSideDoor$ und $forceRightSideDoor$, die zwar beide $false$ sein dürfen, (dann wird nichts verhindert), aber nicht beide $true$ sein dürfen.
+
+Die Berechnung von $D$ erfolgt nun wieder über das Aufrufen von Unitys $Random.value$ Attribut, welches einen Pseudozufälligen Wert von $0-1$ zurückgibt.
+
+Soll die rechte Seite forciert werden wird der Wert durch $2$ geteilt, falls die linke Seite forciert werden soll wird nach dem durch $2$ teilen nochmal $0.5$ addiert. Falls nichts blockiert werden soll wird der Wert direkt wiedergegeben.
 
 \subsection{Umsetzung der Levelgenerierung}
 

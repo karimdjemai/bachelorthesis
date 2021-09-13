@@ -20,10 +20,19 @@
 		\node [style=none] (52) at (0, 6) {};
 		\node [style=none] (53) at (0.25, 5.75) {$P$};
 		\node [style=none] (55) at (-1.25, 6) {$cP$};
-		\node [style=none] (57) at (9, 7.25) {$C_b$};
-		\node [style=none] (58) at (-1, 7.25) {$C_a$};
-		\node [style=none] (59) at (-1, -1.25) {$C_d$};
-		\node [style=none] (60) at (9, -1.25) {$C_c$};
+		\node [style=none] (57) at (9, 7.25) {$C_1$};
+		\node [style=none] (58) at (-1, 7.25) {$C_0$};
+		\node [style=none] (59) at (-1, -1.25) {$C_3$};
+		\node [style=none] (60) at (9, -1.25) {$C_2$};
+
+        %Directions
+		\node [style=none] (61) at (4, 7.25) {$S_0$};
+		\node [style=none] (62) at (9.25, 3) {$S_1$};
+		\node [style=none] (63) at (4, -1.25) {$S_2$};
+		\node [style=none] (64) at (-0.75, 3) {$S_3$};
+
+
+
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style=new edge style 0] (40.center)
