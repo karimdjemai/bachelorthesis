@@ -605,37 +605,32 @@ Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit 
 Natürlich reichen die Meshs der Korridore noch nicht aus um das Gefühl eines Raumes zu vermitteln, zumal diese ja auch nur an einer Seite des Raumes statuiert sind.
 Wie in \autoref{subsec:roomplaceidea} besprochen sollen die Räume von Wänden umgeben sein.
 
-In dem hier vorgestelten Projekt werden die Wände auf zwei verschiedene Arten generiert. Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in real existieren könnten.
-Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Versuchsbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
-
-Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante gennant, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
-
-Die Wandgenerierung erfolgt über ein Prefab, dass instanziiert und dann gestreckt, positioniert und rotiert wird. Es besteht aus einem Würfel mit der entsprechenden Textur, %TODO: siehe section x texturkram
-der der Höhe der Wandhöhe $h$, und der Breite und Tiefe der Wände $w$. Dies geschieht in der Methode \textquote{GenerateWall}. Diese bekommt als Eingabe zwei Punkte, und instanziiert dann eine Wand die von dem einen dieser Punkte zum anderen Reicht. %TODO: code zeigen?
-Abgesehen davon besteht der Prozess der Wandgenerierung also nur noch daraus für jeden Raum für jede Wand jeweils die zwei Endpunkte der Wand zu berechnen.
-
-In der \autoref{figure:wallCompare}
-werden die beiden Varianten miteinander Verglichen.
-
 \begin{figure}[H]
     \centering
 
     \scalebox{0.4}{\input{wallCompare.tikz}}
-    \caption{hallo} %TODO:caption
+    \caption{Vergleich der zwei Wandgenerierungsvarianten. Oben: realistische Variante, die in Joystick- und Teleportationsbedingung eingesetzt werden. Unten: unmögliche Variante, die in der Real-Walking Bedingung die Wände generiert. Gestrichelte Linien repräsentieren Wände, die erst unter bestimmten Umständen sichtbar werden.}
     \label{figure:wallCompare}
 \end{figure}
 
+Die Wandgenerierung erfolgt über ein Prefab, dass instanziiert und dann gestreckt, positioniert und rotiert wird. Es besteht aus einem Würfel mit der entsprechenden Textur, %TODO: siehe section x texturkram
+der Höhe der Wandhöhe $h$, und der Breite und Tiefe der Wände $w$. Dies geschieht in der Methode \textquote{GenerateWall}. Diese bekommt als Eingabe zwei Punkte, und instanziiert dann eine Wand die von dem einen dieser Punkte zum anderen Reicht. %TODO: code zeigen?
+Abgesehen davon besteht der Prozess der Wandgenerierung also nur noch daraus für jeden Raum, für jede Wand, jeweils die zwei Endpunkte der Wand zu berechnen.
+In dem hier vorgestellten Projekt werden die Wände auf zwei verschiedene Arten generiert. In der \autoref{figure:wallCompare} werden die beiden Varianten miteinander Verglichen.
 
 %bedingung a (JS, TP)
 \subsection{Realistische Wandgenerierung}
+Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in real existieren könnten.
+Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Kontrollbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
+
 Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwischen die Korridore platziert werden dass der Nachfolgende Raum die Priotität über den Platz hat. Der Bereich $O$ der in der \autoref{figure:two_rooms} zu sehen war, gehört bei dieser Variante also immer dem Raum $B$ und nicht den Raum $A$.
 %TODO: umsetzung?
 
-
 %bedingung b (RDW)
 \subsection{Unmögliche Wandgenerierung}
+Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante genannt, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
 
-%bedingung a ausführlich, b oberflächlich
+Die Umsetzung der unmöglichen Wandgenerierung erfolgt recht ähnlich, wenn auch um einiges minimalistischer als, die der realistischen. Anstatt die Wandgenerierung auf die verschiedenen Räume aufzuteilen, werden die Wände so generiert, dass sie abgesehen von den Korridoren, des aktuellen, und des vorherigen Raumes den ganzen Raum umschließen. Das ein- und ausblenden, der Wände wird dann vom \textquote{RoomAndProgressManager}, der ja Überblick darüber wo die Nutzer:in sich gerade befindet geregelt. Es werden immer nur die Wände des aktuellen Raumes, angezeigt.
 
 
 \section{Zufallsfaktoren in der Levelgenerierung}
@@ -733,17 +728,21 @@ Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{Rotat
 %code vorstellung?
 
 
-\chapter{Experiment}\label{chapter:kapitellabel}
-\section{Teilnehmer}\label{chapter:kapitellabel}
-\section{Materialien}\label{chapter:kapitellabel}
-\section{Methoden}\label{chapter:kapitellabel}
-\section{Ergebnisse}\label{chapter:kapitellabel}
+\chapter{Experiment}\label{}
+    \section{Versuchsaufbau}\label{}
+    \section{Hypothesen}\label{}
+    \section{Versuchsbedingungen}\label{}
+        \subsection{Kontrollbedingung I Joystick}\label{}
+        \subsection{Kontrollbedingung II Teleportation}\label{}
+        \subsection{Versuchsbedingung Real-Walking}\label{}
 
-\chapter{Diskussion}\label{chapter:kapitellabel}
+\chapter{Ergebnisse}\label{}
+    \section{Teilnehmer}\label{}
+    \section{Methoden}\label{}
 
-\chapter{Konklusion}\label{chapter:kapitellabel}
+\chapter{Diskussion und Fazit}\label{}
 
-\chapter{Acknowledgments}\label{chapter:kapitellabel}
+\chapter{Acknowledgments}\label{}
 
 
 % keep an blank line above
