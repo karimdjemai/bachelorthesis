@@ -708,7 +708,7 @@ Durch die Art und Weise, wie die Eckenberechnung der Räume funktioniert, lässt
 Falls die Seitentür des vorherigen Raumes auf der rechten Seite liegt (wie in der \autoref{figure:calculateCornersFig}) muss ausserdem $S_0$ blockiert werden, da die Nutzer:in sonst von einem Korridor direkt in den nächsten läuft. Ist die Seitentür aber auf der linkens Seite ist ja die Ecken- und Seitenbelegung, wie in \autoref{subsection:calccorners} beschrieben, nicht nur horizontal, sondern auch vertikal spiegelverkehrt. Deshalb muss in dem Fall die Seite $S_2$ blockiert werden.
 Damit diese Seiten bei der zufälligen Auswahl ignoriert werden, Funktioniert die Methode dafür (\textquote{RandomDirectionBlocked}, siehe \autoref{figure:randomdirection})
 folgendermaßen. Als Eingabe wird eine Liste $LB$ mit den blockierten Richtungen übergeben. Alle Richtungen (representiert von Zahlen von 0-3), die darin vorkommen werden aus der Liste aller möglichen Richtungen entfernt.
-Mit dem Unity-Objekt $Random$ lässt sich durch Abrufen der Eigenschaft $value$ eine zufällige Zahl zwischen 0 und 1 generieren\footnote{Falls tatsächlich mal eine volle 1 ausgewählt würde dies tatsächlich dazu führen, dass eine zu hohe Zahl ausgewählt werden würde, deshalb wird im Code mithilfe der $Min$-Funktion dafür gesorgt, dass dieser Fall nicht eintreten kann, siehe \autoref{figure:randomdirection}}.
+Mit dem Unity-Objekt $Random$ lässt sich durch Abrufen der Eigenschaft $value$ eine zufällige Zahl zwischen 0 und 1 generieren\footnote{Falls tatsächlich eine volle 1 ausgewählt wird, würde dies dazu führen, dass eine zu hohe Zahl ausgewählt werden würde, deshalb wird im Code mithilfe der $Min$-Funktion dafür gesorgt, dass dieser Fall nicht eintreten kann, siehe \autoref{figure:randomdirection}}.
 Um nun die Zahl aus der Liste verbleibender Richtungen $LD$ auszuwählen wird das Ergebnis nun mit $4 - length(LB)$ multipliziert um den Index zu berechnen.
 
 \subsection{Türposition}
@@ -775,13 +775,29 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 % \sourcecode{generate.cs}
 
 
-\chapter{Experiment}\label{}
-    \section{Versuchsaufbau}\label{}
+\chapter{Pilotierungsstudie}\label{chapter:experiment}
+
+Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie.Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und danach die Ideen hinter dem Experiment erläutern. Zunächst werde ich den Aufbau, beschreiben, dann die verschiedenen Bedingungen vorstellen und erläutern und zuletzt die zu erforschenden Hypothesen aufstellen.
+
+    \section{Umstände}
+    Aufgrund der anhaltenden Covid-19 Situation wurde dieses nicht, wie sonst bei vergleichbaren Arbeiten üblich im offiziellen Rahmen der Universität durchgeführt, sondern unter meiner privaten Verantwortung. Dennoch wurden ausreichend Sicherheitsmaßnahmen durchgeführt um die Gefahr einer Infektion durch die Umstände des Experiments so gering wie möglich zu halten. Abgesehen von einer Teilnehmenden Person, hatten alle Proband:innen zum Zeitpunkt der Durchführung bereits vollen Impfschutz.
+    Alle Teilnehmenden wurden vor der Durchführung des Experiments mit einem Schnelltest auf Covid-19 getestet und ihre Kontaktdaten wurden festgehalten um sie zu informieren, falls dennoch erforderlich. Ausserdem wurden die genutzen Materialen nach jedem durchlauf desinfiziert und es wurde darauf geachtet nicht mehr als
+    2 %?
+    Leute pro Tag zu teilnehmen zu lassen, um die Anzahl an Personen, die sich infizieren könnten, falls es dennoch dazu kommt, möglichst gering zu halten.
+    Alle Teilnehmenden wurden gebeten während der Durchführung des Experiments einen Mund und Nasenschutz zu tragen sowie sich vorher die Hände mit Handdesinfektionsmittel zu desinfizieren.
+
+    Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen teilnehmen zu lassen. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+
+    \section{Versuchsaufbau}\label{sec:setup}
+    Im Folgenden werde ich den Aufbau des Experiments beschreiben. Um einen gleichmäßig verteilten
+
+    \section{Bedingungen}\label{}
+        Im folgenden werde ich die drei verschiedenen Bedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt.
+        \subsection{Kontrollbedingung I Joystick}\label{subsec:joystick}
+
+        \subsection{Kontrollbedingung II Teleportation}\label{subsec:teleport}
+        \subsection{Versuchsbedingung Real-Walking}\label{subsec:realwalk}
     \section{Hypothesen}\label{}
-    \section{Versuchsbedingungen}\label{}
-        \subsection{Kontrollbedingung I Joystick}\label{}
-        \subsection{Kontrollbedingung II Teleportation}\label{}
-        \subsection{Versuchsbedingung Real-Walking}\label{}
 
 \chapter{Ergebnisse}\label{}
     \section{Teilnehmer}\label{}
