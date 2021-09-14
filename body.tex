@@ -448,6 +448,18 @@ Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{Rotat
 
 In den Kontrollbedingungen wird kein Rotationgain angewandt. Dennoch müssen die Proband:innen auch hier Zahlen in das Eingabefeld eingeben. In diesen Szenarien wird die Türöffnung aus offensichtlichen Gründen nicht von der vervollständigung des Rotationgains abhängig gemacht, sondern wird eine Zufallszahl zwischen 4 und 8 bestimmt und mitgezählt, wie oft Zahlen bestätigt wurden. Wenn die Zufallszahl erreicht wird öffnet sich die Tür. Durch die Erfahrung beim Testen hat sich gezeigt dass es etwa zwischen 4 und 8 Eingaben bedarf, bevor der Rotationgain abgeschlossen ist.
 
+\section{Messmechanismen und Datenspeicherung}
+Um an späterer Stelle einschätzen zu können, wie gut die Proband:innen die Entfernung die sie sich fortbewegt haben geschätzt haben ist es notwendig eben dies auch zu messen. Zusätzlich dazu ist es auch notwendig diese Daten zu speichern. Im folgenden werde ich erläutern, wie dies implementiert ist.
+
+Da es nicht darum geht die Luftlinie zwischen Start und Ende des Levels zu messen, da dann die Bewegungsweise der Proband:in keine Rolle mehr spielen würde, sondern ihre konkreten Fortbewegungsstrecke zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Frame die Kopfposition des virtuellen Avatars, der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis sehr unexakt. %?
+Da nun jede millimeterbewegung des Kopfes aufsummiert werden würde, würde eine einfache Kopfdrehung die fortbewegte Strecke schon um einen großen Teil erhöhen. Dies würde dazuführen, dass die Messung der fortbewegten Strecke nicht mehr intuitiv einzuschätzen wäre.
+Um dem entgegenzuwirken habe ich die Auflösung dieser Messung deutlich veringert, indem nicht mehr jedes Frame, diesen Prozess durchläuft, sondern nur ein Frame etwa alle 2 sekunden. So werden deutlich grobere Bewegungen gemessen und die gemessenen Ergebnisse passen deutlich besser zu der intuitiven Einschätzung der Entfernung.
+%TODO: zu unwissenschaftlich? nochmal best practices recherchieren
+
+All dies ist im \textquote{RoomAndProgressManager} implementiert. Hier gibt es eine \textquote{StartTimeMeasure}-Methode, die zum Start der Bedingung vom \textquote{SceneLoader} aufgerufen wird und eine \textquote{AddDistance}-Methode, die in der von der \textquote{Update}-Methode alle 150 Frames einmal aufgerufen wird. Diese bestimmt dann euklidisch die Distanz zwischen der aktuellen Position der Nutzer:in und der zuletzt gemessenen und addiert diese auf eine Kummulationsvariable.
+
+Sobald das Level der Versuchsbedingung abgeschlossen ist wird diese Kummulationsvariable an den \textquote{FirebaseHandler} weitergeleitet, der nun die Daten der aktuellen Versuchsbedingung an die private Datenbank sendet um die Daten für die spätere Auswertung zu speichern.
+
 \chapter{Levelgenerierung}
 \label{section:generate}
 Dieses Kapitel beschreibt, wie genau die Generierung eines in diesem Projekt genutzen Levels funktioniert. Nacheinander werde ich die grundlegenden Ideen hinter der Levelgenerierung erörtern und dabei jeweils genauer auf ihre Implementierung eingehen um dann den Algorithmus, der die unterschiedlichen Codeblöcke nutzt um die Levelstruktur zu generieren, zu beschreiben und vorzustellen.
@@ -623,7 +635,7 @@ Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit de
 \end{figure}
 
 \paragraph*{Faces}
-Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten dür den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Flächen wird auch in \autoref{figure:doorCalcFig} ersichtlich. Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet.
+Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten für den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Flächen wird auch in \autoref{figure:doorCalcFig} ersichtlich. Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet.
 
 Um die späteren UV Berechnungen nicht zu verunreinugen wird jeder Vertex dem Buffer pro Face einmal hinzugefügt. Die Faces werden dann gespannt indem die jeweiligen Indizes der Vertices im Buffer aufgelistet werden. Dies beides wird dann dem neu erzeugten $MeshFilter$ Objekt übergeben.
 
@@ -690,15 +702,14 @@ Der hier beschriebene Levelgenerierungsalgorithmus nutzt das Element des Pseudoz
     \sourcecode{RandomDirectionBlocked.cs}
     \caption{}\label{figure:randomdirection}
 \end{figure}
-Zu Beginn der Korridorgenerierung wird eine Seite des Raumes als Korridorseite $S$ bestimmt. Diese wird pseudozufällig ausgewählt. Im ersten Raum ist es noch vollkommen beliebig, welche Seite ausgewählt wird.
-%TODO: Footnote: Im Versuchsaufbau wird dabei immer die Selbe Seite ausgesucht um das Erscheinen im Raum einheitlicher zu gestalten. (Die Nutzer:in guckt nach dem Start des Versuchs in Richtung des Korridors).
+Zu Beginn der Korridorgenerierung wird eine Seite des Raumes als Korridorseite $S$ bestimmt. Diese wird pseudozufällig ausgewählt. Im ersten Raum ist es noch vollkommen beliebig, welche Seite ausgewählt wird\footnote{Im Versuchsaufbau wird dabei aber immer die selbe Seite ausgesucht um das Erscheinen im Raum einheitlicher zu gestalten. (Die Nutzer:in guckt nach dem Start des Versuchs in Richtung des Korridors).}.
 Bei den weiteren Räumen hingegen können bestimmte Seiten nicht ausgewählt werden, weil der Korridor nach der Generierung sonst mit dem Ausgang des Korridors des vorherigen Raumes überlappt.
 Durch die Art und Weise, wie die Eckenberechnung der Räume funktioniert, lässt sich feststellen, dass $S_3$ in allen Umständen immer die Seite ist, aus der der Korridor des letzten Raumes herauszeigt (siehe \autoref{subsection:calccorners}). $S_3$ kann also zur Korridorgenerierung nicht ausgewählt werden.
 Falls die Seitentür des vorherigen Raumes auf der rechten Seite liegt (wie in der \autoref{figure:calculateCornersFig}) muss ausserdem $S_0$ blockiert werden, da die Nutzer:in sonst von einem Korridor direkt in den nächsten läuft. Ist die Seitentür aber auf der linkens Seite ist ja die Ecken- und Seitenbelegung, wie in \autoref{subsection:calccorners} beschrieben, nicht nur horizontal, sondern auch vertikal spiegelverkehrt. Deshalb muss in dem Fall die Seite $S_2$ blockiert werden.
 Damit diese Seiten bei der zufälligen Auswahl ignoriert werden, Funktioniert die Methode dafür (\textquote{RandomDirectionBlocked}, siehe \autoref{figure:randomdirection})
-folgendermaßen. Als Eingabe wird eine Liste mit den blockierten Richtungen übergeben. Alle Richtungen (representiert von Zahlen von 0-3), die darin vorkommen werden aus der Liste aller möglichen Richtungen entfernt.
-Mit dem Unity-Objekt $Random$ lässt sich durch Abrufen der Eigenschaft $value$ eine zufällige Zahl zwischen 0 und 1 generieren. %Footnote: falls 1 dann 0.99999
-Um nun die Zahl aus der Liste verbleibender Richtungen $LD$ auszuwählen wird das Ergebnis nun mit $4 - length(LD)$ multipliziert um den Index zu berechnen.
+folgendermaßen. Als Eingabe wird eine Liste $LB$ mit den blockierten Richtungen übergeben. Alle Richtungen (representiert von Zahlen von 0-3), die darin vorkommen werden aus der Liste aller möglichen Richtungen entfernt.
+Mit dem Unity-Objekt $Random$ lässt sich durch Abrufen der Eigenschaft $value$ eine zufällige Zahl zwischen 0 und 1 generieren\footnote{Falls tatsächlich mal eine volle 1 ausgewählt würde dies tatsächlich dazu führen, dass eine zu hohe Zahl ausgewählt werden würde, deshalb wird im Code mithilfe der $Min$-Funktion dafür gesorgt, dass dieser Fall nicht eintreten kann, siehe \autoref{figure:randomdirection}}.
+Um nun die Zahl aus der Liste verbleibender Richtungen $LD$ auszuwählen wird das Ergebnis nun mit $4 - length(LB)$ multipliziert um den Index zu berechnen.
 
 \subsection{Türposition}
 Die Frage in welche Richtung der jeweils nächste Raum generiert wird, hängt gänzlich davon ab, wie die Haupttür des Korridors positioniert ist. In \autoref{subsec:corridormesh} wird erklärt wie die Haupttür auf der Frontalwand des Korridors generiert wird und abhängig von dem Wert $D$ auf der links-rechts Achse positioniert wird.
