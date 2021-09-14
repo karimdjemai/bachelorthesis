@@ -623,15 +623,20 @@ In dem hier vorgestellten Projekt werden die Wände auf zwei verschiedene Arten 
 Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch in real existieren könnten.
 Dazu gibt es einen ausgefeilten Algortithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Kontrollbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil diese keine Impossible Spaces beinhalten.
 
-Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwischen die Korridore platziert werden dass der Nachfolgende Raum die Priotität über den Platz hat. Der Bereich $O$ der in der \autoref{figure:two_rooms} zu sehen war, gehört bei dieser Variante also immer dem Raum $B$ und nicht den Raum $A$.
-%TODO: umsetzung?
+Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwischen die Korridore platziert werden dass der Nachfolgende Raum die Priotität über den Platz hat. Der Bereich $O$ der in der \autoref{figure:two_rooms} zu sehen war, gehört bei dieser Variante also immer zu dem Raum $B$ und nicht zu dem Raum $A$.
+
+Davon ob der Korridor des Raumes an der längeren, oder der kürzeren Seite des Rechtecks generiert wurde hängt ab, wieviele Wände generiert werden. Ist der Korridor an der längeren Seite des Raumes, werden ausgehend vom Korridor des letzten Raumes, zwei Wände generiert, da die nreite Seite des nächsten Raumes als Wand genutzt werden kann. Ist jedoch der Korridor des aktuellen Raumes an der kürzeren Seite des Rechtecks, so muss eine dritte Wand generiert werden, die verhindert, dass eine offene Stelle zwischen dem aktuellen und dem nächsten Raum entsteht.
+
+Um die Wände generieren zu können ist es wichtig, die Punkte diagnonal vor und hinter dem Punkt $P$ des vorherigen Raumes zu kennen. Dazu werden diese nach der Generierung als Iterationsübergreifende Variablen gespeichert und somit an den jeweils nächsten Raum übergeben, siehe \autoref{subsec:iteration}.
+
+%TODO: ausführlicher?
 
 %bedingung b (RDW)
 \subsection{Unmögliche Wandgenerierung}
-Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante genannt, umschließt immer nur den Raum in dem sich die Nutzer:in gerade befindet mit Wänden, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
+Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante genannt, umschließt alle Räume mit drei Wänden, zeigt aber immer nur die Wände des Raums, in dem sich die Nutzer:in gerade befindet an, und hat dementsprechend die Freiheit die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator} -Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. In dem Versuch wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
 
 Die Umsetzung der unmöglichen Wandgenerierung erfolgt recht ähnlich, wenn auch um einiges minimalistischer als, die der realistischen. Anstatt die Wandgenerierung auf die verschiedenen Räume aufzuteilen, werden die Wände so generiert, dass sie abgesehen von den Korridoren, des aktuellen, und des vorherigen Raumes den ganzen Raum umschließen. Das ein- und ausblenden, der Wände wird dann vom \textquote{RoomAndProgressManager}, der ja Überblick darüber wo die Nutzer:in sich gerade befindet geregelt. Es werden immer nur die Wände des aktuellen Raumes, angezeigt.
-
+%TODO: ausführlicher?
 
 \section{Zufallsfaktoren in der Levelgenerierung}
 \label{sec:random}
@@ -698,7 +703,7 @@ An dieser Stelle möchte ich noch einmal die Werte auflisten, die vorher von der
 Grundlegend besteht der Algorithmus aus der Deklarierung einiger Variablen, die den Zustand über die Iterationen hinweg speichern, und einer Schleife, die pro Iteration einen neuen Raum generiert. In der hier vorgestellten Form des Algorithmus wird diese Schleife zu Beginn der Versuchsbedingung ganz ausgeführt, sodass das Level fertig generiert wurde, bevor die Proband:in angefangen hat es zu erkunden.
 Um den Prozess so umzubauen, dass das Level fortlaufend weiter generiert wird, ist es lediglich notwendig den Quellcode, der innerhalb der Schleife steht in eine Funktion auszuverlagern, die immer dann, wenn die Nutzer:in einen weiteren Betritt einen weiteren erzeugt. Damit dies nicht bemerkt wird, ist es an dieser Stelle Ratsam einen kleinen Puffer von etwa 2 oder 3 Räumen einzubauen, sodass die neu erzeugten Räume nicht direkt vor den Augen der Nutzer:in auftauchen. Dies lässt sich einfach erzielen, indem man zu Beginn des Levels einige wenige Räume erzeugt, und die neuen Räume erst hinter diesen generiert werden.
 
-\subsection{Inhalt einer Iteration}
+\subsection{Inhalt einer Iteration}\label{subsec:iteration}
 Eine Iteration besteht aus zwei Bereichen. Im ersten wird zunächst der Raum anhand des aktuellen Zustands der Iterationsübergreifenden Variablen generiert indem die \textquote{Generate} Methode der \textquote{RoomGenerator} Klasse aufgerufen wird. Der zweite Teil ist dann dafür verantwortlich die nächste Iteration vorzubereiten. Dies hat den Zweck, dass der erste Teil der ersten Iteration, den Ursprungszustand der Variablen nutzen kann. Ein Beispiel dafür sind die vom Oculus Integration SDK übergebenen Eckkoordinaten des realen Trackingspaces, oder die, vom Designer ausgewählte, erste Korridorrichtung, die das Erscheinen im ersten Raum vereinheitlichen soll.
 
 \paragraph*{Generierungs-Teil}
