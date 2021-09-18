@@ -778,7 +778,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 \chapter{Pilotierungsstudie}\label{chapter:experiment}
 
 Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie.
-Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und danach die Ideen hinter dem Experiment erläutern. Zunächst werde ich den Aufbau, beschreiben, dann die verschiedenen Bedingungen vorstellen und erläutern und zuletzt die zu erforschenden Hypothesen aufstellen.
+Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und danach die Ideen hinter dem Experiment erläutern. Also zuerst den Aufbau beschreiben, dann die verschiedenen Bedingungen vorstellen und erläutern und zuletzt die zu erforschenden Hypothesen aufstellen.
 
     \section{Umstände}
     Aufgrund der anhaltenden Covid-19 Situation wurde dieses nicht, wie sonst bei vergleichbaren Arbeiten üblich im offiziellen Rahmen der Universität durchgeführt, sondern unter meiner privaten Verantwortung. Dennoch wurden ausreichend Sicherheitsmaßnahmen durchgeführt um die Gefahr einer Infektion durch die Umstände des Experiments so gering wie möglich zu halten. Abgesehen von einer Teilnehmenden Person, hatten alle Proband:innen zum Zeitpunkt der Durchführung bereits vollen Impfschutz.
@@ -787,12 +787,24 @@ Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und dana
     Leute pro Tag zu teilnehmen zu lassen, um die Anzahl an Personen, die sich infizieren könnten, falls es dennoch dazu kommt, möglichst gering zu halten.
     Alle Teilnehmenden wurden gebeten während der Durchführung des Experiments einen Mund- und Nasenschutz zu tragen sowie sich vorher die Hände mit Handdesinfektionsmittel zu desinfizieren.
 
-    Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen teilnehmen zu lassen. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+    Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
 
     \section{Studiendesign}\label{sec:setup}
     Im Folgenden werde ich den Aufbau des Experiments beschreiben.
-    Die Pilotierungsstudie wurde mit 3 verschiedenen Randomisierten Gruppen, durchgeführt. Die drei im folgenden \autoref{sec:conditions} beschriebenen Bedingungen wurden jeweils mit 3 verschiedenen Raumlängen zur Verfügung gestellt um diesen Faktor zu Blockieren. Dementsprechend bot sich als Versuchsplan das Griechisch-Lateinische Quadrat in der Größe $3 x 3$, sodass jede Gruppe nacheinander 3 verschiedene Bedingungen in drei verschiedenen Raumlängen durchlief. Abbildung x stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
+    Die Pilotierungsstudie wurde mit 3 verschiedenen Gruppen, durchgeführt.
+    %%% so oder anders?
+    Diese wurden quasi-randomisiert zugeteilt, i.e. die Reihenfolge der Testung bestimmte die Gruppenzugehörigkeit abwechselnd. Von einem solchen Verfahren wird im Gegensatz zu einer vollständigen Randomisierung oft abgeraten, da es zwar den Balanciertheitsaspekt der Daten gewährleistet, allerdings auch eine gewisse Vorhersagbarkeit potentiell nicht ganz verhindert. In diesem konkreten Fall spielt dies jedoch keine Rolle. Die Gruppen unterscheiden sich nicht, wie oft in medizinischen Studien, darin welche Bedingung ihnen zugeteilt wird, sondern lediglich in der Reihenfolge darin, welche Bedingungen sie wann durchlaufen. Eine Verblindung der Proband:innen, oder sogar der Prüfer:in davor, welche Fortbewegungsart sie durchlaufen ist nicht möglich, da die Fortbewegungsart im Moment der Fortbewegung offensichtlich wird.
 
+    Die drei im folgenden \autoref{sec:conditions} beschriebenen Bedingungen wurden jeweils mit 3 verschiedenen Raumlängen zur Verfügung gestellt um diesen Faktor zu Blockieren. %formulierung
+
+    \begin{figure}
+        \centering
+        \input{graeco-latin-square.tex}
+
+        \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3), der verschiedenen Gruppen (G1-3) darstellt, $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ verdeutlichen die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
+    \end{figure}
+
+    Dementsprechend bot sich als Versuchsplan das Griechisch-Lateinische Quadrat in der Größe $3 \times 3$, sodass jede Gruppe nacheinander 3 verschiedene Bedingungen in drei verschiedenen Raumlängen durchlief, an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
     \section{Bedingungen}\label{sec:conditions}
         Im folgenden werde ich die drei verschiedenen Bedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt.

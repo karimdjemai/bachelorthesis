@@ -1,0 +1,51 @@
+% \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+% \setlength\tabcolsep{0pt}
+% \begin{tabular}{|@{\rule[-0.4cm]{0pt}{1cm}}*{4}{M{1cm} |}}
+%     \hline
+%   & G1 & G2 & G3 \\
+%     \hline
+% Step 1 & $B3$ & $C2$ & $A1$ \\
+%     \hline
+% Step 2 & $C1$ & $A3$ & $B2$\\
+%     \hline
+% Step 3 & $A2$ & $B1$ & $C3$ \\
+%     \hline
+%     \end{tabular}
+
+% \def\mca#1{\multicolumn{1}{c}{#1}}
+% \def\mcb#1{\multicolumn{1}{c|}{#1}}
+% \renewcommand{\arraystretch}{2.25}
+% \begin{tabular}{|@{\rule[]{0pt}{1cm}}*{4}{M{1cm} |}}
+%   \mca{}            & \mca{G1} & \mca{G2} & \mca{G3} \\\cline{2-4}
+%   \mcb{Schritt 1}   & $B3$     & $C2$     & $A1$     \\\cline{2-4}
+%   \mcb{Schritt 2}   & $C1$     & $A3$     & $B2$     \\\cline{2-4}
+%   \mcb{Schritt 3}   & $A2$     & $B1$     & $C3$     \\\cline{2-4}
+% \end{tabular}
+
+
+\newlength\celldim
+\setlength\celldim{3em}
+\newlength\fontheight
+\settoheight\fontheight{A}
+\newlength\extraheight
+\setlength\extraheight{\celldim - \fontheight}
+
+\makeatletter
+\newcolumntype{S}
+{ @{}
+>{\centering\arraybackslash}
+p{\celldim}
+<{\rule[-0.5\extraheight]{0pt}%
+{\fontheight + \extraheight}}
+@{} }
+\makeatother
+
+\def\mca#1{\multicolumn{1}{c}{#1}}
+\def\mcb#1{\multicolumn{1}{c|}{#1}}
+\begin{tabular}{c|S|S|S|}
+  \mca{}            & \mca{G1} & \mca{G2} & \mca{G3} \\\cline{2-4}
+  \mcb{Schritt 1}   & $B3$     & $C2$     & $A1$     \\\cline{2-4}
+  \mcb{Schritt 2}   & $C1$     & $A3$     & $B2$     \\\cline{2-4}
+  \mcb{Schritt 3}   & $A2$     & $B1$     & $C3$     \\\cline{2-4}
+\end{tabular}
