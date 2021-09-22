@@ -370,6 +370,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     \paragraph{RoomAndProgressManager}
     Ist dafür zuständig den Fortschritt der Proband:in zu verfolgen und entsprechend zu reagieren wenn es notwendig ist. Beispielsweise öffnet er die entsprechenden Türen, wenn ein Raum abgeschlossen ist.
     Des weiteren hält diese Klasse Instanzen der GameObjects für die Räume, in einer Liste, sodass sie dazu in der Lage ist an den zugehörigen RoomGenerator-Instanzen Methoden aufzurufen. Um später vergleichen zu können wie gut die Einschätzung der Proband:innen war misst diese Klasse ausserdem die von der Proband:in fortbewegte Strecke. Wenn der letzte Raum des aktuellen Versuchs erreicht wurde übergibt sie die entsprechenden Daten an den FirebaseHandler der diese dann an eine Cloud-Datenbank verschickt sodass der Versuchsdurchgang im Nachhinein ausgewertet werden kann.
+    %%Räume ausblenden?
 
 
     \paragraph{RotationGainMechanism}
@@ -406,6 +407,15 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     Bietet die Methode \textquote{PostResult} an, die die Daten des aktuellen Versuchs an eine Cloud-Datenbank verschickt. So werden dann die gelaufene Anzahl Räume, die gelaufene Strecke in Metern, die Fortbewegungsart, und das Datum, inklusive der genauen Uhrzeit des Abschickens gespeichert. Ausserdem wird gespeichert ob das Verschicken im Unity-Editor, also zum Testen, geschehen ist, oder ob es wirklich von der Datenbrille aus versendet wurde.
 \end{multicols*}
 
+%section hierachie der unity szene
+\section{Hierarchy der Unity-Scene}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/hierarchy.png}
+    \caption{Die Hierachie der Unity-Szene vor der Laufzeit}
+\end{figure}
+
 \section{Design der Szene}
 %TODO: Bild von Raum
 Im folgenden werde ich die Designentscheidungen, die die Optik der Szene bestimmen erläutern.
@@ -427,6 +437,8 @@ Abgesehen davon bietet die Umgebung eines Dungeons viele Freiheiten, was den Rea
 Um die Erkundungsstimmung noch ein wenig zu verstärken und eine realistische Lichtquelle in die Welt einzubauen trägt die Nutzer:in eine Kopflampe, dies ist ein einfacher Spotlight mit leicht bläulichem Licht, dessen Parent die Kamera des Spieler:innenavatars ist.
 
 %MCI mässige quellen wären hier gut
+
+%section hände, avatar etc
 
 \section{Implementierung der Rotationgains}
 
@@ -811,14 +823,35 @@ Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und dana
 
         \subsection{Kontrollbedingung I Joystick}\label{subsec:joystick}
             In der Joystick-Kontrollbedingung ($B$) Bewegen sich die Proband:innen virtuell mithilfe der sich an ihren Oclus Quest 2 Controllern befindenden Joysticks fort. %abbildung der kontroller?
-            Der sich auf dem Controller für die linke Hand befindende Joystick (von nun an \textquote{linker Joystick} genannt) ist dabei für die Fortbewegung zuständig, der sich auf dem rechten Kontroller befindende Joystick (\textquote{rechter Joystick}) gibt der Nutzer:in die Möglichkeit sich umzuschauen. Diese unterscheidet sich leicht von den meisten Joystick basierten Videospielen, indem wirklich nur die Y-Achsen Kopfdrehung $yaw$ von dem Joystick beeinflusst wird, nicht zusätzlich auch die X-Achsen Kopfdrehung und indem die Kopfdrehung in gleichmäßigen Intervallen von x grad %TODO: Grad drehung pro snap
+            Der sich auf dem Controller für die linke Hand befindende Joystick (von nun an \textquote{linker Joystick} genannt) ist dabei für die Fortbewegung zuständig, der sich auf dem rechten Kontroller befindende Joystick (\textquote{rechter Joystick}) gibt der Nutzer:in die Möglichkeit sich umzuschauen. Diese unterscheidet sich leicht von der Steuerung der meisten Joystick basierten Videospielen, indem wirklich nur die Y-Achsen Kopfdrehung $yaw$ von dem Joystick beeinflusst wird, nicht zusätzlich auch die X-Achsen Kopfdrehung und indem die Kopfdrehung in gleichmäßigen Intervallen von x Grad %TODO: Grad drehung pro snap
             verändert wird. %TODO: hci quelle finden wieso
+            Wie in \autoref{subsec:realwallgen} erklärt nutzt diese Bedingung die realistische Wandgenerierung.
+
+            %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
+            Die Joystick-Fortbewegung wurde mithilfe einiger vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem
 
 
+            %implementierung abschnitt
 
         \subsection{Kontrollbedingung II Teleportation}\label{subsec:teleport}
+            Auch in dieser Bedingung $C$ haben die Proband:innen die Möglichkeit sich ähnlich wie in Bedingung $B$ mithilfe des rechten Joysticks in intervallen von x Grad%TODO: herausfinden
+            umzusehen. Die eigentliche Fortbewegung funktioniert hier allerdings auf anderem Wege. Wenn die Proband:innen die, sich auf dem rechten Controller befindliche
+            %vielleicht abbildung von controllern und tasten?
+            A-Taste halten, sehen sie einen grünen Laserstrahl der nun aus ihrer rechten Hand gestrahlt wird.
+            Wenn dieser Strahl auf den Boden trifft wird an dieser Stelle ein Teleportationscurser angezeigt. Dieser ist in Abbildung x %TODO: figure
+            abgebildet und dient sowohl dazu der Proband:in anzuzeigen, wohin sie sich aktuell teleportieren würde, als auch dazu die Blickrichtung nach der Teleportierung, mithilfe eines Pfeils in der Mitte anzuzeigen. Währenddessen lässt sich mit dem linken Joystick diese Blickrichtung verändern, sodass schon vor dem Teleportieren entschieden werden kann wohin danach geguckt wird. Um die Teleportierung nun zu dem ausgewählten Punkt, mit der ausgewählten Blickrichtung durchzuführen muss die Proband:in den Zeigefingertrigger des rechten Controllers bestätigen.
+            Nun wird sie Augenblicklich an die Stelle teleportiert, auf der eben noch der Teleportationscursor zu sehen war. Dabei blickt sie dann auch in die Richtung in die eben noch der Pfeil des Cursors gezeigt hat.
+            Auch bei dieser Bedingung wird die realistische Wandgenerierung genutzt.
+
+            %TODO: Implementierung
+
         \subsection{Versuchsbedingung Real-Walking}\label{subsec:realwalk}
-    \section{Hypothesen}\label{}
+            In der Versuchsbedingung Real-Walking können die Proband:innen sich durch echtes gehen durch den Raum bewegen. Nur in dieser Bedingung wird ein Rotationgain angewandt, sodass die Illusion entstehen soll, sie würden sich unabhängig vom realen Trackingspace durch die Welt bewegen können.
+            Des weiteren wird in dieser Bedingung die in \autoref{subsec:realwallgen} besprochene unmögliche Wandgenerierung verwendet, sodass die Proband:innen mehr Platz innerhalb der Räume haben, dafür aber eine Raumstruktur genutzt wird, die darauf basiert, dass Wände von Räumen in denen sich die Nutzer:in gerade nicht befindet ausgeblendet werden, die Räume sich also überlappen und somit zu Impossible Spaces werden.
+
+            %Implementierung
+
+    \section{Hypothesen}\label{sec:hypo}
 
 \chapter{Ergebnisse}\label{}
     \section{Teilnehmer}\label{}
