@@ -818,6 +818,12 @@ Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und dana
 
     Dementsprechend bot sich als Versuchsplan das Griechisch-Lateinische Quadrat in der Größe $3 \times 3$, jede Gruppe nacheinander 3 verschiedene Bedingungen in drei verschiedenen Raumlängen durchlief, an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
+    \section{Messvariablen}
+    \subsection{Schätzung der fortbewegten Distanz}\label{subsec:measure-distance}
+
+
+    \subsection{Präsenzgefühl}\label{subsec:measure-presence}
+
     \section{Bedingungen}\label{sec:conditions}
         Im folgenden werde ich die drei verschiedenen Bedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt.
 
@@ -852,6 +858,40 @@ Zunächst werde ich die Umstände, die dieses umgeben haben erläutern, und dana
             %Implementierung
 
     \section{Hypothesen}\label{sec:hypo}
+
+
+
+    \section{Ablauf der Studie}
+        An dieser Stelle werde ich den genauen Ablauf der Studie beschreiben.
+        Die Studie wurde zwischen dem 12.08.2021 und dem 20.08.2021 in einer geräumigen Wohnung in Hamburg/Stellingen ausgeführt. Nach Ankunft der Teilnehmer:innen wurden zunächst die notwendigen Covid-Sicherheitsmaßnahmen thematisiert.
+        Zunächst haben diese sich ihre Hände desinfiziert, danach führten sie einen Antigen-Schnelltest an sich aus. In der Zeit, bevor das Ergebnis davon festgestellt werden konnten wurden den Proband:innen die Steuerung von der Joystick- und Teleportationsbedingung erklärt.
+        Zudem wurde ihnen erklärt, dass ihre Aufgabe während des Experiments darin bestünde die fortbewegte Entfernung in jeder Bedingung einzuschätzen. Zudem sollen sie von Raum zu Raum gelanden indem sie an der Tür zum nächsten Raum die erforderlichen Zahlencodes eingeben, bis die Tür sich öffne. %formulierung
+
+        Nachdem dann das negative Testergebnis abzulesen war (bei keiner Teilnehmer:in gab es ein positives Testergebnis), wurden die Proband:innen einer der Gruppen zugeteilt %wie?
+        und ihnen wurde der in %link zum anhang mit demographie fragebogen
+        abgebildete Demographie Fragebogen auf einem Laptop bereit gestellt. Nachdem dieser ausgeführt war durften die Proband:innen das erste mal die für die Durchführung der Studie genutzte Oculus Quest 2 Datenbrille aufsetzen um sich kurz damit vertraut zu machen. Nebenbei wurde das Bild der Brille über einen Google-Chromecast angezeigt, sodass es mir %?
+        möglich war zu sehen, was in dieser dargestellt wurde. Den Teilnehmer:innen wurde erklärt wie sie innerhalb des Oculus Startbildschirm navigieren können, sodass diese dann selber die APK für die Studie öffnen konnten.
+        %figure des menüs
+        Nachdem diese geöffnet wurde (und der Unity-Ladebildschirm) abgeklungen war befanden die Teilnehmer:innen sich im virtuellen Menü der Studie(siehe abbildung x). Im Menü der Studie war die Teleportier-Fortbewegungsart aktiviert, damit die Teilnehmer:innen unabhängig der Reihenfolge, in der sie später die drei Bedingungen durchliefen schon einmal mit dieser vertraut waren.
+        Dort befand sich auch das bereits in %TODO: chooserpad erklären
+        \textquote{Chooser-Pad}, mit dem die Teilnehmenden dann sowohl ausprobieren konnten, wie die späteren Nummerneingabefelder funktionieren, also auch die Studienbedingung auswählen konnten. Dafür musste zuerst die entsprechende Taste ($A1-C3$, jeh nach Bedingung wie in \autoref{sec:setup} definiert) und danach die Bestätigungstaste \# gedrückt werden, mit der die Bedingung dann augenblicklich gestartet wurde. Den Proband:innen wurde, abhängig von ihrer Gruppe, mitgeteilt welche Bedingung sie ausführen sollen, dann starteten sie diese und führten sie aus.
+        Nach Beendigung der Versuchsbedingung wurde den Proband:innen dann auf dem Laptop der Fragebogen %link zum zweiten Fragebogen
+        geöffnet, den diese dann ausfüllten. Bei diesem wurde zuerst nach der Schätzung, gefragt (siehe \autoref{subsec:measure-distance}) und dann mithilfe des SUS-Questionaire %TODO:?
+        nach dem Präsenzgefühl (siehe\autoref{subsec:measure-presence}).
+
+        Das Öffnen, dann Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
+        wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen.
+
+        Zu guter letzt wurden die Proband:innen gebeten die letzten Fehlenden Daten in den Demographiefragebogen zu füllen.
+
+        %aufklärung überaschung?
+        %marvs probleme?
+
+
+
+
+
+
 
 \chapter{Ergebnisse}\label{}
     \section{Teilnehmer}\label{}
