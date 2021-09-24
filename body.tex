@@ -410,16 +410,23 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 %section hierachie der unity szene
 \section{Hierarchy der Unity-Scene}
 
-\begin{figure}
+\begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/hierarchy.png}
-    \caption{Die Hierachie der Unity-Szene vor der Laufzeit}
+    \caption{Die Hierachie der Unity-Szene vor der Laufzeit}\label{figure:hierarchy}
 \end{figure}
 
-Das \textquote{Generator}-Objekt ist dafür dar die Scripts, die ihm als Komponenten %de en?
-angehängt sind in die Szene zu integrieren, sodass diese Laufen können.
+Das \textquote{Generator}-Objekt existiert um die Scripts, die ihm als Komponenten %de en?
+angehängt sind in die Szene zu integrieren, sodass diese ausgeführt werden. Darauf folgt das \textquote{RedirectionObject}, welches, als effektiver Parent des \textquote{OVRCameraRig} später dafür genutzt wird, die Rotationgains auszuführen. Zwischen diesen beiden Objekten liegt aber noch der PlayerController. Dieser wird in den beiden Kontrollbedingung für die Fortbewegungsarten genutzt.
 
-\section{Design der Szene}
+Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind ein vom Oculus Integration SDK bereitgestelltes Prefab, es integriert die Funktionalität der virtuellen Umgebung in die Unity-Szene.
+
+\textquote{Floor} und \textquote{Ceiling} repräsentieren Boden und Decke der Szene. Das zuletzt in \autoref{figure:hierarchy} dargestellte Objekt ist das \textquote{ChooserPad}. Dies ist ein, den später beschriebenen Nummerneingabefeldern nachempfundener Mechanismus mit dem die Nutzer:in später einstellen kann, welche der Testbedingungen sie ausführen möchte. %link zu bild und/oder beschreibung
+
+%TODO: hierarchy zur laufzeit figure + kleiner text
+
+
+\section{Design der Szene} \label{sec:scene-design}
 %TODO: Bild von Raum
 Im folgenden werde ich die Designentscheidungen, die die Optik der Szene bestimmen erläutern.
 
@@ -443,9 +450,11 @@ Um die Erkundungsstimmung noch ein wenig zu verstärken und eine realistische Li
 
 %section hände, avatar etc
 \section{Virtueller Avatar}
-Um die Nutzer:in in der Szene zu repräsentieren und ihr die Möglichkeit zu geben mit dieser zu interagieren kann sie über die Tranformation von Datenbrille und Controller einen virtuelle Avatar steuern. Auf diese Weise ist es ihr möglich mithilfe der Hände dieses virtuellen Avatars die Knöpfe von Nummerneingabefeldern zu bestätigen und in der später beschriebenen Teleportationsbedingung den Ort auszuwählen zu dem sie sich teleportieren möchte. Die virtuellen Hände folgen der Bewegung und Drehung, und sogar der Stellung der Finger, der echten Händer von der Nutzer:in solange sie die Oculus Controller auf die richtige Weise hält.
+Um die Nutzer:in in der Szene zu repräsentieren und ihr die Möglichkeit zu geben mit dieser zu interagieren kann sie über die Tranformation von Datenbrille und Controller einen virtuelle Avatar steuern. Auf diese Weise ist es ihr möglich mithilfe der Hände dieses virtuellen Avatars die Knöpfe von Nummerneingabefeldern zu bestätigen und in der später beschriebenen Teleportationsbedingung den Ort auszuwählen zu dem sie sich teleportieren möchte. Die virtuellen Hände folgen der Bewegung und Drehung, und sogar der Stellung der Finger, der echten Händer von der Nutzer:in solange sie die Oculus Controller auf die richtige Weise hält. Auch mit ihrem Kopf kann die Nutzer:in mit der Szene interagieren, auch Knöpfe betätigen, wenngleich dies auch eine weniger Hilfreiche Funktionalität ist.
 
-
+Diese Funktionalität wurde vom Oculus SDK bereit gestellt und wurde von mir lediglich in die Szene integriert. %quelle?
+Damit virtuelle Objekte innerhalb der Szene dem realen Körper der Nutzer:in folgen wurden diese hierarchisch den dafür bereit gestellten \textquote{Anchor}-Objekten unterstellt (siehe \autoref{figure:hierarchy}). Für die Hände wurden dafür die vom Oculus SDK bereiten gestellten Prefabs genutzt. %name of prefabs
+An den \textquote{CenterEyeAnchor} wurde die in \textquote{sec:scene-design} erwähnte Kopflampe angehangen, sodass diese der Blickrichtung der Nutzer:in folgt.
 
 \section{Implementierung der Rotationgains}
 
