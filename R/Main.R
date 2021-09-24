@@ -1,23 +1,28 @@
 
 
-d = read.csv("./data.csv")
-x = d[29,5]
-n = as.numeric(sub(x=x, pattern=",", "replacement"="."))
+d = read.csv("./data.csv", stringsAsFactors = FALSE)
 
-n
-class(n)
+sapply(d, mode)
 
+#sub , with . to make it convertible
+d = transform(d, schaetzung = sub(x=schaetzung, pattern = ",", replacement="."))
+d = transform(d, distance = sub(x=distance, pattern = ",", replacement="."))
+d = transform(d, difference = sub(x=difference, pattern = ",", replacement="."))
+d$schaetzung
 
-for (c in 1:3) {
-  
-  for (r in 1:nrow(d))
-  {
-    cx = c + 4
-    
-    d[r, cx] = as.numeric(sub(x=d[r,cx], pattern=",", "replacement"="."))
-    
-    print(class(d[r,cx]))
-  }
+d = transform(d, schaetzung = as.numeric(schaetzung))
+d = transform(d, distance = as.numeric(distance))
+d = transform(d, difference = as.numeric(difference))
+
+sapply(d, mode)
+
+#tests the difference property
+for(i in 1:nrow(d)) {
+  row = d[i,]
+  # do stuff with row
+  print(abs(row[1,5] - row[1,6]))
+  print("==?")
+  print(row[1,7])
+  print(class(abs(row[1,5] - row[1,6])) == class(row[1,7]))
+  print("------------------")
 }
-
-d
