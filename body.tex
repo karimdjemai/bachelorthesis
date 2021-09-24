@@ -416,6 +416,9 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     \caption{Die Hierachie der Unity-Szene vor der Laufzeit}
 \end{figure}
 
+Das \textquote{Generator}-Objekt ist dafür dar die Scripts, die ihm als Komponenten %de en?
+angehängt sind in die Szene zu integrieren, sodass diese Laufen können.
+
 \section{Design der Szene}
 %TODO: Bild von Raum
 Im folgenden werde ich die Designentscheidungen, die die Optik der Szene bestimmen erläutern.
@@ -439,10 +442,14 @@ Um die Erkundungsstimmung noch ein wenig zu verstärken und eine realistische Li
 %MCI mässige quellen wären hier gut
 
 %section hände, avatar etc
+\section{Virtueller Avatar}
+Um die Nutzer:in in der Szene zu repräsentieren und ihr die Möglichkeit zu geben mit dieser zu interagieren kann sie über die Tranformation von Datenbrille und Controller einen virtuelle Avatar steuern. Auf diese Weise ist es ihr möglich mithilfe der Hände dieses virtuellen Avatars die Knöpfe von Nummerneingabefeldern zu bestätigen und in der später beschriebenen Teleportationsbedingung den Ort auszuwählen zu dem sie sich teleportieren möchte. Die virtuellen Hände folgen der Bewegung und Drehung, und sogar der Stellung der Finger, der echten Händer von der Nutzer:in solange sie die Oculus Controller auf die richtige Weise hält.
+
+
 
 \section{Implementierung der Rotationgains}
 
-Die Umsetung der Rotaiongains erfolgt mithilfe des
+Die Umsetzung der Rotaiongains erfolgt mithilfe des
 %TODO: Von wem genau kommt space extender?
 freundlicherweise zur Verfügung gestelltem Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces und den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen Rotationgain auf die Nutzer:in anzuwenden. Der RotationRedirector wird nachdem das alles geschehen ist für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist übergeben, sodass er aktiviert werden kann sobald das Signal vom ensprechenden Collider kommt, dass die Nutzer:in sich über dem Rotationspunkt ($P$) befindet.
 

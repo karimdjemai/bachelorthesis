@@ -24,5 +24,6 @@ for(i in 1:nrow(d)) {
   print("==?")
   print(row[1,7])
   print(class(abs(row[1,5] - row[1,6])) == class(row[1,7]))
+  print(abs(row[1,5] - row[1,6]) == row[1,7])
   print("------------------")
 }
