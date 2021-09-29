@@ -28,7 +28,7 @@ for(i in 1:nrow(d)) {
 }
 
 #aov for residual testing 
-aov_df = data.frame(d$bedingung, d$difference)
+aov_df = data.frame(d$bedingung, d$difference, d$id)
 
 aov_df %>%
   group_by(d.bedingung) %>%
@@ -36,6 +36,17 @@ aov_df %>%
 
 ggqqplot(aov_df, "d.difference", facet.by = "d.bedingung")
 
+aov = anova_test(data = aov_df, dv = d.difference, wid = d.id, within = d.bedingung)
+get_anova_table(aov)
+
+
+#ohne id 10
+
+aov_df_without_ten = subset(aov_df, d.id!=10)
+aov_df_without_ten
+
+aov = anova_test(data = aov_df_without_ten, dv = d.difference, wid = d.id, within = d.bedingung)
+get_anova_table(aov)
 
 
 
