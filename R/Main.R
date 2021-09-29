@@ -23,7 +23,21 @@ for(i in 1:nrow(d)) {
   print(abs(row[1,5] - row[1,6]))
   print("==?")
   print(row[1,7])
-  print(class(abs(row[1,5] - row[1,6])) == class(row[1,7]))
-  print(abs(row[1,5] - row[1,6]) == row[1,7])
+  print(all.equal(abs(row[1,5] - row[1,6]), row[1,7]))
   print("------------------")
 }
+
+#aov for residual testing 
+aov_df = data.frame(d$bedingung, d$difference)
+
+aov_df %>%
+  group_by(d.bedingung) %>%
+  shapiro_test(d.difference)
+
+ggqqplot(aov_df, "d.difference", facet.by = "d.bedingung")
+
+
+
+
+
+
