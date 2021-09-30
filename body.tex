@@ -805,22 +805,42 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
 \chapter{Konzipierung der Pilotierungsstudie}\label{chapter:experiment}
 
-Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie zur Vergleich von Fortbewegungsarten für das Raumverständnis und das Präsenzgefühl in der Virtuellen Umgebung. Untersucht werden soll dabei konkreter, ob die Fortbewegungsart \textquote{Real-Walking} in diesen Punkten bessere Effekte erzielt also vergleichbare alternative Fortbewegungsarten.
-Um das Experiment vorzustellen werde ich zunächst die Hypothesen, denen ich mit dieser Arbeit auf den Grund gehen will, beschreiben um deutlich zu machen, was das Ziel des Experiments ist.
-Im darauf folgenden Teil werde ich dann beschreiben wie der Statistische Versuchsplanung der konzipierten Pilotierungsstudie ist. Dabei werde ich genauer auf %TODO: ...
-eingehen.
+    Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie zum Vergleich von Fortbewegungsarten für das Raumverständnis und das Präsenzgefühl in der generierten virtuellen Umgebung. Untersucht werden soll dabei konkreter, ob die Fortbewegungsart \textquote{Real-Walking} in diesen Punkten bessere Effekte erzielt als vergleichbare alternative Fortbewegungsarten.
+    Um das Experiment vorzustellen werde ich zunächst die Hypothesen, denen ich mit dieser Arbeit auf den Grund gehen will, beschreiben um deutlich zu machen, was das Ziel des Experiments ist.
+    Im darauf folgenden Teil werde ich dann beschreiben wie die statistische Versuchsplanung der konzipierten Pilotierungsstudie aussieht. Dabei werde ich genauer auf die drei verschiedenen Fortbewegungsbedingungen die untersucht werden sollten eingehen und beschreiben wie diese für die Studie implementiert wurden.
 
     \section{Hypothesen und Messvariablen}
+        An dieser Stelle möchste ich die in dem Experiment zu überprüfenden Hypothesen vorstellen.
+
+        \begin{enumerate}
+            \item Die \textquote{Real-Walking} Fortbewegungsart ermöglicht besseres Raumverständnis, als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}. (Basiert auf:) %TODO: langebehn 2018 und quellen daraus: 7 und 19 zitieren
+            \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefphl als in mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}. (Basiert auf:) %TODO: langebehns quelle 26 zitieren
+        \end{enumerate}
+
+        \subsection{Raumverständnis}
+            %Die these kommt zustande wegen bla
+
+            In der Studie wird dieser Effekt gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten. Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die konkret fortbewegte Strecke.
+            %Zwar gibt es in der Literatur hinweise darauf, dass Menschen in virtuellen Umgebungen gerade dies, verglichen mit realen Umgebungen,  nicht besonders gut einschätzen können, allerdings werden in der hier vorgestellten Studie ja auch alle drei Fortbewegungsarten in einer virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. TODO: entscheiden ob rein nehmen oder nicht, quellen finden.
+            Neben der Schätzung wurde auch die vom virtuellen Avatar fortbewegte Strecke gemessen (siehe %TODO: finden
+            ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
+
+        \subsection{Präsenzgefühl}
+            %Wie kommt diese These zustande?
+
+            Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire durchgeführt. Dieser wurde im jahr x von denen entwickelt %blabla bla %TODO: nochmal nachgucken und so
+
+
 
     \section{Versuchsplanung}\label{sec:setup}
     Im Folgenden werde ich den Aufbau des Experiments beschreiben.
     Die Pilotierungsstudie wurde mit 3 verschiedenen Gruppen, durchgeführt.
-    %%% so oder anders?
+    %%% so oder anders? anders!
     Diese wurden quasi-randomisiert zugeteilt, i.e. die Reihenfolge der Testung bestimmte die Gruppenzugehörigkeit abwechselnd. Von einem solchen Verfahren wird im Gegensatz zu einer vollständigen Randomisierung oft abgeraten, da es zwar den Balanciertheitsaspekt der Daten gewährleistet, allerdings auch eine gewisse Vorhersagbarkeit potentiell nicht ganz verhindert. In diesem konkreten Fall spielt dies jedoch keine Rolle. Die Gruppen unterscheiden sich nicht, wie oft in medizinischen Studien, darin welche Bedingung ihnen zugeteilt wird, sondern lediglich in der Reihenfolge darin, welche Bedingungen sie wann durchlaufen. Eine Verblindung der Proband:innen, oder sogar der Prüfer:in davor, welche Fortbewegungsart sie durchlaufen ist nicht möglich, da die Fortbewegungsart im Moment der Fortbewegung offensichtlich wird.
 
     Die drei im folgenden \autoref{sec:conditions} beschriebenen Bedingungen wurden jeweils mit 3 verschiedenen Raumlängen zur Verfügung gestellt um diesen Faktor zu Blockieren. %formulierung
 
-    \begin{figure}
+    \begin{figure}[!h]
         \centering
         \input{graeco-latin-square.tex}
 
@@ -864,7 +884,7 @@ eingehen.
 
 
 
-\chapter{Ergebnisse}\label{}
+\chapter{Durchführung und Ergebnisse}\label{}
     Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handlen, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben um danach die Methoden der Datenevaluation vorzustellen und sie zu guter letzt durchzuführen.
 
     \section{Umstände}
@@ -879,8 +899,6 @@ eingehen.
     \section{Teilnehmer}\label{}
 
     %     \subsection{Präsenzgefühl}\label{subsec:measure-presence}
-
-    \section{Statistische Tests}
 
     \section{Ablauf der Studie}
         An dieser Stelle werde ich den genauen Ablauf der Studie beschreiben.

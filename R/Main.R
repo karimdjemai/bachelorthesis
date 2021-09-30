@@ -45,9 +45,7 @@ get_anova_table(aov)
 aov_df_without_ten = subset(aov_df, d.id!=10)
 aov_df_without_ten
 
-aov = anova_test(data = aov_df_without_ten, dv = d.difference, wid = d.id, within = d.bedingung)
-get_anova_table(aov)
-
+a  k
 
 
 
