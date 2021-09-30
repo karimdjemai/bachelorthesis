@@ -834,11 +834,17 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
     \section{Versuchsplanung}\label{sec:setup}
     Im Folgenden werde ich den Aufbau des Experiments beschreiben.
-    Die Pilotierungsstudie wurde mit 3 verschiedenen Gruppen, durchgeführt.
-    %%% so oder anders? anders!
-    Diese wurden quasi-randomisiert zugeteilt, i.e. die Reihenfolge der Testung bestimmte die Gruppenzugehörigkeit abwechselnd. Von einem solchen Verfahren wird im Gegensatz zu einer vollständigen Randomisierung oft abgeraten, da es zwar den Balanciertheitsaspekt der Daten gewährleistet, allerdings auch eine gewisse Vorhersagbarkeit potentiell nicht ganz verhindert. In diesem konkreten Fall spielt dies jedoch keine Rolle. Die Gruppen unterscheiden sich nicht, wie oft in medizinischen Studien, darin welche Bedingung ihnen zugeteilt wird, sondern lediglich in der Reihenfolge darin, welche Bedingungen sie wann durchlaufen. Eine Verblindung der Proband:innen, oder sogar der Prüfer:in davor, welche Fortbewegungsart sie durchlaufen ist nicht möglich, da die Fortbewegungsart im Moment der Fortbewegung offensichtlich wird.
+    Um aus der geringen Teilnehmerzahl der Studie (siehe x ) %TODO: link zu umständen
+    dennoch möglichst viele Daten zu schöpfen %sammeln?
+    und, weil nicht davon auszugehen ist, dass die Bedingungen der Fortbewegungsarten sich gegenseitig beeinflussen habe ich mich beim
+    Versuchsdesign für ein \textquote{Within-Subjects Design} entschieden. Folglich haben alle Teilnehmenden alle 3 Konditionen durchlaufen. Um dabei zu vermeiden, dass die Reihenfolge der Konditionen die Ergebnisse beeinflusst (beispielsweise indem alle zuerst die Real-Walking Bedingung durchlaufen und zu diesem Zeitpunkt noch am besten einschätzen können wie weit sie gegangen sind), wurden die Teilnehmenden in 3 Gruppen eingeteilt, die die 3 möglichen unterschiedlichen Reihenfolgen der 3 Bedingungen abbilden.
 
-    Die drei im folgenden \autoref{sec:conditions} beschriebenen Bedingungen wurden jeweils mit 3 verschiedenen Raumlängen zur Verfügung gestellt um diesen Faktor zu Blockieren. %formulierung
+    Um die Schätzung der fortbewegten Strecke im generellen, also sowohl bei kürzeren, als auch bei längeren Raumzahlen zwischen Start und Ziel, zu Messen wurden die Bedingungen in unterschiedlichen Raumlängen durchgeführt. %oder two way anova?? dann kann man messen ob kürzere Räume besser eingeschätzt werden.
+    Um diesen Effekt gleichmäßig auf alle Messergebnisse zu verteilen wurden die Raumlängen alternierend den unterschiedlichen Gruppen und den unterschiedlichen Fortbewegungsbedingungen zugewiesen, sodass jede Teilnehmer:in einmal jede der 3 Fortbewegungsarten und einmal jede der 3 Raumlängen 3, 6 und 9 durchlief. Ausserdem so, sodass sich für jede Gruppe die Kombination aus Fortbewegungsart und Raumlänge bei allen 3 durchgeführten Bedingungen unterschied.
+
+    %Die Pilotierungsstudie wurde mit 3 verschiedenen Gruppen, durchgeführt.
+    %%% so oder anders? anders!
+    %Diese wurden quasi-randomisiert zugeteilt, i.e. die Reihenfolge der Testung bestimmte die Gruppenzugehörigkeit abwechselnd. Von einem solchen Verfahren wird im Gegensatz zu einer vollständigen Randomisierung oft abgeraten, da es zwar den Balanciertheitsaspekt der Daten gewährleistet, allerdings auch eine gewisse Vorhersagbarkeit potentiell nicht ganz verhindert. In diesem konkreten Fall spielt dies jedoch keine Rolle. Die Gruppen unterscheiden sich nicht, wie oft in medizinischen Studien, darin welche Bedingung ihnen zugeteilt wird, sondern lediglich in der Reihenfolge darin, welche Bedingungen sie wann durchlaufen. Eine Verblindung der Proband:innen, oder sogar der Prüfer:in davor, welche Fortbewegungsart sie durchlaufen ist nicht möglich, da die Fortbewegungsart im Moment der Fortbewegung offensichtlich wird.
 
     \begin{figure}[!h]
         \centering
@@ -847,10 +853,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3), der verschiedenen Gruppen (G1-3) darstellt, $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ verdeutlichen die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
     \end{figure}
 
-    Dementsprechend bot sich als Versuchsplan das Griechisch-Lateinische Quadrat in der Größe $3 \times 3$, jede Gruppe nacheinander 3 verschiedene Bedingungen in drei verschiedenen Raumlängen durchlief, an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
+    Dementsprechend bot sich als Versuchsplan ein Griechisch-Lateinisches Quadrat in der Größe $3 \times 3$ an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
-    \section{Bedingungen}\label{sec:conditions}
-        Im folgenden werde ich die drei verschiedenen Bedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt.
+    Die Abhängige Variable ist also die jeweilige Messvariable der Bedingung, also die absolute Differenz von geschätzem und fortbewegten Weg, oder die mit dem SUS-Präsenz Questionaire gemessene Präsenz. Die Unabhängigen Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
+
+    \section{Fortbewegungsbedingungen}\label{sec:conditions}
+        Im folgenden werde ich die drei verschiedenen Fortbewegungsbedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt. %TODO: sichergehen dass kontrollbedingung hier richtig verwendet wird
 
         \subsection{Kontrollbedingung I Joystick}\label{subsec:joystick}
             In der Joystick-Kontrollbedingung ($B$) Bewegen sich die Proband:innen virtuell mithilfe der sich an ihren Oclus Quest 2 Controllern befindenden Joysticks fort. %abbildung der kontroller?
@@ -885,20 +893,18 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
 
 \chapter{Durchführung und Ergebnisse}\label{}
-    Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handlen, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben um danach die Methoden der Datenevaluation vorzustellen und sie zu guter letzt durchzuführen.
+    Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handeln, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben um danach die Methoden der Datenevaluation vorzustellen und sie, zu guter letzt, durchzuführen.
 
-    \section{Umstände}
+    \section{Umstände}\label{sec:circumstances}
         Aufgrund der anhaltenden Covid-19 Situation wurde dieses nicht, wie sonst bei vergleichbaren Arbeiten üblich im offiziellen Rahmen der Universität durchgeführt, sondern unter meiner privaten Verantwortung. Dennoch wurden ausreichend Sicherheitsmaßnahmen durchgeführt um die Gefahr einer Infektion durch die Umstände des Experiments so gering wie möglich zu halten. Abgesehen von einer Teilnehmenden Person, hatten alle Proband:innen zum Zeitpunkt der Durchführung bereits vollen Impfschutz.
         Alle Teilnehmenden wurden vor der Durchführung des Experiments mit einem Schnelltest auf Covid-19 getestet und ihre Kontaktdaten wurden festgehalten um sie zu informieren, falls dennoch erforderlich. Ausserdem wurden die genutzen Materialen nach jedem durchlauf desinfiziert und es wurde darauf geachtet nicht mehr als
         2 %?
         Leute pro Tag zu teilnehmen zu lassen, um die Anzahl an Personen, die sich infizieren könnten, falls es dennoch dazu kommt, möglichst gering zu halten.
         Alle Teilnehmenden wurden gebeten während der Durchführung des Experiments einen Mund- und Nasenschutz zu tragen sowie sich vorher die Hände mit Handdesinfektionsmittel zu desinfizieren.
 
-        Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+        %Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
 
-    \section{Teilnehmer}\label{}
-
-    %     \subsection{Präsenzgefühl}\label{subsec:measure-presence}
+    \section{Teilnehmer}\label{sec:participants}
 
     \section{Ablauf der Studie}
         An dieser Stelle werde ich den genauen Ablauf der Studie beschreiben.
