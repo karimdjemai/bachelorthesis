@@ -408,7 +408,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 \end{multicols*}
 
 %section hierachie der unity szene
-\section{Hierarchy der Unity-Scene}
+\section{Hierarchy der Unity-Scene}\label{sec:hierarchy}
 
 \begin{figure}[!h]
     \centering
@@ -826,7 +826,31 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
 
         \subsection{Präsenzgefühl}
+            In dem Paper \cite{presence-questionaire} geben Usoh et. al eine Zusammenfassung über die bis dahin diskutierten Ideen darüber, wie die Stärke der Präsenz in virtuellen Umgebungen stark erhöht wird. Diese wird in 5 Punkte aufgeteilt, die übersetzt und zusammengefasst etwa so lauten:
+
+            \begin{enumerate}
+                % \item High resolution information displayed to the participant, in a manner that does not indicate the existence of the display devices. This includes Steuer’s notion of vividness, ‘the ability of a technology to produce a sensorially rich mediated environment’.
+                \item Informationen werden den Proband:innen in hoher Auflösung angezeigt, in einer Weise, die die existenz des Displays nicht erkennen lässt.
+
+                % \item Consistency of the displayed environment across all sensory modalities.
+                \item Die dargestellte Realität ist über alle Sinnesmodalitäten hinweg konsistent.
+
+                % \item  The possibility of the individual being able to navigate through and interact with objects in the environment, including interaction with other actors which may spontaneously react to the indi- vidual;
+                \item  Die Möglichkeit der Nutzer:in durch die Umgebung zu navigieren und mit Objekten oder anderen Agenten zu interagieren.
+
+                % \item Theindividual’svirtualbody,theirself-representationwithintheenvironment,shouldbesimi- lar in appearance or functionality to the individual’s own body, and respond appropriately to the movements of their head, eyes, and limbs;
+                \item Der virtuelle Avatar der Nutzer:in sollte sich äußerlich oder funktionell dem echten Körper dieser ähneln und angemessen auf Kopf-, Augen- und Gliedmaßenbewegungen reagieren.
+
+                % \item Theconnectionbetweenindividual’sactionsandeffectsofthoseactionsshouldbesimple enough for the individual to quickly learn.
+                \item Die Verbindung zwischen den Aktionen und den Effekten dieser sollte unkompliziert genug sein, sodass sie leicht zu erlernen ist.
+            \end{enumerate}
+
+            Besonders interessant für dieses Projekt sind hier die Punkte 2 und 3, da diese sich zwischen den verschiedenen Fortbewegungsarten unterscheiden. So ist zum Beispiel davon auszugehen, dass die Real-Walking-Fortbewegungsart in mehr Sinnesmodalitäten konsitenz bietet, da die Nutzer:in ihre Stellung im Raum auch durch ihre Propriozeption und ihren Gleichgewichtssinn wahrnehmen kann.
+            Nicht ausser Acht zu lassen ist natürlich auch, dass echtes gehen durch dessen Alltagsnähe eine deutlich intuitivere Fortbewegungsmethode darstellt und dementsprechend anzunehmen ist, dass es als solche einem Präsenzgefühl weniger im Weg steht als die ungewohntere Navigation mit den Alternativen.
             %Wie kommt diese These zustande?
+            %TODO:at related work einen presence teil?
+
+
 
             Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire durchgeführt. Dieser wurde im jahr x von denen entwickelt %blabla bla %TODO: nochmal nachgucken und so
 
@@ -839,7 +863,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
     und, weil nicht davon auszugehen ist, dass die Bedingungen der Fortbewegungsarten sich gegenseitig beeinflussen habe ich mich beim
     Versuchsdesign für ein \textquote{Within-Subjects Design} entschieden. Folglich haben alle Teilnehmenden alle 3 Konditionen durchlaufen. Um dabei zu vermeiden, dass die Reihenfolge der Konditionen die Ergebnisse beeinflusst (beispielsweise indem alle zuerst die Real-Walking Bedingung durchlaufen und zu diesem Zeitpunkt noch am besten einschätzen können wie weit sie gegangen sind), wurden die Teilnehmenden in 3 Gruppen eingeteilt, die die 3 möglichen unterschiedlichen Reihenfolgen der 3 Bedingungen abbilden.
 
-    Um die Schätzung der fortbewegten Strecke im generellen, also sowohl bei kürzeren, als auch bei längeren Raumzahlen zwischen Start und Ziel, zu Messen wurden die Bedingungen in unterschiedlichen Raumlängen durchgeführt. %oder two way anova?? dann kann man messen ob kürzere Räume besser eingeschätzt werden.
+    Um die Schätzung der fortbewegten Strecke im generellen, sowohl bei mehr oder weniger vielen Räumen zwischen Start und Ziel, also bei längeren und kürzeren Leveln, zu messen wurden die Bedingungen in unterschiedlichen Raumlängen durchgeführt. %oder two way anova?? dann kann man messen ob kürzere Räume besser eingeschätzt werden.
     Um diesen Effekt gleichmäßig auf alle Messergebnisse zu verteilen wurden die Raumlängen alternierend den unterschiedlichen Gruppen und den unterschiedlichen Fortbewegungsbedingungen zugewiesen, sodass jede Teilnehmer:in einmal jede der 3 Fortbewegungsarten und einmal jede der 3 Raumlängen 3, 6 und 9 durchlief. Ausserdem so, sodass sich für jede Gruppe die Kombination aus Fortbewegungsart und Raumlänge bei allen 3 durchgeführten Bedingungen unterschied.
 
     %Die Pilotierungsstudie wurde mit 3 verschiedenen Gruppen, durchgeführt.
@@ -855,7 +879,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
     Dementsprechend bot sich als Versuchsplan ein Griechisch-Lateinisches Quadrat in der Größe $3 \times 3$ an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Kontrollbedingung \textquote{Joystick} und $C$ für die Kontrollbedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
-    Die Abhängige Variable ist also die jeweilige Messvariable der Bedingung, also die absolute Differenz von geschätzem und fortbewegten Weg, oder die mit dem SUS-Präsenz Questionaire gemessene Präsenz. Die Unabhängigen Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
+    Die Abhängige Variable ist also die jeweilige Messvariable der Bedingung, also die absolute Differenz von geschätzem und fortbewegten Weg, oder die mit dem SUS-Präsenz Questionaire gemessene Präsenz. Die unabhängige Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
 
     \section{Fortbewegungsbedingungen}\label{sec:conditions}
         Im folgenden werde ich die drei verschiedenen Fortbewegungsbedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt. %TODO: sichergehen dass kontrollbedingung hier richtig verwendet wird
@@ -866,11 +890,11 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             verändert wird. %TODO: hci quelle finden wieso
             Wie in \autoref{subsec:realwallgen} erklärt nutzt diese Bedingung die realistische Wandgenerierung.
 
-            %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
-            Die Joystick-Fortbewegung wurde mithilfe einiger vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem
-
-
             %implementierung abschnitt
+            %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
+            Die Joystick-Fortbewegung wurde mithilfe einiger vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem in \autoref{sec:hierarchy} beschriebenen PlayerController und steuert so diesen und dessen Kindelemente, so auch den virtuellen Avatar der Nutzer:in.
+
+
 
         \subsection{Kontrollbedingung II Teleportation}\label{subsec:teleport}
             Auch in dieser Bedingung $C$ haben die Proband:innen die Möglichkeit sich ähnlich wie in Bedingung $B$ mithilfe des rechten Joysticks in intervallen von x Grad%TODO: herausfinden
@@ -882,10 +906,11 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Nun wird sie Augenblicklich an die Stelle teleportiert, auf der eben noch der Teleportationscursor zu sehen war. Dabei blickt sie dann auch in die Richtung in die eben noch der Pfeil des Cursors gezeigt hat.
             Auch bei dieser Bedingung wird die realistische Wandgenerierung genutzt.
 
-            %TODO: Implementierung
+            %Implementierung
+            Auch diese Bedingung wird mithilfe einiger, mit dem Oculus Integration SDK gelieferten Scripts, das auf dem PlayerController liegt, implementiert. Hierbei ist hauptsächlich das \textquote{} %TODO: feddich machen
 
         \subsection{Versuchsbedingung Real-Walking}\label{subsec:realwalk}
-            In der Versuchsbedingung Real-Walking können die Proband:innen sich durch echtes gehen durch den Raum bewegen. Nur in dieser Bedingung wird ein Rotationgain angewandt, sodass die Illusion entstehen soll, sie würden sich unabhängig vom realen Trackingspace durch die Welt bewegen können.
+            In der Versuchsbedingung Real-Walking können die Proband:innen sich durch echtes gehen im Raum bewegen. Nur in dieser Bedingung wird ein Rotationgain angewandt, sodass die Illusion entstehen soll, sie könnten sich unabhängig vom realen Trackingspace durch die Welt bewegen.
             Des weiteren wird in dieser Bedingung die in \autoref{subsec:realwallgen} besprochene unmögliche Wandgenerierung verwendet, sodass die Proband:innen mehr Platz innerhalb der Räume haben, dafür aber eine Raumstruktur genutzt wird, die darauf basiert, dass Wände von Räumen in denen sich die Nutzer:in gerade nicht befindet ausgeblendet werden, die Räume sich also überlappen und somit zu Impossible Spaces werden.
 
             %Implementierung
@@ -902,9 +927,24 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         Leute pro Tag zu teilnehmen zu lassen, um die Anzahl an Personen, die sich infizieren könnten, falls es dennoch dazu kommt, möglichst gering zu halten.
         Alle Teilnehmenden wurden gebeten während der Durchführung des Experiments einen Mund- und Nasenschutz zu tragen sowie sich vorher die Hände mit Handdesinfektionsmittel zu desinfizieren.
 
-        %Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb muss ich an dieser Stelle betonen, das die statistische Aussagekraft der hier erhobenen Ergebnisse stark eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+        Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb musste ich mich dafür entscheiden eine Pilotierungsstudie statt einer vollwertigen offiziellen Studie durchzuführen. Deashalb möchte ich an dieser Stelle betonen, dass die statistische Aussagekraft der hier erhobenen Ergebnisse natürlich deutlich eingeschränkt ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+        %wieviel teilnehmer hätte man eigentlich gebraucht?
 
     \section{Teilnehmer}\label{sec:participants}
+        An der Studie nahmen 10 Proband:innen im Alter zwischen 20 und 69 (Median: 23), davon 8 männlich und 2 weiblich teil. Die Teilnehmenden sind ausnahmlos private Bekannte von mir und haben keinerlei Entschädigung für die freundliche Teilnahme erhalten.
+        Die Teilnehmer:innen waren zwischen 1,62m und 1,89m groß (durschnittlich 1,80m).
+        5 der 10 Teilnehmer:innen, gaben an nicht an einer diagnostizierten Sehschwäche zu leiden, 3 trugen eine Brille oder Kontaktlinsen und 2 der Proband:innen gaben an, zwar unter einer Sehschwäche zu leiden, aber keine Korrigierung dafür zu nutzen. Ansonsten gaben die Teilnehmer:innen keine Vorerkrankungen an, mit Ausnahme einer Person, die angab unter einer Rot-Grün-Schwäche zu leiden.
+        70\% der Proband:innen schon einmal eine Virtuelle Erfahrung mithilfe einer Datenbrille erlebt. Die angegebene Erfahrung mit Stereoskopischem 3D und Computerspielen ist aus \autoref{figure:videogames} ersichtlich.
+
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=0.99\textwidth]{images/erfahrungpc.png}
+            \includegraphics[width=0.99\textwidth]{images/pcstundenprowoche.png}
+            \includegraphics[width=0.99\textwidth]{images/3derfahrung.png}
+            \caption{Angaben der Teilnehmenden zur Erfahrung mit Computerspielen und Stereoskopischem 3D.
+            X-Achsen: Antworten der Teilnehmenden
+            Y-Achsen: Häufigkeit der Antworten}\label{figure:videogames}
+        \end{figure}
 
     \section{Ablauf der Studie}
         An dieser Stelle werde ich den genauen Ablauf der Studie beschreiben.
@@ -927,8 +967,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         Das Öffnen, dann Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
         wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen.
 
-        Zu guter letzt wurden die Proband:innen gebeten die letzten Fehlenden Daten in den Demographiefragebogen zu füllen.
+        Zu guter letzt wurden die Proband:innen gebeten die letzten, noch fehlenden Daten in den Demographiefragebogen zu füllen.
 
+        %länge erwähnen
         %aufklärung überaschung?
         %marvs probleme?
 
