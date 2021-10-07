@@ -150,6 +150,8 @@ In dem hier vorgestellten Experiment
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
+%TODO: Raumverständnis ausarbeiten
+
 In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene redirection Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch in dieser Studie genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren. Dabei werde ich mich sowohl mit Artikeln über die genauen Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
 \section{Real-Walking}
@@ -813,17 +815,27 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         An dieser Stelle möchste ich die in dem Experiment zu überprüfenden Hypothesen vorstellen.
 
         \begin{enumerate}
-            \item Die \textquote{Real-Walking} Fortbewegungsart ermöglicht besseres Raumverständnis, als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}. (Basiert auf:) %TODO: langebehn 2018 und quellen daraus: 7 und 19 zitieren
+            \item Die \textquote{Real-Walking} Fortbewegungsart ermöglicht besseres Raumverständnis %(spatial knowledge)
+            , als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}. (Basiert auf:) %TODO: langebehn 2018 und quellen daraus: 7 und 19 zitieren
             \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}.
         \end{enumerate}
 
         \subsection{Raumverständnis}
-            %Die these kommt zustande wegen bla
+            %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
+            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbesset. \cite{peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
-            In der Studie wird dieser Effekt gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten. Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die konkret fortbewegte Strecke.
-            %Zwar gibt es in der Literatur hinweise darauf, dass Menschen in virtuellen Umgebungen gerade dies, verglichen mit realen Umgebungen,  nicht besonders gut einschätzen können, allerdings werden in der hier vorgestellten Studie ja auch alle drei Fortbewegungsarten in einer virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. TODO: entscheiden ob rein nehmen oder nicht, quellen finden.
+            In dieser Studie wird dieser Effekt gemessen
+            %gemessen ob es auch in generierten leveln gilt?
+            indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten.\footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die konkret fortbewegte Strecke.}
             Neben der Schätzung wurde auch die vom virtuellen Avatar fortbewegte Strecke gemessen (siehe %TODO: finden
             ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
+
+            Um das Raumverständnis einer Proband:in zu Messen tätige ich im Kontext dieser Studie also die Annahme: \textquote{Je besser ihr Raumverständnis ist, desto besser kann sie die von ihr gegangene (oder andersartig fortbewegte) Strecke einschätzen.}
+            Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil sie sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt.
+
+            Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
+            %schlechter, jeh schlechter die qualität
+            allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht zwischen den Bedingungen unterscheidende) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. % TODO: entscheiden ob rein nehmen oder nicht, quellen finden.
 
         \subsection{Präsenzgefühl}
             In dem Paper \cite{presence-questionaire} geben Usoh et. al eine Zusammenfassung über die bis dahin diskutierten Ideen darüber, wie die Stärke der Präsenz in virtuellen Umgebungen stark erhöht wird. Diese wird in 5 Punkte aufgeteilt, die übersetzt und zusammengefasst etwa so lauten:
