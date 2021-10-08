@@ -150,7 +150,7 @@ In dem hier vorgestellten Experiment
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
-%TODO: Raumverständnis ausarbeiten
+%TODO: Raumverständnis ausarbeiten, und presence? oder garnicht?
 
 In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene redirection Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch in dieser Studie genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren. Dabei werde ich mich sowohl mit Artikeln über die genauen Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
@@ -816,13 +816,14 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
         \begin{enumerate}
             \item Die \textquote{Real-Walking} Fortbewegungsart ermöglicht besseres Raumverständnis %(spatial knowledge)
-            , als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}. (Basiert auf:) %TODO: langebehn 2018 und quellen daraus: 7 und 19 zitieren
+            , als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}.
+
             \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}.
         \end{enumerate}
 
         \subsection{Raumverständnis}
             %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
-            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbesset. \cite{peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
+            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbesset. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
             In dieser Studie wird dieser Effekt gemessen
             %gemessen ob es auch in generierten leveln gilt?
@@ -831,11 +832,13 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
 
             Um das Raumverständnis einer Proband:in zu Messen tätige ich im Kontext dieser Studie also die Annahme: \textquote{Je besser ihr Raumverständnis ist, desto besser kann sie die von ihr gegangene (oder andersartig fortbewegte) Strecke einschätzen.}
-            Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil sie sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt.
+            Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil sie sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt. %TODO: weiter argumentieren
+            %Es ist also von größerem Interesse herauszufinden ob die Schätzung der fortbewegten Distanz angemessen mit der wirklich fortbewegten Distanz mitwächst
+            %
 
-            Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
+            Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
             %schlechter, jeh schlechter die qualität
-            allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht zwischen den Bedingungen unterscheidende) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. % TODO: entscheiden ob rein nehmen oder nicht, quellen finden.
+            allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht zwischen den Bedingungen unterscheidenden) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. % TODO: entscheiden ob rein nehmen oder nicht
 
         \subsection{Präsenzgefühl}
             In dem Paper \cite{presence-questionaire} geben Usoh et. al eine Zusammenfassung über die bis dahin diskutierten Ideen darüber, wie die Stärke der Präsenz in virtuellen Umgebungen stark erhöht wird. Diese wird in 5 Punkte aufgeteilt, die übersetzt und zusammengefasst etwa so lauten:
@@ -870,6 +873,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
 
     \section{Versuchsplanung}\label{sec:setup}
+    %TODO:firebase und google docs erwähnen
     Im Folgenden werde ich den Aufbau des Experiments beschreiben.
     Um aus der geringen Teilnehmerzahl der Studie (siehe x ) %TODO: link zu umständen
     dennoch möglichst viele Daten zu schöpfen %sammeln?
@@ -977,7 +981,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         geöffnet, den diese dann ausfüllten. Bei diesem wurde zuerst nach der Schätzung, gefragt (siehe \autoref{subsec:measure-distance}) und dann mithilfe des SUS-Questionaire %TODO:?
         nach dem Präsenzgefühl (siehe\autoref{subsec:measure-presence}).
 
-        Das Öffnen, dann Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
+        Das Öffnen, dann das Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
         wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen.
 
         Zu guter letzt wurden die Proband:innen gebeten die letzten, noch fehlenden Daten in den Demographiefragebogen zu füllen.
@@ -987,8 +991,33 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         %marvs probleme?
 
         \section{Statistische Evaluationsverfahren}
+        Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Raumlänge %TODO: klar was gemeint ist? umschreiben?
+         zuordnen. Im folgenden werde ich die statistischen Verfahren vorstellen, mit denen ich die, im vorherigen Kapitel, aufgestellten Hypothesen überprüfen werde.
+
+        \subsection{Errechnung Qualität der Distanzschätzung}
+            Die Qualität von der Schätzung der Proband:innen wird über die absolute Different zwischen gemessener Strecke und geschätzer Strecke, also folgendermaßen, berechnet:
+            $$ \mid D_g - D_m \mid $$
+            Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
+
+        \subsection{Signifikanztests zur Distanzschätzung}
+            Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen fortbewegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen bietet sich eine Varianzanalyse an.
+            Aufgrund des \textquote{Within-Subjects Design} wird eine einfaktorielle Varianzanalyse mit Messwiederholung durchgeführt. Obwohl die verwendete Versuchsplanung auch eine zweifaktorielle Varianzanalyse ermöglichen würde, bei der die zweite abhängige Variable %?
+            die Anzahl der durchlaufenen Räume ist, ist es nicht Ziel dieses Versuchs zu messen inwieweit sich diese Variable auf die Ergebnisse auswirkt.
+
+            Um die für eine solche Varianzanalyse vorrausgesetze Normalität der verschiedenen Faktorstufen %?
+            zu garantieren sollte vorher ein Shapiro-Wilk Test an diesen durchgeführt werden. Dieser eignet sich besonders gut dafür, da er auch bei sehr kleinen Stichproben aussagekräftig ist.
+
+        \subsection{Signifikanztest über Ergebnisse des Präsenz-Questionaire}
+            Ob die Unterschiede der Ergebnisse des SUS-Präsenz-Questionaire signfikant sind wird ebenfalls über eine einfaktorielle Varianzanalyse mit Messwiederholung ermittelt. Dabei werden die \textquote{SUS-Scores} der Durchläufe verglichen. Der SUS-Score ermittelt sich über die Anzahl der Fragen die mit dem Wert $6$ oder $7$, also die beiden Werte, die am meisten erlebte Präsenz beschreiben beantwortet wurden. %formulierung
+
+            Auch hier muss ein Shapiro-Wilk Test die Vorraussetzung der Normalität der Faktorstufen überprüfen.
+
 
         \section{Auswertung der Ergebnisse}
+            Um die Ergebnisse der beiden Quellen in einer gemeinsame Tabelle zu vereinen habe ich die Antworten auf das Google-Form in einer \textquote{Google-Tabellen}-Tabelle gesammelt und dann die Messergebnisse aus der Datenbank dazugetragen. Die Zuordnung erfolgte über die Versuchspersonen-ID, die Fortbewegungsbedingung und die Raumlänge%TODO: klar was gemeint ist? umschreiben?
+            , die sich in beiden Datenquellen finden ließen und in der Kombination eindeutig einander zuordbar sind.
+            Mit der Formel %link?
+            berechnete ich eine neue Spalte, für die Differenz. Das ganze
 %durchschnitte darstellen
 
 \chapter{Diskussion und Fazit}\label{}
