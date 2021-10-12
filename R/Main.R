@@ -32,39 +32,46 @@ for(i in 1:nrow(d)) {
 #################################diff aov
 
 #diff aov
-aov_diff_df_ = data.frame(d$bedingung, d$difference, d$id)
+aov_diff_df_ = data.frame(id = d$id, bedingung = d$bedingung, differenz = d$difference )
 
 #ohne id 10
-aov_diff_df = subset(aov_diff_df_, d.id!=10)
+aov_diff_df = subset(aov_diff_df_, id!=10)
 aov_diff_df
+
+aov_diff_df = convert_as_factor(aov_diff_df, id, bedingung)
+aov_diff_df = aov_diff_df %>%
+  arrange(bedingung) 
+
+tibble(aov_diff_df)
 
 #summary statistics 
 aov_diff_df %>%
-  group_by(d.bedingung) %>%
-  get_summary_stats(d.difference, type = "mean_sd") #to Latex
+  group_by(bedingung) %>%
+  get_summary_stats(differenz, type = "mean_sd") #to Latex
 
 #boxplot
-bxp = ggboxplot(aov_diff_df, x = "d.bedingung", y = "d.difference", add = "point")
+bxp = ggboxplot(aov_diff_df, x = "bedingung", y = "differenz", add = "point", xlab="Fortbewegungsart", ylab="Differenz")
 bxp #toLatex
 
 #outliers
 aov_diff_df %>%
-    group_by("d.bedingung") %>%
-    identify_outliers("d.difference") #no outliers
+    group_by("bedingung") %>%
+    identify_outliers("differenz") #no extreme outliers
 
 #normality test
 aov_diff_df %>%
-  group_by(d.bedingung) %>%
-  shapiro_test(d.difference) #to latex, normality may be assumed
+  group_by(bedingung) %>%
+  shapiro_test(differenz) #to latex, normality may be assumed
 
 #normality plot
-ggqqplot(aov_diff_df, "d.difference", facet.by = "d.bedingung") #tolatex
+ggqqplot(aov_diff_df, "differenz", facet.by = "bedingung") #tolatex
 
 #anova 
-diff_aov = anova_test(data = aov_diff_df, dv = d.difference, wid = d.id, within = d.bedingung) #with mauchly's test for spherecity
+diff_aov = anova_test(data = aov_diff_df, dv = differenz, wid = id, within = bedingung) #with mauchly's test for spherecity
 get_anova_table(diff_aov) # reenhouse-Geisser sphericity correction is automatically applied
 #TOLATEX
 #not significant :( this no posthoc test
+diff_aov
 
 #################################presence aov
 
@@ -72,7 +79,7 @@ get_anova_table(diff_aov) # reenhouse-Geisser sphericity correction is automatic
 presence_df = data.frame(d$id, d$bedingung, d$A, d$B, d$C, d$D, d$E, d$F)
 presence_df
 
-#without 10?
+#without 5?
 presence_df = subset(presence_df, d.id!=5)
 
 #calculate SUS-score
@@ -122,31 +129,37 @@ presence_df$SUS = scores
 presence_df
 
 #extract aov df
-presence_aov_df = data.frame(presence_df$d.id, presence_df$d.bedingung, presence_df$SUS)
-presence_aov_df
+presence_aov_df = data.frame(id = presence_df$d.id, bedingung = presence_df$d.bedingung, sus_score = presence_df$SUS, stringsAsFactors = TRUE)
+presence_aov_df = convert_as_factor(presence_aov_df, id)
+
+#order by bedingung
+presence_aov_df = presence_aov_df %>%
+  arrange(bedingung) 
+  
+tibble(presence_aov_df)
 
 #summary statistics 
 presence_aov_df %>%
-  group_by(presence_df.d.bedingung) %>%
-  get_summary_stats(presence_df.SUS, type = "mean_sd") #to Latex
+  group_by(bedingung) %>%
+  get_summary_stats(sus_score, type = "mean_sd") #to Latex
 
 #boxplot
-presence_bxp = ggboxplot(presence_aov_df, x = "presence_df.d.bedingung", y = "presence_df.SUS", add = "point")
+presence_bxp = ggboxplot(presence_aov_df, x = "bedingung", y = "sus_score", add = "point", xlab="Fortbewegungsart", ylab="SUS Präsenz Score")
 presence_bxp #toLatex
 
 #outliers
 presence_aov_df %>%
-  group_by("presence_df.d.bedingung") %>%
-  identify_outliers("presence_df.SUS") #no outliers
+  group_by(bedingung) %>%
+  identify_outliers(sus_score) #no extreme outliers
 
 presence_aov_df %>%
-  group_by(presence_df.d.bedingung) %>%
-  shapiro_test(presence_df.SUS) #to latex, normality may not be assumed -> friedmann #tolatex
+  group_by(bedingung) %>%
+  shapiro_test(sus_score) #to latex, normality may not be assumed -> friedmann #tolatex
 
-ggqqplot(presence_aov_df, "presence_df.SUS", facet.by = "presence_df.d.bedingung") #tolatex
+ggqqplot(presence_aov_df, "sus_score", facet.by = "bedingung") #tolatex
 
 presence_fried_res = presence_aov_df %>%
-  friedman_test(presence_df.SUS ~ presence_df.d.bedingung|presence_df.d.id)
+  friedman_test(sus_score ~ bedingung|id)
 presence_fried_res #tolatex
 
 # The Kendall’s W can be used as the measure of the Friedman test effect size. 
@@ -162,9 +175,10 @@ presence_fried_res #tolatex
 # Confidence intervals are calculated by bootstap.
 
 presence_aov_df %>%
-  friedman_effsize(presence_df.SUS ~ presence_df.d.bedingung|presence_df.d.id) #tolatex
+  friedman_effsize(sus_score ~ bedingung|id) #tolatex
 
 pairwise_presence = presence_aov_df %>%
- wilcox_test(presence_df.SUS ~ presence_df.d.bedingung, paired=TRUE, p.adjust.method = "bonferroni")
+ wilcox_test(sus_score ~ bedingung, paired=TRUE, p.adjust.method = "bonferroni")
 pairwise_presence#tolatex very confused, how can a and b be equal, b and c be equal but a and c not???
+
 
