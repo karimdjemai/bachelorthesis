@@ -483,7 +483,7 @@ Um an späterer Stelle einschätzen zu können, wie gut die Proband:innen die En
 
 Da es nicht darum geht die Luftlinie zwischen Start und Ende des Levels zu messen, da dann die Bewegungsweise der Proband:in keine Rolle mehr spielen würde, sondern ihre konkreten Fortbewegungsstrecke zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Frame die Kopfposition des virtuellen Avatars, der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis sehr unexakt. %?
 Da nun jede millimeterbewegung des Kopfes aufsummiert werden würde, würde eine einfache Kopfdrehung die fortbewegte Strecke schon um einen großen Teil erhöhen. Dies würde dazuführen, dass die Messung der fortbewegten Strecke nicht mehr intuitiv einzuschätzen wäre.
-Um dem entgegenzuwirken habe ich die Auflösung dieser Messung deutlich veringert, indem nicht mehr jedes Frame, diesen Prozess durchläuft, sondern nur ein Frame etwa alle 2 sekunden. So werden deutlich grobere Bewegungen gemessen und die gemessenen Ergebnisse passen deutlich besser zu der intuitiven Einschätzung der Entfernung.
+Um dem entgegenzuwirken habe ich die Auflösung dieser Messung deutlich veringert, indem nicht mehr jedes Frame, diesen Prozess durchläuft, sondern nur ein Frame etwa alle 2 Sekunden. So werden deutlich grobere Bewegungen gemessen und die gemessenen Ergebnisse passen deutlich besser zu der intuitiven Einschätzung der Entfernung.
 %TODO: zu unwissenschaftlich? nochmal best practices recherchieren
 
 All dies ist im \textquote{RoomAndProgressManager} implementiert. Hier gibt es eine \textquote{StartTimeMeasure}-Methode, die zum Start der Bedingung vom \textquote{SceneLoader} aufgerufen wird und eine \textquote{AddDistance}-Methode, die in der von der \textquote{Update}-Methode alle 150 Frames einmal aufgerufen wird. Diese bestimmt dann euklidisch die Distanz zwischen der aktuellen Position der Nutzer:in und der zuletzt gemessenen und addiert diese auf eine Kummulationsvariable.
@@ -953,7 +953,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         5 der 10 Teilnehmer:innen, gaben an nicht an einer diagnostizierten Sehschwäche zu leiden, 3 trugen eine Brille oder Kontaktlinsen und 2 der Proband:innen gaben an, zwar unter einer Sehschwäche zu leiden, aber keine Korrigierung dafür zu nutzen. Ansonsten gaben die Teilnehmer:innen keine Vorerkrankungen an, mit Ausnahme einer Person, die angab unter einer Rot-Grün-Schwäche zu leiden.
         70\% der Proband:innen schon einmal eine Virtuelle Erfahrung mithilfe einer Datenbrille erlebt. Die angegebene Erfahrung mit Stereoskopischem 3D und Computerspielen ist aus \autoref{figure:videogames} ersichtlich.
 
-        \begin{figure}[!h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=0.99\textwidth]{images/erfahrungpc.png}
             \includegraphics[width=0.99\textwidth]{images/pcstundenprowoche.png}
@@ -979,7 +979,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \textquote{Chooser-Pad}, mit dem die Teilnehmenden dann sowohl ausprobieren konnten, wie die späteren Nummerneingabefelder funktionieren, also auch die Studienbedingung auswählen konnten. Dafür musste zuerst die entsprechende Taste ($A1-C3$, jeh nach Bedingung wie in \autoref{sec:setup} definiert) und danach die Bestätigungstaste \# gedrückt werden, mit der die Bedingung dann augenblicklich gestartet wurde. Den Proband:innen wurde, abhängig von ihrer Gruppe, mitgeteilt welche Bedingung sie ausführen sollen, dann starteten sie diese und führten sie aus.
         Nach Beendigung der Versuchsbedingung wurde den Proband:innen dann auf dem Laptop der Fragebogen %link zum zweiten Fragebogen
         geöffnet, den diese dann ausfüllten. Bei diesem wurde zuerst nach der Schätzung, gefragt (siehe \autoref{subsec:measure-distance}) und dann mithilfe des SUS-Questionaire %TODO:?
-        nach dem Präsenzgefühl (siehe\autoref{subsec:measure-presence}).
+        nach dem Präsenzgefühl (siehe\autoref{subsec:measure-presence}).%TODO: links
 
         Das Öffnen, dann das Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
         wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen.
@@ -991,81 +991,100 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         %marvs probleme?
 
         \section{Statistische Evaluationsverfahren}
-        Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Raumlänge %TODO: klar was gemeint ist? umschreiben?
-         zuordnen. Im folgenden werde ich die statistischen Verfahren vorstellen, mit denen ich die, im vorherigen Kapitel, aufgestellten Hypothesen überprüfen werde.
+            Im folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel, aufgestellten Hypothesen   überprüfen werde.
 
-        \subsection{Errechnung Qualität der Distanzschätzung}
-            Die Qualität von der Schätzung der Proband:innen wird über die absolute Different zwischen gemessener Strecke und geschätzer Strecke, also folgendermaßen, berechnet:
-            $$ \mid D_g - D_m \mid $$
-            Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
+            \subsection{Errechnung Qualität der Distanzschätzung}
+                Die Qualität von der Schätzung der Proband:innen wird über die absolute Different zwischen gemessener Strecke und geschätzer Strecke, also folgendermaßen, berechnet:
+                $$ \mid D_g - D_m \mid $$
+                Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
 
-        \subsection{Signifikanztests zur Distanzschätzung}
-            Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen fortbewegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen bietet sich eine Varianzanalyse an.
-            Aufgrund des \textquote{Within-Subjects Design} wird eine einfaktorielle Varianzanalyse mit Messwiederholung durchgeführt. Obwohl die verwendete Versuchsplanung auch eine zweifaktorielle Varianzanalyse ermöglichen würde, bei der die zweite abhängige Variable %?
-            die Anzahl der durchlaufenen Räume ist, ist es nicht Ziel dieses Versuchs zu messen inwieweit sich diese Variable auf die Ergebnisse auswirkt.
+            \subsection{Signifikanztests zur Distanzschätzung}
+                Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen fortbewegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen bietet sich eine Varianzanalyse an.
+                Aufgrund des \textquote{Within-Subjects Design} wird eine einfaktorielle Varianzanalyse mit Messwiederholung durchgeführt. Obwohl die verwendete Versuchsplanung auch eine zweifaktorielle Varianzanalyse ermöglichen würde, bei der die zweite abhängige Variable %?
+                die Anzahl der durchlaufenen Räume ist, ist es nicht Ziel dieses Versuchs zu messen inwieweit sich diese Variable auf die Ergebnisse auswirkt.
 
-            Um die für eine solche Varianzanalyse vorrausgesetze Normalität der verschiedenen Faktorstufen %?
-            zu garantieren sollte vorher ein Shapiro-Wilk Test an diesen durchgeführt werden. Dieser eignet sich besonders gut dafür, da er auch bei sehr kleinen Stichproben aussagekräftig ist.
+                Um die für eine solche Varianzanalyse vorrausgesetze Normalität der verschiedenen Faktorstufen %?
+                zu garantieren sollte vorher ein Shapiro-Wilk Test an diesen durchgeführt werden. Dieser eignet sich besonders gut dafür, da er auch bei sehr kleinen Stichproben aussagekräftig ist.
 
-        \subsection{Signifikanztest über Ergebnisse des Präsenz-Questionaire}
-            Ob die Unterschiede der Ergebnisse des SUS-Präsenz-Questionaire signfikant sind wird ebenfalls über eine einfaktorielle Varianzanalyse mit Messwiederholung ermittelt. Dabei werden die \textquote{SUS-Scores} der Durchläufe verglichen. Der SUS-Score ermittelt sich über die Anzahl der Fragen die mit dem Wert $6$ oder $7$, also die beiden Werte, die am meisten erlebte Präsenz beschreiben beantwortet wurden. %formulierung
+            \subsection{Signifikanztest über Ergebnisse des Präsenz-Questionaire}
+                Ob die Unterschiede der Ergebnisse des SUS-Präsenz-Questionaire signfikant sind wird ebenfalls über eine einfaktorielle Varianzanalyse mit Messwiederholung ermittelt. Dabei werden die \textquote{SUS-Scores} der Durchläufe verglichen. Der SUS-Score ermittelt sich über die Anzahl der Fragen die mit dem Wert $6$ oder $7$, also die beiden Werte, die am meisten erlebte Präsenz beschreiben beantwortet wurden. %formulierung
 
-            Auch hier muss ein Shapiro-Wilk Test die Vorraussetzung der Normalität der Faktorstufen überprüfen.
+                Auch hier muss ein Shapiro-Wilk Test die Vorraussetzung der Normalität der Faktorstufen überprüfen.
 
         \section{Auswertung der Ergebnisse}
+            Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Raumlänge %TODO: klar was gemeint ist? umschreiben?
+            zuordnen.
             Um die Ergebnisse der beiden Quellen in einer gemeinsame Tabelle zu vereinen habe ich die Antworten auf das Google-Form in einer \textquote{Google-Tabellen}-Tabelle gesammelt und dann die Messergebnisse aus der Datenbank dazugetragen. Die Zuordnung erfolgte über die Versuchspersonen-ID, die Fortbewegungsbedingung und die Raumlänge%TODO: klar was gemeint ist? umschreiben?
             , die sich in beiden Datenquellen finden ließen und in der Kombination eindeutig einander zuordbar sind.
             Mit der Formel %link?
-            berechnete ich eine neue Spalte, für die Differenz. Das ganze
-%durchschnitte darstellen
+            berechnete ich eine neue Spalte, für die Differenz. Das ganze habe ich dann als $.csv$ Datei exportiert und um die weitere Datenverarbeitung und statistische in R durchzuführen. Dafür habe ich die Version \textquote{stable 4.1.1} genutzt.
 
+                \subsection{Statistische Auswertung zum Raumverständnis}
+                    Durchschnittswerte der Differenz von Messung und Schätzung zur fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
 
-        % diff
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lccc} \toprule
+                            Bedingung       & n & M    & SD   \\ \midrule
+                            Redirection     & 9 & 16.9 & 12.0 \\
+                            Joystick        & 9 & 16.0 & 16.8 \\
+                            Teleport        & 9 & 13.8 & 9.62 \\ \bottomrule
+                        \end{tabular}
+                        \caption{Durchschnitte und Standartabweichungen der Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
+                    \end{table}
 
+                    Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
 
-\begin{table}[]
-    \renewcommand\arraystretch{1.2}
-    \centering
-    \caption{CaptionTODO: lets go}
-    \begin{tabular}{lccc} \toprule
-        Bedingung       & n & M    & SD   \\ \midrule
-        Redirection         & 9 & 16.9 & 12.0 \\
-        Joystick         & 9 & 16.0 & 16.8 \\
-        Teleport         & 9 & 13.8 & 9.62 \\ \bottomrule
-    \end{tabular}
-\end{table}
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=1\textwidth]{plots/diff_plot.png}
+                        \caption{Plot der Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, Aufgeteilt nach Fortbewegungstechnik; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
+                    \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/diff_plot.png}
-    \caption{caption caption}\label{figure:diff_plot}
-\end{figure}
+                    Eine Varianzanalye mit Messwiederholung setzt vorraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in \autoref{figure:diff_normality} abgebildet.
 
-%no extreme outliers
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
+                        \caption{Korrelation zwischen Messergebnissen und Normalverteilung nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
+                    \end{figure}
 
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
-    \caption{caption caption}\label{figure:diff_normality}
-\end{figure}
+                    Zudem wurde ein Shapiro-Wilk Test für die einzelnen Faktorstufen durchgeführt (Ergebnisse in \autoref{table:norm_test_diff}). Dieser deutete nicht darauf hin, dass die Annahme der Normalverteilung verletzt worden sei.
 
-%shapiro wilk diff
-\begin{table}[]
-    \renewcommand\arraystretch{1.2}
-    \centering
-    \caption{CaptionTODO: lets go shapiro diff}
-    \begin{tabular}{lcc} \toprule
-        Bedingung    & Teststatistik    & p   \\ \midrule
-        Redirection  & 0.908            & 0.300 \\
-        Joystick     & 0.868            & 0.117 \\
-        Teleport     & 0.867            & 0.113 \\ \bottomrule
-    \end{tabular}
-\end{table}
+                    %shapiro wilk diff
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lcc} \toprule
+                            Bedingung    & Teststatistik    & p   \\ \midrule
+                            Real-Walking & 0.908            & 0.300 \\
+                            Joystick     & 0.868            & 0.117 \\
+                            Teleport     & 0.867            & 0.113 \\ \bottomrule
+                        \end{tabular}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
+                    \end{table}
 
-%anova diff
-%mauchlys test for spherecity and greenhouse geisser correction
-% 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
+                    Im Datensatz wurden keine extremen Ausreißer %grenze?
+                    festgestellt.
 
+                    Mit den erhobenen Daten wurde eine Varianzanalyse mit Messwiederholung zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Level durchgeführt. Dabei wurde implizit ein Mauchly’s Test zur Überprüfung der Varianzhomogenität %das gleiche  wie spherecity? formulierung
+                    durchgeführt. %TODO: Ergebnis davon beschreiben:
+                    %mauchlys test for spherecity and greenhouse geisser correction
+
+                    % $`Mauchly's Test for Sphericity`
+                    % Effect     W     p p<.05
+                    % 1 bedingung 0.457 0.064
+
+% $`Sphericity Corrections`
+%    Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
+% 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
+
+                    Die Varianzanalyse zeigte keine signifikanten Unterschiede zwischen den Fortbewegungsarten; $F(2,16) = 0.207, p = 0.815$
+                    %anova diff
+                    % 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
+
+                    Post-Hoc Tests zur genaueren Bestimmung der Unterschiede waren folglich nicht erforderlich.
 %full:
 %
     % > diff_aov
@@ -1076,7 +1095,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
     % 1 bedingung   2  16 0.207 0.815       0.01
 
     % $`Mauchly's Test for Sphericity`
-    %      Effect     W     p p<.05
+    % Effect     W     p p<.05
     % 1 bedingung 0.457 0.064
 
     % $`Sphericity Corrections`
@@ -1085,61 +1104,89 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
 %
 
-%no post hoc required
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
-presence
+                \subsection{Statistische Auswertung der Präsenz}
+                    Für jeden Versuchsdurchlauf wurde der SUS-Score berechnet. Die Durchschnittswerte für die einzelnen Fortbewegungsarten sind in \autoref{table:presence_means} ersichtlich.
 
-\begin{table}[]
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lccc} \toprule
+                            Bedingung       & n & M     & SD   \\ \midrule
+                            Real-Walking    & 9 & 2.33  & 1.80 \\
+                            Joystick        & 9 & 0.889 & 1.36 \\
+                            Teleport        & 9 & 0.667 & 0.866 \\ \bottomrule
+                        \end{tabular}
+                        \caption{Durchschnittswerte und Standartabweichungen der SUS-Scores für die verschiedenen Fortbewegungsarten; Die Unterschiede sind signfikant, können aber nicht von Post-Hoc Tests eingeordnet werden, denn dort sind die Ergebnisse nicht signifikant. %?????
+                        } \label{table:presence_means}
+                    \end{table}
+
+                    \autoref{figure:presence_plot} Stellt die SUS-Scores als Boxplot dar. %wirklich? irgendwie komisch
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=1\textwidth]{plots/presence_plot.png}
+                        \caption{Darstellung der SUS-Scores nach Fortbewegungsart;  A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:presence_plot}
+                    \end{figure}
+
+                    %no extreme outliers
+                    Auch für die Präsenz-Messdaten wurden keine Extremen Ausreißer gefunden.
+
+                    %qqplot
+                    Die \autoref{figure:presence_normality} stellt die Korrelation zwischen den Daten und einer Normal-Verteilung für jede der Fortbewegungsarten dar.
+                    Die Messpunkte in den Kategorien \textquote{Joystick} und \textquote{Teleportation} folgen nicht der Referenzlinie.
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=0.5\textwidth]{plots/presence_normality.png}
+                        \caption{Korrelation von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt;  A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
+                    \end{figure}
+
+                    Um Klarheit zu schaffen wurde ein Shapiro-Wilk test zum 5\% Konfidenzniveau %?
+                    durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0.00316$) und Teleportation ($P = 0.00521$) nicht gegeben ist. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_normal} zu sehen.
+
+                    %shapiro
+                    \begin{table}[!h]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lccc} \toprule
+                            Bedingung    & Teststatistik    & p   \\ \midrule
+                            Real-Walking & 0.935            & 0.529 \\
+                            Joystick     & 0.730            & 0.00316 \\
+                            Teleport     & 0.748            & 0.00521 \\ \bottomrule
+                        \end{tabular}
+                        \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen; Die Ergebnisse für die Joystick und die Teleportationsbedingung deuten bei einem $\alpha = 5\%$ Signifikanzniveau darauf hin, dass eine Normalverteilung nicht gegeben ist}\label{table:presence_normal}
+                    \end{table}
+
+                    Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt.
+                    %H0 erwähnen?
+                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 9.3, p = 0.00956$
+
+                    %friedman
+                    %.y.           n statistic    df       p method
+                    %* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
+                    %1 sus_score     9       9.3     2 0.00956 Friedman test
+                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source?
+                    als starker Effekt.
+
+                    %effsize
+                    %.y.           n effsize method    magnitude
+                    %* <chr>     <int>   <dbl> <chr>     <ord>
+                    %1 sus_score     9   0.517 Kendall W large
+
+                    Dennoch wurden bei einer paarweise durchgeführten Post-Hoc analyse der Präsenzdaten mit einem mit einem Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der p-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0.174$, Real-Walking mit Teleport: $p = 0.105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
+
+\begin{table}[!ht]
     \renewcommand\arraystretch{1.2}
     \centering
-    \caption{CaptionTODO: lets go presence}
-    \begin{tabular}{lccc} \toprule
-        Bedingung       & n & M     & SD   \\ \midrule
-        Redirection     & 9 & 2.33  & 1.80 \\
-        Joystick        & 9 & 0.889 & 1.36 \\
-        Teleport        & 9 & 0.667 & 0.866 \\ \bottomrule
+    \begin{tabular}{lcccc} \toprule
+Gruppe 1     & Gruppe 2 & Teststatistik &  p    & p Korrigiert \\ \midrule
+Real-Walking & Joystick & 15            & 0.058 & 0.174        \\
+Real-Walking & Teleport & 21            & 0.035 & 0.105        \\
+Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
     \end{tabular}
+    \caption{Ergebnisse der Post-Hoc Analyse mit Wilcoxon-Vorzeichen-Rang-Test; Die korrigierten p-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
 \end{table}
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/presence_plot.png}
-    \caption{caption caption presence plot}\label{figure:presence_plot}
-\end{figure}
-
-%no extreme outliers
-
-\begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.5\textwidth]{plots/presence_normality.png}
-    \caption{caption caption presence norm}\label{figure:presence_normality}
-\end{figure}
-
-%shapiro
-\begin{table}[]
-    \renewcommand\arraystretch{1.2}
-    \centering
-    \caption{CaptionTODO: lets go shapiro presence}
-    \begin{tabular}{lccc} \toprule
-        Bedingung    & Teststatistik    & p   \\ \midrule
-        Redirection  & 0.935            & 0.529 \\
-        Joystick     & 0.730            & 0.00316 \\
-        Teleport     & 0.748            & 0.00521 \\ \bottomrule
-    \end{tabular}
-\end{table}
-
-%friedman
-%.y.           n statistic    df       p method
-%* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
-%1 sus_score     9       9.3     2 0.00956 Friedman test
-
-%effsize
-%.y.           n effsize method    magnitude
-%* <chr>     <int>   <dbl> <chr>     <ord>
-%1 sus_score     9   0.517 Kendall W large
-
 
 %post-hoc
 % .y.       group1 group2    n1    n2 statistic     p p.adj p.adj.signif
@@ -1147,9 +1194,6 @@ presence
 % 1 sus_score A      B          9     9      15   0.058 0.174 ns
 % 2 sus_score A      C          9     9      21   0.035 0.105 ns
 % 3 sus_score B      C          9     9       4.5 0.586 1     ns
-
-
-
 
 
 \chapter{Diskussion und Fazit}\label{}
