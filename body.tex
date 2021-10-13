@@ -815,23 +815,21 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         An dieser Stelle möchste ich die in dem Experiment zu überprüfenden Hypothesen vorstellen.
 
         \begin{enumerate}
-            \item Die \textquote{Real-Walking} Fortbewegungsart ermöglicht besseres Raumverständnis %(spatial knowledge)
-            , als die beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}.
+            \item Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportaion}.
+            \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
         \end{enumerate}
 
         \subsection{Raumverständnis}
             %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
-            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbesset. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
+            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbessert. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
-            In dieser Studie wird dieser Effekt gemessen
+            Die hier vorgestellte Hypothese basiert auf der Annahme, dass ein besseres Raumverständnis dazu führt, dass Nutzer:innen bereits gegangene, oder anderweitig bewegte Distanzen besser Schätzen können.
             %gemessen ob es auch in generierten leveln gilt?
-            indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten.\footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die konkret fortbewegte Strecke.}
-            Neben der Schätzung wurde auch die vom virtuellen Avatar fortbewegte Strecke gemessen (siehe %TODO: finden
+            Wie gut die Nutzer:innen die bewegte Distanz schätzen wird hier gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten. \footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die gesamte fortbewegte Strecke.}
+            Neben der Schätzung wurde auch die vom virtuellen Avatar bewegte Strecke gemessen (siehe %TODO: finden
             ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
 
-            Um das Raumverständnis einer Proband:in zu Messen tätige ich im Kontext dieser Studie also die Annahme: \textquote{Je besser ihr Raumverständnis ist, desto besser kann sie die von ihr gegangene (oder andersartig fortbewegte) Strecke einschätzen.}
             Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil sie sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt. %TODO: weiter argumentieren
             %Es ist also von größerem Interesse herauszufinden ob die Schätzung der fortbewegten Distanz angemessen mit der wirklich fortbewegten Distanz mitwächst
             %
@@ -994,6 +992,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Im folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel, aufgestellten Hypothesen   überprüfen werde.
 
             \subsection{Errechnung Qualität der Distanzschätzung}
+            %errechnung % geschätzt positiv, prozent negativ ?, signifikante unterschiede?
                 Die Qualität von der Schätzung der Proband:innen wird über die absolute Different zwischen gemessener Strecke und geschätzer Strecke, also folgendermaßen, berechnet:
                 $$ \mid D_g - D_m \mid $$
                 Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
@@ -1057,12 +1056,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \renewcommand\arraystretch{1.2}
                         \centering
                         \begin{tabular}{lcc} \toprule
-                            Bedingung    & Teststatistik    & p   \\ \midrule
+                            Bedingung    & Teststatistik    & $p$   \\ \midrule
                             Real-Walking & 0.908            & 0.300 \\
                             Joystick     & 0.868            & 0.117 \\
                             Teleport     & 0.867            & 0.113 \\ \bottomrule
                         \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die Differenz von Schätzung und Messung für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
                     \end{table}
 
                     Im Datensatz wurden keine extremen Ausreißer %grenze?
@@ -1150,7 +1149,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \renewcommand\arraystretch{1.2}
                         \centering
                         \begin{tabular}{lccc} \toprule
-                            Bedingung    & Teststatistik    & p   \\ \midrule
+                            Bedingung    & Teststatistik    & $p$   \\ \midrule
                             Real-Walking & 0.935            & 0.529 \\
                             Joystick     & 0.730            & 0.00316 \\
                             Teleport     & 0.748            & 0.00521 \\ \bottomrule
@@ -1166,7 +1165,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     %.y.           n statistic    df       p method
                     %* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
                     %1 sus_score     9       9.3     2 0.00956 Friedman test
-                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source?
+                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source? %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
                     als starker Effekt.
 
                     %effsize
@@ -1174,18 +1173,19 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     %* <chr>     <int>   <dbl> <chr>     <ord>
                     %1 sus_score     9   0.517 Kendall W large
 
-                    Dennoch wurden bei einer paarweise durchgeführten Post-Hoc analyse der Präsenzdaten mit einem mit einem Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der p-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0.174$, Real-Walking mit Teleport: $p = 0.105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
+                    Dennoch wurden bei einer paarweise durchgeführten Post-Hoc Analyse der Präsenzdaten mit einem
+                    Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der $p$-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0.174$, Real-Walking mit Teleport: $p = 0.105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
 
 \begin{table}[!ht]
     \renewcommand\arraystretch{1.2}
     \centering
     \begin{tabular}{lcccc} \toprule
-Gruppe 1     & Gruppe 2 & Teststatistik &  p    & p Korrigiert \\ \midrule
+Gruppe 1     & Gruppe 2 & Teststatistik &  $p$  & $p$ korrigiert \\ \midrule
 Real-Walking & Joystick & 15            & 0.058 & 0.174        \\
 Real-Walking & Teleport & 21            & 0.035 & 0.105        \\
 Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
     \end{tabular}
-    \caption{Ergebnisse der Post-Hoc Analyse mit Wilcoxon-Vorzeichen-Rang-Test; Die korrigierten p-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
+    \caption{Ergebnisse der Post-Hoc Analyse mit Wilcoxon-Vorzeichen-Rang-Test; Die korrigierten $p$-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
 \end{table}
 
 %post-hoc
@@ -1196,9 +1196,65 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 % 3 sus_score B      C          9     9       4.5 0.586 1     ns
 
 
-\chapter{Diskussion und Fazit}\label{}
+\chapter{Diskussion, Ausblick und Konklusion}\label{chapter:discussion-conclusion}
+    In diesem letzten Kapitel werde ich die im vorherigen Kapitel errechneten Ergebnisse diskutieren und versuchen sie einzuordnen. Anschließend werde ich eine abschließende Zusammenfassung der in dieser Arbeit vorgestellten Ideen, Umsetzungen und Erkenntnissen geben. Damit verbunden werde ich einen Ausblick formulieren, wie zukünftige Forschungsarbeiten auf dieser Arbeit aufbauen sollten.
 
-\chapter{Acknowledgments}\label{}
+    \section{Diskussion der Ergebnisse}
+        Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies könnte verschiedene Gründe haben. An dieser Stelle möchte ich versuchen die Ergebnisse einzuordnen und eben diese Gründe herauszuarbeiten
+
+        \subsection{Schätzung der bewegten Distanz}
+            Die oben formulierte Hypothese zur Schätzung der fortbewegten Distanz lautete wie folgt:
+
+            Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+
+            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die Differenz der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die der Alternativen. Die Durchschnittswerte der unterschiedlichen Fortbewegungsbedingungen unterscheiden sich nicht signifikant. Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
+
+            Vorab ist zu sagen, dass die statistische %Effektstärke berechnen
+
+            Ein möglicher Grund dafür wieso diese Hypothese nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft. %spricht da schon was für oder gegen?
+            In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind.
+
+            Möglichkeiten das Raumverständnis zu messen sind beispielsweise, die Nutzer:innen zu bitten nach dem durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen (siehe \cite{langbehn-vergleich-2018}).
+            %warum hab ich das nicht so gemacht? begründen?
+
+            Ein weiterer Grund dafür wieso diese Hypothese nicht unterstützt werden könnte ist die Monotonität der generierten Räume.
+            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erzeugen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dennoch ist eben dies ein Grundproblem von generierten (generischen) Leveln. %quelle dazu?
+
+            Falls die oben erwähnte Annahme doch zutrifft, könnte es also sein, dass sich die Fähigkeit von Nutzer:innen, die fortbewegte Distanz einzuschätzen, zwischen von Menschen gestalteten und Computergenerierten Leveln signifikant unterscheidet.
+
+            Dies, und ob das Raumverständnis einer Person, mit der Fähigkeit fortbewegte Distanz einzuschätzen in kausalem Zusammenhang steht sollte in einer zukünftigen Studie untersucht werden. %genauer wie?
+            %weitere gründe?
+
+            \subsection{Präsenzgefühl in der virtuellen Umgebung}
+                Die oben formulierte Hypothese zum Präsenzgefühl lautete:
+
+                Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+
+                Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2.33$) ist deutlich größer, als bei der Joystick-($0.889$) oder Teleportationsbedingung ($0.667$).
+                Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
+
+                Ein möglicher Grund für diese ambivalenten Ergebnisse hat konkret mit den Umständen %link?
+                dieser Studie zu tun. Da nicht so viele Proband:innen teilnehmen konnten, wie es üblicherweise der Fall gewesen wäre, ist die Datenlage, aus der diese Ergebnisse entstanden weniger gut, als sie in einer offiziellen Studie gewesen wäre. %formuliereung
+                Es ist davon auszugehen, dass die Ergebnisse in diesem Fall um einiges klarer gewesen wären.
+
+                Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen. %?
+
+    \section{Konklusion}
+        In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raum-Basierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen, mithilfe von Rotationgains und Impossible Spaces, ermöglicht wird sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der die Illusion entsteht sie würden die Grenzen des realen Trackingspaces verlassen und könnten unabhängig davon die virtuelle Umgebung erkunden.
+        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht zwei Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung fortbewegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in prozedural generierten Leveln gegeben sind. %autsch
+
+    \section{Ausblick}
+
+        Wie bereits erwähnt sind die Ergebnisse der hier durchgeführten Pilotierungsstudie mit einer relativ geringen Teilnehmerzahl entstanden. Um die Ergebnisse mit mehr Genauigkeit beurteilen zu können wäre es wünschenswert wenn eine offizielle Studie mit den hier vorgestellten Methoden durchgeführt würde.
+        Aber auch abgesehen davon gibt es einige Fragen, die in dem Prozess dieser Arbeit aufgeworfen wurden, deren Klärung es bedarf.
+
+        Zukünftige Studien, die Level mit der hier vorgestellten Methode generieren sollten untersuchen, inwieweit eine generierung von Objekten in den Räumen zur kognitiven Kartenbildung von Nutzer:innen beiträgt. Ausserdem sollte sie, anstatt nur die Qualität der Distanzschätzung zu untersuchen auch Forschungsmethodiken nutzen, die auf andere Art und Weisen das Raumverständnis der Proband:innen prüfen.
+        %noch mehr finden?
+
+
+\chapter*{Danksagungen}\label{chapter:acknowledgements}
+    bla bla
+\addcontentsline{toc}{chapter}{Danksagungen}
 
 
 % keep an blank line above
