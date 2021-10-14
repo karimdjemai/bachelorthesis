@@ -182,3 +182,6 @@ pairwise_presence = presence_aov_df %>%
 pairwise_presence#tolatex very confused, how can a and b be equal, b and c be equal but a and c not???
 
 
+#experiments with 
+
+

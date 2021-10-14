@@ -1,114 +1,31 @@
 %!TEX root = ./thesis.tex
 
-% \chapter{Template}\label{chapter:kapitellabel} %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{Test}
-% \subsection{Sub Test}
-% Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat\cite{aho:dragonbook}. See Table ~\ref{table:speedup1} and ~\ref{table:speedup1} and \ref{figure:helloworld}.
-
-% \begin{table}[!th]
-%   \renewcommand{\arraystretch}{1.3}
-%   \caption{Speed-Up Table I}\label{table:speedup1}
-%   \vspace{4mm} % hack
-%   \centering
-%     \begin{tabular}{|l||r|r|r|}
-%       \hline
-%       program            & basline   & algorithm 1  & alogrithm 2\\
-%       \hline
-%       \hline
-%       {\tt simple}       &  30 sec   &  20 sec      &  18 sec     \\
-%       \hline
-%       {\tt hello world}  &  43 sec   &  27 sec      &  28 sec     \\
-%       \hline
-%     \end{tabular}
-% \end{table}
-
-% \begin{table}[!th]
-%   \renewcommand{\arraystretch}{1.3}
-%   \caption{Speed-Up Table II}\label{table:speedup2}
-%   \vspace{4mm} % hack
-%   \centering
-%     \begin{tabular}{|l||r|r|r|}
-%       \hline
-%       program            & basline   & algorithm 1  & alogrithm 2\\
-%       \hline
-%       \hline
-%       {\tt simple}       &  30 sec   &  20 sec      &  18 sec     \\
-%       \hline
-%       {\tt hello world}  &  43 sec   &  27 sec      &  28 sec     \\
-%       \hline
-%     \end{tabular}
-% \end{table}
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla hghgh hhghg mco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-% \begin{figure}[!ht]
-% \centering
-% \sourcecode{main.cpp}
-% \caption{Hello World Program}\label{figure:helloworld}
-% \end{figure}
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum~\cite{GorillaArm}
-
-% \begin{figure}[!ht] % see https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions for placement parameters
-%   \centering
-%   \includegraphics[width=0.5\textwidth]{images/gull.png}
-%   \caption{A picture of a gull.}
-% \end{figure}
-
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[width=0.5\textwidth]{images/gull.png}
-%   \caption{A picture of a gull.}
-% \end{figure}
-% Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
-% Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
-
 \chapter{Einführung}\label{chapter:intro}
 
-Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten.[
+Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten. Usoh et al \cite{usoh-vergleich-1999} beschreiben beispielsweise, ein höheres Präsenzgefühl der Nutzer:innen, wenn diese sich gehend durch die virtuelle Umgebung fortbewegten, als wenn diese per Knopfdruck durch die Szene flogen.
+Eine der drei von LaViola \cite{cybersickness} zusammenfassten Theorien, die \textquote{Sensory Conflict Theory} (Sensorische Konflikt Theorie) erklärt die Ursache für so genannte \textquote{Cybersickness} oder auch Simulatorkrankheit, also dass Nutzer:innen in bestimmten, durch virtuelle Umgebungen hervorgerufenen Situationen teilweise starke Übelkeit erleben so, dass Informationen verschiedener Sinnesmodalitäten widersprüchlich sind.
+Demnach wäre es also Cybersickness senkend, wenn andere Sinnesmodalitäten, wie der Gleichgewichtssinn oder die Propriozeption zusätzlich zum visuellen Sinn die eigenbewegung der Nutzer:in wahrnehmen. Und tatsächlich konnten beispielsweise Langbehn et al zeigen, dass Nutzer:innen, die sich in virtuellen Umgebungen fortbewegen signifikant weniger Cybersickness erleben, als wenn sie sich mithilfe von Joysticks fortbewegen.
+% [
+%     %TODO: quelle
 
-    %TODO:Quelle
-    ]
-beschreibt beispielsweise, ein höheres Präsensgefühl der Nutzer:innen.[
-    %TODO: Quelle
+% ]
+% erklärt, dass beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
+Leider bringt das natürliche gehen (Real-Walking) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
 
-]
-zeigt dass weniger Motion sickness entsteht wenn sich die Nutzer:innen durch die virtuelle Welt bewegen indem sie gehen.
-[
-    %TODO: quelle
+Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation des Headsets und der Controller bei einigen Technologien, zum anderen durch die Raumgröße der meisten VR-Setups.
 
-]
-erklärt, dass beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
-Leider bring das reale gehen (real walking nach[
-    %TODO: quelle
-
-]
-) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
-
-Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation des Headsets und der Controller bei einigen Technologien (zum Beispiel den Modellen der \textquote{HTC VIVE}-Produktreihe
-%TODO:quelle%
-), zum anderen durch die Raumgröße der meisten VR-Setups.
-
-Zwar gibt es dazu auch Ausnahmen, ( siehe z.B.[
-    %TODO: quelle microsoft studie
-]
+Zwar gibt es dazu auch Ausnahmen, ( siehe z.B. \cite{microsoft}
 ), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
 
-\section{Redirections Techniques} %oder lieber deutsch???
-%sind impossible spaces überhaupt redirected walking?
-Eine Herangehensweise dieses Problem zu Umgehen sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet (nach [
-    %quelle steinicke übersicht paper
+\section{Redirection Methoden}
+Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht})). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Bereiche zugreifen kann, die sonst ausserhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
+Im Idealfall wird dabei die Illusion aufrecht erhalten sie würde sich unmanipuliert, frei, und in virtueller und echter Umgebung identisch bewegen. Tatsächlich werden bei den meisten dieser Methoden %unterschied zwischen methode und methodik?
+an einem bestimmten Punkt gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise gehgeschwindigkeit), sodass die Bewegung zwischen den beiden Umgebungen sich unterscheiden.
+Bei manchen dieser Methoden sorgt diese Veränderung dafür, die Bewegungen der Nutzer:in in gewisser Weise zu Manipulieren, etwa dafür zu sorgen, dass sie sich immer %curve paper nochmal anschauen
 
-])). Dies ist ein Sammelbegriff für Techniken bei denen die Nutzer:in mit Manipulationen der Fortbewegungsart durch den Trackingspace navigiert wird.
-%  Dabei wird die Illusion aufrecht erhalten sie würde sich unverändert, frei bewegen.
-So lässt sich die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
-Im folgenden werde ich nun zwei dieser Techniken genauer vorstellen.
+Mit diesen Methoden lassen sich also einige Effekte erreichen, unter anderm die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
+Im folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
+%%%%%%%%%%%%
 
 \subsection{Rotationgains}
 %TODO: quelle steinicke zusammenfassung der techniken
@@ -1214,7 +1131,7 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
             Ein möglicher Grund dafür wieso diese Hypothese nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft. %spricht da schon was für oder gegen?
             In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind.
 
-            Möglichkeiten das Raumverständnis zu messen sind beispielsweise, die Nutzer:innen zu bitten nach dem durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen (siehe \cite{langbehn-vergleich-2018}).
+            Möglichkeiten das Raumverständnis zu messen sind beispielsweise, die Nutzer:innen zu bitten nach dem durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}).
             %warum hab ich das nicht so gemacht? begründen?
 
             Ein weiterer Grund dafür wieso diese Hypothese nicht unterstützt werden könnte ist die Monotonität der generierten Räume.
@@ -1246,7 +1163,7 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 
     \section{Ausblick}
 
-        Wie bereits erwähnt sind die Ergebnisse der hier durchgeführten Pilotierungsstudie mit einer relativ geringen Teilnehmerzahl entstanden. Um die Ergebnisse mit mehr Genauigkeit beurteilen zu können wäre es wünschenswert wenn eine offizielle Studie mit den hier vorgestellten Methoden durchgeführt würde.
+        Wie bereits erwähnt sind die Ergebnisse der hier durchgeführten Pilotierungsstudie mit einer relativ geringen Teilnehmerzahl entstanden. Um die Ergebnisse mit mehr Genauigkeit beurteilen zu können wäre es wünschenswert wenn eine etwas größere,  offizielle Studie mit den hier vorgestellten Methoden durchgeführt würde.
         Aber auch abgesehen davon gibt es einige Fragen, die in dem Prozess dieser Arbeit aufgeworfen wurden, deren Klärung es bedarf.
 
         Zukünftige Studien, die Level mit der hier vorgestellten Methode generieren sollten untersuchen, inwieweit eine Generierung von Objekten in den Räumen zur kognitiven Kartenbildung von Nutzer:innen beiträgt. Ausserdem sollte sie, anstatt nur die Qualität der Distanzschätzung zu untersuchen auch Forschungsmethodiken nutzen, die auf andere Art und Weisen das Raumverständnis der Proband:innen prüfen.
@@ -1255,8 +1172,13 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 
 \chapter*{Danksagungen}\label{chapter:acknowledgements}
 \addcontentsline{toc}{chapter}{Danksagungen}
-    % An dieser Stelle möchte ich mich noch einmal ganz herzlich, bei all meinen Freunden und Verwandten bedanken, die freundlicherweise an der Studie teilgenommen haben! Ganz besonderer Dank geht dabei an meine Eltern, Jutta Dalladas-Djemai und Chaffok Djemai, für die vielen Jahre Unterstützung, die mir ermöglicht haben zu Studieren und abzuschließen, und an meine Freundin Nora Schwerdtfeger,
-    % Ich möchte mich ganz herzlich bei meinem Betreuer Dr. Eike Langbehn bedanken ohne den diese Arbeit nicht
+    An dieser Stelle möchte ich mich bei allen bedanken, die mich während diesem Projekt unterstützt und motiviert haben.
+    Ganz herzlicher Dank gebürt bei all meinen Freunden und Verwandten, die freundlicherweise an der Studie teilgenommen haben! Ganz besonderer Dank geht dabei an meine Eltern, Jutta Dalladas-Djemai und Chaffok Djemai, für die vielen Jahre Unterstützung, die mir ermöglicht haben zu Studieren und abzuschließen, und an meine Freundin Nora Schwerdtfeger, die mich in schwierigen Phasen stets motiviert hat.
+    Außerdem möchte ich mich bei meinem Betreuer Dr. Eike Langbehn bedanken, dessen Expertise und Gedult mir die Arbeit an diesem Projekt erleichtert hat.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %TODO: auf peck verweisen ===>
+        %Moreover, RFED participants were able to more accurately estimate VE size.
 
 
 % keep an blank line above
