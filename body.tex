@@ -23,30 +23,33 @@ Im Idealfall wird dabei die Illusion aufrecht erhalten sie würde sich unmanipul
 an einem bestimmten Punkt gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise gehgeschwindigkeit), sodass die Bewegung zwischen den beiden Umgebungen sich unterscheiden.
 Bei manchen dieser Methoden sorgt diese Veränderung dafür, die Bewegungen der Nutzer:in in gewisser Weise zu Manipulieren, etwa dafür zu sorgen, dass sie sich immer %curve paper nochmal anschauen
 
-Mit diesen Methoden lassen sich also einige Effekte erreichen, unter anderm die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche vergrößern.
+Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche zu vergrößern.
 Im folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
 %%%%%%%%%%%%
 
 \subsection{Rotationgains}
-%TODO: quelle steinicke zusammenfassung der techniken
 Rotationgains werden Kopfrotationen hinzugefügt sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
-Kopf mit dem VR-Headset. Kopfrotationen lassen sich mit der Schreibweise
+Kopf mit dem VR-Headset.
+
+Kopfrotationen lassen sich mit der Schreibweise
 $$ R_{real} := (pitch_{real}, yaw_{real}, roll_{real}) $$
-darstellen, wobei pitch, yaw und roll
-die Eulerschen Winkel der Kopfrotation darstellen. Der Rotationgain wird dann als Quotient des virtuellen Winkels und des realen Winkels definiert also:
+darstellen (siehe Steinicke et al \cite{detection-thresholds}) %genug zitiert? dieser ganze abschnitt kommt daher
+, wobei $pitch$, $yaw$ und $roll$ die Eulerschen Winkel der Kopfrotation darstellen. Ein Rotationgain wird als Quotient des virtuellen Winkels und des realen Winkels einer Rotationsdimension definiert also:
 $$ gR := \frac{R_{virtual}}{R_{real}} $$
 Für alle 3 Winkel kann ein Rotationgain angewandt werden.
-Dieses Anwenden funktioniert indem der Rotationgain $gR$ mit dem Winkel der realen Kopfrotation $\alpha$ multipliziert wird also:
+Dieses Anwenden funktioniert indem statt der eigentlichen Rotatation $\alpha$, die Multiplikation aus $\alpha$ mit dem Rotationgain also:
 $$ gR * \alpha $$
-Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann werden Rotation gains folgendermaßen dargestellt:
+durchgeführt wird. Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
+
+Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann können Rotationgains folgendermaßen dargestellt werden:
 $$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
-%TODO: inline?
-In der Regel wird für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
-[
-    %quelle steinicke techniken
-]
-Durch anwenden eines rotation gains kann der virtuelle Trackingspace um den realen Trackingspace mit dem Drehpunkt der Nutzerposition herum rotiert werden.
-Für den Nutzer kann so die Illusion entstehen er würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. (Siehe grafik)
+Nach Steinicke et al \cite{detection-thresholds} wird in der Regel für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
+Durch Anwenden eines positiven Rotationgains auf $yaw$-Rotationen nach rechts und eines neutralen oder sogar negativen, für Rotationen nach Links kann der virtuelle Trackingspace um den realen Trackingspace nach rechts, mit dem Drehpunkt der Nutzerposition herum rotiert werden. Andersherum natürlich genauso. Indem im vorhinein ein Winkel $\beta$, für die Ziel-Verdrehung der beiden Realitäten definiert wird, lässt sich beim Erreichen dieses Winkels das Anwenden des Rotationgains beenden, sodass die Welten sich nun um genau $\beta$ Grad verdreht haben.
+
+Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher gerichteter Rotationgain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte dafür gesorgt werden, dass dieser möglichst nah an der Position des virtuellen Avatar liegt, da sonst nicht der Eindruck entsteht die Rotation wäre mit der Kopfrotation der Nutzer:in identisch} angewendet wird.
+
+In solchen Prozessen ist die Verdrehung zwischen den beiden Realitäten designbar, da sie so deterministisch wird. Da sich nun die Realitäten verdreht haben, liegen nun virtuelle Orte innerhalb des, durch den realen Trackingspace begrenzten, für die Nutzer:in begehbaren Bereichs die es vorher nicht waren.
+Für die Nutzer:in kann so die Illusion entstehen sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. (Siehe grafik)
 %TODO: grafik.
 
 \subsection{Impossible Spaces}
