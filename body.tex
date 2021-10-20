@@ -4,26 +4,23 @@
 
 Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten. Usoh et al \cite{usoh-vergleich-1999} beschreiben beispielsweise, ein höheres Präsenzgefühl der Nutzer:innen, wenn diese sich gehend durch die virtuelle Umgebung fortbewegten, als wenn diese per Knopfdruck durch die Szene flogen.
 Eine der drei von LaViola \cite{cybersickness} zusammenfassten Theorien, die \textquote{Sensory Conflict Theory} (Sensorische Konflikt Theorie) erklärt die Ursache für so genannte \textquote{Cybersickness} oder auch Simulatorkrankheit, also dass Nutzer:innen in bestimmten, durch virtuelle Umgebungen hervorgerufenen Situationen teilweise starke Übelkeit erleben so, dass Informationen verschiedener Sinnesmodalitäten widersprüchlich sind.
-Demnach wäre es also Cybersickness senkend, wenn andere Sinnesmodalitäten, wie der Gleichgewichtssinn oder die Propriozeption zusätzlich zum visuellen Sinn die eigenbewegung der Nutzer:in wahrnehmen. Und tatsächlich konnten beispielsweise Langbehn et al zeigen, dass Nutzer:innen, die sich in virtuellen Umgebungen fortbewegen signifikant weniger Cybersickness erleben, als wenn sie sich mithilfe von Joysticks fortbewegen.
-% [
-%     %TODO: quelle
+Demnach wäre es also Cybersickness senkend, wenn andere Sinnesmodalitäten, wie der Gleichgewichtssinn oder die Propriozeption zusätzlich zum visuellen Sinn die Eigenbewegung der Nutzer:in wahrnehmen. Und tatsächlich konnten Langbehn et al \cite{langbehn-vergleich-2018} zeigen, dass Nutzer:innen, die sich in virtuellen Umgebungen fortbewegen signifikant weniger Cybersickness erleben, als wenn sie sich mithilfe von Joysticks fortbewegen.
 
-% ]
 % erklärt, dass beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
 Leider bringt das natürliche gehen (Real-Walking) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
 
-Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation des Headsets und der Controller bei einigen Technologien, zum anderen durch die Raumgröße der meisten VR-Setups.
+Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation von Headset und Controllern bei einigen Technologien, zum anderen durch die Raumgröße der meisten VR-Setups.
 
 Zwar gibt es dazu auch Ausnahmen, ( siehe z.B. \cite{microsoft}
 ), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
 
 \section{Redirection Methoden}
-Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht})). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Bereiche zugreifen kann, die sonst ausserhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
+Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht})). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Gebiete zugreifen kann, die sonst ausserhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
 Im Idealfall wird dabei die Illusion aufrecht erhalten sie würde sich unmanipuliert, frei, und in virtueller und echter Umgebung identisch bewegen. Tatsächlich werden bei den meisten dieser Methoden %unterschied zwischen methode und methodik?
-an einem bestimmten Punkt gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise gehgeschwindigkeit), sodass die Bewegung zwischen den beiden Umgebungen sich unterscheiden.
+an gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise die Geh-Geschwindigkeit), sodass die Bewegung sich zwischen den beiden Umgebungen unterscheiden.
 Bei manchen dieser Methoden sorgt diese Veränderung dafür, die Bewegungen der Nutzer:in in gewisser Weise zu Manipulieren, etwa dafür zu sorgen, dass sie sich immer %curve paper nochmal anschauen
 
-Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern halten, und die virtuell begehbare Fläche zu vergrößern.
+Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern zu halten, und die virtuell begehbare Fläche zu vergrößern.
 Im folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
 %%%%%%%%%%%%
 
@@ -39,7 +36,9 @@ $$ gR := \frac{R_{virtual}}{R_{real}} $$
 Für alle 3 Winkel kann ein Rotationgain angewandt werden.
 Dieses Anwenden funktioniert indem statt der eigentlichen Rotatation $\alpha$, die Multiplikation aus $\alpha$ mit dem Rotationgain also:
 $$ gR * \alpha $$
-durchgeführt wird. Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
+durchgeführt wird. \cite{detection-thresholds}
+
+Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
 
 Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann können Rotationgains folgendermaßen dargestellt werden:
 $$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
@@ -49,34 +48,32 @@ Durch Anwenden eines positiven Rotationgains auf $yaw$-Rotationen nach rechts un
 Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher gerichteter Rotationgain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte dafür gesorgt werden, dass dieser möglichst nah an der Position des virtuellen Avatar liegt, da sonst nicht der Eindruck entsteht die Rotation wäre mit der Kopfrotation der Nutzer:in identisch} angewendet wird.
 
 In solchen Prozessen ist die Verdrehung zwischen den beiden Realitäten designbar, da sie so deterministisch wird. Da sich nun die Realitäten verdreht haben, liegen nun virtuelle Orte innerhalb des, durch den realen Trackingspace begrenzten, für die Nutzer:in begehbaren Bereichs die es vorher nicht waren.
-Für die Nutzer:in kann so die Illusion entstehen sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. (Siehe grafik)
-%TODO: grafik.
+Für die Nutzer:in kann so die Illusion entstehen sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. %(Siehe grafik)
+%Optional TODO: grafik.
 
 \subsection{Impossible Spaces}
-Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern haben sich Suma et al. \cite{impossible-spaces-suma} eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispiels weise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
-%TODO: grafik?
-Dafür ist es also notwendig $x$ verschiedene states
-%TODO: übersetzung
-zu setzen sodass immer einer $x$ verschiedener Räume angezeigt wird. Des weiteren ist es Notwendig einen Bereich zu erschaffen in dem zwischen den states gewechselt werden kann, ohne dass die Nutzer:in es merkt.
+Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern haben sich Suma et al. \cite{impossible-spaces-suma} eine Technik ausgedacht bei der zwei oder mehr Räume in überlappenden Flächen liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispielsweise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
+%OptionalTODO: grafik?
+Dafür ist es also notwendig, dass $x$ verschiedene Zustände programmatisch ermöglicht werden sodass immer einer $x$ verschiedener Räume angezeigt wird.
+Des weiteren ist es notwendig ein Gebiet in der virtuellen Umgebung zu erschaffen in dem zwischen den Zuständen gewechselt werden kann, ohne dass die Nutzer:in es merkt.
 
 \section{Generierte Level} %prozedural, oder zufällig? oder pseudozufällig?
 
-Klassischer weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern designed. Dies erfordert Zeit und know-how. %TODO: formulierung
-Der Arbeitsaufwand wächst (linear) mit der Größe des Levels, deshalb ist es unmöglich endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist das so genannte \textquote{Prozedurale Generieren}(Auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit endlos große Welten erschaffen.
+Klassischer weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern gestaltet. Dies erfordert Zeit und Fachwissen.
+Der Arbeitsaufwand wächst mit der Größe des Levels, deshalb ist es unmöglich auf diese Art endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist die so genannte \textquote{Prozedurale Generierung}(Auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit theoretisch endlos groß werden.
 %verschiedene Arten von prozeduraler generiung und dazu beispiel wie minecraft, rogue etc. mit quellen.
-
-In dem hier vorgestellten Experiment
-
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
 %TODO: Raumverständnis ausarbeiten, und presence? oder garnicht?
 
-In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene redirection Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in dieser Studie sehr im Fokus liegenden Rotationgains ein um danach die auch in dieser Studie genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich dem Leser noch Arbeiten vor die sich damit beschäftigt haben Level auf eine automatische Art und Weise zu generieren. Dabei werde ich mich sowohl mit Artikeln über die genauen Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
+In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene Redirection-Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in diesem Projekt sehr im Fokus liegenden Rotationgains ein um danac die auch genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich der Leser:in Arbeiten zu dem Thema der Prozeduralen Levelgenerierung vor. Dabei werde ich mich sowohl mit Artikeln über die genauen Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
 \section{Real-Walking}
-1995 zeigen Slater et al. \cite{taking-steps}, dass Proband:innen eine höheres Präsensgefühl zeigten wenn sie die von ihm vorgestellte Technik \textquote{Walking-In-Place} nutzen als wenn sie per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine virtual-walking Technik bei der die Proband:innen ein eine Gehbewegung simulierten die dann digital erfasst und in Virtuell Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{Real-Walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsensgefühl, als bei den beiden anderen Optionen (Virtual-Walking und Push-Button-Fly).
-Des weiteren zeigen Arbeiten wie \cite{benefits-real-walking} und \cite{locomotion-path-integration}, dass virtuelle Fortbewegungsarten, die anders als real-walking nicht den vestibulären Sinn und die Propriozeption stimulieren, wahrscheinlicher die sogenannte \textquote{Simulator-Sickness} auslösen und, dass die User:innen damit weniger effektiv navigieren.
+1995 zeigen Slater et al. \cite{taking-steps}, dass Proband:innen eine höheres Präsenzgefühl angaben, wenn sie die von ihm vorgestellte Technik \textquote{Walking-In-Place} nutzen, als wenn sie per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine Virtual-Walking Technik, bei der die Proband:innen eine Gehbewegung simulierten die dann digital erfasst und in virtuelle Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{Real-Walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsenzgefühl, als bei den beiden anderen Optionen (Virtual-Walking und Push-Button-Fly).
+
+Des weiteren zeigen Arbeiten dass virtuelle Fortbewegungsarten, die anders
+als Real-Walking nicht den vestibulären Sinn und die Propriozeption stimulieren, wahrscheinlicher die sogenannte \textquote{Simulator-Sickness} auslösen \cite{locomotion-path-integration} und, dass die Nutzer:innen damit weniger effektiv navigieren. \cite{benefits-real-walking}
 
 Wenn Designer eine Real-Walking-Umgebung erstellen müssen sie dabei schon die Dimensionen des Trackingspaces kennen. Da man aber nicht davon ausgehen kann, dass unterschiedliche Nutzer:innen gleiche Trackingspacedimensionen zur Verfügung haben entsteht ein Problem, dass Marwecki et al. in ihrer Arbeit \cite{scenograph} zu Lösen versuchen. Sie stellen dabei das Softwaresystem \textquote{Scenograph} vor, welches große virtuelle Umgebungen in mehrere kleinere, teilweise anders geformte, Umgebungen, mit prozedural generierten Verbindungen, aufteilt ohne dabei die narrative Struktur der Ursprünglichen Umgebung zu verändern.
 
