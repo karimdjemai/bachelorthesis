@@ -18,9 +18,9 @@ Zwar gibt es dazu auch Ausnahmen, ( siehe z.B. \cite{microsoft}
 Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht})). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Gebiete zugreifen kann, die sonst ausserhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
 Im Idealfall wird dabei die Illusion aufrecht erhalten sie würde sich unmanipuliert, frei, und in virtueller und echter Umgebung identisch bewegen. Tatsächlich werden bei den meisten dieser Methoden %unterschied zwischen methode und methodik?
 an gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise die Geh-Geschwindigkeit), sodass die Bewegung sich zwischen den beiden Umgebungen unterscheiden.
-Bei manchen dieser Methoden sorgt diese Veränderung dafür, die Bewegungen der Nutzer:in in gewisser Weise zu Manipulieren, etwa dafür zu sorgen, dass sie sich immer %curve paper nochmal anschauen
+Bei manchen dieser Methoden sorgt diese Veränderung dafür, die Bewegungen der Nutzer:in in gewisser Weise zu Manipulieren, beispielsweise indem diese unbewusst die veränderungen Auszugleichen.%curve paper nochmal anschauen
 
-Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die Nutzer:in von den äußeren Begrenzungen des Trackingspaces fern zu halten, und die virtuell begehbare Fläche zu vergrößern.
+Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die virtuell begehbare Fläche zu vergrößern.
 Im folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
 %%%%%%%%%%%%
 
@@ -39,7 +39,7 @@ $$ gR * \alpha $$
 durchgeführt wird. \cite{detection-thresholds}
 
 Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
-
+%nochmal peck 11 angucken dazu
 Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann können Rotationgains folgendermaßen dargestellt werden:
 $$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
 Nach Steinicke et al \cite{detection-thresholds} wird in der Regel für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
@@ -62,6 +62,15 @@ Des weiteren ist es notwendig ein Gebiet in der virtuellen Umgebung zu erschaffe
 Klassischer weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern gestaltet. Dies erfordert Zeit und Fachwissen.
 Der Arbeitsaufwand wächst mit der Größe des Levels, deshalb ist es unmöglich auf diese Art endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist die so genannte \textquote{Prozedurale Generierung}(Auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit theoretisch endlos groß werden.
 %verschiedene Arten von prozeduraler generiung und dazu beispiel wie minecraft, rogue etc. mit quellen.
+
+Dies ermöglicht mit Hinblick auf die Erweiterung des begehbaren Bereichs durch Redirection Methoden einen weiteren spannenden Effekt. Endlos generierbare Level können mit Redirection-Maßnahmen, die wiederholt angewendet werden um immer wieder den Begehbaren Bereich durch die virtuelle Umgebung zu transformieren, theoretisch endlos große begehbare virtuelle Umgebungen erschaffen. Eine solche \textquote{Infinite-Walking} Methode wird in dieser Arbeit vorgestellt.
+
+\section{Infinite Walking Methode}
+Die in dieser Arbeit vorgestellte Infinite Walking Methode basiert darauf aufeinander folgende trackingspacegroße Räume zu generieren, die genau so angeordnet sind, dass ein
+90 \textdegree
+gerichteter Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, zu wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren zu generieren. %optional TODO: genauer ausführen
+
+Wie die Generierung solcher Level funktioniert wird in \autoref{chapter:implementation} genauer beschrieben.
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
