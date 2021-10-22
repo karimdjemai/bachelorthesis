@@ -468,7 +468,7 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 \begin{figure}[H]
     \centering
     \input{calculateCorners.tikz}
-    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $C_{0-3}$ werden die Ecken bezeichnet, mit $S_{0-3}$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). }
+    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $C_{0}, C_1, C_2, C_3$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). }
     \label{figure:calculateCornersFig}
 \end{figure}
 
@@ -554,39 +554,41 @@ Bevor die Meshgenerierung stattfinden kann muss zunächst die Türposition auf d
 
 Es gibt zwei Möglichkeiten der Struktur einer Wand, abhängig davon ob in ihr eine Tür eingelassen ist oder nicht. Der simplere Fall trifft zu wenn in der Wand keine Tür liegt, dann besteht die Wand aus einem Quader, also aus 8 Vertices.
 Die Wandstruktur der Türbeinhaltenden Alternative wird in \autoref{figure:doorCalcFig}
-veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht auf eine solche Wand gezeigt ist, die Innenseite derselben Wand hat die selbe Struktur. Zudem sind die Vertices der Tür jeweils mit ihren inneren Gegenspielern durch Faces verbunden, sodass man beim durchschreiten der Tür nicht ins innere der Wand blicken kann.
+veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht auf eine solche Wand gezeigt ist, die Innenseite derselben Wand hat die selbe Struktur. Zudem sind die frontalen Vertices der Tür jeweils mit ihren inneren Gegenspielern durch Faces verbunden, sodass man beim durchschreiten der Tür nicht ins innere der Wand blicken kann.
 
-\paragraph*{Vertices} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% hier bin ich 21.10.
+\paragraph*{Vertices}
 
-Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{a-d}$), die Seite des Raumes, an der der Korridor liegen soll $S$ ($_{a-d}$), die Türposition $D$, die Tiefe des Korridors $d$, durch die sich der in \autoref{subsection:calccorners} besprochene Abstand des Punktes $P$ zu den Wänden der Ecke des Punktes ergibt: $d = 2 * dP$, die Höhe $h$ und Dicke der Wände $w$ sowie die Höhe ($dh$) und Breite ($dw$) der Tür .
+Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{0}, ..., C_3$), diese werden wie in \autoref{subsection:calccorners} berechnet, die Seite des Raumes, an der der Korridor liegen soll ($S_s$) und die Türposition $D$, welche mithilfe eines Pseudo-Zufallsalgorithmus ermittelt werden (siehe \autoref{sec:random}). Dazu noch einige Werte, die im vorhinein von der Gestalter:in der Level vordefiniert werden: Die Tiefe des Korridors $d$, durch die sich auch der in \autoref{subsection:calccorners} besprochene Wert $dP$ also der Abstand des Punktes $P$ zu den Wänden der Ecke des Raumes ergibt: $dP = \frac{d}{2}$, die Höhe $h$ und Dicke der Wände $w$ sowie die Höhe ($dh$) und Breite ($dw$) der Tür.
 
-Als erstes werden die unteren, äußeren Punkte berechnet. ($F_{1-4}$)
-Dabei wird mit den beiden hinteren, äußeren Punkte des Korridors begonnen. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich die Ecke des Raumes, die $S$ entspricht, und die im Uhrzeigersinn darauf folgende auswählen. %TODO: formulierung
+Als erstes werden die unteren, äußeren Punkte berechnet. ($F_{0}, ..., F_3$)
+Dabei wird mit den beiden hinteren, äußeren Punkten des Korridors begonnen. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich diese Punkte heraussuchen indem die $s$'te Ecke des Raumes und die im Uhrzeigersinn darauf folgende auswählt werden. %TODO: formulierung
 
-$$ F_1 = C_S $$
-$$ F_2 = C_{(S+1) \% 4} $$ %modulo???
+$$ \vec{F_0} = \vec{C_s} $$
+$$ \vec{F_1} = \vec{C_{((s+1)\pmod 4)}} $$
 
-Damit wird der Richtungsvektur $rTL$ bestimmt indem die rechte Ecke von der linken Ecke subtrahiert wird und das Ergebnis dann normalisiert wird.
+Damit wird der Richtungsvektor $rTL$ (rightToLeft) errechnet indem die rechte Ecke von der linken Ecke subtrahiert wird und das Ergebnis dann normalisiert wird.
+%TODO: all previous points and vectors need to use \vec
+$$ \vec{rTL} = \vec{F_1} - \vec{F_0} $$ %TODO: normalisieren?
+$$ \hat{rTL}=\frac{\vec{rTL}}{\left | \vec{rTL} \right |} $$
 
-$$ rTL = F_2 - F_1 $$ %TODO: normalisieren?
+Um die beiden vorderen äußeren Ecken zu bestimmen muss nun ein Richtungsvektor $\hat{tF}$ (toFrontWall) berechnet werden der von der Seite $S_s$ in Richtung der gegenüber liegenden Seite des Raumes zeigt. Hierfür wird das Kreuzprodukt von $\hat{rTL}$ und dem nach oben gerichteten Einheitsvektor berechnet und das Ergebnis normalisiert.
 
-Um die beiden vorderen äußeren Ecken zu bestimmen muss nun ein richtungs Vektor $tF$ berechnet werden der von der Seite $S$ in Richtung der gegenüberliegenden Seite des Raumes zeigt. Hierfür wird das Kreuzprodukt von $rTL$ und dem Vektor
-%vektor nach oben einfügen
-berechnet und das Ergebnis normalisiert.
+$$ \hat{up} = \begin{pmatrix} 0 \\ 1 \\ 0 \\ \end{pmatrix} $$
+$$ \vec{tF} = \hat{rTL} \times \hat{up} $$ %TODO: oben vektor, kreuzprodukt, normalisieren
+$$ \hat{tF} = \frac{\vec{tF}}{\left | \vec{tF} \right |} $$
 
-$$ tF = rTL x $$ %TODO: oben vektor, kreuzprodukt, normalisieren
+Um nun die vorderen Punkte zu bestimmen wird einfach der neue Richtungsvektor $\hat{tF}$ mit $2 * dP$ multipliziert und auf die hinteren Punkte addiert.
 
-Um nun die vorderen Punkte zu bestimmen wird einfach der neue Richtungsvektor mit $2 * dP$ multipliziert und auf die hinteren Punkte addiert.
+$$ \vec{F_2} = \vec{F_0} + \hat{tF} * dP $$
+$$ \vec{F_3} = \vec{F_1} + \hat{tF} * dP $$
 
-$$F_3 = F_1 + tF * dP $$
-$$F_4 = F_2 + tF * dP $$
+Nach dem nun hoffentlich klar gewordenen Prinzip, die Knotenpunkte zu berechnen indem schon errechnete Knotenpunkte mit den entprechenden Richtungsvektoren multipliziert werden lassen sich nun die äußeren oberen, äußeren Ecken des Korridors bestimmen, hierfür werden die unteren Ecken mit dem Vektor $\vec{T}$ addiert, der sich wie folgt berechnet:
 
-Nach demselben Prinzip lassen sich nun die äußeren oberen Ecken des Korridors bestimmen, hierfür werden die unteren Ecken mit dem Vektor $T$ addiert, der sich wie folgt berechnet:
+$$\vec{T} = \hat{up} * h $$ %TODO: up
 
-$$T = up * h $$ %TODO: up
+$$ \vec{F_4}, ..., \vec{F_7} = \vec{F_0} * \vec{T}, ..., \vec{F_3} * \vec{T} $$ %TODO: is multiplication with the * actually acurate?
 
-Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Prinzip, jeweils mit den beiden Richtungsvektoren, die beide mit $w$ multipliziert werden addiert.
-
+Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Prinzip, jeweils mit den entsprechenden Richtungsvektoren, die dann mit $w$ multipliziert werden addiert. Die inneren Punkte liegen mit den äußeren Punkten auf einer Höhe. Die linken Ecken werden also jeweils nach rechts addiert, die rechten nach links, die hinteren nach vorne, die vorderen nach hinten, sodass jede innere Ecke mit zwei $w$-langen Vektoren von den Äußeren in Richtung der Mitte verschoben wurde. Für die Richtung nach rechts wird $\hat{rTL}$ verwendet, nach links $\hat{rTL} * (-1)$, nach vorne $\hat{tF}$ und nach hinten $\hat{tF} * (-1)$.
 
 \begin{figure}[H]
     \centering
@@ -596,7 +598,7 @@ Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Pr
 \end{figure}
 
 Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür ($mD$) berechnet.
-In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $lTR$ und $rTL$ vertauscht.
+In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $\hat{rTL}$ und $\hat{rTL} * (-1)$ vertauscht. %TODO: hier weitermachen(22.10)
 Hierfür ist es zunächst wichtig die entsprechende Achse ($mDX$)zu berechnen, auf der die Tür dann erzeugt wird (siehe \autoref{figure:doorCalcFig})
 
 Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinter $P$ berechnet ($xP$). Von da aus spannt sich die Achse dann bis zur anderen Seite des Korridors. Da $mD$ ja den Mittelpunkt der Haupttür darstellen soll, muss an beiden Seiten der Achse $dw / 2$ als padding eingesetzt werden, damit die Tür nicht weiter oder rechts übersteht, falls $D$ einen extremwert annimmt. $mD$ berechnet sich dann folgendermaßen:
