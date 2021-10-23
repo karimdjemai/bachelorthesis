@@ -348,7 +348,7 @@ angehängt sind in die Szene zu integrieren, sodass diese ausgeführt werden. Da
 
 Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind ein vom Oculus Integration SDK bereitgestelltes Prefab, es integriert die Funktionalität der virtuellen Umgebung in die Unity-Szene.
 
-\textquote{Floor} und \textquote{Ceiling} repräsentieren Boden und Decke der Szene. Das zuletzt in \autoref{figure:hierarchy} dargestellte Objekt ist das \textquote{ChooserPad}. Dies ist ein, den später beschriebenen Nummerneingabefeldern nachempfundener Mechanismus mit dem die Nutzer:in später einstellen kann, welche der Testbedingungen sie ausführen möchte. %link zu bild und/oder beschreibung
+\textquote{Floor} und \textquote{Ceiling} repräsentieren Boden und Decke der Szene. Das zuletzt in \autoref{figure:hierarchy} dargestellte Objekt ist das \textquote{ChooserPad}. Dies ist ein, den später beschriebenen Nummerneingabefeldern nachempfundener Mechanismus mit dem die Nutzer:in später einstellen kann, welche der Testbedingungen sie ausführen möchte. Dies wird genauer in \autoref{sec:chooserpad} erklärt.
 
 %TODO: hierarchy zur laufzeit figure + kleiner text + bild
 
@@ -387,7 +387,7 @@ An den \textquote{CenterEyeAnchor} wurde die in \textquote{sec:scene-design} erw
 
 Die Umsetzung der Rotaiongains erfolgt mithilfe des
 %TODO: Von wem genau kommt space extender? quelle
-freundlicherweise zur Verfügung gestelltem Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces und den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen Rotationgain auf die Nutzer:in anzuwenden. Der RotationRedirector wird nachdem das alles geschehen ist für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist übergeben, sodass er aktiviert werden kann sobald das Signal vom entsprechenden Collider kommt, dass die Nutzer:in sich über dem Rotationspunkt ($P$) befindet.
+freundlicherweise zur Verfügung gestelltem Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces und den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen Rotationgain auf die Nutzer:in anzuwenden. Der RotationRedirector wird nachdem das alles geschehen ist für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist übergeben, sodass er aktiviert werden kann sobald das Signal vom entsprechenden Collider kommt, dass die Nutzer:in sich über dem Rotationspunkt ($\vec{P}$) befindet.
 %TODO: wie stark sind die rotation gains und wann wie doll wieviel grad etc #unitydata
 
 
@@ -399,14 +399,14 @@ freundlicherweise zur Verfügung gestelltem Unity-Package \textquote{Space-Exten
 \section{Der Rotationgain Inzentivierungs Mechanismus}
 \label{sec:rotgaininc}
 
-Damit der Rotationgain seinen Effekt erzielen kann ist es wichtig, dass die Nutzer:in sich etwa auf den Punkt $P$ stellt und ihren Kopf um die Y-Achse dreht.
-Damit sich dies intuitiver anfühlt und die Aufmerksamkeit nicht so konkret auf den Rotationgain gelenkt wird, habe ich mich dagegen entschieden den Nutzer:innen einfach den Punkt $P$ zu markieren und sie zu bitten dort ihren Kopf zu drehen, sondern habe mir einen Vorwand ausgedacht, wieso es zum einen Notwendig ist an der Stelle zu stehen und zum anderen, wieso sie ihren Kopf drehen müssen.
+Damit der Rotationgain seinen Effekt erzielen kann ist es wichtig, dass die Nutzer:in sich ungefähr auf den Punkt $\vec{P}$ stellt und ihren Kopf um die Y-Achse dreht.
+Damit sich dies intuitiver anfühlt und die Aufmerksamkeit nicht so konkret auf den Rotationgain gelenkt wird, habe ich mich dagegen entschieden den Nutzer:innen einfach den Punkt $\vec{P}$ zu markieren und sie zu bitten dort ihren Kopf zu drehen, sondern habe mir einen Vorwand ausgedacht, wieso es zum einen Notwendig ist an der Stelle zu stehen und zum anderen, wieso sie ihren Kopf drehen müssen.
 
 %TODO: NumPad Picture
-Um diesen Effekt zu erzielen wird ein Nummern-Eingabefeld, an der Korridorinnenwand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $P$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
-Dies sorgt dann sowohl dafür dass die Nutzer:in sich automatisch auf den Punkt $P$ stellt, um möglichst gut die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Y-Achse dreht weil sie abwechselnd ablesen muss welche Zahlen auf der Tafel hinter ihr angezeigt werden und dann die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotationgain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt ist es wichtig, dass die Nutzer:in nicht versucht zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
+Um diesen Effekt zu erzielen wird ein Nummern-Eingabefeld, an der Korridorinnenwand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $\vec{P}$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
+Dies sorgt dann sowohl dafür dass die Nutzer:in sich automatisch auf den Punkt $\vec{P}$ stellt, um möglichst gut die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Y-Achse dreht weil sie abwechselnd ablesen muss welche Zahlen auf der Tafel hinter ihr angezeigt werden und dann die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotationgain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt ist es wichtig, dass die Nutzer:in nicht versucht zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
 
-Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Component hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $P$ herum platzierten Collider wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe des (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörigen Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{$\#$}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls nicht, beginnt das ganze von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\ Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
+Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Component hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $\vec{P}$ herum platzierten Collider wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe des (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörigen Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{$\#$}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls nicht, beginnt das ganze von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\ Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
 
 In den Kontrollbedingungen wird kein Rotationgain angewandt. Dennoch müssen die Proband:innen auch hier Zahlen in das Eingabefeld eingeben. In diesen Szenarien wird die Türöffnung aus offensichtlichen Gründen nicht von der vervollständigung des Rotationgains abhängig gemacht, sondern wird eine Zufallszahl zwischen 4 und 8 bestimmt und mitgezählt, wie oft Zahlen bestätigt wurden. Wenn die Zufallszahl erreicht wird öffnet sich die Tür. Durch die Erfahrung beim Testen hat sich gezeigt dass es etwa zwischen 4 und 8 Eingaben bedarf, bevor der Rotationgain abgeschlossen ist.
 
@@ -436,17 +436,17 @@ Um zu verstehen wie die Berechnung der Ecken eines Raumes funktioniert ist es zu
 
 \begin{figure}[H]
     \ctikzfig{2rooms_a}
-    \caption{Veranschaulichung der Raumstellung zueinander, sodass $P$ den Drehpunkt kennzeichnet }\label{figure:two_rooms} %TODO: formulierung
-    %TODO: P is a point
+    \caption{Veranschaulichung der Raumstellung zueinander, sodass $\vec{P}$ den Drehpunkt kennzeichnet }\label{figure:two_rooms} %TODO: formulierung
+    %TODO: P Point size, vec
 \end{figure}
 
 %paragraph Erklärung
 \subsection{Grundidee}
 \label{subsec:roomplaceidea}
 %Um die durchgehende Weiterführung des Levels zu ermöglichen werden zwei Räume immer genau so angeordnet, dass ein Rotation-Gain, der genau bis zu einer Verdrehung der beiden Realitäten von 90\textdegree\ angewandt wird, während die Nutzer:in an einem bestimmten Punkt in der Ecke des Raumes steht,
-Wenn ein Rotation-Gain angewandt wird verdrehen sich virtuelle und reale Realität umeinander, um einen konkreten Drehpunkt. In der Regel stellt dieser die Position der Nutzer:in dar, damit der Effekt allerdings genau plan- und vorhersagbar ist findet die Drehung der Umgebung nicht, wie sonst in VR üblich um den Kopf der Nutzer:in, sondern um einen bestimmten verdefinierten Punkt $P$ statt.
+Wenn ein Rotation-Gain angewandt wird verdrehen sich virtuelle und reale Realität umeinander, um einen konkreten Drehpunkt. In der Regel stellt dieser die Position der Nutzer:in dar, damit der Effekt allerdings genau plan- und vorhersagbar ist findet die Drehung der Umgebung nicht, wie sonst in VR üblich um den Kopf der Nutzer:in, sondern um einen bestimmten vordefinierten Punkt $\vec{P}$ statt.
 
-Wenn diese Position $P$ sich in einer Ecke des (rechteckigen) Trackingspace-Raumes befindet, zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist und dann ein gerichteter Rotationgain angewandt wird,
+Wenn diese Position $\vec{P}$ sich in einer Ecke des (rechteckigen) Trackingspace-Raumes befindet, zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist und dann ein gerichteter Rotationgain angewandt wird,
 bis genau 90\textdegree\ Verdrehung erreicht sind, dann steht der aktuelle begehbare Bereich in der virtuellen Umgebung $B$, dem vorherigen begehbaren virtuellen Bereich, der ebenfalls durch den Trackingspace definiert war $A$, genau orthogonal gegenüber.
 
 Vorher hat der Bereich $A$ genau den virtuellen Bereich innerhalb des Trackingspaces dargestellt. Die beiden Areale $A$ und $B$ überlappen sich zwar in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotationgains dann auch gerade steht $O$, aber ein Großteil von $A$ ist nun Teil des Bereiches der virtuellen Umgebung geworden der, begrenzt durch den Trackingspace, nicht zugänglich ist. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der virtuellen Umgebung begehbar geworden.
@@ -456,7 +456,7 @@ Ziel des Algorithmus ist es eine Reihe von aufeinander folgenden Räumen zu gene
 Die Grundidee hinter der Raumgenerierung ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden. %TODO: formulierung
 In \autoref{figure:two_rooms} wird ersichtlich, wie die beiden Räume zueinander Stehen müssen um diesen Effekt zu ermöglichen.
 
-Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich an der Position $P$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ in die jeweilige Richtung angewandt werden. Bei dem Beispiel in \autoref{figure:two_rooms} muss der Rotationgain bei Yaw-Kopfdrehungen nach links positiv und nach rechts negativ verlaufen um den gewünschten Effekt möglichst Effizient zu erzielen. Andersherum wäre auch möglich, dann müssten sich die Welten aber nicht um
+Um dann also von Raum $A$ zu Raum $B$ zu kommen muss die Nutzer:in sich an der Position $\vec{P}$ oft genug drehen und ein Rotation-Gain bis zu 90\textdegree\ in die jeweilige Richtung angewandt werden. Bei dem Beispiel in \autoref{figure:two_rooms} muss der Rotationgain bei Yaw-Kopfdrehungen nach links positiv und nach rechts negativ verlaufen um den gewünschten Effekt möglichst Effizient zu erzielen. Andersherum wäre auch möglich, dann müssten sich die Welten aber nicht um
 90 \textdegree sondern um 270 \textdegree
 drehen.
 
@@ -468,7 +468,7 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 \begin{figure}[H]
     \centering
     \input{calculateCorners.tikz}
-    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $C_{0}, C_1, C_2, C_3$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). }
+    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $\vec{C_0}, \vec{C_1}, \vec{C_2}, \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). } %TODO: bessere caption, was für eine scheisse
     \label{figure:calculateCornersFig}
 \end{figure}
 
@@ -483,21 +483,22 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
 % $$ C_b = C_a + sDD * length $$
 % $$ C_c = C_d + sDD * length $$
 % $$ C_d = cP + btF * (width - dP) $$
+%TODO: nochmal checken
 
     \begin{align}
         \begin{split}\label{eq:1}
-            cP ={}& P + (-1) * sDD * dP
+            \vec{cP} ={}& \vec{P} + (-1) * \vec{sDD} * dP
         \end{split}\\ \\
         \begin{split}\label{eq:2}
-            C_0 ={}& cP + (-1) * btF * dP
+            \vec{C_0} ={}& \vec{cP} + (-1) * \vec{btF} * dP
         \end{split}\\
         \begin{split}\label{eq:3}
-            C_1 ={}& C_a + sDD * length
+            \vec{C_1} ={}& \vec{C_0} + \vec{sDD} * length
         \end{split}\\
         \begin{split}\label{eq:4}
-            C_2 ={}& C_d + sDD * length
+            \vec{C_2} ={}& \vec{C_3} + \vec{sDD} * length
         \end{split}\\
-            C_3 ={}& cP + btF * (width - dP)\label{eq:5}
+            \vec{C_3} ={}& \vec{cP} + \vec{btF} * (width - dP)\label{eq:5}
         \end{align}
 
     % \begin{align}
@@ -512,15 +513,15 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
     %         r ={}& s + t (u + v + w)\label{eq:3}
     %     \end{align}
 Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
-Wie die hier genutzen Variablen $cP$, $sDD$, $btF$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. %TODO: figure erweitern
+Wie die hier genutzen Variablen $\vec{cP}$, $\hat{sDD}$, $\hat{btF}$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. %TODO: figure erweitern
         %weiteres dP nach rechts
         %sDD
         %btF
-$cP$ steht dabei für den Punkt hinter $P$, der genau eine $dP$-Länge in Richtung des alten Raumes liegt. $sDD$ (sideDoorDirection) ist ein normalisierter Richtungsvektor,
+$\vec{cP}$ steht dabei für den Punkt hinter $\vec{P}$, der genau eine $dP$-Länge in Richtung des alten Raumes liegt. $\hat{sDD}$ (sideDoorDirection) ist ein normalisierter Richtungsvektor,
 der die Richtung des Korridors des letzen Raumes erweitert. %TODO: besser beschreiben, hier weiss man noch nicht was ein korridor ist
-$btF$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $sDD$ steht.
+$\hat{btF}$ (backToFront) ist auch ein normalisierter Richtungsvektor, der orthogonal zu $\hat{sDD}$ steht.
 Er zeigt von der hinteren Wand des Korridors des vorherigen Raumes zur vorderen Wand. %TODO: hier auch
-Diese Richtungsvektoren werden vor der Eckenberechnung errechnet indem die Vektoren, die die entsprechenden Ecken des schon bestehenden Raumes darstellen, voneinander subtrahiert werden um die gemeinten Richtungen in Form von Vektoren zu errechnen, bevor sie dann normalisiert werden. %muss ich erklären wie Vektoren normalisiert werden?
+Diese Richtungsvektoren werden vor der Eckenberechnung errechnet indem die Vektoren, die die entsprechenden Ecken des schon bestehenden Raumes darstellen, voneinander subtrahiert werden um die gemeinten Richtungen in Form von Vektoren zu errechnen, bevor sie dann normalisiert werden.
 
 $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreibt. Diese beiden Variablen hängen von den Maßen des ersten Raumes ab, bei dem die Eckkoordinaten ja den Trackingspace der Nutzer:in abbilden. Wichtig ist noch zu erwähnen, dass die in der eben erwähnten Abbildung gezeigte Folge von Ecken und Seiten, nicht genau spiegelverkehrt ist wenn der Raum in die andere Richtung generiert würde (siehe \autoref{sec:random}), sondern die Reihenfolge der Ecken genau invertiert läuft. Das ganze ist also nicht nur vertikal, sondern auch horizontal gespiegelt zu der Darstellung in \autoref{figure:calculateCornersFig}.
 
@@ -558,15 +559,15 @@ veranschauligt. Dabei ist allerdings zu beachten, dass nur die Frontalansicht au
 
 \paragraph*{Vertices}
 
-Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($C_{0}, ..., C_3$), diese werden wie in \autoref{subsection:calccorners} berechnet, die Seite des Raumes, an der der Korridor liegen soll ($S_s$) und die Türposition $D$, welche mithilfe eines Pseudo-Zufallsalgorithmus ermittelt werden (siehe \autoref{sec:random}). Dazu noch einige Werte, die im vorhinein von der Gestalter:in der Level vordefiniert werden: Die Tiefe des Korridors $d$, durch die sich auch der in \autoref{subsection:calccorners} besprochene Wert $dP$ also der Abstand des Punktes $P$ zu den Wänden der Ecke des Raumes ergibt: $dP = \frac{d}{2}$, die Höhe $h$ und Dicke der Wände $w$ sowie die Höhe ($dh$) und Breite ($dw$) der Tür.
+Das Generieren eines solchen Korridors läuft dann also wie folgt ab. Gegeben sind die die Eckkoordinaten des Raumes in den der Korridor platziert werden soll ($\vec{C_0}, ..., \vec{C_3}$), diese werden wie in \autoref{subsection:calccorners} berechnet, die Seite des Raumes, an der der Korridor liegen soll ($S_s$) und die Türposition $D$, welche mithilfe eines Pseudo-Zufallsalgorithmus ermittelt werden (siehe \autoref{sec:random}). Dazu noch einige Werte, die im vorhinein von der Gestalter:in der Level vordefiniert werden: Die Tiefe des Korridors $d$, durch die sich auch der in \autoref{subsection:calccorners} besprochene Wert $dP$ also der Abstand des Punktes $\vec{P}$ zu den Wänden der Ecke des Raumes ergibt: $dP = \frac{d}{2}$, die Höhe $h$ und Dicke der Wände $w$ sowie die Höhe ($dh$) und Breite ($dw$) der Tür.
 
-Als erstes werden die unteren, äußeren Punkte berechnet. ($F_{0}, ..., F_3$)
+Als erstes werden die unteren, äußeren Punkte berechnet. ($\vec{F_0}, ..., \vec{F_3}$)
 Dabei wird mit den beiden hinteren, äußeren Punkten des Korridors begonnen. Da die Ecken eines Raumes immer im Uhrzeigersinn gespeichert werden lassen sich diese Punkte heraussuchen indem die $s$'te Ecke des Raumes und die im Uhrzeigersinn darauf folgende auswählt werden. %TODO: formulierung
 
 $$ \vec{F_0} = \vec{C_s} $$
 $$ \vec{F_1} = \vec{C_{((s+1)\pmod 4)}} $$
 
-Damit wird der Richtungsvektor $rTL$ (rightToLeft) errechnet indem die rechte Ecke von der linken Ecke subtrahiert wird und das Ergebnis dann normalisiert wird.
+Damit wird der Richtungsvektor $\hat{rTL}$ (rightToLeft) errechnet indem die rechte Ecke von der linken Ecke subtrahiert wird und das Ergebnis dann normalisiert wird.
 %TODO: all previous points and vectors need to use \vec
 $$ \vec{rTL} = \vec{F_1} - \vec{F_0} $$ %TODO: normalisieren?
 $$ \hat{rTL}=\frac{\vec{rTL}}{\left | \vec{rTL} \right |} $$
@@ -582,7 +583,7 @@ Um nun die vorderen Punkte zu bestimmen wird einfach der neue Richtungsvektor $\
 $$ \vec{F_2} = \vec{F_0} + \hat{tF} * dP $$
 $$ \vec{F_3} = \vec{F_1} + \hat{tF} * dP $$
 
-Nach dem nun hoffentlich klar gewordenen Prinzip, die Knotenpunkte zu berechnen indem schon errechnete Knotenpunkte mit den entprechenden Richtungsvektoren multipliziert werden lassen sich nun die äußeren oberen, äußeren Ecken des Korridors bestimmen, hierfür werden die unteren Ecken mit dem Vektor $\vec{T}$ addiert, der sich wie folgt berechnet:
+Nach dem nun klar gewordenen Prinzip, die Knotenpunkte zu berechnen indem schon errechnete Knotenpunkte mit den entprechenden Richtungsvektoren multipliziert werden lassen sich nun die äußeren, oberen Ecken des Korridors bestimmen, hierfür werden die unteren Ecken mit dem Vektor $\vec{T}$ addiert, der sich wie folgt berechnet:
 
 $$\vec{T} = \hat{up} * h $$ %TODO: up
 
@@ -597,18 +598,29 @@ Um die inneren Punkte zu berechnen werden die äußeren Ecken nach dem selben Pr
     \label{figure:doorCalcFig}
 \end{figure}
 
-Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür ($mD$) berechnet.
-In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $\hat{rTL}$ und $\hat{rTL} * (-1)$ vertauscht. %TODO: hier weitermachen(22.10)
-Hierfür ist es zunächst wichtig die entsprechende Achse ($mDX$)zu berechnen, auf der die Tür dann erzeugt wird (siehe \autoref{figure:doorCalcFig})
+In der folgenden Erklärung wird davon ausgegangen, dass $D <= 0.5$ ist und somit die Haupttür links, und die Seitentür rechts erzeugt wird, andernfalls  wären natürlich $\hat{rTL}$ und $\hat{rTL} * (-1)$ vertauscht. Genauso verhält es sich mit den beiden äußeren, unteren, vorderen Ecken $F_2$ (links vorne) und $F_3$ (rechts vorne), die Nutzung in den folgenden Formeln wäre vertauscht, wenn $D > 0.5$.
 
-Dafür wird erstmal der Punkt, an der Frontalseite des Korridors, diagonal hinter $P$ berechnet ($xP$). Von da aus spannt sich die Achse dann bis zur anderen Seite des Korridors. Da $mD$ ja den Mittelpunkt der Haupttür darstellen soll, muss an beiden Seiten der Achse $dw / 2$ als padding eingesetzt werden, damit die Tür nicht weiter oder rechts übersteht, falls $D$ einen extremwert annimmt. $mD$ berechnet sich dann folgendermaßen:
+Für die Tür-Vertices wird zunächst der untere Mittelpunkt der Tür ($\vec{mD}$) berechnet.
 
-$$ mD = xP + D * mDX $$
+Hierfür ist es zunächst wichtig die entsprechende Achse $\vec{mDX}$ zu berechnen, auf der die Tür dann erzeugt wird (siehe \autoref{figure:doorCalcFig}) %TODO: \vec in doorcalc figure
 
-Die Berechnung von $xP$, und $mDX$ wird aus dem in \autoref{figure:calcMainDoorCode}
-dargestellten quelltext ersichtlich. %kommentare, variablen übersetzen etc.
+Dafür wird erstmal der Punkt $\vec{dP}$, an der Frontalseite des Korridors, diagonal hinter $\vec{P}$ berechnet.
 
-Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit der bekannten Methode und wird auch in \autoref{figure:doorCalcFig} ersichtlich. Türhöhe ($dh$), Türbreite ($dw$) und Wandbreite ($w$) werden mit den entsprechenden Richtungsvektoren multipliziert und auf $mD$ addiert.
+$$\vec{xP} = \vec{P} + \hat{tF} * dP + \hat{rTL} * dP$$
+
+Von da aus spannt sich die Achse $\vec{mDX}$ dann bis zur anderen Seite des Korridors. Da $\vec{mD}$ ja den Mittelpunkt der Haupttür darstellen soll, muss an beiden Seiten der Achse $dw / 2$ als Padding eingesetzt werden, damit die Tür nicht weiter links oder rechts übersteht, falls $D$ einen Extremwert annimmt.
+
+$$ \vec{mDX} = (F_2 + \hat{rTL} * (-1) * dw / 2) -
+(\vec{xP} + \hat{rTL} * dw / 2)$$ %TODO: dw/2 frac
+
+$\vec{mD}$ berechnet sich dann folgendermaßen:
+
+$$ \vec{mD} = \vec{xP} + \vec{mDX} * D$$
+
+Die Berechnung und $\vec{mDX}$ wird auch aus dem in \autoref{figure:calcMainDoorCode}
+dargestellten Quelltext ersichtlich. %TODO: kommentare, variablen übersetzen etc.
+
+Die Berechnung der Vertices, in der Haupttür ist nun trivial, erfolgt mit der bekannten Methode und wird auch in \autoref{figure:doorCalcFig} ersichtlich. Türhöhe ($dh$), Türbreite ($dw$) und Wandbreite ($w$) werden mit den entsprechenden Richtungsvektoren multipliziert und auf $mD$ addiert.
 %TODO: side door
 
 \begin{figure}[H]
@@ -619,13 +631,14 @@ Die Berechnung der Vertices, in der Haupttür ist nun trivial und erfolgt mit de
 \end{figure}
 
 \paragraph*{Faces}
-Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten für den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Flächen wird auch in \autoref{figure:doorCalcFig} ersichtlich. Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet.
+Der nächste Schritt, der für die Meshgenerierung erforderlich ist, ist das Spannen der verschiedenen Faces (Triangles). Die meisten für den Korridor erforderlichen Flächen bestehen nur aus zwei aneinanderliegenden Triangles, die somit gemeinsam die viereckige Fläche bilden. Die Ausnahmen, sind die Frontalfläche und die Seitenfläche in die die Seitentür generiert wurde (jeweils mit der zugehörigen Innenseite). Die Struktur dieser Ausnahmen wird auch in \autoref{figure:doorCalcFig} ersichtlich.
+Auch hier werden die benötigten Vertices jeweils durch multiplizieren mit den entsprechenden Richtungsvektoren und der anschließenden Addierung auf bestehende Vertices errechnet. \footnote{Bei der Seitentür hingegen verläuft die Berechnung des Türmittelpunkts allerdings deutlich simpler, es handelt sich einfach um die Mitte des Korridors.}
 
-Um die späteren UV Berechnungen nicht zu verunreinugen wird jeder Vertex dem Buffer pro Face einmal hinzugefügt. Die Faces werden dann gespannt indem die jeweiligen Indizes der Vertices im Buffer aufgelistet werden. Dies beides wird dann dem neu erzeugten $MeshFilter$ Objekt übergeben.
+Um die späteren UV Berechnungen nicht zu verunreinugen wird jeder Vertex dem Buffer pro Face einmal hinzugefügt. Die Faces werden dann gespannt indem die jeweiligen Indizes der Vertices im Buffer aufgelistet werden. Dies beides wird dann in Listenform dem neu erzeugten $MeshFilter$ Objekt übergeben.
 
 \paragraph*{UV}
-Die Berechnung der UV-Koordinaten erfolgt für jeden einzeln und wird nach Triangles geordnet der Reihe nach durchgeführt. Der Quelltext dazu findet sich in der GenerateUV Methode, die in \autoref{figure:uvcode} Abgebildet ist.
-Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit den Richtungsvektoren abzugleichen und die Vektoren der Vertices dann entsprechend zu Rotieren.
+Die Berechnung der UV-Koordinaten erfolgt für jeden Knotenpunkt einzeln und wird nach Triangles geordnet iterativ durchgeführt. Der Quelltext dazu findet sich in der GenerateUV Methode, die in \autoref{figure:uvcode} Abgebildet ist.
+Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit den Richtungsvektoren abzugleichen und die UV-Vektoren der Vertices dann entsprechend zu Rotieren.
 
 \begin{figure}[H] %TODO: more pages
     \centering
@@ -633,8 +646,6 @@ Die Berechnung besteht daraus die Normale des Triangles zu berechnen, diese mit 
     \caption{} %TODO:caption
     \label{figure:uvcode}
 \end{figure}
-
-
 
 \section{Wandgenerierung}
 \label{sec:genwalls}
@@ -664,7 +675,7 @@ Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwi
 
 Davon ob der Korridor des Raumes an der längeren, oder der kürzeren Seite des Rechtecks generiert wurde hängt ab, wieviele Wände generiert werden. Ist der Korridor an der längeren Seite des Raumes, werden ausgehend vom Korridor des letzten Raumes, zwei Wände generiert, da die nreite Seite des nächsten Raumes als Wand genutzt werden kann. Ist jedoch der Korridor des aktuellen Raumes an der kürzeren Seite des Rechtecks, so muss eine dritte Wand generiert werden, die verhindert, dass eine offene Stelle zwischen dem aktuellen und dem nächsten Raum entsteht.
 
-Um die Wände generieren zu können ist es wichtig, die Punkte diagnonal vor und hinter dem Punkt $P$ des vorherigen Raumes zu kennen. Dazu werden diese nach der Generierung als Iterationsübergreifende Variablen gespeichert und somit an den jeweils nächsten Raum übergeben, siehe \autoref{subsec:iteration}.
+Um die Wände generieren zu können ist es wichtig, die Punkte diagnonal vor und hinter dem Punkt $\vec{P}$ des vorherigen Raumes zu kennen. Dazu werden diese nach der Generierung als Iterationsübergreifende Variablen gespeichert und somit an den jeweils nächsten Raum übergeben, siehe \autoref{subsec:iteration}.
 
 %TODO: ausführlicher?
 
@@ -686,7 +697,7 @@ Der hier beschriebene Levelgenerierungsalgorithmus nutzt das Element des Pseudoz
     \sourcecode{RandomDirectionBlocked.cs}
     \caption{}\label{figure:randomdirection}
 \end{figure}
-Zu Beginn der Korridorgenerierung wird eine Seite des Raumes als Korridorseite $S$ bestimmt. Diese wird pseudozufällig ausgewählt. Im ersten Raum ist es noch vollkommen beliebig, welche Seite ausgewählt wird\footnote{Im Versuchsaufbau wird dabei aber immer die selbe Seite ausgesucht um das Erscheinen im Raum einheitlicher zu gestalten. (Die Nutzer:in guckt nach dem Start des Versuchs in Richtung des Korridors).}.
+Zu Beginn der Korridorgenerierung wird eine Seite des Raumes als Korridorseite $S_s$ bestimmt. Diese wird pseudozufällig ausgewählt. Im ersten Raum ist es noch vollkommen beliebig, welche Seite ausgewählt wird\footnote{Im Versuchsaufbau wird dabei aber immer die selbe Seite ausgesucht um das Erscheinen im Raum einheitlicher zu gestalten. (Die Nutzer:in guckt nach dem Start des Versuchs in Richtung des Korridors).}.
 Bei den weiteren Räumen hingegen können bestimmte Seiten nicht ausgewählt werden, weil der Korridor nach der Generierung sonst mit dem Ausgang des Korridors des vorherigen Raumes überlappt.
 Durch die Art und Weise, wie die Eckenberechnung der Räume funktioniert, lässt sich feststellen, dass $S_3$ in allen Umständen immer die Seite ist, aus der der Korridor des letzten Raumes herauszeigt (siehe \autoref{subsection:calccorners}). $S_3$ kann also zur Korridorgenerierung nicht ausgewählt werden.
 Falls die Seitentür des vorherigen Raumes auf der rechten Seite liegt (wie in der \autoref{figure:calculateCornersFig}) muss außerdem $S_0$ blockiert werden, da die Nutzer:in sonst von einem Korridor direkt in den nächsten läuft. Ist die Seitentür aber auf der linkens Seite ist ja die Ecken- und Seitenbelegung, wie in \autoref{subsection:calccorners} beschrieben, nicht nur horizontal, sondern auch vertikal spiegelverkehrt. Deshalb muss in dem Fall die Seite $S_2$ blockiert werden.
@@ -700,7 +711,7 @@ Die Frage in welche Richtung der jeweils nächste Raum generiert wird, hängt g�
 Falls $D$ einen Wert von $0$ hat wird die Tür ganz links positioniert, bei einem Wert von $1$ ganz rechts. Davon ist dann auch die positionierung der Seitentür Abhängig. Ist $D <= 0.5$ wird die Seitentür in die rechte Seitenwand des Korridors generiert, sonst in die linke.
 Davon ist dann natürlich auch wieder Abhängig in welche Richtung der folgende Raum generiert wird, denn die Nutzer:in soll ja aus der Seitentür heraus-, in den Raum hineintreten.
 Man kann den Wert $D$ also sowohl als einen verstehen, der graduell %TODO: formulierung?
-die position auf der Frontalwand verstellt, als auch als einen wichigen Wert, der die Richtung des folgenden Raumes vorherbestimmt.
+die Position auf der Frontalwand verstellt, als auch als einen wichigen Wert, der die Richtung des folgenden Raumes vorherbestimmt.
 
 Auch hier müssen wieder einige Varianten ausgeschlossen werden, um die Begehbarkeit der erzeugten Level zu garantieren.
 
@@ -710,7 +721,7 @@ Wenn der Korridor an diese Seite generiert wurde, kann die Türposition nicht me
 
 Genauso wichtig ist, dass das Ende des Korridors des aktuellen Raumes, nicht in Richtung des vorherigen Raumes zeigt.
 
-Diese Varianten werden bei der Levelgenerierung mit Fallunterscheidungen ausgeschlossen. %TODO: zeigen?
+Diese Varianten werden bei der Levelgenerierung durch Fallunterscheidungen ausgeschlossen. %TODO: zeigen?
 Dazu hat die Methode \textquote{GenerateRandomDoorPosition} in der \textquote{GenerateLevel}-Klasse, die für die Berechnung von $D$ verantwortlich ist zwei Parameter, $forceLeftSideDoor$ und $forceRightSideDoor$, die zwar beide $false$ sein dürfen, (dann wird nichts verhindert), aber nicht beide $true$ sein dürfen.
 
 Die Berechnung von $D$ erfolgt nun wieder über das Aufrufen von Unitys $Random.value$ Attribut, welches einen Pseudozufälligen Wert von $0-1$ zurückgibt.
@@ -722,8 +733,8 @@ Soll die rechte Seite forciert werden wird der Wert durch $2$ geteilt, falls die
 Nachdem ich nun nacheinander die einzelnen Komponenten der Levelgenerierung erklärt habe werde ich nun erklären wie diese zusammenspielen um den Levelgenerierungsalgorithmus zu bilden. Diesen werde ich zunächst in seiner Vorgehensweise erläutern und anschließend die Grundstruktur des Quelltextes darstellen.
 
 \subsection{Funktionsweise des Levelgenerierungsalgorithmus}
-Im Rahmen des in dieser Arbeit vorgestellten Experiments war es notwendig, Level zu generieren, die eine vorher festlegbare Länge $L$, im Sinne der Anzahl der Räume gemeint, hatten und dementsprechend nicht unendlich lang waren. Jedoch ist es aber durchaus trivial den folgend vorgestellten Algortithmus leicht zu verändern, sodass er die Räume fortlaufend generiert, während die Nutzer:in bereits dabei ist das Level zu erkunden. %TODO: formulierung
-Nachdem dann $L$ also ausgewählt wurde (in diesem Fall indem die Proband:in eine der Versuchsbedingungen auswählt, siehe Abschnitt x) %TODO: link zu bedingungsauswahl
+Im Rahmen des in dieser Arbeit vorgestellten Experiments war es notwendig, Level zu generieren, bei der im vorhinein die Anzahl der Räume $L$ definiert werden konnte, und die dementsprechend nicht unendlich lang waren. Jedoch ist es durchaus trivial den folgend vorgestellten Algortithmus leicht zu verändern, sodass er die Räume fortlaufend generiert, während die Nutzer:in bereits dabei ist das Level zu erkunden.
+Nachdem $L$ ausgewählt wurde (in diesem Fall indem die Proband:in eine der Versuchsbedingungen auswählt, siehe \autoref{sec:chooserpad}) %TODO: link zu bedingungsauswahl
 kann das Level generiert werden.
 
 An dieser Stelle möchte ich noch einmal die Werte auflisten, die vorher von der Designer:in festgelegt werden sollen und kurz zusammenfassen was sie bedeuten.
@@ -753,7 +764,7 @@ Die Generierung der Wände wird als nächstes in die Wege geleitet, jeh nach Var
 
 \paragraph*{Berechnungsteil}
 
-Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariablen zuständig. Diese müssen berechnet werden, weil der erste Teil der nächsten Iteration keinen Zugriff mehr auf die Objekte der aktuellen Iteration hat. Hier findet die in \autoref{subsection:calccorners} erklärte Eckenberechnung statt. So können die Richtungsvektoren und andere Informationen von dem Raum, der in der aktuellen Iteration generiert wurde genutzt werden um die Generation des nächsten Raumes vorzubereiten. Auch die in \autoref{sec:random} besprochenene Pseudozufallsvariablen und die in \autoref{subsec:realwallgen} besprochenen Punkte diagonal vor und hinter dem Punkt $P$ des vorherigen Raumes werden hier berechnet, sodass sie in der nächsten Iteration schon feststehen und genutzt werden können.
+Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariablen zuständig. Diese müssen berechnet werden, weil der erste Teil der nächsten Iteration keinen Zugriff mehr auf die Objekte der aktuellen Iteration hat. Hier findet die in \autoref{subsection:calccorners} erklärte Eckenberechnung statt. So können die Richtungsvektoren und andere Informationen von dem Raum, der in der aktuellen Iteration generiert wurde genutzt werden um die Generation des nächsten Raumes vorzubereiten. Auch die in \autoref{sec:random} besprochenene Pseudozufallsvariablen und die in \autoref{subsec:realwallgen} besprochenen Punkte diagonal vor und hinter dem Punkt $\vec{P}$ des vorherigen Raumes werden hier berechnet, sodass sie in der nächsten Iteration schon feststehen und genutzt werden können.
 
 % \subsection{Vorstellung des Quelltexts}
 
@@ -857,17 +868,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         Im folgenden werde ich die drei verschiedenen Fortbewegungsbedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich die beiden Kontrollbedingungen, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des echten Gehens nutzt. %TODO: sichergehen dass kontrollbedingung hier richtig verwendet wird
 
         \subsection{Kontrollbedingung I Joystick}\label{subsec:joystick}
-            In der Joystick-Kontrollbedingung ($B$) Bewegen sich die Proband:innen virtuell mithilfe der sich an ihren Oclus Quest 2 Controllern befindenden Joysticks fort. %abbildung der kontroller?
-            Der sich auf dem Controller für die linke Hand befindende Joystick (von nun an \textquote{linker Joystick} genannt) ist dabei für die Fortbewegung zuständig, der sich auf dem rechten Kontroller befindende Joystick (\textquote{rechter Joystick}) gibt der Nutzer:in die Möglichkeit sich umzuschauen. Diese unterscheidet sich leicht von der Steuerung der meisten Joystick basierten Videospielen, indem wirklich nur die Y-Achsen Kopfdrehung $yaw$ von dem Joystick beeinflusst wird, nicht zusätzlich auch die X-Achsen Kopfdrehung und indem die Kopfdrehung in gleichmäßigen Intervallen von x Grad %TODO: Grad drehung pro snap #unitydata
+            In der Joystick-Kontrollbedingung ($B$) Bewegen sich die Proband:innen virtuell mithilfe der sich an ihren Oclus Quest 2 Controllern befindenden Joysticks fort. %abbildung der Controller?
+            Der sich auf dem Controller für die linke Hand befindende Joystick (von nun an \textquote{linker Joystick} genannt) ist dabei für die Fortbewegung zuständig, der sich auf dem rechten Controller befindende Joystick (\textquote{rechter Joystick}) gibt der Nutzer:in die Möglichkeit sich umzuschauen. Diese unterscheidet sich leicht von der Steuerung der meisten Joystick basierten Videospiele, indem wirklich nur die Yaw-Achsen Kopfdrehung von dem Joystick beeinflusst wird, nicht zusätzlich auch die Pitch-Achsen Kopfdrehung und indem die Kopfdrehung in gleichmäßigen Intervallen von x Grad %TODO: Grad drehung pro snap #unitydata
             verändert wird. %TODO: hci quelle finden wieso
             Wie in \autoref{subsec:realwallgen} erklärt nutzt diese Bedingung die realistische Wandgenerierung.
 
-            %implementierung abschnitt
-            %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
-            Die Joystick-Fortbewegung wurde mithilfe einiger vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem in \autoref{sec:hierarchy} beschriebenen PlayerController und steuert so diesen und dessen Kindelemente, so auch den virtuellen Avatar der Nutzer:in.
-            %in kapitel 4 verschieben?
-
-
+            Die Implementierung der Joysticksteuerung wurde bereits in \autoref{subsec:joystick-implementation} beschrieben.
 
         \subsection{Kontrollbedingung II Teleportation}\label{subsec:teleport}
             Auch in dieser Bedingung $C$ haben die Proband:innen die Möglichkeit sich ähnlich wie in Bedingung $B$ mithilfe des rechten Joysticks in intervallen von x Grad%TODO: herausfinden
@@ -878,10 +884,6 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             abgebildet und dient sowohl dazu der Proband:in anzuzeigen, wohin sie sich aktuell teleportieren würde, als auch dazu die Blickrichtung nach der Teleportierung, mithilfe eines Pfeils in der Mitte anzuzeigen. Währenddessen lässt sich mit dem linken Joystick diese Blickrichtung verändern, sodass schon vor dem Teleportieren entschieden werden kann wohin danach geguckt wird. Um die Teleportierung nun zu dem ausgewählten Punkt, mit der ausgewählten Blickrichtung durchzuführen muss die Proband:in den Zeigefingertrigger des rechten Controllers bestätigen.
             Nun wird sie Augenblicklich an die Stelle teleportiert, auf der eben noch der Teleportationscursor zu sehen war. Dabei blickt sie dann auch in die Richtung in die eben noch der Pfeil des Cursors gezeigt hat.
             Auch bei dieser Bedingung wird die realistische Wandgenerierung genutzt.
-
-            %Implementierung
-            Auch diese Bedingung wird mithilfe einiger, mit dem Oculus Integration SDK gelieferten Scripts, das auf dem PlayerController liegt, implementiert. Hierbei ist hauptsächlich das \textquote{} %TODO: feddich machen
-            %in kapitel 4 verschieben?
 
         \subsection{Versuchsbedingung Real-Walking}\label{subsec:realwalk}
             In der Versuchsbedingung Real-Walking können die Proband:innen sich durch echtes gehen im Raum bewegen. Nur in dieser Bedingung wird ein Rotationgain angewandt, sodass die Illusion entstehen soll, sie könnten sich unabhängig vom realen Trackingspace durch die Welt bewegen.
@@ -1101,7 +1103,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \end{figure}
 
                     Um Klarheit zu schaffen wurde ein Shapiro-Wilk test zum 5\% Konfidenzniveau %?
-                    durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0.00316$) und Teleportation ($P = 0.00521$) nicht gegeben ist. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_normal} zu sehen.
+                    durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0.00316$) und Teleportation ($p = 0.00521$) nicht gegeben ist. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_normal} zu sehen.
 
                     %shapiro
                     \begin{table}[!h]
