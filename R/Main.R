@@ -178,10 +178,18 @@ presence_aov_df %>%
   friedman_effsize(sus_score ~ bedingung|id) #tolatex
 
 pairwise_presence = presence_aov_df %>%
- wilcox_test(sus_score ~ bedingung, paired=TRUE, p.adjust.method = "bonferroni")
+ wilcox_test(sus_score ~ bedingung, paired=TRUE, p.adjust.method = "bonferroni", exact=T)
 pairwise_presence#tolatex very confused, how can a and b be equal, b and c be equal but a and c not???
 
+#test it thouroghly
+#GroupA = c(4,4,2,3,5,0,1,0,2)
+#GroupB = c(0,1,2,0,4,0,1,0,0)
+#GroupC = c(0,2,1,0,2,0,1,0,0)
 
-#experiments with 
+#wilcox.test(GroupA, GroupC, paired=T)
 
+#library(coin)
+#wilcoxsign_test(GroupA ~ GroupC, distribution="exact")
+
+#effektstärke von diff repeated measures anova
 

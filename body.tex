@@ -392,9 +392,15 @@ freundlicherweise zur Verfügung gestelltem Unity-Package \textquote{Space-Exten
 
 
 %impossible spaces
-
+\section{Fortbewegungsarten}
 %TODO:implementierung joystick mit daten
+\subsection{Joystick-Steuerung} \label{subsec:joystick-implementation}
 %TODO:implementierung teleport mit daten
+    %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
+    Die Joystick-Fortbewegung wurde mithilfe einiger, vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem in \autoref{sec:hierarchy} beschriebenen PlayerController und steuert so diesen und dessen Kindelemente, so auch den virtuellen Avatar der Nutzer:in.
+\subsection{Teleportierung}
+    Auch diese Bedingung wird mithilfe einiger, mit dem Oculus Integration SDK gelieferten Scripts, das auf dem PlayerController liegt, implementiert. Hierbei ist hauptsächlich das \textquote{} %TODO: feddich machen
+\subsection{Real-Walking}
 
 \section{Der Rotationgain Inzentivierungs Mechanismus}
 \label{sec:rotgaininc}
@@ -421,11 +427,12 @@ Damit die Versuchspersonen der später vorgestellten Studie die Level mit den un
 Das ganze funktioniert dann so, dass die Instanz der \textquote{SceneLoader}-Klasse, die auf dem \textquote{Generator}-Objekt liegt, eine Instanz auf das Auswahlfeld und auf die \textquote{GenerateLevel}-Instanz hält. Sobald die Bestätigungstaste gedrückt wurde, werden die entsprechenden Einstellungen daran vorgenommen, einige VR-Einstellungen getätigt (beispielsweise das Deaktivieren, der Reset-Möglichkeit, die bei der Real-Walking Bedingung zu Problemen führen könnte), die Fortbewegungsart festgelegt, indem die entsprechenden Components, die die Joysticksteuerung oder die Teleportation ermöglichen (siehe %link
 ) aktiviert, oder deaktiviert werden und zu guter letzt die Teleportierung der Nurtzer:in in den ersten Raum des Levels getätigt.
 
-\section{Messmechanismen und Datenspeicherung}
+\section{Messmechanismen und Datenspeicherung} \label{sec:measure-distance}
 Um an späterer Stelle einschätzen zu können, wie gut die Proband:innen die Entfernung die sie sich fortbewegt haben geschätzt haben ist es notwendig eben dies auch zu messen. Zusätzlich dazu ist es auch notwendig diese Daten zu speichern. Im folgenden werde ich erläutern, wie dies implementiert ist.
 
-Da es nicht darum geht die Luftlinie zwischen Start und Ende des Levels zu messen, da dann die Bewegungsweise der Proband:in keine Rolle mehr spielen würde, sondern ihre konkreten Fortbewegungsstrecke zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Frame die Kopfposition des virtuellen Avatars, der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis sehr unexakt. %?
+Da es nicht darum geht die Luftlinie zwischen Start und Ende des Levels zu messen, da dann die Bewegungsweise der Proband:in keine Rolle mehr spielen würde, sondern ihre konkreten Fortbewegungsstrecke zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Tick die Kopfposition des virtuellen Avatars der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis sehr ungenau. %?
 Da nun jede millimeterbewegung des Kopfes aufsummiert werden würde, würde eine einfache Kopfdrehung die fortbewegte Strecke schon um einen großen Teil erhöhen. Dies würde dazuführen, dass die Messung der fortbewegten Strecke nicht mehr intuitiv einzuschätzen wäre.
+
 Um dem entgegenzuwirken habe ich die Auflösung dieser Messung deutlich veringert, indem nicht mehr jedes Frame, diesen Prozess durchläuft, sondern nur ein Frame etwa alle 2 Sekunden. So werden deutlich grobere Bewegungen gemessen und die gemessenen Ergebnisse passen deutlich besser zu der intuitiven Einschätzung der Entfernung.
 %TODO: zu unwissenschaftlich? nochmal best practices recherchieren %einfach noch mehr dazu sagen dann geht das schon
 
@@ -801,16 +808,13 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
             Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbessert. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
-            Die hier vorgestellte Hypothese basiert auf der Annahme, dass ein besseres Raumverständnis dazu führt, dass Nutzer:innen bereits gegangene, oder anderweitig bewegte Distanzen besser Schätzen können.
+            Die hier vorgestellte Hypothese basiert auf zum Teil auf der Annahme, dass ein besseres Raumverständnis dazu führt, dass Nutzer:innen bereits gegangene, oder anderweitig fortbewegte Distanzen besser schätzen können. Dafür spricht die von Peck et al \cite{peck-vergleich-2011} gefundene Untersuchung, dass Proband:innen in Real-Walking Fortbewegungsbedingungen die größe der virtuellen Umgebung nach dem Versuch siginifikant besser einschätzen konnten, als mit anderen virtuellen Fortbewegungsarten.
+
             %gemessen ob es auch in generierten leveln gilt?
             Wie gut die Nutzer:innen die bewegte Distanz schätzen wird hier gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten. \footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die gesamte fortbewegte Strecke.}
-            Neben der Schätzung wurde auch die vom virtuellen Avatar bewegte Strecke gemessen (siehe %TODO: finden
-            ), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
+            Neben der Schätzung wurde auch die vom virtuellen Avatar bewegte Strecke gemessen (siehe \autoref{sec:measure-distance}), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
 
-            Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil sie sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt. %TODO: weiter argumentieren
-            %Es ist also von größerem Interesse herauszufinden ob die Schätzung der fortbewegten Distanz angemessen mit der wirklich fortbewegten Distanz mitwächst
-            %bending the curve hat doch noch was zu
-            %
+            Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil diese sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt. %TODO: weiter argumentieren
 
             Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
             %schlechter, jeh schlechter die qualität
@@ -961,7 +965,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         %marvs probleme?
 
         \section{Statistische Evaluationsverfahren}
-            Im folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel, aufgestellten Hypothesen   überprüfen werde.
+            Im folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel aufgestellten, Hypothesen   überprüfen werde.
 
             \subsection{Errechnung Qualität der Distanzschätzung}
             % errechnung % differenz positiv, negativ ?, signifikante unterschiede? abgleich mit literatur zur
@@ -990,19 +994,84 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Mit der Formel %link?
             berechnete ich eine neue Spalte, für die Differenz. Das ganze habe ich dann als $.csv$ Datei exportiert und um die weitere Datenverarbeitung und statistische in R durchzuführen. Dafür habe ich die Version \textquote{stable 4.1.1} genutzt.
 
-                \subsection{Statistische Auswertung zum Raumverständnis}
-                    Durchschnittswerte der Differenz von Messung und Schätzung zur fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
+                \subsection{Statistische Auswertung zur Schätzung der fortbewegten Distanz}
+                    Die Auswertung zur Schätzung der fortbewegten Distanz erfolgt in zwei Teilen. Zuerst wird die Schätzung relativ zur tatsächlichen Distanz mit einer multiplen Varianzanalyse auf die Einflussfaktoren der Fortbewegungsart und der Raumanzahl des Levels untersucht.
+
+                    Der zweite Teil untersucht die  absolute Differenz zwischen Schätzung und Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
+
+                    %%part 1
+                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz ist $0,649$ (also circa $65\%$) bei einer Standartabweichung von $0,352$.
+
+                    Die Durchschnittswerte und Standartabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
+
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+            \begin{tabular}{lcccc} \toprule
+                Bedingung       & Raumzahl & n   & M       & SD      \\ \midrule
+                Redirection     & 3        & $3$ & $0,813$ & $0,298$  \\
+                Redirection     & 6        & $3$ & $0,415$ & $0,356$  \\
+                Redirection     & 9        & $3$ & $0,546$ & $0,183$  \\
+                Joystick        & 3        & $3$ & $0,775$ & $0,319$  \\
+                Joystick        & 6        & $3$ & $1,16$  & $0,422$  \\
+                Joystick        & 9        & $3$ & $0,37$  & $0,298$  \\
+                Teleport        & 3        & $3$ & $0,458$ & $0,343$  \\
+                Teleport        & 6        & $3$ & $0,464$ & $0,199$  \\
+                Teleport        & 9        & $3$ & $0,836$ & $0,051$  \\ \bottomrule
+            \end{tabular}
+                        \caption{Durchschnitte und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz; Alle Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:ratio_means}
+                    \end{table}
+
+                    Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=1\textwidth]{plots/2wayboxplot.png}
+                        \caption{Boxplot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
+                    \end{figure}
+
+                    Für eine zweifaktorielle Varianzanalyse müssen die einzelnen Faktorstufen der Daten normalverteilt sein.
+                    Ein Plot der Korrelation zwischen den Faktorstufen (siehe \autoref{figure:qqplot-2way}) und ein Shapiro-Wilk-Test (siehe \autoref{table:shapiro-2way}) deuten nicht darauf hin, dass diese Bedingung verletzt wurde.
+
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+        \begin{tabular}{lccc} \toprule
+            Bedingung    & Raumanzahl & Teststatistik& $p$   \\ \midrule
+            Real-Walking &  3         & $0,917$      & $0,442$ \\
+            Real-Walking &  6         & $0,918$      & $0,445$ \\
+            Real-Walking &  9         & $0,823$      & $0,172$ \\
+            Joystick     &  3         & $0,934$      & $0,504$ \\
+            Joystick     &  6         & $0,922$      & $0,459$ \\
+            Joystick     &  9         & $0,842$      & $0,219$ \\
+            Teleport     &  3         & $0,920$      & $0,451$ \\
+            Teleport     &  6         & $0,792$      & $0,0959$ \\
+            Teleport     &  9         & $0,981$      & $0,738$ \\ \bottomrule
+        \end{tabular}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für das Verhältnis zwischen Schätzung und Messung für die unterschiedlichen Fortbewegungsarten und Raumanzahlen; Die Annahme der Normalverteilung scheint bei einem Signifikanzniveau von $\alpha = 5\% $ für keine Faktorstufe verletzt}\label{table:shapiro-2way}
+                    \end{table}
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=1\textwidth]{plots/qqplot2way.png}
+                        \caption{Plot der Korrelation zwischen den jeweiligen Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint}\label{figure:qqplot-2way}
+                    \end{figure}
+
+
+                    %%part 2
+
+                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
 
                     \begin{table}[]
                         \renewcommand\arraystretch{1.2}
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung       & n & M    & SD   \\ \midrule
-                            Redirection     & 9 & 16.9 & 12.0 \\
-                            Joystick        & 9 & 16.0 & 16.8 \\
-                            Teleport        & 9 & 13.8 & 9.62 \\ \bottomrule
+                            Redirection     & $9$ & $16,9$ & $12,0$ \\
+                            Joystick        & $9$ & $16,0$ & $16,8$ \\
+                            Teleport        & $9$ & $13,8$ & $9,62$ \\ \bottomrule
                         \end{tabular}
-                        \caption{Durchschnitte und Standartabweichungen der Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
+                        \caption{Durchschnitte und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
                     \end{table}
 
                     Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
@@ -1029,9 +1098,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \centering
                         \begin{tabular}{lcc} \toprule
                             Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & 0.908            & 0.300 \\
-                            Joystick     & 0.868            & 0.117 \\
-                            Teleport     & 0.867            & 0.113 \\ \bottomrule
+                            Real-Walking & $0,908$            & $0,300$ \\
+                            Joystick     & $0,868$            & $0,117$ \\
+                            Teleport     & $0,867$            & $0,113$ \\ \bottomrule
                         \end{tabular}
                         \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die Differenz von Schätzung und Messung für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
                     \end{table}
@@ -1042,6 +1111,8 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     Mit den erhobenen Daten wurde eine Varianzanalyse mit Messwiederholung zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Level durchgeführt. Dabei wurde implizit ein Mauchly’s Test zur Überprüfung der Varianzhomogenität %das gleiche  wie spherecity? formulierung
                     durchgeführt. %TODO: Ergebnis davon beschreiben:
                     %mauchlys test for spherecity and greenhouse geisser correction
+
+            %        When Mauchly’s test of sphericity indicated that the assumption of sphericity had been violated we used Greenhouse-Geisser estimates of sphericity to correct the degrees of freedom.
 
                     % $`Mauchly's Test for Sphericity`
                     % Effect     W     p p<.05
@@ -1137,7 +1208,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     %.y.           n statistic    df       p method
                     %* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
                     %1 sus_score     9       9.3     2 0.00956 Friedman test
-                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source? %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
+                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source? TODO: %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
                     als starker Effekt.
 
                     %effsize
@@ -1181,35 +1252,34 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 
             Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die Differenz der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die der Alternativen. Die Durchschnittswerte der unterschiedlichen Fortbewegungsbedingungen unterscheiden sich nicht signifikant. Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
 
-            Vorab ist zu sagen, dass die statistische %Effektstärke berechnen
-
             Ein möglicher Grund dafür wieso diese Hypothese nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft. %spricht da schon was für oder gegen?
+            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre fortbewegte Distanz über mehrere Räume hinweg besser einschätzen können.
+
             In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind.
 
-            Möglichkeiten das Raumverständnis zu messen sind beispielsweise, die Nutzer:innen zu bitten nach dem durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}).
-            %warum hab ich das nicht so gemacht? begründen?
+            Alternative Möglichkeiten das Raumverständnis zu Messen sind beispielsweise, die Nutzer:innen zu bitten nach dem Durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen, und dann die Differenz der gezeigten Winkel mit den wahren winkeln zu vergleichen. (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}).
 
-            Ein weiterer Grund dafür wieso diese Hypothese nicht unterstützt werden könnte ist die Monotonität der generierten Räume.
-            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erzeugen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dennoch ist eben dies ein Grundproblem von generierten (generischen) Leveln. %quelle dazu?
+            Ein möglicher weiterer Grund dafür wieso diese Hypothese nicht unterstützt werden konnte ist die Monotonität der generierten Räume.
+            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erzeugen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dennoch ist eben dies ein Grundproblem von generierten (generischen) Leveln.
 
             Falls die oben erwähnte Annahme doch zutrifft, könnte es also sein, dass sich die Fähigkeit von Nutzer:innen, die fortbewegte Distanz einzuschätzen, zwischen von Menschen gestalteten und Computergenerierten Leveln signifikant unterscheidet.
 
-            Dies, und ob das Raumverständnis einer Person, mit der Fähigkeit fortbewegte Distanz einzuschätzen in kausalem Zusammenhang steht sollte in einer zukünftigen Studie untersucht werden. %genauer wie?
+            Dies, und ob das Raumverständnis einer Person, mit der Fähigkeit fortbewegte Distanz einzuschätzen in kausalem Zusammenhang steht sollte in einer zukünftigen Studie untersucht werden. Dafür könnten die eben beschriebenen Möglichkeiten das Raumverständnis zu messen genutzt werden. Es wäre dann sinnvoll die Level nach ihrer Generierung zu Speichern und zu exportieren, sodass die Beschreibungen der Proband:innen mit den wirklich generierten Leveln verglichen werden können. Ausserdem sollten die Level um zufällig in die Räume platzierte Objekte und anderen Varianzen zwischen den Räumen ersetzt werden, da dies die kognitive Kartenbildung mutmaßlich vereinfacht.
             %weitere gründe?
 
-            \subsection{Präsenzgefühl in der virtuellen Umgebung}
-                Die oben formulierte Hypothese zum Präsenzgefühl lautete:
+        \subsection{Präsenzgefühl in der virtuellen Umgebung}
+            Die oben formulierte Hypothese zum Präsenzgefühl lautete:
 
-                Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-                Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2.33$) ist deutlich größer, als bei der Joystick-($0.889$) oder Teleportationsbedingung ($0.667$).
-                Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
+            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2.33$) ist deutlich größer, als bei der Joystick-($0.889$) oder Teleportationsbedingung ($0.667$).
+            Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
 
-                Ein möglicher Grund für diese ambivalenten Ergebnisse hat konkret mit den Umständen %link?
-                dieser Studie zu tun. Da nicht so viele Proband:innen teilnehmen konnten, wie es üblicherweise der Fall gewesen wäre, ist die Datenlage, aus der diese Ergebnisse entstanden weniger gut, als sie in einer offiziellen Studie gewesen wäre. %formuliereung
-                Es ist davon auszugehen, dass die Ergebnisse in diesem Fall um einiges klarer gewesen wären.
+            Ein möglicher Grund für diese ambivalenten Ergebnisse hat konkret mit den Umständen %link?
+            dieser Studie zu tun. Da nicht so viele Proband:innen teilnehmen konnten, wie es üblicherweise der Fall gewesen wäre, ist die Datenlage, aus der diese Ergebnisse entstanden weniger gut, als sie in einer offiziellen Studie gewesen wäre. %formuliereung
+            Es ist davon auszugehen, dass die Ergebnisse in diesem Fall um einiges klarer gewesen wären.
 
-                Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen. %?
+            Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen. %?
 
     \section{Konklusion}
         In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raum-Basierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen, mithilfe von Rotationgains und Impossible Spaces, ermöglicht wird sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der die Illusion entsteht sie würden die Grenzen des realen Trackingspaces verlassen und könnten unabhängig davon die virtuelle Umgebung erkunden. Diese Methodik ermöglicht potentiell unendlich lange Level, bei denen die Generierung während der Erkundung des Levels fortgeführt wird.
@@ -1234,79 +1304,5 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %TODO: auf peck verweisen ===>
         %Moreover, RFED participants were able to more accurately estimate VE size.
-
-
-        %%%%%%%Anhang
-        %Demographie Fragebogen
-        Redirected Walking Study Karim Djemai (*: notwendig)
-Wie ist deine VP-Nummer? *
-
-Wieviel Erfahrung hast du mit Computerspielen? *
-1-5 lieare skala
-
-Wieviele Stunden pro Woche spielst du durchschnittlich Computerspiele? *
-kurzantwort text
-
-Wieviel Erfahrung hast du mit Stereoskopischen 3D Erfahrungen (3D Kino o.ä.) *
-1-5 lineare skala
-
-Hast du schonmal eine VR-Brille genutzt? *
-ja, nein
-
-Hast du eine Sehschwäche, wenn ja trägst du eine Brille/Kontaktlinsen *
-single choice
-    - Kaum/Keine Sehschwäche
-    - Sehschwäche, aber Brille/Kontaktlinsen
-    - Nicht-Korrigierte Sehschwäche
-
-Hast du eine Gleichgewichtsstörung? *
-ja, nein
-
-Hast du sonstige Krankheiten oder gesundheitliche Probleme die deine Sicht beschränken? *
-ja, nein
-
-Abschnitt 2, am ende
-Wie groß bist du? *
-
-Wie ist dein Geschlecht?
-Männlich, Weiblich, sonstiges
-Wie alt bist du? *
-
-
-
-Durchlauf
-Wie ist deine VP-Nummer? *
-eingabetext
-
-Welche Bedingung hast du soeben getätigt? *
-eingabetext
-
-
-Bitte schätzen: Wie weit hast du dich im letzen Durchlauf innerhalb der Virtuellen Umgebung fortbewegt? Dabei zählt nur der Bereich innerhalb der Versuchsbedingung (nicht das Menü). *
-Eingabetext
-
-Präsenzfragen:
-Please rate your sense of being in the virtual environment, on a scale of 1 to 7, where 7 represents your normal experience of being in a place. *
-1-7 lineare skala
-
-To what extent were there times during the experience when the virtual environment was the reality for you? *
-1-7 lineare skala
-
-When you think back to the experience, do you think of the virtual environment more as images that you saw or more as somewhere that you visited? *
-1-7 lineare skala
-
-During the time of the experience, which was the strongest on the whole, your sense of being in the virtual environment or of being elsewhere? *
-1-7 lineare skala
-
-Consider your memory of being in the virtual environment. How similar in terms of the structure of the memory is this to the structure of the memory of other places you have been today? By ‘structure of the memory’ consider things like the extent to which you have a visual memory of the virtual environment, whether that memory is in colour, the extent to which the memory seems vivid or realistic, its size, location in your imagination, the extent to which it is panoramic in your imagination, and other such structural elements. *
-1-7 lineare skala
-
-
-During the time of your experience, did you often think to yourself that you were actually in the virtual environment? *
-1-7 lineare skala
-
-Anything you would like to add?
-kurzeingabe text
-
 
 % keep an blank line above

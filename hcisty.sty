@@ -11,6 +11,7 @@
 \usepackage[tight]{subfigure}% subfigures: figures within figures
 \usepackage{iflang}
 \usepackage{booktabs}
+\usepackage{lscape}
 
 %\marginsize{1.2in}{0.9in}{1.1in}{0.9in} % small margins
 \marginsize{1.2in}{0.9in}{0.5in}{1.5in} % small margins
@@ -71,10 +72,6 @@
 
 
 % hyperref must be the second last package and glossary the last package
-
-% index
-\usepackage{makeidx}                       % for \printindex
-\makeindex                                 % creates paper.idx index file
 
 % glossary
 %\usepackage[style=super, cols=3]{glossary} % for \printclossary
@@ -210,13 +207,10 @@
 %\bibliographystyle{alpha}\bibliography{references}
 %
 	\newpage\phantomsection%
-	\addcontentsline{toc}{chapter}{\indexname}                   % add Index to TOC
-	\printindex
 
-	%\newpage\phantomsection%
-	%\addcontentsline{toc}{chapter}{Glossary}                  % add Glossary to TOC
-	%\printglossary
-	\newpage
+    \newpage
+    \input{anhang.tex}
+    \newpage
 	\input{bibliothek.tex}
 	\newpage\input{erklaerung.tex}
 	\end{document}
