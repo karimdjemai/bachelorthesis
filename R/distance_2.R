@@ -71,15 +71,19 @@ ff = data.frame(vp_id=dd$vp_id, bedingung=dd$bedingung, laenge=dd$laenge, nadiff
 tibble(ff)
 
 anova_test(nadiff ~ bedingung*laenge, data=ff, wid=vp_id)
+
 # Coefficient covariances computed by hccm()
 # ANOVA Table (type II tests)
 # 
-# Effect DFn DFd     F     p p<.05   ges
+#             Effect DFn DFd     F     p p<.05   ges
 # 1        bedingung   2  18 1.144 0.341       0.113
 # 2           laenge   2  18 0.332 0.722       0.036
 # 3 bedingung:laenge   4  18 4.106 0.015     * 0.477
 
 #effect of bedingung on the different laenge values
+
+# anova_test(data=ff, wid=vp_id, within=laenge, dv=nadiff )
+# anova_test(data=ff, wid=vp_id, within=bedingung, dv=nadiff )
 
 ff %>%
   group_by(laenge) %>%

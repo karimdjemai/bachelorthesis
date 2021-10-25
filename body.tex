@@ -801,10 +801,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \begin{enumerate}
             \item Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
+            \item Nutzer:innen werden die fortbewegte Distanz bei kürzeren Leveln tendentiell eher unterschätzen, während sie sie bei längeren tendentiell überschätzen werden. Dieser Effekt wird bei Real-Walking Bedingungen geringer ausfallen, als bei den alternativen Fortbewegungsarten. %TODO: genau so?
+
             \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
         \end{enumerate}
 
-        \subsection{Raumverständnis}
+        \subsection{Distanzschätzung}
             %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
             Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbessert. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
@@ -819,6 +821,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
             %schlechter, jeh schlechter die qualität
             allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht zwischen den Bedingungen unterscheidenden) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird. % TODO: entscheiden ob rein nehmen oder nicht
+
+            %TODO: quelle unter, überschätzen
+            Nach x werden kürzere Distanzen in der virtuellen Realität eher unterschätzt, während größere eher überschätzt werden. Dieser Effekt sollte sich auch auf den hier durchgeführten Versuch übertragen lassen. Es wird untersucht werden, wie dieser Effekt im wechselspiel zu den Fortbewegungsarten steht.
 
         \subsection{Präsenzgefühl}
             In dem Paper \cite{presence-questionaire} geben Usoh et. al eine Zusammenfassung über die bis dahin diskutierten Ideen darüber, wie die Stärke der Präsenz in virtuellen Umgebungen stark erhöht wird. Diese wird in 5 Punkte aufgeteilt, die übersetzt und zusammengefasst etwa so lauten:
@@ -963,9 +968,10 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         %länge erwähnen
         %aufklärung überaschung?
         %marvs probleme?
+        %TODO: 10 bei fortbewegung und 5 bei Präsenz
 
-        \section{Statistische Evaluationsverfahren}
-            Im folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel aufgestellten, Hypothesen   überprüfen werde.
+        \section{Statistische Evaluationsverfahren} %TODO: mit nächster section kombinieren
+            Im Folgenden werde ich die statistischen Verfahren vorstellen, mit  denen ich die, im vorherigen Kapitel aufgestellten, Hypothesen   überprüfen werde.
 
             \subsection{Errechnung Qualität der Distanzschätzung}
             % errechnung % differenz positiv, negativ ?, signifikante unterschiede? abgleich mit literatur zur
@@ -986,7 +992,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
                 Auch hier muss ein Shapiro-Wilk Test die Vorraussetzung der Normalität der Faktorstufen überprüfen.
 
-        \section{Auswertung der Ergebnisse}
+        \section{Auswertung der Ergebnisse} %TODO: mauchlys tests for all
             Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Raumlänge %TODO: klar was gemeint ist? umschreiben?
             zuordnen.
             Um die Ergebnisse der beiden Quellen in einer gemeinsame Tabelle zu vereinen habe ich die Antworten auf das Google-Form in einer \textquote{Google-Tabellen}-Tabelle gesammelt und dann die Messergebnisse aus der Datenbank dazugetragen. Die Zuordnung erfolgte über die Versuchspersonen-ID, die Fortbewegungsbedingung und die Raumlänge%TODO: klar was gemeint ist? umschreiben?
@@ -995,11 +1001,99 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             berechnete ich eine neue Spalte, für die Differenz. Das ganze habe ich dann als $.csv$ Datei exportiert und um die weitere Datenverarbeitung und statistische in R durchzuführen. Dafür habe ich die Version \textquote{stable 4.1.1} genutzt.
 
                 \subsection{Statistische Auswertung zur Schätzung der fortbewegten Distanz}
-                    Die Auswertung zur Schätzung der fortbewegten Distanz erfolgt in zwei Teilen. Zuerst wird die Schätzung relativ zur tatsächlichen Distanz mit einer multiplen Varianzanalyse auf die Einflussfaktoren der Fortbewegungsart und der Raumanzahl des Levels untersucht.
+                    Die Auswertung zur Schätzung der fortbewegten Distanz erfolgt in zwei Teilen.
+                    Der erste Teil untersucht die absolute Differenz zwischen Schätzung und Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
+                    Darauf folgend wird die Schätzung relativ zur gemessenen Distanz mit einer auf eine Wechselwirkung der Einflussfaktoren \textquote{Fortbewegungsart} und \textquote{Raumanzahl des Levels} untersucht.
 
-                    Der zweite Teil untersucht die  absolute Differenz zwischen Schätzung und Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
+                    %%part absolute difference
+                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
 
-                    %%part 1
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lccc} \toprule
+                            Bedingung       & n & M    & SD   \\ \midrule
+                            Redirection     & $9$ & $16,9$ & $12,0$ \\
+                            Joystick        & $9$ & $16,0$ & $16,8$ \\
+                            Teleport        & $9$ & $13,8$ & $9,62$ \\ \bottomrule
+                        \end{tabular}
+                        \caption{Durchschnitte und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
+                    \end{table}
+
+                    Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=1\textwidth]{plots/diff_plot.png}
+                        \caption{Plot der Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, Aufgeteilt nach Fortbewegungstechnik; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
+                    \end{figure}
+
+                    Eine Varianzanalye mit Messwiederholung setzt vorraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in \autoref{figure:diff_normality} abgebildet.
+
+                    \begin{figure}[!h]
+                        \centering
+                        \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
+                        \caption{Korrelation zwischen Messergebnissen und Normalverteilung nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
+                    \end{figure}
+
+                    Zudem wurde ein Shapiro-Wilk Test für die einzelnen Faktorstufen durchgeführt (Ergebnisse in \autoref{table:norm_test_diff}). Dieser deutete nicht darauf hin, dass die Annahme der Normalverteilung verletzt worden sei.
+
+                    %shapiro wilk diff
+                    \begin{table}[]
+                        \renewcommand\arraystretch{1.2}
+                        \centering
+                        \begin{tabular}{lcc} \toprule
+                            Bedingung    & Teststatistik    & $p$   \\ \midrule
+                            Real-Walking & $0,908$            & $0,300$ \\
+                            Joystick     & $0,868$            & $0,117$ \\
+                            Teleport     & $0,867$            & $0,113$ \\ \bottomrule
+                        \end{tabular}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die Differenz von Schätzung und Messung für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
+                    \end{table}
+
+                    Im Datensatz wurden keine extremen Ausreißer %grenze?
+                    festgestellt.
+
+                    Mit den erhobenen Daten wurde eine Varianzanalyse mit Messwiederholung zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Level durchgeführt.
+
+
+                    %mauchlys test for spherecity and greenhouse geisser correction
+
+                    % When Mauchly’s test of sphericity indicated that the assumption of sphericity had been violated we used Greenhouse-Geisser estimates of sphericity to correct the degrees of freedom.
+
+                    % $`Mauchly's Test for Sphericity`
+                    %      Effect     W     p p<.05
+                    % 1 bedingung 0.457 0.064
+
+% $`Sphericity Corrections`
+%    Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
+% 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
+
+                    Die Varianzanalyse zeigte keine signifikanten Unterschiede zwischen den Fortbewegungsarten; $F(2,16) = 0.207, p = 0.815$
+                    %anova diff
+                    % 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
+
+                    Post-Hoc Tests zur genaueren Bestimmung der Unterschiede waren folglich nicht erforderlich.
+%full:
+%
+    % > diff_aov
+    % ANOVA Table (type III tests)
+
+    % $ANOVA
+    %      Effect DFn DFd     F     p p<.05  ges
+    % 1 bedingung   2  16 0.207 0.815       0.01
+
+    % $`Mauchly's Test for Sphericity`
+    % Effect     W     p p<.05
+    % 1 bedingung 0.457 0.064
+
+    % $`Sphericity Corrections`
+    %      Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
+    % 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
+
+%
+
+                    %%part 2
                     Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz ist $0,649$ (also circa $65\%$) bei einer Standartabweichung von $0,352$.
 
                     Die Durchschnittswerte und Standartabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
@@ -1057,94 +1151,37 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \caption{Plot der Korrelation zwischen den jeweiligen Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint}\label{figure:qqplot-2way}
                     \end{figure}
 
+                    Im Datensatz wurden keine extremen Ausreißer festgestellt.
 
-                    %%part 2
+                    Es wurde eine zweifaktorielle Varianzanalyse mit Messwiederholung mit den Faktoren Fortbewegungsart und Raumanzahl des Levels zu einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt.
+                    Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren; $F(4,18) = 4,106  p = 0,015$
 
-                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
+                    %TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
+                    Implizit wurden dabei auch einfaktorielle Varianzanalysen zu einem Signifikanzniveau von $\alpha = 5\%$ mit beiden Faktoren durchgeführt. Beide zeigten keine signifikanten Effekte. (Raumanzahl: $F(2,18) = 0,332  p = 0,722$, Fortbewegungsart: $F(2,18) = 1,144  p = 0.341$)
 
-                    \begin{table}[]
-                        \renewcommand\arraystretch{1.2}
-                        \centering
-                        \begin{tabular}{lccc} \toprule
-                            Bedingung       & n & M    & SD   \\ \midrule
-                            Redirection     & $9$ & $16,9$ & $12,0$ \\
-                            Joystick        & $9$ & $16,0$ & $16,8$ \\
-                            Teleport        & $9$ & $13,8$ & $9,62$ \\ \bottomrule
-                        \end{tabular}
-                        \caption{Durchschnitte und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
-                    \end{table}
-
-                    Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
-
-                    \begin{figure}[!h]
-                        \centering
-                        \includegraphics[width=1\textwidth]{plots/diff_plot.png}
-                        \caption{Plot der Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, Aufgeteilt nach Fortbewegungstechnik; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
-                    \end{figure}
-
-                    Eine Varianzanalye mit Messwiederholung setzt vorraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in \autoref{figure:diff_normality} abgebildet.
-
-                    \begin{figure}[!h]
-                        \centering
-                        \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
-                        \caption{Korrelation zwischen Messergebnissen und Normalverteilung nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
-                    \end{figure}
-
-                    Zudem wurde ein Shapiro-Wilk Test für die einzelnen Faktorstufen durchgeführt (Ergebnisse in \autoref{table:norm_test_diff}). Dieser deutete nicht darauf hin, dass die Annahme der Normalverteilung verletzt worden sei.
-
-                    %shapiro wilk diff
-                    \begin{table}[]
-                        \renewcommand\arraystretch{1.2}
-                        \centering
-                        \begin{tabular}{lcc} \toprule
-                            Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & $0,908$            & $0,300$ \\
-                            Joystick     & $0,868$            & $0,117$ \\
-                            Teleport     & $0,867$            & $0,113$ \\ \bottomrule
-                        \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die Differenz von Schätzung und Messung für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
-                    \end{table}
-
-                    Im Datensatz wurden keine extremen Ausreißer %grenze?
-                    festgestellt.
-
-                    Mit den erhobenen Daten wurde eine Varianzanalyse mit Messwiederholung zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Level durchgeführt. Dabei wurde implizit ein Mauchly’s Test zur Überprüfung der Varianzhomogenität %das gleiche  wie spherecity? formulierung
-                    durchgeführt. %TODO: Ergebnis davon beschreiben:
-                    %mauchlys test for spherecity and greenhouse geisser correction
-
-            %        When Mauchly’s test of sphericity indicated that the assumption of sphericity had been violated we used Greenhouse-Geisser estimates of sphericity to correct the degrees of freedom.
-
-                    % $`Mauchly's Test for Sphericity`
-                    % Effect     W     p p<.05
-                    % 1 bedingung 0.457 0.064
-
-% $`Sphericity Corrections`
-%    Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
-% 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
-
-                    Die Varianzanalyse zeigte keine signifikanten Unterschiede zwischen den Fortbewegungsarten; $F(2,16) = 0.207, p = 0.815$
-                    %anova diff
-                    % 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
-
-                    Post-Hoc Tests zur genaueren Bestimmung der Unterschiede waren folglich nicht erforderlich.
-%full:
+%ANOVA Table (type II tests)
 %
-    % > diff_aov
-    % ANOVA Table (type III tests)
+%             Effect DFn DFd     F     p p<.05   ges
+% 1        bedingung   2  18 1.144 0.341       0.113
+% 2           laenge   2  18 0.332 0.722       0.036
+% 3 bedingung:laenge   4  18 4.106 0.015     * 0.477
 
-    % $ANOVA
-    %      Effect DFn DFd     F     p p<.05  ges
-    % 1 bedingung   2  16 0.207 0.815       0.01
+                    Daraufhin wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur bei einem Signifikanzniveau von $\alpha = 5\%$ auf die einzelnen Stufen des Faktors Raumanzahl mit dem Faktor Fortbewegungsart durchgeführt. Keine zeigte einen signifikanten Effekt. Des weiteren wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur auf die einzelnen Stufen des Faktors Fortbewegungsart, mit dem Faktor Raumanzahl bei einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt. Auch bei diesen wurden keine signifikanten Effekte gefunden. Die Ergebnisse aller dieser einfaktoriellen Varianzanalysen findet sich in der \autoref{table:2way-anova-ph}
 
-    % $`Mauchly's Test for Sphericity`
-    % Effect     W     p p<.05
-    % 1 bedingung 0.457 0.064
-
-    % $`Sphericity Corrections`
-    %      Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
-    % 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
-
-%
+        \begin{table}[]
+            \renewcommand\arraystretch{1.2}
+            \centering
+\begin{tabular}{lcccccc} \toprule
+Faktorstufe    & Effekt-Faktor  & DFn & DFd & $F$    & $p$      & $p$ korrigiert  \\ \midrule
+Raumanzahl: 3  &  Fortbewegungsart & $2$ & $6$ & $1,11$ & $0,389$ & $1$  \\
+Raumanzahl: 6  &  Fortbewegungsart & $2$ & $6$ & $4,60$ & $0,061$ & $0,183$  \\
+Raumanzahl: 9  &  Fortbewegungsart & $2$ & $6$ & $3,99$ & $0,079$ & $0,237$  \\
+Real-Walking   &  Raumanzahl       & $2$ & $6$ & $1,49$ & $0,299$ & $0,897 $\\
+Joystick       &  Raumanzahl       & $2$ & $6$ & $3,86$ & $0,084$ & $0,252 $\\
+Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
+\end{tabular}
+\caption{Die Ergebnisse der Nachuntersuchung der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten, in Form von einfaktoriellen Varianzanalysen, der einzelnen Faktorstufen, des jeweils anderen Fakors}\label{table:2way-anova-ph}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
                 \subsection{Statistische Auswertung der Präsenz}
@@ -1154,13 +1191,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \renewcommand\arraystretch{1.2}
                         \centering
                         \begin{tabular}{lccc} \toprule
-                            Bedingung       & n & M     & SD   \\ \midrule
-                            Real-Walking    & 9 & 2.33  & 1.80 \\
-                            Joystick        & 9 & 0.889 & 1.36 \\
-                            Teleport        & 9 & 0.667 & 0.866 \\ \bottomrule
+                            Bedingung       & $n$ & M       & SD     \\ \midrule
+                            Real-Walking    & $9$ & $2,33 $ & $1,80$ \\
+                            Joystick        & $9$ & $0,889$ & $1,36$ \\
+                            Teleport        & $9$ & $0,667$ & $0,866$ \\ \bottomrule
                         \end{tabular}
-                        \caption{Durchschnittswerte und Standartabweichungen der SUS-Scores für die verschiedenen Fortbewegungsarten; Die Unterschiede sind signfikant, können aber nicht von Post-Hoc Tests eingeordnet werden, denn dort sind die Ergebnisse nicht signifikant. %?????
-                        } \label{table:presence_means}
+                        \caption{Durchschnittswerte und Standartabweichungen der SUS-Scores für die verschiedenen Fortbewegungsarten; Die Unterschiede sind signfikant, können aber nicht von Post-Hoc Tests eingeordnet werden, dort wurden keine Signifikanten Effekte gefunden.} \label{table:presence_means}
                     \end{table}
 
                     \autoref{figure:presence_plot} Stellt die SUS-Scores als Boxplot dar. %wirklich? irgendwie komisch
@@ -1185,7 +1221,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \end{figure}
 
                     Um Klarheit zu schaffen wurde ein Shapiro-Wilk test zum 5\% Konfidenzniveau %?
-                    durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0.00316$) und Teleportation ($p = 0.00521$) nicht gegeben ist. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_normal} zu sehen.
+                    durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0,00316$) und Teleportation ($p = 0,00521$) nicht gegeben ist. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_shapiro} zu sehen.
 
                     %shapiro
                     \begin{table}[!h]
@@ -1193,16 +1229,16 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & 0.935            & 0.529 \\
-                            Joystick     & 0.730            & 0.00316 \\
-                            Teleport     & 0.748            & 0.00521 \\ \bottomrule
+                            Real-Walking & $0,935$            & $0,529$ \\
+                            Joystick     & $0,730$            & $0,00316$ \\
+                            Teleport     & $0,748$            & $0,00521$ \\ \bottomrule
                         \end{tabular}
-                        \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen; Die Ergebnisse für die Joystick und die Teleportationsbedingung deuten bei einem $\alpha = 5\%$ Signifikanzniveau darauf hin, dass eine Normalverteilung nicht gegeben ist}\label{table:presence_normal}
+                        \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen; Die Ergebnisse für die Joystick und die Teleportationsbedingung deuten bei einem $\alpha = 5\%$ Signifikanzniveau darauf hin, dass eine Normalverteilung nicht gegeben ist}\label{table:presence_shapiro}
                     \end{table}
 
                     Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt.
                     %H0 erwähnen?
-                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 9.3, p = 0.00956$
+                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 9,3  p = 0,00956$
 
                     %friedman
                     %.y.           n statistic    df       p method
