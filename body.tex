@@ -847,7 +847,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             \end{enumerate}
 
             Besonders interessant für dieses Projekt sind hier die Punkte 2 und 3, da diese sich zwischen den verschiedenen Fortbewegungsarten unterscheiden. So ist zum Beispiel davon auszugehen, dass die Real-Walking-Fortbewegungsart in mehr Sinnesmodalitäten konsitenz bietet, da die Nutzer:in ihre Stellung im Raum auch durch ihre Propriozeption und ihren Gleichgewichtssinn wahrnehmen kann.
-            Nicht außer Acht zu lassen ist natürlich auch, dass echtes gehen durch dessen Alltagsnähe eine deutlich intuitivere Fortbewegungsmethode darstellt und dementsprechend anzunehmen ist, dass es als solche einem Präsenzgefühl weniger im Weg steht als die ungewohntere Navigation mit den Alternativen.
+            Nicht außer Acht zu lassen ist natürlich auch, dass natürliches Gehen durch dessen Alltagsnähe eine deutlich intuitivere Fortbewegungsmethode darstellt und dementsprechend anzunehmen ist, dass es als solche einem Präsenzgefühl weniger im Weg steht als die ungewohntere Navigation mit den Alternativen.
 
             Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire \cite{presence-questionaire} durchgeführt. (Fortlaufend SUS-Questionaire genannt.) Dieser ist in Abbildung x %TODO: link to sus
             abgebildet. Er besteht aus 6 Fragen, die auf einer Skala von 1-7 beantwortet werden, wobei 7 immer für die höchste und 1 für die geringste wahrgenommene Präsenz in der Umgebung steht.
@@ -1098,22 +1098,17 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
                     Die Durchschnittswerte und Standartabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
 
-                    \begin{table}[]
+                    \begin{table}[] %TODO: hübscher
                         \renewcommand\arraystretch{1.2}
                         \centering
-            \begin{tabular}{lcccc} \toprule
-                Bedingung       & Raumzahl & n   & M       & SD      \\ \midrule
-                Redirection     & 3        & $3$ & $0,813$ & $0,298$  \\
-                Redirection     & 6        & $3$ & $0,415$ & $0,356$  \\
-                Redirection     & 9        & $3$ & $0,546$ & $0,183$  \\
-                Joystick        & 3        & $3$ & $0,775$ & $0,319$  \\
-                Joystick        & 6        & $3$ & $1,16$  & $0,422$  \\
-                Joystick        & 9        & $3$ & $0,37$  & $0,298$  \\
-                Teleport        & 3        & $3$ & $0,458$ & $0,343$  \\
-                Teleport        & 6        & $3$ & $0,464$ & $0,199$  \\
-                Teleport        & 9        & $3$ & $0,836$ & $0,051$  \\ \bottomrule
-            \end{tabular}
-                        \caption{Durchschnitte und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz; Alle Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:ratio_means}
+\begin{tabular}{l|ccc|c}
+M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrule
+3  & $0,813$ / $0298$ & $0,775$ / $0,319$ & $0,458$ / $0,343$ & 0,682 / $0,325$ \\
+6  & $0,415$ / $0356$ & $1,16$  / $0,422$ & $0,464$ / $0,199$ & 0,681 / $0,467$ \\
+9  & $0,546$ / $0183$ & $0,37$  / $0,298$ & $0,836$ / $0,051$ & 0,584 / $0,2$   \\ \bottomrule
+   & $0,591$ / $0,305$ & $0,77$ / $0,459$ & $0,586$ / $0,274$ & $0,649$ / $0,352$
+\end{tabular}
+                        \caption{Durchschnitte und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, bei den verschiedenen Faktorstufen: Raumanzahl (Reihen) und Fortbewegungsart (Zeilen);  Alle Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:ratio_means}
                     \end{table}
 
                     Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
@@ -1148,7 +1143,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=1\textwidth]{plots/qqplot2way.png}
-                        \caption{Plot der Korrelation zwischen den jeweiligen Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint}\label{figure:qqplot-2way}
+                        \caption{Plot der Korrelation zwischen den jeweiligen Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
                     \end{figure}
 
                     Im Datensatz wurden keine extremen Ausreißer festgestellt.
@@ -1180,7 +1175,7 @@ Real-Walking   &  Raumanzahl       & $2$ & $6$ & $1,49$ & $0,299$ & $0,897 $\\
 Joystick       &  Raumanzahl       & $2$ & $6$ & $3,86$ & $0,084$ & $0,252 $\\
 Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
 \end{tabular}
-\caption{Die Ergebnisse der Nachuntersuchung der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten, in Form von einfaktoriellen Varianzanalysen, der einzelnen Faktorstufen, des jeweils anderen Fakors}\label{table:2way-anova-ph}
+\caption{Die Ergebnisse der Nachuntersuchung der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten, in Form von einfaktoriellen Varianzanalysen, der einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
@@ -1276,66 +1271,66 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
 
 
 \chapter{Diskussion, Ausblick und Konklusion}\label{chapter:discussion-conclusion}
-    In diesem letzten Kapitel werde ich die im vorherigen Kapitel errechneten Ergebnisse diskutieren und versuchen sie einzuordnen. Anschließend werde ich eine abschließende Zusammenfassung der in dieser Arbeit vorgestellten Ideen, Umsetzungen und Erkenntnissen geben. Damit verbunden werde ich einen Ausblick formulieren, wie zukünftige Forschungsarbeiten auf dieser Arbeit aufbauen sollten.
+    In diesem letzten Kapitel werde ich die im vorherigen Kapitel errechneten Ergebnisse diskutieren und einordnen, damit verbunden werde ich einen Ausblick formulieren, wie zukünftige Forschungsarbeiten auf dieser Arbeit aufbauen sollten.. Anschließend werde ich eine abschließende Zusammenfassung der in dieser Arbeit vorgestellten Ideen, Umsetzungen und Erkenntnissen geben.
 
-    \section{Diskussion der Ergebnisse}
-        Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies könnte verschiedene Gründe haben. An dieser Stelle möchte ich versuchen die Ergebnisse einzuordnen und eben diese Gründe herauszuarbeiten
+    \section{Diskussion und Ausblick}
+        Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies könnte verschiedene Gründe haben. An dieser Stelle möchte ich versuchen die Ergebnisse einzuordnen und eben diese Gründe herauszuarbeiten.
+        Vorweg ist aber nochmal zu betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, sowieso nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren, es ist zudem  durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten. Dies gilt im Besonderen für die zweifaktorielle Varianzanalyse, die für die Auswertung des Verhältnisses zwischen geschätzen und gemessenen fortbewegten Distanzen angewandt wurde. Die einzelnen kombinierten Faktorstufen konnten dabei nur auf einer Evidenzgrundlage von 3 Messungen basieren.
 
         \subsection{Schätzung der bewegten Distanz}
             Die oben formulierte Hypothese zur Schätzung der fortbewegten Distanz lautete wie folgt:
 
             Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die Differenz der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die der Alternativen. Die Durchschnittswerte der unterschiedlichen Fortbewegungsbedingungen unterscheiden sich nicht signifikant. Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
+            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzer und gemessender fortbewegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die den Alternativen. Es konnten keine signifikanten  Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
 
-            Ein möglicher Grund dafür wieso diese Hypothese nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft. %spricht da schon was für oder gegen?
-            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre fortbewegte Distanz über mehrere Räume hinweg besser einschätzen können.
+            Genauso sieht es für die zweite Hypothese aus:
 
-            In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind.
+            Nutzer:innen werden die fortbewegte Distanz bei kürzeren Leveln tendentiell eher unterschätzen, während sie sie bei längeren tendentiell überschätzen werden. Dieser Effekt wird bei Real-Walking Bedingungen geringer ausfallen, als bei den alternativen Fortbewegungsarten.
 
-            Alternative Möglichkeiten das Raumverständnis zu Messen sind beispielsweise, die Nutzer:innen zu bitten nach dem Durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen, und dann die Differenz der gezeigten Winkel mit den wahren winkeln zu vergleichen. (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}).
+            Es konnte zwar eine signifikante Wechselwirkung zwischen den Levellängen und den Fortbewegungsarten gefunden werden, allerdings lassen sich danach in den jeweiligen Untersuchungen keine signifikanten Effekte mehr zwischen den einzelnen Fortbewegungsarten, und den Levellängen in Bezug auf das Verhältnis von Schätzung und Messung feststellen. Bei keiner der Kombinationen, der beiden Faktoren konnte eine signifikante Abweichung von den jeweils anderen Kombinationen nachgewiesen werden.
 
-            Ein möglicher weiterer Grund dafür wieso diese Hypothese nicht unterstützt werden konnte ist die Monotonität der generierten Räume.
-            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erzeugen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dennoch ist eben dies ein Grundproblem von generierten (generischen) Leveln.
+            Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
 
-            Falls die oben erwähnte Annahme doch zutrifft, könnte es also sein, dass sich die Fähigkeit von Nutzer:innen, die fortbewegte Distanz einzuschätzen, zwischen von Menschen gestalteten und Computergenerierten Leveln signifikant unterscheidet.
+            In jedem der Räume ist es notwendig mithilfe eines Rotationgains die virtuelle Umgebung um
+            90\textdegree
+            um die reale Umgebung zu rotieren. Auch wenn dieser Effekt aufgrund der Subtilität des Rotationgains nicht bemerkt wird, könnte dieser Effekt dennoch für eine starke Beeinträchtigung der Orientierungsfähigkeit der Nutzer:innen sorgen. Mehrere Proband:innen gaben wärend der Real-Walking Fortbewegungsbedingung an, schon nach einem Raum die Orientierung, wo im realen Trackingspace sie sich gerade befänden verloren zu haben. Dies sollte nicht überraschen, da der virtuell bewegte Pfad ohne Redirection-Maßnahmen so ja aufgrund der Trackingspace-Grenzen garnicht in der realen Umgebung möglich gewesen wäre. Ob dieser Effekt tatsächlich das kognitive Raumverständnis der virtuellen Umgebung erschwert sollte in zukünftigen Arbeiten konkreter Untersucht werden. Dabei sollte dann die zusätzliche Redirection Komponente, der durch die Wandgenerierung entstehenden Impossible Spaces herausgenommen werden, da diese für zusätzliche Verwirrung sorgen könnten.
 
-            Dies, und ob das Raumverständnis einer Person, mit der Fähigkeit fortbewegte Distanz einzuschätzen in kausalem Zusammenhang steht sollte in einer zukünftigen Studie untersucht werden. Dafür könnten die eben beschriebenen Möglichkeiten das Raumverständnis zu messen genutzt werden. Es wäre dann sinnvoll die Level nach ihrer Generierung zu Speichern und zu exportieren, sodass die Beschreibungen der Proband:innen mit den wirklich generierten Leveln verglichen werden können. Ausserdem sollten die Level um zufällig in die Räume platzierte Objekte und anderen Varianzen zwischen den Räumen ersetzt werden, da dies die kognitive Kartenbildung mutmaßlich vereinfacht.
-            %weitere gründe?
+            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt werden konnten ist die Monotonität der generierten Räume.
+            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erstellen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dies ein Grundproblem von generierten (generischen) Leveln.
+
+            In diesem Fall könnte es also so sein, dass sich die Fähigkeit von Nutzer:innen, die fortbewegte Distanz einzuschätzen, zwischen von Menschen gestalteten und von Computern generierten Leveln signifikant unterscheidet. Diese Überlegung könnte einen Versuchaufbau gestalten, bei dem die kognitive Kartenbildung in menschlich gestalteten Leveln, mit der in prozedural generierten Leveln verglichen wird.
+
+            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft.
+            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre eigene fortbewegte Distanz über mehrere Räume hinweg besser einschätzen können, als in anderen Bedingungen.
+
+            In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind. Aus diesem Grund sollte in zukünftigen Studien mit unterschiedlichen Methoden gemessen werden, wie gut das Raumverständnis der Proband:innen ist.
+
+            Alternative Möglichkeiten das Raumverständnis zu Messen sind beispielsweise, die Nutzer:innen zu bitten nach dem Durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen, und dann die Differenz der gezeigten Winkel mit den gemessenen Winkeln zu vergleichen. (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}). Es wäre dann sinnvoll die prozudural generierten Level zu Speichern und zu exportieren, sodass die Beschreibungen der Proband:innen mit den wirklich generierten Leveln verglichen werden können. Bei Leveln, die mit der hier vorgestellten Levelgeneierungsmethode erstellt wurden, wäre es simpel dies zu lösen, indem der Algorithmus so erweitert würde, dass die in \autoref{sec:random} beschriebenen Variablen ex- und importierbar gemacht würden.
 
         \subsection{Präsenzgefühl in der virtuellen Umgebung}
             Die oben formulierte Hypothese zum Präsenzgefühl lautete:
 
             Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2.33$) ist deutlich größer, als bei der Joystick-($0.889$) oder Teleportationsbedingung ($0.667$).
+            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,33$) ist deutlich größer, als bei der Joystick-($0,889$) oder Teleportationsbedingung ($0,667$).
             Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
 
-            Ein möglicher Grund für diese ambivalenten Ergebnisse hat konkret mit den Umständen %link?
-            dieser Studie zu tun. Da nicht so viele Proband:innen teilnehmen konnten, wie es üblicherweise der Fall gewesen wäre, ist die Datenlage, aus der diese Ergebnisse entstanden weniger gut, als sie in einer offiziellen Studie gewesen wäre. %formuliereung
-            Es ist davon auszugehen, dass die Ergebnisse in diesem Fall um einiges klarer gewesen wären.
+            Ein möglicher Grund für diese ambivalenten Ergebnisse hat ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnten, konnten nur nicht parametrische-statistische Tests verwendet werden.
+            Es ist davon auszugehen, dass die Ergebnisse im Falle einer größeren Datenmenge um einiges klarer gewesen wären.
 
-            Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen. %?
+            Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen.
 
     \section{Konklusion}
         In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raum-Basierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen, mithilfe von Rotationgains und Impossible Spaces, ermöglicht wird sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der die Illusion entsteht sie würden die Grenzen des realen Trackingspaces verlassen und könnten unabhängig davon die virtuelle Umgebung erkunden. Diese Methodik ermöglicht potentiell unendlich lange Level, bei denen die Generierung während der Erkundung des Levels fortgeführt wird.
 
-        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht zwei Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung fortbewegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in prozedural generierten Leveln gegeben sind. %autsch
+        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung fortbewegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in mit dieser Methode prozedural generierten Leveln gegeben sind.
 
-    \section{Ausblick}
-
-        Wie bereits erwähnt sind die Ergebnisse der hier durchgeführten Pilotierungsstudie mit einer relativ geringen Teilnehmerzahl entstanden. Um die Ergebnisse mit mehr Genauigkeit beurteilen zu können wäre es wünschenswert wenn eine etwas größere,  offizielle Studie mit den hier vorgestellten Methoden durchgeführt würde.
-        Aber auch abgesehen davon gibt es einige Fragen, die in dem Prozess dieser Arbeit aufgeworfen wurden, deren Klärung es bedarf.
-
-        Zukünftige Studien, die Level mit der hier vorgestellten Methode generieren sollten untersuchen, inwieweit eine Generierung von Objekten in den Räumen zur kognitiven Kartenbildung von Nutzer:innen beiträgt. Außerdem sollte sie, anstatt nur die Qualität der Distanzschätzung zu untersuchen auch Forschungsmethodiken nutzen, die auf andere Art und Weisen das Raumverständnis der Proband:innen prüfen.
-        %noch mehr finden?
-
-
-\chapter*{Danksagungen}\label{chapter:acknowledgements}
-\addcontentsline{toc}{chapter}{Danksagungen}
-    An dieser Stelle möchte ich mich bei allen bedanken, die mich während diesem Projekt unterstützt und motiviert haben.
-    Ganz herzlicher Dank gebürt bei all meinen Freunden und Verwandten, die freundlicherweise an der Studie teilgenommen haben! Ganz besonderer Dank geht dabei an meine Eltern, Jutta Dalladas-Djemai und Chaffok Djemai, für die vielen Jahre Unterstützung, die mir ermöglicht haben zu Studieren und abzuschließen, und an meine Freundin Nora Schwerdtfeger, die mich in schwierigen Phasen stets motiviert hat.
-    Außerdem möchte ich mich bei meinem Betreuer Dr. Eike Langbehn bedanken, dessen Expertise und Gedult mir die Arbeit an diesem Projekt erleichtert hat.
+% \chapter*{Danksagungen}\label{chapter:acknowledgements}
+% \addcontentsline{toc}{chapter}{Danksagungen}
+%     An dieser Stelle möchte ich mich bei allen bedanken, die mich während diesem Projekt unterstützt und motiviert haben.
+%     Ganz herzlicher Dank gebürt bei all meinen Freunden und Verwandten, die freundlicherweise an der Studie teilgenommen haben! Ganz besonderer Dank geht dabei an meine Eltern, Jutta Dalladas-Djemai und Chaffok Djemai, für die vielen Jahre Unterstützung, die mir ermöglicht haben zu Studieren und abzuschließen, und an meine Freundin Nora Schwerdtfeger, die mich in schwierigen Phasen stets motiviert hat.
+%     Außerdem möchte ich mich bei meinem Betreuer Dr. Eike Langbehn bedanken, dessen Expertise und Gedult mir die Arbeit an diesem Projekt erleichtert hat.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %TODO: auf peck verweisen ===>
