@@ -24,7 +24,19 @@ get_summary_stats(dd, nadiff, type = "mean_sd")
 #<chr>    <dbl> <dbl> <dbl>
 #  1 nadiff      27 0.649 0.352
 
+get_summary_stats(group_by(dd,laenge), nadiff, type = "mean_sd")
+# laenge variable     n  mean    sd
+# <fct>  <chr>    <dbl> <dbl> <dbl>
+# 1 1      nadiff       9 0.682 0.325
+# 2 2      nadiff       9 0.681 0.467
+# 3 3      nadiff       9 0.584 0.2
 
+get_summary_stats(group_by(dd,bedingung), nadiff, type = "mean_sd")
+# bedingung variable     n  mean    sd
+# <fct>     <chr>    <dbl> <dbl> <dbl>
+# 1 A         nadiff       9 0.591 0.305
+# 2 B         nadiff       9 0.77  0.459
+# 3 C         nadiff       9 0.586 0.274
 
 get_summary_stats(group_by(dd,bedingung,laenge), nadiff, type = "mean_sd")
 # A tibble: 9 × 6
@@ -82,7 +94,8 @@ anova_test(nadiff ~ bedingung*laenge, data=ff, wid=vp_id)
 
 #effect of bedingung on the different laenge values
 
-# anova_test(data=ff, wid=vp_id, within=laenge, dv=nadiff )
+anova_test(data=ff, wid=vp_id, within=laenge, dv=nadiff )
+anova_test(nadiff ~ laenge, data=ff, wid=vp_id)
 # anova_test(data=ff, wid=vp_id, within=bedingung, dv=nadiff )
 
 ff %>%
