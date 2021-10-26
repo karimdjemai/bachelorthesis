@@ -1,0 +1,229 @@
+{
+    "data": {
+        "-MguFK3474FUG9xpfd3a": {
+            "dateTime": "12.08.21 14:06",
+            "distanceWalked": 21.78,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 3,
+            "vp": 1
+        },
+        "-MguHixGipzIQrLbgKPw": {
+            "dateTime": "12.08.21 14:16",
+            "distanceWalked": 30.53,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 6,
+            "vp": 1
+        },
+        "-MguK0Ua0vkP_IWh4_lm": {
+            "dateTime": "12.08.21 14:26",
+            "distanceWalked": 50.69,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 9,
+            "vp1": 1
+        },
+        "-MgzTg3JH97uQWIR_kfq": {
+            "dateTime": "13.08.21 14:26",
+            "distanceWalked": 33.16,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 6,
+            "vp": 2
+        },
+        "-MgzX4L0OIPCkY0wuBsd": {
+            "dateTime": "13.08.21 14:41",
+            "distanceWalked": 50.44,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 9,
+            "vp": 2
+        },
+        "-MgzYicn6NuKbD7HCogH": {
+            "dateTime": "13.08.21 14:48",
+            "distanceWalked": 13.8,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 3,
+            "vp": 2
+        },
+        "-Mgzh0U9mrYMpgq-_NHK": {
+            "dateTime": "13.08.21 15:29",
+            "distanceWalked": 42.89,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 9,
+            "vp": 3
+        },
+        "-MgziwJ7U4Iqur8bYGpX": {
+            "dateTime": "13.08.21 15:37",
+            "distanceWalked": 14.49,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 3,
+            "vp": 3
+        },
+        "-MgzkaURMmacaryY_Gxh": {
+            "dateTime": "13.08.21 15:45",
+            "distanceWalked": 33.69,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 6,
+            "vp": 3
+        },
+        "-MhExJVoeXwXGNtFNado": {
+            "dateTime": "16.08.21 19:14",
+            "distanceWalked": 19.06,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 3,
+            "vp": 4
+        },
+        "-MhGR1KiYD-JOVlAPKtf": {
+            "dateTime": "17.08.21 02:08",
+            "distanceWalked": 35.02,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 6,
+            "vp": 4
+        },
+        "-MhGUSS0VLApklnFOuZW": {
+            "dateTime": "17.08.21 02:23",
+            "distanceWalked": 49.44,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 9,
+            "vp": 4
+        },
+        "-MhOd8L-QMlF5G97zFN-": {
+            "dateTime": "18.08.21 16:22",
+            "distanceWalked": 44.56,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 6
+        },
+        "-MhOh1R6x096RxTs8O-V": {
+            "dateTime": "18.08.21 16:39",
+            "distanceWalked": 53.6,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 9
+        },
+        "-MhOlyrJ4sn8Cr1SK07F": {
+            "dateTime": "18.08.21 17:01",
+            "distanceWalked": 23.87,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 3
+        },
+        "-MhOsmR7ZNKVOh8iv8qv": {
+            "dateTime": "18.08.21 17:31",
+            "distanceWalked": 60.63,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 9
+        },
+        "-MhOyIwbB39cZf2SfvpV": {
+            "dateTime": "18.08.21 17:55",
+            "distanceWalked": 27.11,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 3
+        },
+        "-MhP0zCKJbZ_og_qqScV": {
+            "dateTime": "18.08.21 18:11",
+            "distanceWalked": 37.78,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 6
+        },
+        "-MhPPhRH6QIib9o6Bu65": {
+            "dateTime": "18.08.21 19:59",
+            "distanceWalked": 18.21,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 3
+        },
+        "-MhPRl_FJWnbTfFELl_S": {
+            "dateTime": "18.08.21 20:08",
+            "distanceWalked": 31.1,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 6
+        },
+        "-MhPTmKpAjCdCfB03ziU": {
+            "dateTime": "18.08.21 20:17",
+            "distanceWalked": 48.34,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 9
+        },
+        "-MhTqukl9fCLPNNPUCJo": {
+            "dateTime": "19.08.21 16:40",
+            "distanceWalked": 41.29,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 6
+        },
+        "-MhTtswSayLjGJkmMMY2": {
+            "dateTime": "19.08.21 16:53",
+            "distanceWalked": 52.46,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 9
+        },
+        "-MhTvbSYDjJiw2idaq8X": {
+            "dateTime": "19.08.21 17:01",
+            "distanceWalked": 19.3,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 3
+        },
+        "-MhV9CWviKkksbdFWMKs": {
+            "dateTime": "19.08.21 22:44",
+            "distanceWalked": 60.44,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 9,
+            "vp": 9
+        },
+        "-MhVBStBXBe1_Ioa8E2-": {
+            "dateTime": "19.08.21 22:54",
+            "distanceWalked": 15.42,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 3,
+            "vp": 9
+        },
+        "-MhVDtN_Tu0QB6pBWgis": {
+            "dateTime": "19.08.21 23:05",
+            "distanceWalked": 39.26,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 6,
+            "vp": 9
+        },
+        "-MhVPG8uYHkeObAe2YOU": {
+            "dateTime": "19.08.21 23:55",
+            "distanceWalked": 18.69,
+            "environment": "Android",
+            "locomotion": "Redirection",
+            "rooms": 3
+        },
+        "-MhVSFrvZOr3kjmHCfgF": {
+            "dateTime": "20.08.21 00:08",
+            "distanceWalked": 36.24,
+            "environment": "Android",
+            "locomotion": "Joystick",
+            "rooms": 6
+        },
+        "-MhVVNs_4LlswVm2VJ6Q": {
+            "dateTime": "20.08.21 00:21",
+            "distanceWalked": 50.31,
+            "environment": "Android",
+            "locomotion": "Teleport",
+            "rooms": 9
+        }
+    }
+}
