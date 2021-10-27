@@ -337,10 +337,10 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     \includegraphics[width=0.5\textwidth]{images/hierarchy.png}
     \caption{Die Hierachie der Unity-Szene vor der Laufzeit}\label{figure:hierarchy}
 \end{figure}
+
 Der folgende Abschnitt beschreibt die Objekte in der Unity-Szene und ihre Beziehung untereinander.
 
-Das \textquote{Generator}-Objekt existiert um die Scripts, die ihm als Komponenten %de en?
-angehängt sind in die Szene zu integrieren, sodass diese ausgeführt werden. Darauf folgt das \textquote{RedirectionObject}, welches, als effektiver Parent des \textquote{OVRCameraRig} später dafür genutzt wird, die Rotationgains auszuführen. Zwischen diesen beiden Objekten liegt aber noch der PlayerController. Dieser wird in den beiden Kontrollbedingung für die Fortbewegungsarten genutzt.
+Das \textquote{Generator}-Objekt existiert um die Scripts, die ihm als Komponenten angehängt sind in die Szene zu integrieren, sodass diese ausgeführt werden. Darauf folgt das \textquote{RedirectionObject}, welches, als effektiver Parent des \textquote{OVRCameraRig} später dafür genutzt wird, die Rotationgains auszuführen. Zwischen diesen beiden Objekten liegt aber noch der PlayerController. Dieser wird in den beiden Kontrollbedingung für die Fortbewegungsarten genutzt.
 
 Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind ein vom Oculus Integration SDK bereitgestelltes Prefab, es integriert die Funktionalität der virtuellen Umgebung in die Unity-Szene.
 
@@ -349,7 +349,7 @@ Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/hierarchy_runtime.png}
-    \caption{hierarch runtime caption}\label{figure:hierarchy-runtime}
+    \caption{Die Unity-Hierarchie der Objekte, die der Szene erst bei der Levelgenerierung während der Laufzeit hinzugefügt wurden}\label{figure:hierarchy-runtime}
 \end{figure}
 
 \autoref{figure:hierarchy-runtime} zeigt die Hierarchie der erst nach Levelgenerierung entstandenen \textquote{RotGainCorridor}-Objekte, die nicht nur die, später in \autoref{sec:corridor} beschriebenen, Korridore, und alle Objekte darin repräsentieren, sondern auch die Wände um die zugehörigen Räume, also alle Objekte, die zu dem jeweiligen Raum gehören.
@@ -359,7 +359,7 @@ Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/rauminnen.jpg}
-    \caption{room caption}\label{figure:room}
+    \caption{Ein Raum von innen}\label{figure:room}
 \end{figure}
 
 Im Folgenden werde ich die Designentscheidungen, die die Optik der Szene bestimmen erläutern.
@@ -378,8 +378,10 @@ Obgleich letztere in den hier erzeugten Leveln nicht vorkommen, ist das  Ambient
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{images/rogue.png}
-    \caption{rogue caption with image source}
-    %, source: https:\/\/commons.wikimedia.org\/wiki\/File\:Rogue_Screenshot.png}
+    \caption{
+        Screenshot des beliebten Computerspiels \textquote{Rogue} (1980)
+        Bildquelle: \href{https://commons.wikimedia.org/wiki/File:Rogue_Screenshot.png}{https://commons.wikimedia.org/wiki/File:Rogue\_Screenshot.png}
+    }
     \label{figure:rogue}
 \end{figure}
 
@@ -396,13 +398,13 @@ Um die Erkundungsstimmung noch ein wenig zu verstärken und eine realistische Li
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/hands.jpg}
-    \caption{caption hands}\label{figure:hands}
+    \caption{Die Hände des virtuellen Avatars vor einem Nummerneingabefeld}\label{figure:hands}
 \end{figure}
 
 Um die Nutzer:in in der Szene zu repräsentieren und ihr die Möglichkeit zu geben mit dieser zu interagieren kann sie über die Tranformation von Datenbrille und Controller einen virtuellen Avatar steuern. Auf diese Weise ist es ihr möglich mithilfe der Hände dieses virtuellen Avatars die Knöpfe von Nummerneingabefeldern zu bestätigen und in der später beschriebenen Teleportationsbedingung den Ort auszuwählen zu dem sie sich teleportieren möchte (siehe \autoref{figure:tp-ring}).
 
-Die virtuellen Hände folgen der Bewegung und Drehung, und sogar der Stellung der Finger, der echten Hände von der Nutzer:in solange sie die Oculus Controller auf die richtige Weise hält. Die Hände sind in \autoref{figure:hands} zu sehen.
-Auch mit ihrem Kopf kann die Nutzer:in mit der Szene interagieren, auch Knöpfe betätigen, wenngleich dies auch eine weniger hilfreiche Funktionalität ist.
+Die virtuellen Hände folgen der Bewegung und Drehung, der echten Hände, sogar der Stellung der Finger, von der Nutzer:in solange sie die Oculus Controller auf die richtige Weise hält. Die Hände sind in \autoref{figure:hands} zu sehen.
+Auch mit ihrem Kopf kann die Nutzer:in mit der Szene interagieren und Knöpfe betätigen, wenngleich dies auch eine weniger hilfreiche Funktionalität ist.
 
 Die Funktionalität der virtuellen Avatare wurde vom Oculus SDK bereit gestellt und wurde von mir lediglich in die Szene integriert. %quelle?
 Damit virtuelle Objekte innerhalb der Szene dem realen Körper der Nutzer:in folgen wurden diese hierarchisch den dafür bereit gestellten \textquote{Anchor}-Objekten unterstellt (siehe \autoref{figure:hierarchy}). Für die Hände wurden dafür die vom Oculus SDK bereiten gestellten Prefabs genutzt. %name of prefabs
@@ -413,7 +415,7 @@ An den \textquote{CenterEyeAnchor} wurde die in \autoref{sec:scene-design} erwä
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\textwidth]{images/rotationredirector.png}
-    \caption{caption rotgains}\label{figure:rotredirector}
+    \caption{Screenshot eines instaziierten \textquote{RotatinRedirector}-Objekts von oben. Der rote Bereich repräsentiert den Trackingspace bevor der Rotationgain ausgeführt wurde, der Blaue den danach. Der grün umrandete Quader stellt den Collider dar, in dem die Nutzer:in sich befinden muss, damit der Rotationgain angewendet wird. Die grün nach oben steigende Linie repäsentiert den Punkt $\vec{P}$}\label{figure:rotredirector}
 \end{figure}
 
 Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen gerichteten Rotationgain auf die Nutzer:in anzuwenden. Wie das generierte und konfigurierte RotationRedirector-Objekt im Unity-Editor aussieht ist in \autoref{figure:rotredirector} zu sehen. Der rote Bereich repräsentiert den innerhalb Trackingspaces begehbaren Bereich vor der Anwendung des Rotationgains und der Blaue den innerhalb des Trackingspace begehbaren Bereich nach der vollständigen Ausführung des Rotaiongains.
@@ -447,7 +449,7 @@ Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/teleportring.jpg}
-    \caption{caption teleport ring}\label{figure:tp-ring}
+    \caption{Der Teleportationscursor mit dem die Nutzer:in kurz vor der Teleportation ihr Ziel markieren kann. Der Pfeil innerhalb des Rings repäsentiert die Blickrichtung nach der Teleportation}\label{figure:tp-ring}
 \end{figure}
     Die Teleportierung funktioniert indem die Nutzer:innen mit der rechten Hand ihres Avatars während sie die $A$-Taste auf dem rechten Controller gerückt halten, auf die Stelle am Boden zielen, zu der sie sich bewegen möchten. Währenddessen werden ein grüner Laserstrahl, der aus der rechten Hand zielt und der Teleportationscursor eingeblendet (siehe \autoref{figure:tp-ring}). Mit dem Joystick des linken Controllers kann die Blickrichtung nach der Teleportation eingestellt werden, diese wird auch durch den Pfeil im Teleportationscursor repäsentiert. Wenn die Nutzer:in nun den Zeigefinger-Trigger ihres rechten Controller bedient, wird die Teleportation ausgeführt.
 
@@ -466,7 +468,7 @@ Damit sich dies intuitiver anfühlt und die Aufmerksamkeit nicht so konkret auf 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/numpad.jpg}
-    \caption{numpad caption}\label{figure:numpad}
+    \caption{Ein Nummerneingabefeld. Mit der \# Taste wird eine Eingabe bestätigt, die c-Taste löscht die aktuelle Eingabe}\label{figure:numpad}
 \end{figure}
 
 Um diesen Effekt zu erzielen wird ein Nummerneingabefeld (siehe \autoref{figure:numpad}), an der Korridorinnenwand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $\vec{P}$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
@@ -481,7 +483,7 @@ In den Kontrollbedingungen wird kein Rotationgain angewandt. Dennoch müssen die
     \centering
     \includegraphics[width=0.4\textwidth]{vrscreenshots/dissolve.jpg}
     \includegraphics[width=0.4\textwidth]{vrscreenshots/reverseddoor.jpg}
-    \caption{doors caption}\label{figure:doors}
+    \caption{Links: Eine sich gerade mit einem Auflösungseffekt öffnende Seitentür; Rechts: Die nun verschloßene Tür, die verhindert, dass die Nutzer:in nach der Ausführung des Rotaiongains in den vorherigen Raum zurück geht}\label{figure:doors}
 \end{figure}
 
 Um die Nutzer:in daran zu hindern in Bereiche zu gehen, in die ihr noch nicht zugänglich sind weil beispielsweise der Rotationgain noch nicht abgeschlossen ist, wird ihr dies durch eine verschlossene Tür suggeriert. Nach abgeschlossenem Rotationgain öffnet die Tür sich mit einem auflösenden optischem Effekt (siehe \autoref{figure:doors}, links) und einem Erfolg andeutenden Geräusch. Damit sie nun aber nicht auf die Idee kommt, in den vorherigen Raum zurück zu gehen (dieser läge nun außerhalb begehbaren Bereichs) wird hinter ihr eine weitere Tür mit dem selben Effekt verschlossen (siehe \autoref{figure:doors} rechts).
@@ -494,7 +496,7 @@ Um zu verhindern, dass in andere Räume hinragende Korridore betreten werden kö
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/better_chooserpad.jpg}
-    \caption{chooserpad caption}\label{figure:chooserpad-menu}
+    \caption{Das Eingabefeld, mit dem die verschiedenen Versuchsbedingungen ausgewählt werden können; Die c-Taste löscht die aktuelle Eingabe, mit der \#-Taste wird das aktuell ausgewählte Level gestartet}\label{figure:chooserpad-menu}
 \end{figure}
 Damit die Versuchspersonen der später vorgestellten Studie die Level mit den unterschiedlichen Bedingungen ausführen können, gibt es ein Menü, in dem diese Ausgewählt werden können. Darin befindet sich nur der Boden, die Decke und das Bedingungsauswahlfeld (siehe \autoref{figure:chooserpad-menu}). Auf diesem kann die Nutzer:in auf einem $3 \times 3$ Eingabefeld auswählen, welche Versuchsbedingung sie starten möchte. In der späteren Studie wird vorgegeben, welche die Proband:in auswählen soll. Die einzelnen Bedingungen sind folgendermaßen kodiert. $A$ steht für die Real-Walking Fortbewegungsart-Bedingungen, $B$ für Joystick-Steuerung, $C$ für Teleportation, $1$ für eine Raumanzahl von 3 Räumen, $2$ für 6 und $3$ für 9 Räume. Die Auswahl erfolgt per Tastendruck, allerdings wird das Level erst generiert und gestartet, sobald anschließend die Bestätigungstaste \# gedrückt wird. Diese Kodierung ist den Versuchspersonen nicht bekannt.
 
@@ -527,8 +529,8 @@ Um zu verstehen wie die Berechnung der Ecken eines Raumes funktioniert ist es zu
 
 \begin{figure}[H]
     \ctikzfig{2rooms_a}
-    \caption{Veranschaulichung der Raumstellung zueinander, sodass $\vec{P}$ den Drehpunkt kennzeichnet }\label{figure:two_rooms} %TODO: formulierung
-    %TODO: P Point size, vec
+    \caption{So müssen die Räume angeordnet sein, sodass der Trackingspace, wenn an Punkt $\vec{P}$ ein gerichteter Rotationgain über 90\textdegree\ ausgeführt wird über dem Areal $B$ liegt, wenn er vorher über $A$ lag; $O$ bezeichnet den Bereich, bei dem sich die beiden Räume überlagern}\label{figure:two_rooms} %TODO: formulierung
+    %TODO: P Point size
 \end{figure}
 
 %paragraph Erklärung
@@ -558,8 +560,8 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 
 \begin{figure}[H]
     \centering
-    \input{calculateCorners.tikz}
-    \caption{Zur Eckenberechnung genutzte Vektoren. Mit $\vec{C_0}, \vec{C_1}, \vec{C_2}, \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes (Nicht die zur Eckenberechnung genutzen Vektoren). } %TODO: bessere caption, was für eine scheisse
+    \input{calculateCorners.tikz}%TODO: um richtungsvektoren ergänzen
+    \caption{Die Pfeile repräsentieren die zur Eckenberechnung genutzten Vektoren. Mit $\vec{C_0}, ..., \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes }
     \label{figure:calculateCornersFig}
 \end{figure}
 
@@ -631,7 +633,7 @@ $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreib
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/korridorheraus.jpg}
-    \caption{korridor caption}\label{figure:qqplot-2way}
+    \caption{Ein Korridor von innen; Links, am Ende des Ganges befindet sich die Seitentür, rechts daneben das Nummerneingabefeld; Rechts lässt sich aus der Tür hinaus in den Raum blicken}\label{figure:qqplot-2way}
 \end{figure}
 %TODO: Bild eines Korridors
 Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so gestaltet, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird in die Räume jeweils ein Korridor, also ein kleiner Flur, der auf die Tür zum nächsten Raum zuläuft, generiert. In der hier vorgestellten Implementierung der Levelgenerierungmethode wird der Korridor für jeden Raum generiert, bevor mit der Eckenberechnung für den nächsten Raum begonnen wird, und wie in \autoref{sec:random} beschrieben wird, hängt diese sogar von dem Korridor ab. Sie sind also wichtiger Bestandteil dieser Implementierung, die Levelgenerierungmethode ließe sich aber auch ohne sie realisieren. In diesem Abschnitt wird die Generierung dieser Korridore für ihre jeweiligen Räume erläutert.
@@ -654,7 +656,7 @@ Bevor die Meshgenerierung stattfinden kann muss zunächst die Türposition auf d
 \begin{figure}[H]
     \centering
     \input{doorCalc.tikz}
-    \caption{caption} %TODO:caption
+    \caption{Frontalansicht von der Struktur der Frontalseite eines Korridors}
     \label{figure:doorCalcFig}
 \end{figure}
 
@@ -723,7 +725,7 @@ Die Berechnung der Vertices, in der Haupttür ist nun trivial, erfolgt mit der b
 \begin{figure}[H]
     \centering
     \sourcecode{calcMainDoor.cs}
-    \caption{caption TODO: code hübscher machen} %TODO:caption
+    \caption{Der Quelltext, der für die Errechnung des Mittelpunktes der Haupttür eines Korridors verantwortlich ist}
     \label{figure:calcMainDoorCode}
 \end{figure}
 
