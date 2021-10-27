@@ -410,7 +410,14 @@ An den \textquote{CenterEyeAnchor} wurde die in \autoref{sec:scene-design} erwä
 
 \section{Implementierung der Rotationgains}
 
-Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen gerichteten Rotationgain auf die Nutzer:in anzuwenden. Der RotationRedirector wird nachdem das alles geschehen ist für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist übergeben, sodass er aktiviert werden kann sobald das Signal vom entsprechenden Collider kommt, dass die Nutzer:in sich über dem Rotationspunkt ($\vec{P}$) befindet.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\textwidth]{images/rotationredirector.png}
+    \caption{caption rotgains}\label{figure:rotredirector}
+\end{figure}
+
+Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen gerichteten Rotationgain auf die Nutzer:in anzuwenden. Wie das generierte und konfigurierte RotationRedirector-Objekt im Unity-Editor aussieht ist in \autoref{figure:rotredirector} zu sehen. Der rote Bereich repräsentiert den innerhalb Trackingspaces begehbaren Bereich vor der Anwendung des Rotationgains und der Blaue den innerhalb des Trackingspace begehbaren Bereich nach der vollständigen Ausführung des Rotaiongains.
+Der RotationRedirector wird nachdem das alles geschehen ist für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist übergeben, sodass er aktiviert werden kann sobald das Signal vom entsprechenden Collider kommt, dass die Nutzer:in sich über dem Rotationspunkt ($\vec{P}$) befindet. (Auch der Collider ist in \autoref{figure:rotredirector} abgebildet.)
 Der Rotationgain verstärkt,verringert die Drehung in jeweilige Richtung, um $10\%$. Damit liegt der Rotationgain noch innerhalb der in \cite{detection-thresholds} gefundenen Grenzen der Wahrnehmbarkeit (Detection-Thresholds), und sollten somit nicht von Nutzer:innen erkennbar sein.
 Desweiteren sind die Rotationgains abhängig von der Kopf-Drehgeschwindigkeit (velocity dependent gains) %TODO: eike fragen, wie ich das aufschreiben soll.
 Die Höchstgeschwindigkeit, auf die die Drehung erhöht werden kann liegt bei 350.
@@ -420,13 +427,12 @@ Die Höchstgeschwindigkeit, auf die die Drehung erhöht werden kann liegt bei 35
 %rotation speed upper threshold: 350
 
 \section{Implementierung der Impossible Spaces}
-Die Wände der Räume werden für die Real-Walking Studienbedingung, wie später in \autoref{subsec:realwallgen} ausgeführt, auf eine Weise generiert die real nicht möglich wäre, die Räume überlappen sich an den Grenzbereichen. Sie werden also zu Impossible Spaces. Das Ein- und Ausblenden der entsprechenden Wände wird von der \textquote{RoomAndProgressManager}-Klasse übernommen.
+Die Wände der Räume werden für die Real-Walking Studienbedingung, wie später in \autoref{subsec:realwallgen} ausgeführt, auf eine Weise generiert die in der realen Welt nicht möglich wäre, die Räume überlagern sich an den Grenzbereichen. Sie werden also zu Impossible Spaces. Das Ein- und Ausblenden der entsprechenden Wände wird von der \textquote{RoomAndProgressManager}-Klasse übernommen.
 
 \section{Fortbewegungsarten}
 Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten implementiert wurden.
 
 \subsection{Joystick-Steuerung} \label{subsec:joystick-implementation}
-    %TODO: technische Daten über joysticks: geschwindigkeit, beschleunigung, in blickrichtung etc(?).
     Der Joystick des rechten Controllers bestimmt bei dieser Fortbewegungsbedingung die Yaw-Rotation des Avatars, während der des linken Controllers die Bewegung ermöglicht. Den linken Joystick nach oben zu schieben beschleunigt den Avatar in die aktuelle Blickrichtung.
 
     Die Joystick-Fortbewegung wurde mithilfe einiger, vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem in \autoref{sec:hierarchy} beschriebenen PlayerController und steuert so diesen und dessen Kindelemente, so auch den virtuellen Avatar der Nutzer:in.
@@ -905,11 +911,10 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Besonders interessant für dieses Projekt sind hier die Punkte 2 und 3, da diese sich zwischen den verschiedenen Fortbewegungsarten unterscheiden. So ist zum Beispiel davon auszugehen, dass die Real-Walking-Fortbewegungsart in mehr Sinnesmodalitäten konsitenz bietet, da die Nutzer:in ihre Stellung im Raum auch durch ihre Propriozeption und ihren Gleichgewichtssinn wahrnehmen kann.
             Nicht außer Acht zu lassen ist natürlich auch, dass natürliches Gehen durch dessen Alltagsnähe eine deutlich intuitivere Fortbewegungsmethode darstellt und dementsprechend anzunehmen ist, dass es als solche einem Präsenzgefühl weniger im Weg steht als die ungewohntere Navigation mit den Alternativen.
 
-            Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire \cite{presence-questionaire} durchgeführt. (Fortlaufend SUS-Questionaire genannt.) Dieser ist im Anhang %TODO: link to sus
-            abgebildet. Er besteht aus 6 Fragen, die auf einer Skala von 1-7 beantwortet werden, wobei 7 immer für die höchste und 1 für die geringste wahrgenommene Präsenz in der Umgebung steht.
+            Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire \cite{presence-questionaire} durchgeführt. (Fortlaufend SUS-Questionaire genannt.) Dieser ist im \nameref{anhang:durchlauf} enthalten (P1-P7) und ist im Anhang abgebildet. Der SUS-Questionaire besteht aus 6 Fragen, die auf einer Skala von 1-7 beantwortet werden, wobei 7 immer für die höchste und 1 für die geringste wahrgenommene Präsenz in der Umgebung steht. Die letze Frage des SUS-Questionaires ermöglicht den Proband:innen noch etwas dazu hinzuzufügen.
 
             %wer hat da was zu rausgefunden
-            Usoh et al. überprüfen in ihrer Arbeit \cite{usoh-vergleich-1999} inwieweit sich das Präsenzgefühl zwischen echtem gehen, virtuellem gehen und Fortbewegung durch fliegen unterscheidet. Die Ergebnisse deuten darauf hin, dass die beiden Geh-Fortbewegungsarten zu einem signifikant höhreren Präsenzgefühl führen und sie konkludieren, dass dies mit der stärkeren Assoziation mit dem virtuellen Avatar zu tun haben könnte. Dies ist die Grundlage für die dritte hier überprüfte Hypothese.
+            Usoh et al. überprüfen in ihrer Arbeit \cite{usoh-vergleich-1999} inwieweit sich das Präsenzgefühl zwischen natürlichem Gehen, virtuellem Gehen und Fortbewegung durch Fliegen unterscheidet. Die Ergebnisse deuten darauf hin, dass die beiden Geh-Fortbewegungsarten zu einem signifikant höhreren Präsenzgefühl führen und sie konkludieren, dass dies mit der stärkeren Assoziation mit dem virtuellen Avatar zu tun haben könnte. Dies ist die Grundlage für die dritte hier überprüfte Hypothese.
 
             %TODO:at related work einen presence teil?
 
@@ -963,7 +968,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
 
 \chapter{Durchführung und Ergebnisse}\label{}
-    Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handeln, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben um danach die Methoden der Datenevaluation vorzustellen und sie, zu guter letzt, durchzuführen. Die Fragebögen wurden mit \textquote{Google-Forms} implementiert und sind im Anhang mitsamt allen Daten und Antworten im Anhang zu finden.
+    Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handeln, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben um danach die Methoden der Datenevaluation vorzustellen und sie, zu guter letzt, durchzuführen. Die Fragebögen wurden mit \textquote{Google-Forms} implementiert und sind im \textquote{\nameref{anhang}} mitsamt allen Daten und Antworten zu finden.
 
     \section{Umstände}\label{sec:circumstances}
         Aufgrund der anhaltenden Covid-19 Situation wurde dieses nicht, wie sonst bei vergleichbaren Arbeiten üblich im offiziellen Rahmen der Universität durchgeführt, sondern unter meiner privaten Verantwortung. Es wurden ausreichend Sicherheitsmaßnahmen durchgeführt um die Gefahr einer Infektion durch die Umstände des Experiments so gering wie möglich zu halten. Abgesehen von einer Teilnehmenden Person, hatten alle Proband:innen zum Zeitpunkt der Durchführung bereits vollen Impfschutz.
@@ -994,10 +999,8 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         Zunächst haben diese sich ihre Hände desinfiziert, danach führten sie einen Antigen-Schnelltest an sich aus. In der Zeit, bevor das Ergebnis davon festgestellt werden konnten wurden den Proband:innen die Steuerung von der Joystick- und Teleportationsbedingung erklärt.
         Zudem wurde ihnen erklärt, dass ihre Aufgabe während des Experiments darin bestünde die fortbewegte Entfernung in jeder Bedingung einzuschätzen. Zudem sollen sie von Raum zu Raum gelangen indem sie an der Tür zum nächsten Raum die erforderlichen Zahlencodes eingeben, bis die Tür sich öffnet.
 
-        Nachdem dann das negative Testergebnis abzulesen war (bei keiner Teilnehmer:in gab es ein positives Testergebnis), wurden die Proband:innen einer der Gruppen zugeteilt %wie?
-        und ihnen wurde der im Anhang %link zum anhang mit demographie fragebogen
-        abgebildete Demographie Fragebogen auf einem Laptop bereit gestellt. Nachdem dieser ausgefüllt war durften die Proband:innen das erste mal die für die Durchführung der Studie genutzte Oculus Quest 2 Datenbrille aufsetzen um sich kurz damit vertraut zu machen. Nebenbei wurde das Bild der Brille über einen Google-Chromecast angezeigt, sodass es von aussen möglich war zu sehen, was in der Datenbrill dargestellt wurde. Den Teilnehmer:innen wurde erklärt wie sie innerhalb des Oculus Startbildschirm navigieren können, sodass diese dann selber die APK für die Studie öffnen konnten (siehe \autoref{figure:oculus-menu}).
-
+        Nachdem dann das negative Testergebnis abzulesen war (bei keiner Teilnehmer:in gab es ein positives Testergebnis), wurden die Proband:innen einer der Gruppen zugeteilt und ihnen wurde der erste Abschnitt des, im Anhang
+        abgebildeten, \nameref{anhang:demo}s auf einem Laptop bereit gestellt. Nachdem dieser ausgefüllt war durften die Proband:innen das erste mal die für die Durchführung der Studie genutzte Oculus Quest 2 Datenbrille aufsetzen um sich kurz damit vertraut zu machen. Nebenbei wurde das Bild der Brille über einen Google-Chromecast angezeigt, sodass es von aussen möglich war zu sehen, was in der Datenbrill dargestellt wurde. Den Teilnehmer:innen wurde erklärt wie sie innerhalb des Oculus Startbildschirm navigieren können, sodass diese dann selber die APK für die Studie öffnen konnten (siehe \autoref{figure:oculus-menu}).
 
         \begin{figure}[!h]
             \centering
@@ -1007,14 +1010,14 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
         Nachdem diese geöffnet wurde (und der Unity-Ladebildschirm abgeklungen war) befanden die Teilnehmer:innen sich im virtuellen Menü der Studie (siehe \autoref{figure:chooserpad-menu}). Im Menü der Studie war die Teleportier-Fortbewegungsart aktiviert, damit die Teilnehmer:innen unabhängig der Reihenfolge, in der sie später die drei Bedingungen durchliefen schon einmal mit dieser vertraut waren.
         Dort befand sich auch Versuchsbedingungseingabefeld, mit dem die Teilnehmenden dann sowohl ausprobieren konnten, wie die späteren Nummerneingabefelder funktionieren, also auch die Studienbedingung auswählen konnten. Dafür musste zuerst die entsprechende Taste ($A1-C3$, je nach Bedingung wie in \autoref{sec:setup} definiert) und danach die Bestätigungstaste \# gedrückt werden, mit der die Bedingung dann augenblicklich gestartet wurde. Den Proband:innen wurde, abhängig von ihrer Gruppe, mitgeteilt welche Bedingung sie ausführen sollen, dann starteten sie diese und führten sie aus.
-        Nach Beendigung der Versuchsbedingung wurde den Proband:innen dann auf dem Laptop der Fragebogen 2 %link zum zweiten Fragebogen
-        geöffnet, den diese dann ausfüllten. Bei diesem wurde zuerst nach der Distanzschätzung, gefragt und dann mithilfe des SUS-Questionaire
+        Nach Beendigung der Versuchsbedingung wurde für die Proband:innen dann auf dem Laptop der, auch im Anhang abgebildete, \nameref{anhang:durchlauf}
+        geöffnet, den diese dann ausfüllten. Bei diesem wurde zuerst nach der Distanzschätzung, gefragt und dann mithilfe des SUS-Questionaires
         nach dem Präsenzgefühl.
 
         Das Öffnen, dann das Durchführen der Bedingung und das nachfolgende Ausfüllen des Fragebogens %formulierung
-        wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen.
+        wurde dann für jede der drei Bedingungen in der entsprechenden Reihenfolge durchgeführt. Danach wurde von mir überprüft ob die Daten, die am Ende einer Bedingung an die Firebase-Datenbank versendet werden, angekommen sind um im Falle eines Fehlers gegebenenfalls einzelne Bedingungen zu wiederholen. Dies ist erfreulicherweise nicht notwendig gewesen. Zusätzlich dazu, wurde die aktuelle VP-ID händisch von mir in die neu hinzugekommenen Daten eingetragen, um die Ergebnisse später eindeutig zuordnen zu können.
 
-        Zu guter letzt wurden die Proband:innen gebeten die letzten, noch fehlenden Daten in den Demographiefragebogen zu füllen.
+        Zuletzt wurden die Proband:innen gebeten die letzten, noch fehlenden Daten in den Abschnitt 2 des \nameref{anhang:demo}s zu füllen.
 
         Bei der Versuchsperson mit der ID 2, gab es leider einen kleinen Fehler mit der Wandgenerierung, sodass zuerst von ihr durchgeführte Versuchsbedinung $C2$ abgebrochen und wiederholt wurde. Im Anschluss wurde der Fehler, der nur in seltenen Fällen auftrat, von mir aus dem Quelltext beseitigt.
 
@@ -1024,18 +1027,19 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
         Die Durchführung des Experiments hat bei allen Teilnehmer:innen etwa 45 Minuten gedauert.
 
-        \section{Auswertung der Ergebnisse} %TODO: mauchlys tests for all
-            Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Raumlänge %TODO: klar was gemeint ist? umschreiben?
+        \section{Auswertung der Ergebnisse}
+            Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Levellänge
             zuordnen.
-            Um die Ergebnisse der beiden Quellen in einer gemeinsame Tabelle zu vereinen habe ich die Antworten auf das Google-Form in einer \textquote{Google-Tabellen}-Tabelle gesammelt und dann die Messergebnisse aus der Datenbank dazugetragen. Die Zuordnung erfolgte über die Versuchspersonen-ID, die Fortbewegungsbedingung und die Raumlänge%TODO: klar was gemeint ist? umschreiben?
-            , die sich in beiden Datenquellen finden ließen und in der Kombination eindeutig einander zuordbar sind.
+            Um die Ergebnisse der beiden Quellen in einer gemeinsame Tabelle zu vereinen habe ich die Antworten auf das \textquote{Google-Forms}-Formular in einer \textquote{Google-Tabellen}-Tabelle gesammelt und dann die Messergebnisse aus der Datenbank dazugetragen. Die Zuordnung erfolgte über die Versuchspersonen-ID, die Fortbewegungsbedingung und die Levellänge, die sich in beiden Datenquellen finden ließen und in der Kombination eindeutig einander zuordbar sind.
             Mit der Formel %link?
-            berechnete ich eine neue Spalte, für die Differenz. Das ganze habe ich dann als $.csv$ Datei exportiert und um die weitere Datenverarbeitung und statistische in R durchzuführen. Dafür habe ich die Version \textquote{stable 4.1.1} genutzt.
+            berechnete ich eine neue Spalte, für die Differenz. Das ganze habe ich dann als $.csv$ Datei exportiert und um die weitere Datenverarbeitung und statistische Auswertung in R durchzuführen. Dafür habe ich die R Version \textquote{stable 4.1.1} genutzt.
+
+            Alle Antworten aus den Fragebögen und die in der Datenbank gespeicherten Mess-Daten sind im \textquote{\nameref{anhang}} abgebildet. Letztere wurden von mir, der Übersicht wegen, vom $.json$ Format in ein Tabellenformat formatiert.
 
                 \subsection{Statistische Auswertung zur Schätzung der fortbewegten Distanz}
                     Die Auswertung zur Schätzung der fortbewegten Distanz erfolgt in zwei Teilen.
-                    Der erste Teil untersucht die absolute Differenz zwischen Schätzung und Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
-                    Darauf folgend wird die Schätzung relativ zur gemessenen Distanz mit einer auf eine Wechselwirkung der Einflussfaktoren \textquote{Fortbewegungsart} und \textquote{Raumanzahl des Levels} untersucht.
+                    Der erste Teil untersucht die absolute Differenz zwischen Schätzung und gemessener Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
+                    Darauf folgend wird die Schätzung relativ zur gemessenen Distanz mit einer zweifaktoriellen Varianzanalyse auf eine Wechselwirkung der Einflussfaktoren \textquote{Fortbewegungsart} und \textquote{Raumanzahl des Levels} untersucht.
 
                     %%part absolute difference
                     Die Qualität von der Schätzung der Proband:innen wird über die absolute Different zwischen gemessener Strecke und geschätzer Strecke, also folgendermaßen, berechnet:
@@ -1140,7 +1144,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     $$ \frac{D_g}{D_m} $$
 
                     Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
-                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz ist $0,649$ (also circa $65\%$) bei einer Standartabweichung von $0,352$.
+                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz liegt bei $0,649$ (also circa $65\%$) mit einer Standartabweichung von $0,352$.
 
                     Die Durchschnittswerte und Standartabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
 
@@ -1197,7 +1201,7 @@ M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrul
                     Es wurde eine zweifaktorielle Varianzanalyse mit Messwiederholung mit den Faktoren Fortbewegungsart und Raumanzahl des Levels zu einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt.
                     Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren; $F(4,18) = 4,106$  $p = 0,015$
 
-                    %TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
+                    %Important TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
                     Implizit wurden dabei auch einfaktorielle Varianzanalysen zu einem Signifikanzniveau von $\alpha = 5\%$ mit beiden Faktoren durchgeführt. Beide zeigten keine signifikanten Effekte. (Raumanzahl: $F(2,18) = 0,332$  $ p = 0,722$   Fortbewegungsart: $F(2,18) = 1,144$  $ p = 0.341$)
 
 %ANOVA Table (type II tests)
@@ -1242,7 +1246,7 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                         \caption{Durchschnittswerte und Standartabweichungen der SUS-Scores für die verschiedenen Fortbewegungsarten; Die Unterschiede sind signfikant, können aber nicht von Post-Hoc Tests eingeordnet werden, dort wurden keine Signifikanten Effekte gefunden.} \label{table:presence_means}
                     \end{table}
 
-                    \autoref{figure:presence_plot} Stellt die SUS-Scores als Boxplot dar. %wirklich? irgendwie komisch
+                    \autoref{figure:presence_plot} Stellt die SUS-Scores als Boxplot dar.
 
                     \begin{figure}[!h]
                         \centering
@@ -1363,7 +1367,7 @@ Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
             Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,33$) ist deutlich größer, als bei der Joystick-($0,889$) oder Teleportationsbedingung ($0,667$).
             Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
 
-            Ein möglicher Grund für diese ambivalenten Ergebnisse hat ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnten, konnten nur nicht parametrische-statistische Tests verwendet werden.
+            Ein möglicher Grund für diese ambivalenten Ergebnisse hat ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnte, konnten nur nicht-parametrische statistische Tests verwendet werden.
             Es ist davon auszugehen, dass die Ergebnisse im Falle einer größeren Datenmenge um einiges klarer gewesen wären.
 
             Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen.
