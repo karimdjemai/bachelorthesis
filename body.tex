@@ -275,7 +275,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 
         \end{tikzpicture}
     \end{center}
-    \caption{Ein Überblick über die Beziehungen der Klassen untereinander in Form eines UML-Klassendiagramms; Für die Übersichtlichkeit wurden Unity-Speizifische Klassen wie zum Beispiel $Vector3$ oder $MonoBehaviour$ herausgelassen}\label{figure:uml}
+    \caption{Ein Überblick über die Beziehungen der Klassen untereinander in Form eines UML-Klassendiagramms; Für die Übersichtlichkeit wurden Unity-eigene Klassen wie zum Beispiel $Vector3$ oder $MonoBehaviour$ herausgelassen}\label{figure:uml}
 \end{figure}
 
 \section{Vorstellung der Klassen}
@@ -415,7 +415,7 @@ An den \textquote{CenterEyeAnchor} wurde die in \autoref{sec:scene-design} erwä
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\textwidth]{images/rotationredirector.png}
-    \caption{Screenshot eines instaziierten \textquote{RotatinRedirector}-Objekts von oben. Der rote Bereich repräsentiert den Trackingspace bevor der Rotationgain ausgeführt wurde, der Blaue den danach. Der grün umrandete Quader stellt den Collider dar, in dem die Nutzer:in sich befinden muss, damit der Rotationgain angewendet wird. Die grün nach oben steigende Linie repäsentiert den Punkt $\vec{P}$}\label{figure:rotredirector}
+    \caption{Screenshot eines instaziierten \textquote{RotatinRedirector}-Objekts von oben. Der rote Bereich repräsentiert den Trackingspace bevor der Rotationgain ausgeführt wurde, der Blaue den danach. Der grün umrandete Quader stellt den Collider dar, in dem die Nutzer:in sich befinden muss, damit der Rotationgain angewendet wird. Die grün nach oben steigende Linie repräsentiert den Punkt $\vec{P}$}\label{figure:rotredirector}
 \end{figure}
 
 Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender}. Dieses bietet das Prefab \textquote{RotationRedirector}, welches im Code instanziiert werden kann und dann nachdem es richtig positioniert ist, die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Kooridinaten, des Punktes, um den rotiert werden soll übergeben bekommen hat, dazu in der Lage ist einen gerichteten Rotationgain auf die Nutzer:in anzuwenden. Wie das generierte und konfigurierte RotationRedirector-Objekt im Unity-Editor aussieht ist in \autoref{figure:rotredirector} zu sehen. Der rote Bereich repräsentiert den innerhalb Trackingspaces begehbaren Bereich vor der Anwendung des Rotationgains und der Blaue den innerhalb des Trackingspace begehbaren Bereich nach der vollständigen Ausführung des Rotaiongains.
@@ -449,7 +449,7 @@ Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/teleportring.jpg}
-    \caption{Der Teleportationscursor mit dem die Nutzer:in kurz vor der Teleportation ihr Ziel markieren kann. Der Pfeil innerhalb des Rings repäsentiert die Blickrichtung nach der Teleportation}\label{figure:tp-ring}
+    \caption{Der Teleportationscursor mit dem die Nutzer:in kurz vor der Teleportation ihr Ziel markieren kann. Der Pfeil innerhalb des Rings repräsentiert die Blickrichtung nach der Teleportation}\label{figure:tp-ring}
 \end{figure}
     Die Teleportierung funktioniert indem die Nutzer:innen mit der rechten Hand ihres Avatars während sie die $A$-Taste auf dem rechten Controller gerückt halten, auf die Stelle am Boden zielen, zu der sie sich bewegen möchten. Währenddessen werden ein grüner Laserstrahl, der aus der rechten Hand zielt und der Teleportationscursor eingeblendet (siehe \autoref{figure:tp-ring}). Mit dem Joystick des linken Controllers kann die Blickrichtung nach der Teleportation eingestellt werden, diese wird auch durch den Pfeil im Teleportationscursor repäsentiert. Wenn die Nutzer:in nun den Zeigefinger-Trigger ihres rechten Controller bedient, wird die Teleportation ausgeführt.
 
@@ -468,7 +468,7 @@ Damit sich dies intuitiver anfühlt und die Aufmerksamkeit nicht so konkret auf 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/numpad.jpg}
-    \caption{Ein Nummerneingabefeld. Mit der \# Taste wird eine Eingabe bestätigt, die c-Taste löscht die aktuelle Eingabe}\label{figure:numpad}
+    \caption{Ein Nummerneingabefeld; Mit der \# Taste wird eine Eingabe bestätigt, die c-Taste löscht die aktuelle Eingabe}\label{figure:numpad}
 \end{figure}
 
 Um diesen Effekt zu erzielen wird ein Nummerneingabefeld (siehe \autoref{figure:numpad}), an der Korridorinnenwand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $\vec{P}$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
@@ -483,7 +483,7 @@ In den Kontrollbedingungen wird kein Rotationgain angewandt. Dennoch müssen die
     \centering
     \includegraphics[width=0.4\textwidth]{vrscreenshots/dissolve.jpg}
     \includegraphics[width=0.4\textwidth]{vrscreenshots/reverseddoor.jpg}
-    \caption{Links: Eine sich gerade mit einem Auflösungseffekt öffnende Seitentür; Rechts: Die nun verschloßene Tür, die verhindert, dass die Nutzer:in nach der Ausführung des Rotaiongains in den vorherigen Raum zurück geht}\label{figure:doors}
+    \caption{Links: Eine sich gerade mit einem Auflösungseffekt öffnende Seitentür; Rechts: Die nun verschloßene Tür, die verhindert, dass die Nutzer:in nach der Ausführung des Rotationgains in den vorherigen Raum zurück geht}\label{figure:doors}
 \end{figure}
 
 Um die Nutzer:in daran zu hindern in Bereiche zu gehen, in die ihr noch nicht zugänglich sind weil beispielsweise der Rotationgain noch nicht abgeschlossen ist, wird ihr dies durch eine verschlossene Tür suggeriert. Nach abgeschlossenem Rotationgain öffnet die Tür sich mit einem auflösenden optischem Effekt (siehe \autoref{figure:doors}, links) und einem Erfolg andeutenden Geräusch. Damit sie nun aber nicht auf die Idee kommt, in den vorherigen Raum zurück zu gehen (dieser läge nun außerhalb begehbaren Bereichs) wird hinter ihr eine weitere Tür mit dem selben Effekt verschlossen (siehe \autoref{figure:doors} rechts).
@@ -529,8 +529,8 @@ Um zu verstehen wie die Berechnung der Ecken eines Raumes funktioniert ist es zu
 
 \begin{figure}[H]
     \ctikzfig{2rooms_a}
-    \caption{So müssen die Räume angeordnet sein, sodass der Trackingspace, wenn an Punkt $\vec{P}$ ein gerichteter Rotationgain über 90\textdegree\ ausgeführt wird über dem Areal $B$ liegt, wenn er vorher über $A$ lag; $O$ bezeichnet den Bereich, bei dem sich die beiden Räume überlagern}\label{figure:two_rooms} %TODO: formulierung
-    %TODO: P Point size
+    \caption{Darstellung davon, wie die Räume für den antizipierten Effekt angeordnet sein müssen. Wenn an Punkt $\vec{P}$ ein gerichteter Rotationgain über 90\textdegree\ ausgeführt wird liegt der Trackingspace vor der Ausführung des Rotationgains über dem Bereich $A$ und danach über dem Bereich $B$; $O$ bezeichnet den Bereich, bei dem sich die beiden Räume überlagern}\label{figure:two_rooms}
+    %TODO: P Point size in tikz
 \end{figure}
 
 %paragraph Erklärung
@@ -561,7 +561,7 @@ Danach kann sie mit der Illusion geradeaus zu gehen einen neuen Raum erkunden w�
 \begin{figure}[H]
     \centering
     \input{calculateCorners.tikz}%TODO: um richtungsvektoren ergänzen
-    \caption{Die Pfeile repräsentieren die zur Eckenberechnung genutzten Vektoren. Mit $\vec{C_0}, ..., \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes }
+    \caption{Die Pfeile repräsentieren die zur Eckenberechnung genutzten Vektoren. Mit $\vec{C_0}, ..., \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes}
     \label{figure:calculateCornersFig}
 \end{figure}
 
@@ -633,10 +633,9 @@ $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreib
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/korridorheraus.jpg}
-    \caption{Ein Korridor von innen; Links, am Ende des Ganges befindet sich die Seitentür, rechts daneben das Nummerneingabefeld; Rechts lässt sich aus der Tür hinaus in den Raum blicken}\label{figure:qqplot-2way}
+    \caption{Ein Korridor von innen; Links im Bild, am Ende des Ganges befindet sich die Seitentür, an der Wand daneben das Nummerneingabefeld; Rechts im Bild lässt sich aus der Tür hinaus in den Raum blicken}\label{figure:corridor-out}
 \end{figure}
-%TODO: Bild eines Korridors
-Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so gestaltet, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird in die Räume jeweils ein Korridor, also ein kleiner Flur, der auf die Tür zum nächsten Raum zuläuft, generiert. In der hier vorgestellten Implementierung der Levelgenerierungmethode wird der Korridor für jeden Raum generiert, bevor mit der Eckenberechnung für den nächsten Raum begonnen wird, und wie in \autoref{sec:random} beschrieben wird, hängt diese sogar von dem Korridor ab. Sie sind also wichtiger Bestandteil dieser Implementierung, die Levelgenerierungmethode ließe sich aber auch ohne sie realisieren. In diesem Abschnitt wird die Generierung dieser Korridore für ihre jeweiligen Räume erläutert.
+Damit die Nutzer:in versteht wie sie in den nächsten Raum kommt sind die Räume so gestaltet, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen wird in die Räume jeweils ein Korridor, also ein kleiner Flur, der auf die Tür zum nächsten Raum zuläuft, generiert. Wie ein solcher Korridor von innen aussieht ist in \autoref{figure:corridor-out} zu sehen. In der hier vorgestellten Implementierung der Levelgenerierungmethode wird der Korridor für jeden Raum generiert, bevor mit der Eckenberechnung für den nächsten Raum begonnen wird, und wie in \autoref{sec:random} beschrieben wird, hängt diese sogar von dem Korridor ab. Sie sind also wichtiger Bestandteil dieser Implementierung, die Levelgenerierungmethode ließe sich aber auch ohne sie realisieren. In diesem Abschnitt wird die Generierung dieser Korridore für ihre jeweiligen Räume erläutert.
 
 Zunächst wird eine Kante des Grundecks des Raumes ausgewählt, an der ein Korridor erstellt wird (diese wird Pseudozufällig ausgewählt, siehe \autoref{sec:random}). Er kann sowohl an einer kürzeren Kante als auch an einer längeren Kante des Grundecks des Raumes erstellt werden, nur nicht an der Seite an der das Ende des Korridors des vorherigen Raums herausragt, da sich die beiden Korridore sonst kreuzen würden.
 
@@ -656,7 +655,7 @@ Bevor die Meshgenerierung stattfinden kann muss zunächst die Türposition auf d
 \begin{figure}[H]
     \centering
     \input{doorCalc.tikz}
-    \caption{Frontalansicht von der Struktur der Frontalseite eines Korridors}
+    \caption{Frontalansicht von der Struktur der Vorderseite eines Korridors}
     \label{figure:doorCalcFig}
 \end{figure}
 
@@ -751,7 +750,7 @@ Wie in \autoref{subsec:roomplaceidea} besprochen sollen die Räume von Wänden u
     \centering
 
     \scalebox{0.4}{\input{wallCompare.tikz}}
-    \caption{Vergleich der zwei Wandgenerierungsvarianten. Oben: realistische Variante, die in Joystick- und Teleportationsbedingung eingesetzt werden. Unten: unmögliche Variante, die in der Real-Walking Bedingung die Wände generiert. Gestrichelte Linien repräsentieren Wände, die erst unter bestimmten Umständen sichtbar werden.}
+    \caption{Vergleich der zwei Wandgenerierungsvarianten. Oben: Die \textquote{realistische} Variante, die in Joystick- und Teleportationsbedingung eingesetzt wird. Unten: \textquote{unmögliche} Variante, die in der Real-Walking Bedingung die Wände generiert; Gestrichelte Linien repräsentieren Wände, die erst unter bestimmten Umständen sichtbar werden}
     \label{figure:wallCompare}
 \end{figure}
 
@@ -932,7 +931,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \centering
         \input{graeco-latin-square.tex}
 
-        \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3), der verschiedenen Gruppen (G1-3) darstellt, $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ verdeutlichen die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
+        \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3), der verschiedenen Gruppen (G1-3) darstellt, $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ repräsentieren die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
     \end{figure}
 
     Dementsprechend bot sich als Versuchsplan ein Griechisch-Lateinisches Quadrat in der Größe $3 \times 3$ an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Versuchsnedingung \textquote{Joystick} und $C$ für die Bedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
@@ -990,9 +989,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             \includegraphics[width=0.99\textwidth]{images/erfahrungpc.png}
             \includegraphics[width=0.99\textwidth]{images/pcstundenprowoche.png}
             \includegraphics[width=0.99\textwidth]{images/3derfahrung.png}
-            \caption{Angaben der Teilnehmenden zur Erfahrung mit Computerspielen und Stereoskopischem 3D.
-            X-Achsen: Antworten der Teilnehmenden
-            Y-Achsen: Häufigkeit der Antworten}\label{figure:videogames}
+            \caption{Angaben der Teilnehmenden zur Erfahrung mit Computerspielen und Stereoskopischem 3D. Bei allen drei Diagrammen gilt:
+            X-Achse: Antworten der Teilnehmenden
+            Y-Achse: Häufigkeit der Antworten}\label{figure:videogames}
         \end{figure}
 
     \section{Ablauf der Studie}
@@ -1007,7 +1006,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \begin{figure}[!h]
             \centering
             \includegraphics[width=0.5\textwidth]{vrscreenshots/oculusmenu.jpg}
-            \caption{oculus menu caption}\label{figure:oculus-menu}
+            \caption{Das \textquote{Home}-Menü des Betriebssystems der Oculus Quest 2 Datenbrille, auf der der Versuch ausgeführt wurde; Nutzer:innen starteten hier eigenständig die Anwendung in der die Studie durchgeführt wurde}\label{figure:oculus-menu}
         \end{figure}
 
         Nachdem diese geöffnet wurde (und der Unity-Ladebildschirm abgeklungen war) befanden die Teilnehmer:innen sich im virtuellen Menü der Studie (siehe \autoref{figure:chooserpad-menu}). Im Menü der Studie war die Teleportier-Fortbewegungsart aktiviert, damit die Teilnehmer:innen unabhängig der Reihenfolge, in der sie später die drei Bedingungen durchliefen schon einmal mit dieser vertraut waren.
@@ -1057,12 +1056,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \renewcommand\arraystretch{1.2}
                         \centering
                         \begin{tabular}{lccc} \toprule
-                            Bedingung       & n & M    & SD   \\ \midrule
-                            Redirection     & $9$ & $16,9$ & $12,0$ \\
-                            Joystick        & $9$ & $16,0$ & $16,8$ \\
-                            Teleport        & $9$ & $13,8$ & $9,62$ \\ \bottomrule
+                            Fortbewegungsart& $n$ & M    & SD   \\ \midrule
+                            Redirection     & $9$ & 16,9 & 12,0 \\
+                            Joystick        & $9$ & 16,0 & 16,8 \\
+                            Teleport        & $9$ & 13,8 & 9,62 \\ \bottomrule
                         \end{tabular}
-                        \caption{Durchschnitte und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz; Die Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:diff_means}
+                        \caption{Arithmetische Mittel und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz}\label{table:diff_means}
                     \end{table}
 
                     Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
@@ -1070,7 +1069,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/diff_plot.png}
-                        \caption{Plot der Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, Aufgeteilt nach Fortbewegungstechnik; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
+                        \caption{Box-Plot der absoluten Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, aufgeteilt nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
                     \end{figure}
 
                     Eine Varianzanalye mit Messwiederholung setzt vorraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in \autoref{figure:diff_normality} abgebildet.
@@ -1078,7 +1077,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
-                        \caption{Korrelation zwischen Messergebnissen und Normalverteilung nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
+                        \caption{Korrelation zwischen Messergebnissen und einer Normalverteilung in einem Quantil-Quantil-Diagramm, nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
                     \end{figure}
 
                     Zudem wurde ein Shapiro-Wilk Test für die einzelnen Faktorstufen durchgeführt (Ergebnisse in \autoref{table:norm_test_diff}). Dieser deutete nicht darauf hin, dass die Annahme der Normalverteilung verletzt worden sei.
@@ -1089,11 +1088,11 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \centering
                         \begin{tabular}{lcc} \toprule
                             Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & $0,908$            & $0,300$ \\
-                            Joystick     & $0,868$            & $0,117$ \\
-                            Teleport     & $0,867$            & $0,113$ \\ \bottomrule
+                            Real-Walking & 0,908            & 0,300 \\
+                            Joystick     & 0,868            & 0,117 \\
+                            Teleport     & 0,867            & 0,113 \\ \bottomrule
                         \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für die Differenz von Schätzung und Messung für die unterschiedlichen Fortbewegungsarten; Die Annahme der Normalverteilung scheint für keine Faktorstufe verletzt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{table:norm_test_diff}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Tests der absoluten Differenz von Schätzung und Messung der fortbewegten Distanz für die unterschiedlichen Fortbewegungsarten}\label{table:norm_test_diff}
                     \end{table}
 
                     Im Datensatz wurden keine extremen Ausreißer %grenze?
@@ -1154,13 +1153,13 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                         \renewcommand\arraystretch{1.2}
                         \centering
 \begin{tabular}{l|ccc|c}
-M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrule
-3  & $0,813$ / $0298$ & $0,775$ / $0,319$ & $0,458$ / $0,343$ & 0,682 / $0,325$ \\
-6  & $0,415$ / $0356$ & $1,16$  / $0,422$ & $0,464$ / $0,199$ & 0,681 / $0,467$ \\
-9  & $0,546$ / $0183$ & $0,37$  / $0,298$ & $0,836$ / $0,051$ & 0,584 / $0,2$   \\ \bottomrule
-   & $0,591$ / $0,305$ & $0,77$ / $0,459$ & $0,586$ / $0,274$ & $0,649$ / $0,352$
+M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \hline
+3  & 0,813 / 0,298 & 0,775 / 0,319 & 0,458 / 0,343 & 0,682 / 0,325 \\
+6  & 0,415 / 0,356 & 1,160  / 0,422 & 0,464 / 0,199 & 0,681 / 0,467 \\
+9  & 0,546 / 0,183 & 0,370  / 0,298 & 0,836 / 0,051 & 0,584 / 0,200   \\ \hline
+   & 0,591 / 0,305 & 0,770 / 0,459 & 0,586 / 0,274 & 0,649 / 0,352
 \end{tabular}
-                        \caption{Durchschnitte und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, bei den verschiedenen Faktorstufen: Raumanzahl (Reihen) und Fortbewegungsart (Zeilen);  Alle Abweichungen sind bei einem $\alpha = 5\%$ Niveau nicht signifikant}\label{table:ratio_means}
+                        \caption{Arithmetische Mittel und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standartabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
                     \end{table}
 
                     Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
@@ -1168,7 +1167,7 @@ M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrul
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/2wayboxplot.png}
-                        \caption{Boxplot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
+                        \caption{Zweifaktorieller Box-Plot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
                     \end{figure}
 
                     Für eine zweifaktorielle Varianzanalyse müssen die einzelnen Faktorstufen der Daten normalverteilt sein.
@@ -1179,23 +1178,23 @@ M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrul
                         \centering
         \begin{tabular}{lccc} \toprule
             Bedingung    & Raumanzahl & Teststatistik& $p$   \\ \midrule
-            Real-Walking &  3         & $0,917$      & $0,442$ \\
-            Real-Walking &  6         & $0,918$      & $0,445$ \\
-            Real-Walking &  9         & $0,823$      & $0,172$ \\
-            Joystick     &  3         & $0,934$      & $0,504$ \\
-            Joystick     &  6         & $0,922$      & $0,459$ \\
-            Joystick     &  9         & $0,842$      & $0,219$ \\
-            Teleport     &  3         & $0,920$      & $0,451$ \\
-            Teleport     &  6         & $0,792$      & $0,0959$ \\
-            Teleport     &  9         & $0,981$      & $0,738$ \\ \bottomrule
+            Real-Walking &  3         & 0,917      & 0,442 \\
+            Real-Walking &  6         & 0,918      & 0,445 \\
+            Real-Walking &  9         & 0,823      & 0,172 \\
+            Joystick     &  3         & 0,934      & 0,504 \\
+            Joystick     &  6         & 0,922      & 0,459 \\
+            Joystick     &  9         & 0,842      & 0,219 \\
+            Teleport     &  3         & 0,920      & 0,451 \\
+            Teleport     &  6         & 0,792      & 0,0959 \\
+            Teleport     &  9         & 0,981      & 0,738 \\ \bottomrule
         \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Test der Werte für das Verhältnis zwischen Schätzung und Messung für die unterschiedlichen Fortbewegungsarten und Raumanzahlen; Die Annahme der Normalverteilung scheint bei einem Signifikanzniveau von $\alpha = 5\% $ für keine Faktorstufe verletzt}\label{table:shapiro-2way}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Tests der Werte für das Verhältnis zwischen Schätzung und Messung von der fortbewegten Distanz, für die unterschiedlichen Fortbewegungsarten und Raumanzahlen}\label{table:shapiro-2way}
                     \end{table}
 
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/qqplot2way.png}
-                        \caption{Plot der Korrelation zwischen den jeweiligen Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
+                        \caption{Quantil-Quantil Diagramme der Korrelation zwischen den verschiedenen Kombinantionen der Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
                     \end{figure}
 
                     Im Datensatz wurden keine extremen Ausreißer festgestellt.
@@ -1220,14 +1219,14 @@ M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \midrul
             \centering
 \begin{tabular}{lcccccc} \toprule
 Faktorstufe    & Effekt-Faktor  & DFn & DFd & $F$    & $p$      & $p$ korrigiert  \\ \midrule
-Raumanzahl: 3  &  Fortbewegungsart & $2$ & $6$ & $1,11$ & $0,389$ & $1$  \\
-Raumanzahl: 6  &  Fortbewegungsart & $2$ & $6$ & $4,60$ & $0,061$ & $0,183$  \\
-Raumanzahl: 9  &  Fortbewegungsart & $2$ & $6$ & $3,99$ & $0,079$ & $0,237$  \\
-Real-Walking   &  Raumanzahl       & $2$ & $6$ & $1,49$ & $0,299$ & $0,897 $\\
-Joystick       &  Raumanzahl       & $2$ & $6$ & $3,86$ & $0,084$ & $0,252 $\\
-Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
+Raumanzahl: 3  &  Fortbewegungsart & $2$ & $6$ & 1,11 & 0,389 & 1        \\
+Raumanzahl: 6  &  Fortbewegungsart & $2$ & $6$ & 4,60 & 0,061 & 0,183        \\
+Raumanzahl: 9  &  Fortbewegungsart & $2$ & $6$ & 3,99 & 0,079 & 0,237        \\
+Real-Walking   &  Raumanzahl       & $2$ & $6$ & 1,49 & 0,299 & 0,897       \\
+Joystick       &  Raumanzahl       & $2$ & $6$ & 3,86 & 0,084 & 0,252       \\
+Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
 \end{tabular}
-\caption{Die Ergebnisse der Nachuntersuchung der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten, in Form von einfaktoriellen Varianzanalysen, der einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
+\caption{Die Ergebnisse der Post-Hoc Nachuntersuchung von der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten; Diese sind Form von einfaktoriellen Varianzanalysen, von den einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
@@ -1241,11 +1240,11 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung       & $n$ & M       & SD     \\ \midrule
-                            Real-Walking    & $9$ & $2,33 $ & $1,80$ \\
-                            Joystick        & $9$ & $0,889$ & $1,36$ \\
-                            Teleport        & $9$ & $0,667$ & $0,866$ \\ \bottomrule
+                            Real-Walking    & $9$ & 2,33  & 1,80 \\
+                            Joystick        & $9$ & 0,889 & 1,36 \\
+                            Teleport        & $9$ & 0,667 & 0,866 \\ \bottomrule
                         \end{tabular}
-                        \caption{Durchschnittswerte und Standartabweichungen der SUS-Scores für die verschiedenen Fortbewegungsarten; Die Unterschiede sind signfikant, können aber nicht von Post-Hoc Tests eingeordnet werden, dort wurden keine Signifikanten Effekte gefunden.} \label{table:presence_means}
+                        \caption{Arithmetische Mittel und Standartabweichungen der SUS-Scores der Teilnehmenden bei den verschiedenen Fortbewegungsbedingungen} \label{table:presence_means}
                     \end{table}
 
                     \autoref{figure:presence_plot} Stellt die SUS-Scores als Boxplot dar.
@@ -1253,7 +1252,7 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/presence_plot.png}
-                        \caption{Darstellung der SUS-Scores nach Fortbewegungsart;  A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:presence_plot}
+                        \caption{Box-Plot der SUS-Scores nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:presence_plot}
                     \end{figure}
 
                     %no extreme outliers
@@ -1266,7 +1265,7 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/presence_normality.png}
-                        \caption{Korrelation von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt;  A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
+                        \caption{Quantil-Quantil-Diagram der Korrelationen von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
                     \end{figure}
 
                     Um Klarheit zu schaffen wurde ein Shapiro-Wilk-Test zum $\alpha = 5\%$ Signifikanzniveau durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0,00316$) und Teleportation ($p = 0,00521$) nicht angenommen werden kann. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_shapiro} zu sehen.
@@ -1277,11 +1276,11 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & $0,935$            & $0,529$ \\
-                            Joystick     & $0,730$            & $0,00316$ \\
-                            Teleport     & $0,748$            & $0,00521$ \\ \bottomrule
+                            Real-Walking & 0,935            & 0,529 \\
+                            Joystick     & 0,730            & 0,00316 \\
+                            Teleport     & 0,748            & 0,00521 \\ \bottomrule
                         \end{tabular}
-                        \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen; Die Ergebnisse für die Joystick und die Teleportationsbedingung deuten bei einem $\alpha = 5\%$ Signifikanzniveau darauf hin, dass eine Normalverteilung nicht gegeben ist}\label{table:presence_shapiro}
+                        \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen}\label{table:presence_shapiro}
                     \end{table}
 
                     Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt, da dieser nicht normalverteilte Daten vorraussetzt.
@@ -1301,18 +1300,18 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & $2,63$ & $0,151$ & $0,453 $\\
                     %1 sus_score     9   0.517 Kendall W large
 
                     Dennoch wurden bei einer paarweise durchgeführten Post-Hoc Analyse der Präsenzdaten mit einem
-                    Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der $p$-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0.174$, Real-Walking mit Teleport: $p = 0.105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
+                    Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der $p$-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0,174$, Real-Walking mit Teleport: $p = 0,105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
 
 \begin{table}[!ht]
     \renewcommand\arraystretch{1.2}
     \centering
     \begin{tabular}{lcccc} \toprule
-Gruppe 1     & Gruppe 2 & Teststatistik &  $p$  & $p$ korrigiert \\ \midrule
-Real-Walking & Joystick & 15            & 0.058 & 0.174        \\
-Real-Walking & Teleport & 21            & 0.035 & 0.105        \\
-Joystick     & Teleport & 4.5           & 0.586 & 1     \\ \bottomrule
+Bedingung 1& Bedingung 2& Teststatistik &  $p$  & $p$ korrigiert \\ \midrule
+Real-Walking & Joystick & 15            & 0,058 & 0,174        \\
+Real-Walking & Teleport & 21            & 0,035 & 0,105        \\
+Joystick     & Teleport & 4,5           & 0,586 & 1    \\ \bottomrule
     \end{tabular}
-    \caption{Ergebnisse der Post-Hoc Analyse mit Wilcoxon-Vorzeichen-Rang-Test; Die korrigierten $p$-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
+    \caption{Ergebnisse der Post-Hoc Analyse: Paarweise-Untersuchung mit Wilcoxon-Vorzeichen-Rang-Test für gepaarte Datensätze; Die korrigierten $p$-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
 \end{table}
 
 %post-hoc
