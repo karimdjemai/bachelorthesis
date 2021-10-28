@@ -2,75 +2,77 @@
 
 \chapter{Einführung}\label{chapter:intro}
 
-Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten. Usoh et al. \cite{usoh-vergleich-1999} beschreiben beispielsweise, ein höheres Präsenzgefühl der Nutzer:innen, wenn diese sich gehend durch die virtuelle Umgebung fortbewegten, als wenn diese per Knopfdruck durch die Szene flogen.
-Eine der drei von LaViola \cite{cybersickness} zusammenfassten Theorien, die \textquote{Sensory Conflict Theory} (Sensorische Konflikt Theorie) erklärt die Ursache für so genannte \textquote{Cybersickness} oder auch Simulatorkrankheit, also dass Nutzer:innen in bestimmten, durch virtuelle Umgebungen hervorgerufenen Situationen teilweise starke Übelkeit erleben so, dass Informationen verschiedener Sinnesmodalitäten widersprüchlich sind.
-Demnach wäre es also Cybersickness senkend, wenn andere Sinnesmodalitäten, wie der Gleichgewichtssinn oder die Propriozeption zusätzlich zum visuellen Sinn die Eigenbewegung der Nutzer:in wahrnehmen. Und tatsächlich konnten Langbehn et al. \cite{langbehn-vergleich-2018} zeigen, dass Nutzer:innen, die sich in virtuellen Umgebungen fortbewegen signifikant weniger Cybersickness erleben, als wenn sie sich mithilfe von Joysticks fortbewegen.
+Zweibeiniges Gehen bietet als Fortbewegungsart durch virtuelle Umgebungen viele Vorteile gegenüber alternativen Fortbewegungsarten. Usoh et al. \cite{usoh-vergleich-1999} beschreiben beispielsweise, ein höheres Präsenzgefühl der Nutzer:innen, wenn sich diese gehend durch die virtuelle Umgebung fortbewegten, als wenn diese per Knopfdruck durch die Szene flogen.
+Eine der drei von LaViola \cite{cybersickness} zusammenfassten Theorien, die \textquote{Sensory Conflict Theory} (Sensorische Konflikt Theorie) erklärt die Ursache für so genannte \textquote{Cybersickness} oder auch Simulatorkrankheit: Nutzer:innen erleben in bestimmten, durch virtuelle Umgebungen hervorgerufenen, Situationen teilweise starke Übelkeit, weil Informationen verschiedener Sinnesmodalitäten widersprüchlich sind.
+
+Demnach wäre es also Cybersickness senkend, wenn andere Sinnesmodalitäten, wie der Gleichgewichtssinn oder die Propriozeption zusätzlich zum visuellen Sinn die Eigenbewegung der Nutzer:in wahrnehmen. Und tatsächlich konnten Langbehn et al. \cite{langbehn-vergleich-2018} zeigen, dass Nutzer:innen, die sich in virtuellen Umgebungen fortbewegen signifikant weniger Cybersickness erleben, als bei der Fortbewegung mithilfe von Joysticks.
 
 % erklärt, dass beim Gehen mehr Sinne stimuliert werden als bei künstlichen Alternativen, wie zum Beispiel der Joystick Steuerung. Tiefensensibilität (Propriozeption) und Gleichgewichtssinn (vestibuläre Wahrnehmung) signalisieren, dass er gerade wirklich geht, während diese Information bei alternativen Fortbewegungsart allein vom visuellen Sinn übermittelt wird.
-Leider bringt das natürliche gehen (Real-Walking) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
+Leider bringt das natürliche Gehen (Real-Walking) auch den großen Nachteil mit sich, dass es in der Regel auf einen einzelnen Raum (den Trackingspace) beschränkt ist.
 
 Dies entsteht zum einen, durch räumlich limitierte Erfassung (auf Englisch: tracking) der Position und Rotation von Headset und Controllern bei einigen Technologien, zum anderen durch die Raumgröße der meisten VR-Setups.
 
-Zwar gibt es dazu auch Ausnahmen, ( siehe beispielsweise \cite{microsoft}
-), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
+Zwar gibt es dazu auch Ausnahmen, (siehe beispielsweise \cite{microsoft}), jedoch sind diese dann mit großem Aufwand verbunden und nicht für jede Endnutzer:in umzusetzen.
 
 \section{Redirection Methoden}
-Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking, diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht}). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Gebiete zugreifen kann, die sonst außerhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
+Eine Herangehensweise an dieses Problem sind so genannte \textquote{Redirection Techniques} (besser bekannt als Redirected Walking. Diese Begriffe werden oft austauschbar verwendet, siehe \cite{redwalk_uebersicht}). Dies ist ein Sammelbegriff für Methoden bei denen die Nutzer:in durch subtile Manipulationen an der Darstellung der virtuellen Umgebung, auf virtuelle Gebiete zugreifen kann, die sonst außerhalb des begehbaren Bereichs wären. Tatsächlich bleibt sie dabei aber nur innerhalb des realen Trackingspaces.
 Im Idealfall wird dabei die Illusion aufrecht erhalten sie würde sich unmanipuliert, frei, und in virtueller und echter Umgebung identisch bewegen. Tatsächlich werden bei den meisten dieser Methoden %unterschied zwischen methode und methodik?
-gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise die Geh-Geschwindigkeit), sodass die Bewegung sich zwischen den beiden Umgebungen unterscheiden.
+gewisse Veränderungen zwischen der Nutzer:in und ihrem virtuellen Avatar etabliert (beispielsweise die Geh-Geschwindigkeit), sodass die Bewegung sich zwischen den beiden Umgebungen unterscheidet.
 Bei manchen dieser Methoden sorgt diese Veränderung dafür, dass die Bewegungen der Nutzer:in in gewisser Weise manipuliert werden, beispielsweise indem diese unbewusst versucht die Veränderungen auszugleichen.
 
 Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem die virtuell begehbare Fläche zu vergrößern.
-Im folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
+Im Folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
 %%%%%%%%%%%%
 
 \subsection{Rotationgains}
-Rotationgains werden Kopfrotationen hinzugefügt sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
+Rotationgains werden Kopfrotationen hinzugefügt, sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
 Kopf mit dem VR-Headset.
-Wie diese dargestellt werden können findet sich wie folgend sich bei Steinicke et al. \cite{detection-thresholds}.
+Wie diese dargestellt werden können findet sich wie folgend bei Steinicke et al. \cite{detection-thresholds}:
+
 Kopfrotationen lassen sich mit der Schreibweise
 $$ R_{real} := (pitch_{real}, yaw_{real}, roll_{real}) $$
-darstellen, wobei $pitch$, $yaw$ und $roll$ die Eulerschen Winkel der Kopfrotation darstellen. Ein Rotationgain wird als Quotient des virtuellen Winkels und des realen Winkels einer Rotationsdimension definiert also:
+darstellen, wobei $pitch$, $yaw$ und $roll$ die Eulerschen Winkel der Kopfrotation repräsentieren. Ein Rotationgain wird als Quotient des virtuellen Winkels und des realen Winkels einer Rotationsdimension definiert:
 $$ gR := \frac{R_{virtual}}{R_{real}} $$
 Für alle 3 Winkel kann ein Rotationgain angewandt werden.
-Dieses Anwenden funktioniert indem statt der eigentlichen Rotatation $\alpha$, die Multiplikation aus $\alpha$ mit dem Rotationgain also:
+Statt der eigentlichen Kopfrotation $\alpha$, wird die Multiplikation aus $\alpha$ mit dem Rotationgain:
 $$ gR * \alpha $$
-durchgeführt wird.
-
+durchgeführt.
 Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
 %nochmal peck 11 angucken dazu
-Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann können Rotationgains folgendermaßen dargestellt werden:
+Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann,können Rotationgains folgendermaßen dargestellt werden:
 $$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
-Nach Steinicke et al. \cite{detection-thresholds} wird in der Regel für Redirection ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
 
-Durch Anwenden eines positiven Rotationgains auf Yaw-Rotationen nach rechts und eines neutralen oder sogar negativen, für Rotationen nach Links kann der virtuelle Trackingspace um den realen Trackingspace nach rechts rotiert werden, mit dem Drehpunkt der Nutzer:innenposition. Andersherum natürlich genauso. Indem im vorhinein ein Winkel $\beta$, für die Ziel-Verdrehung der beiden Realitäten definiert wird, lässt sich beim Erreichen dieses Winkels das Anwenden des Rotationgains beenden, sodass die Welten sich nun um genau $\beta$ Grad verdreht haben.
+Nach Steinicke et al. \cite{detection-thresholds} wird generell für Redirection-Zwecke ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
 
-Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher \textquote{gerichteter} Rotationgain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte sichergestellt werden, dass sich Kopfposition der Nutzer:in möglichst nah an diesem Drehpunkt befindet, da sonst nicht der Eindruck entsteht die Rotation wäre mit der Kopfrotation der Nutzer:in identisch. Außerdem kann es für große Verwirrung sorgen, wenn sich die Welt auf einmal nicht um die eigene Achse dreht, aber dennoch genau dann wenn der Kopf bewegt wird.} angewendet wird.
+Durch Anwenden eines positiven Rotationgains auf Yaw-Rotationen nach rechts und eines neutralen oder sogar negativen Rotationgains für Rotationen nach links kann der virtuelle Bereich, der dem Trackingspace entspricht um den realen Trackingspace nach rechts rotiert werden, mit dem Drehpunkt der Nutzer:innenposition. Dies gilt auch für die andere Richtung. Indem im vorhinein ein Winkel $\beta$, für die Ziel-Verdrehung der beiden Realitäten definiert wird, lässt sich beim Erreichen dieses Winkels das Anwenden des Rotationgains beenden, sodass die Welten sich nun um genau $\beta$ Grad verdreht haben.
 
-In solchen Prozessen ist die Verdrehung zwischen den beiden Realitäten designbar, da sie so deterministisch wird. Da sich nun die Realitäten verdreht haben, liegen nun virtuelle Orte innerhalb des, durch den realen Trackingspace begrenzten, für die Nutzer:in begehbaren Bereichs die es vorher nicht taten.
-Für die Nutzer:in kann so die Illusion entstehen sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. %(Siehe grafik)
+Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher \textquote{gerichteter} Rotationgain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte sichergestellt werden, dass sich die Kopfposition der Nutzer:in möglichst nah an diesem Drehpunkt befindet, da sonst nicht der Eindruck entsteht die Rotation wäre mit der Kopfrotation der Nutzer:in identisch. Außerdem kann es für große Verwirrung sorgen, wenn sich die Welt auf einmal nicht um die eigene Achse dreht, aber dennoch genau dann, wenn der Kopf bewegt wird.} angewendet wird.
+
+In solchen Prozessen ist die Verdrehung zwischen den beiden Realitäten designbar, da sie so deterministisch wird. Da sich nun die Realitäten verdreht haben, liegen nun virtuelle Orte innerhalb des durch den realen Trackingspace begrenzten, für die Nutzer:in begehbaren Bereichs, die es vorher nicht taten.
+Für die Nutzer:in kann so die Illusion entstehen, sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. %(Siehe grafik)
 %Optional TODO: grafik.
 
 \subsection{Impossible Spaces}
-Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern wurde eine Redirection Methode von Suma et al. \cite{impossible-spaces-suma} vorgestellt, bei der zwei oder mehr Räume in überlappenden Gebieten liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispielsweise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $b$, wenn sie ihn durch Tür $b$ betritt.
+Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern wurde eine Redirection Methode von Suma et al. \cite{impossible-spaces-suma} vorgestellt, bei der zwei oder mehr Räume in überlappenden Gebieten liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispielsweise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $B$, wenn sie ihn durch Tür $b$ betritt.
 %OptionalTODO: grafik?
-Dafür ist es also notwendig, dass $x$ verschiedene Zustände programmatisch ermöglicht werden sodass immer einer $x$ verschiedener Räume angezeigt wird.
-Des weiteren ist es notwendig ein Gebiet in der virtuellen Umgebung zu erschaffen in dem zwischen den Zuständen gewechselt werden kann, ohne dass die Nutzer:in es merkt.
+Dafür ist es also notwendig, dass $x$ verschiedene Zustände programmatisch ermöglicht werden, sodass immer einer von $x$ verschiedenen möglichen Räumen angezeigt wird.
+Des weiteren ist es notwendig ein Gebiet in der virtuellen Umgebung bereitzustellen, in dem zwischen den Zuständen gewechselt werden kann, ohne dass die Nutzer:in es merkt.
 
 \section{Generierte Level} %prozedural, oder zufällig? oder pseudozufällig?
 
 Klassischer Weise werden Level in Computerspielen und virtuellen Umgebungen von Leveldesignern gestaltet. Dies erfordert Zeit und Fachwissen.
-Der Arbeitsaufwand wächst mit der Größe des Levels, deshalb ist es unmöglich auf diese Art endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist die so genannte \textquote{Prozedurale Generierung}, auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit theoretisch endlos groß werden.
+Der Arbeitsaufwand wächst mit der Größe des Levels. Deshalb ist es unmöglich auf diese Art endlos große Level zu erschaffen. Eine alternative Levelerstellungsweise ist die so genannte \textquote{Prozedurale Generierung}, auch \textquote{Prozedurale Synthese} genannt. Dabei wird das Level von einem Algorithmus erschaffen, und kann somit theoretisch endlos groß werden.
 %verschiedene Arten von prozeduraler generiung und dazu beispiel wie minecraft, rogue etc. mit quellen.
 
-Dies ermöglicht mit Hinblick auf die Erweiterung des begehbaren Bereichs durch Redirection Methoden einen weiteren spannenden Effekt. Endlos generierbare Level können mit Redirection-Maßnahmen, die wiederholt angewendet werden um immer wieder den Begehbaren Bereich durch die virtuelle Umgebung zu transformieren, theoretisch endlos große begehbare virtuelle Umgebungen erschaffen. Eine solche \textquote{Infinite-Walking} Methode wird in dieser Arbeit vorgestellt.
+Dies ermöglicht mit Hinblick auf die Erweiterung des begehbaren Bereichs durch Redirection Methoden einen weiteren spannenden Effekt. %Endlos generierbare Level können mit Redirection-Maßnahmen, die wiederholt angewendet werden um immer wieder den Begehbaren Bereich durch die virtuelle Umgebung zu transformieren, theoretisch endlos große begehbare virtuelle Umgebungen erschaffen. Eine solche \textquote{Infinite-Walking} Methode wird in dieser Arbeit vorgestellt.
+Mit Redirection-Maßnahmen ausgestattet, welche wiederholt angewendet werden können um immer wieder den begehbaren Bereich durch die virtuelle Umgebung zu transformieren, ist es möglich theoretisch endlos große, begehbare virtuelle Umgebungen zu erzeugen.
 
 \section{Infinite Walking Methode}
 Die in dieser Arbeit vorgestellte Infinite Walking Methode basiert darauf aufeinander folgende trackingspacegroße Räume zu generieren, die genau so angeordnet sind, dass ein
 90\textdegree, gerichteter
-Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren zu generieren. %optional TODO: genauer ausführen
+Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich, viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren, zu generieren. %optional TODO: genauer ausführen
 
-Wie die Generierung solcher Level funktioniert wird in \autoref{chapter:generate} genauer beschrieben.
+Wie die Generierung solcher Level funktioniert, wird in \autoref{chapter:generate} genauer beschrieben.
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
@@ -976,7 +978,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         Alle Teilnehmenden wurden vor der Durchführung des Experiments mit einem Schnelltest auf Covid-19 getestet und ihre Kontaktdaten wurden festgehalten um sie zu informieren, falls dennoch erforderlich. Außerdem wurden die genutzen Materialen nach jedem Versuchsdurchlauf desinfiziert.
         Alle Teilnehmenden wurden gebeten während der Durchführung des Experiments einen Mund- und Nasenschutz zu tragen sowie sich vorher die Hände mit Handdesinfektionsmittel zu desinfizieren.
 
-        Aufgrund dieser Umstände war es leider nicht möglich dem Standart einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb musste ich mich dafür entscheiden eine Pilotierungsstudie statt einer vollwertigen offiziellen Studie durchzuführen. Deashalb möchte ich an dieser Stelle betonen, dass die statistische Aussagekraft der hier erhobenen Ergebnisse nicht so groß wie gewünscht ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
+        Aufgrund dieser Umstände war es leider nicht möglich dem Standard einer solchen Arbeit nach entsprechend viele Proband:innen zu finden. Deshalb musste ich mich dafür entscheiden eine Pilotierungsstudie statt einer vollwertigen offiziellen Studie durchzuführen. Deashalb möchte ich an dieser Stelle betonen, dass die statistische Aussagekraft der hier erhobenen Ergebnisse nicht so groß wie gewünscht ist. Dies werde ich natürlich in der Auswertung und Einordnung der Ergebnisse berücksichtigen. Ich hoffe dennoch, dass zukünftige Studien mit mehr Teilnehmern von meiner hier geleisten Vorarbeit profitieren können.
 
     \section{Teilnehmer}\label{sec:participants}
         An der Studie nahmen 10 Proband:innen im Alter zwischen 20 und 69 (Median: 23), davon 8 männlich und 2 weiblich, teil. Die Teilnehmenden sind ausnahmlos private Bekannte von mir und haben keinerlei Entschädigung für die freundliche Teilnahme erhalten.
@@ -1061,7 +1063,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                             Joystick        & $9$ & 16,0 & 16,8 \\
                             Teleport        & $9$ & 13,8 & 9,62 \\ \bottomrule
                         \end{tabular}
-                        \caption{Arithmetische Mittel und Standartabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz}\label{table:diff_means}
+                        \caption{Arithmetische Mittel und Standardabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz}\label{table:diff_means}
                     \end{table}
 
                     Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
@@ -1145,9 +1147,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     $$ \frac{D_g}{D_m} $$
 
                     Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
-                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz liegt bei $0,649$ (also circa $65\%$) mit einer Standartabweichung von $0,352$.
+                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz liegt bei $0,649$ (also circa $65\%$) mit einer Standardabweichung von $0,352$.
 
-                    Die Durchschnittswerte und Standartabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
+                    Die Durchschnittswerte und Standardabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
 
                     \begin{table}[!h] %TODO: hübscher
                         \renewcommand\arraystretch{1.2}
@@ -1159,7 +1161,7 @@ M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \hline
 9  & 0,546 / 0,183 & 0,370  / 0,298 & 0,836 / 0,051 & 0,584 / 0,200   \\ \hline
    & 0,591 / 0,305 & 0,770 / 0,459 & 0,586 / 0,274 & 0,649 / 0,352
 \end{tabular}
-                        \caption{Arithmetische Mittel und Standartabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standartabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
+                        \caption{Arithmetische Mittel und Standardabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standardabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
                     \end{table}
 
                     Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
