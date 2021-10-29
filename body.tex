@@ -65,18 +65,17 @@ Der Arbeitsaufwand wächst mit der Größe des Levels. Deshalb ist es unmöglich
 %verschiedene Arten von prozeduraler generiung und dazu beispiel wie minecraft, rogue etc. mit quellen.
 
 Dies ermöglicht mit Hinblick auf die Erweiterung des begehbaren Bereichs durch Redirection Methoden einen weiteren spannenden Effekt. %Endlos generierbare Level können mit Redirection-Maßnahmen, die wiederholt angewendet werden um immer wieder den Begehbaren Bereich durch die virtuelle Umgebung zu transformieren, theoretisch endlos große begehbare virtuelle Umgebungen erschaffen. Eine solche \textquote{Infinite-Walking} Methode wird in dieser Arbeit vorgestellt.
-Mit Redirection-Maßnahmen ausgestattet, welche wiederholt angewendet werden können um immer wieder den begehbaren Bereich durch die virtuelle Umgebung zu transformieren, ist es möglich theoretisch endlos große, begehbare virtuelle Umgebungen zu erzeugen.
+Mit Redirection-Maßnahmen ausgestattet, welche wiederholt angewendet werden können um immer wieder den begehbaren Bereich durch die virtuelle Umgebung zu transformieren, ist es möglich theoretisch endlos große, begehbare virtuelle Umgebungen zu erzeugen. Eine solche \textquote{Infinite-Walking} Methode wird in dieser Arbeit vorgestellt.
 
-\section{Infinite Walking Methode}
-Die in dieser Arbeit vorgestellte Infinite Walking Methode basiert darauf aufeinander folgende trackingspacegroße Räume zu generieren, die genau so angeordnet sind, dass ein
+\section{Infinite-Walking Methode}
+Die in dieser Arbeit vorgestellte Infinite-Walking Methode basiert darauf aufeinander folgende trackingspacegroße Räume zu generieren, die genau so angeordnet sind, dass ein
 90\textdegree, gerichteter
-Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich, viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren, zu generieren. %optional TODO: genauer ausführen
+Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich, viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren, zu generieren. %optional  TODO: genauer ausführen
 
 Wie die Generierung solcher Level funktioniert, wird in \autoref{chapter:generate} genauer beschrieben.
 
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
-%TODO: Raumverständnis ausarbeiten, und presence? oder garnicht?
 
 In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene Redirection-Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in diesem Projekt sehr im Fokus liegenden Rotationgains ein um danach die auch genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich der Leser:in Arbeiten zu dem Thema der Prozeduralen Levelgenerierung vor. Dabei werde ich mich sowohl mit Artikeln über die genauen Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
@@ -114,7 +113,6 @@ Suma et al. \cite{impossible-spaces-suma} vorgestellte Redirection-Technik, bei 
 Die Räume überlappen einander, allerdings wird jeweils nur einer der überlappenden Räume angezeigt. Hierbei handelt es sich nach der schon erwähnten Taxonomie um eine subtile diskrete Redirection-Technik.
 
 In einer Forschungsdemonstration \cite{redirected-spaces} stellten Langbehn et al. eine Weise vor mit der Impossible-Spaces mit traditionelleren Redirected-Walking Methoden %(in diesem Fall Curvature-Gains)TODO: nochmal anschauen
-%TODO: sind bending und curvature gains das selbe?
 kombiniert werden können, sodass beide Methoden ihren Effekt beitragen können.
 
 \section{Prozedural generierte Level}
@@ -866,8 +864,6 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \begin{enumerate}
             \item Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            \item Nutzer:innen werden die fortbewegte Distanz bei kürzeren Leveln tendentiell eher unterschätzen, während sie sie bei längeren tendentiell überschätzen werden. Dieser Effekt wird bei Real-Walking Bedingungen geringer ausfallen, als bei den alternativen Fortbewegungsarten.
-
             \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
         \end{enumerate}
 
@@ -886,9 +882,6 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebungen,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
             %schlechter, jeh schlechter die qualität
             allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht grundlegend zwischen den Versuchsbedingungen unterscheidenden) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird.
-
-            %TODO: quelle unter, überschätzen
-            Nach x werden kürzere Distanzen in der virtuellen Realität eher unterschätzt, während größere eher überschätzt werden. Dieser Effekt sollte sich auch auf den hier durchgeführten Versuch übertragen lassen. Es wird untersucht werden, wie dieser Effekt im Wechselspiel zu den Fortbewegungsarten steht.
 
         \subsection{Präsenzgefühl}
             In dem Paper \cite{presence-questionaire} geben Usoh et al. eine Zusammenfassung über die bis dahin diskutierten Ideen darüber, wie die Stärke der Präsenz in virtuellen Umgebungen stark erhöht wird. Diese wird in 5 Punkte aufgeteilt, die übersetzt und zusammengefasst und übersetzt so lauten:
@@ -917,7 +910,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Um diesen Effekt zu erfassen, wurde mit den Teilnehmer:innen nach jeder Bedingung ein Slater-Usoh-Steed-Präsenz-Questionaire \cite{presence-questionaire} durchgeführt. (Fortlaufend SUS-Questionaire genannt.) Dieser ist im \nameref{anhang:durchlauf} enthalten (P1-P7) und ist im Anhang abgebildet. Der SUS-Questionaire besteht aus 6 Fragen, die auf einer Skala von 1-7 beantwortet werden, wobei 7 immer für die höchste und 1 für die geringste wahrgenommene Präsenz in der Umgebung steht. Die letze Frage des SUS-Questionaires ermöglicht den Proband:innen noch etwas dazu hinzuzufügen.
 
             %wer hat da was zu rausgefunden
-            Usoh et al. überprüfen in ihrer Arbeit \cite{usoh-vergleich-1999} inwieweit sich das Präsenzgefühl zwischen natürlichem Gehen, virtuellem Gehen und Fortbewegung durch Fliegen unterscheidet. Die Ergebnisse deuten darauf hin, dass die beiden Geh-Fortbewegungsarten zu einem signifikant höhreren Präsenzgefühl führen und sie konkludieren, dass dies mit der stärkeren Assoziation mit dem virtuellen Avatar zu tun haben könnte. Dies ist die Grundlage für die dritte hier überprüfte Hypothese.
+            Usoh et al. überprüfen in ihrer Arbeit \cite{usoh-vergleich-1999} inwieweit sich das Präsenzgefühl zwischen natürlichem Gehen, virtuellem Gehen und Fortbewegung durch Fliegen unterscheidet. Die Ergebnisse deuten darauf hin, dass die beiden Geh-Fortbewegungsarten zu einem signifikant höhreren Präsenzgefühl führen und sie konkludieren, dass dies mit der stärkeren Assoziation mit dem virtuellen Avatar zu tun haben könnte. Dies ist die Grundlage für die zweite, in dieser Thesis überprüfte, Hypothese.
 
             %TODO:at related work einen presence teil?
 
@@ -1024,11 +1017,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
         Bei der Versuchsperson mit der ID 2, gab es leider einen kleinen Fehler mit der Wandgenerierung, sodass zuerst von ihr durchgeführte Versuchsbedinung $C2$ abgebrochen und wiederholt wurde. Im Anschluss wurde der Fehler, der nur in seltenen Fällen auftrat, von mir aus dem Quelltext beseitigt.
 
-        Bei der Versuchsperson mit der ID 10 stellte sich kurz nach Beendigung des Experiments heraus, dass sie aufgrund eines Missverständnisses die Frage nach der Distanzschätzung falsch interpretiert hatte. Bei der Auswertung der Daten wurden die von ihr angegebenen Schätzungen nicht berücksichtigt, die Präsenzdaten hingegen schon.
+        Bei der Versuchsperson mit der ID 10 stellte sich kurz nach Beendigung des Experiments heraus, dass diese aufgrund eines Missverständnisses die Frage nach der Distanzschätzung falsch interpretiert hatte. Bei den statistischen Untersuchungen wurden die gesammelten Daten die der ID 10 zugehörig waren folglich nicht mitgenutzt.
 
-        Ähnlich verhält es sich mit den gesammelten Präsenz-Scores der Versuchsperson mit der ID 5, diese gab kurz nach Beendigung der Studie an, das die Skala falsch verstanden zu haben, sodass die Präsenzdaten von ihr nicht bei der Auswertung berücksichtigt wurden. Die Distanz-Schätzungen dagegen schon.
-
-        Die Durchführung des Experiments hat bei allen Teilnehmer:innen etwa 45 Minuten gedauert.
+        %Die Durchführung des Experiments hat bei allen Teilnehmer:innen etwa 45 Minuten gedauert.
 
         \section{Auswertung der Ergebnisse}
             Die Daten aus den Google-Forms Formularen und die gemessenen Daten aus der Firebase Datenbank wurden jeweils anonym hinterlegt. Die Datensätze lassen sich einander lediglich über eine Versuchspersonen-ID, die Bedingung, und die Levellänge
@@ -1115,9 +1106,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 %    Effect   GGe     DF[GG] p[GG] p[GG]<.05   HFe      DF[HF] p[HF] p[HF]<.05
 % 1 bedingung 0.648 1.3, 10.37  0.72           0.721 1.44, 11.53 0.744
 
-                    Ein Mauchly's Test auf Sphärizität deutete keine Verletzung dieser Bedingung.
+                    Ein Mauchly's Test auf Sphärizität zeigte keine Verletzung dieser Bedingung auf.
 
-                    Die Varianzanalyse zeigte keine signifikanten Unterschiede zwischen den Fortbewegungsarten; $F(2,16) = 0.207, p = 0.815$
+                    Die Varianzanalyse erfasste keine signifikanten Unterschiede zwischen den Fortbewegungsarten; $F(2,16) = 0,207$  $p = 0,815$
                     %anova diff
                     % 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
 
@@ -1142,94 +1133,94 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 %
 
                     %%part 2
-                    \paragraph*{Das Verhältnis zwischen geschätzer und gemessener Distanz} errechnet sich folgendermaßen:
+%                     \paragraph*{Das Verhältnis zwischen geschätzer und gemessener Distanz} errechnet sich folgendermaßen:
 
-                    $$ \frac{D_g}{D_m} $$
+%                     $$ \frac{D_g}{D_m} $$
 
-                    Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
-                    Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz liegt bei $0,649$ (also circa $65\%$) mit einer Standardabweichung von $0,352$.
+%                     Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
+%                     Das durchschnittliche Verhältnis zwischen Schätzung und gemessender Distanz liegt bei $0,649$ (also circa $65\%$) mit einer Standardabweichung von $0,352$.
 
-                    Die Durchschnittswerte und Standardabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
+%                     Die Durchschnittswerte und Standardabweichungen des Verhältnisses bei den einzelnen Fortbewegungsarten und Raumanzahlen steht in \autoref{table:ratio_means}
 
-                    \begin{table}[!h] %TODO: hübscher
-                        \renewcommand\arraystretch{1.2}
-                        \centering
-\begin{tabular}{l|ccc|c}
-M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \hline
-3  & 0,813 / 0,298 & 0,775 / 0,319 & 0,458 / 0,343 & 0,682 / 0,325 \\
-6  & 0,415 / 0,356 & 1,160  / 0,422 & 0,464 / 0,199 & 0,681 / 0,467 \\
-9  & 0,546 / 0,183 & 0,370  / 0,298 & 0,836 / 0,051 & 0,584 / 0,200   \\ \hline
-   & 0,591 / 0,305 & 0,770 / 0,459 & 0,586 / 0,274 & 0,649 / 0,352
-\end{tabular}
-                        \caption{Arithmetische Mittel und Standardabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standardabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
-                    \end{table}
+%                     \begin{table}[!h] %TODO: hübscher
+%                         \renewcommand\arraystretch{1.2}
+%                         \centering
+% \begin{tabular}{l|ccc|c}
+% M / SD & Real-Walking  & Joystick     & Teleportation &               \\ \hline
+% 3  & 0,813 / 0,298 & 0,775 / 0,319 & 0,458 / 0,343 & 0,682 / 0,325 \\
+% 6  & 0,415 / 0,356 & 1,160  / 0,422 & 0,464 / 0,199 & 0,681 / 0,467 \\
+% 9  & 0,546 / 0,183 & 0,370  / 0,298 & 0,836 / 0,051 & 0,584 / 0,200   \\ \hline
+%    & 0,591 / 0,305 & 0,770 / 0,459 & 0,586 / 0,274 & 0,649 / 0,352
+% \end{tabular}
+%                         \caption{Arithmetische Mittel und Standardabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standardabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
+%                     \end{table}
 
-                    Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
+%                     Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
 
-                    \begin{figure}[!h]
-                        \centering
-                        \includegraphics[width=0.5\textwidth]{plots/2wayboxplot.png}
-                        \caption{Zweifaktorieller Box-Plot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
-                    \end{figure}
+%                     \begin{figure}[!h]
+%                         \centering
+%                         \includegraphics[width=0.5\textwidth]{plots/2wayboxplot.png}
+%                         \caption{Zweifaktorieller Box-Plot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
+%                     \end{figure}
 
-                    Für eine zweifaktorielle Varianzanalyse müssen die einzelnen Faktorstufen der Daten normalverteilt sein.
-                    Ein Plot der Korrelation zwischen den Faktorstufen (siehe \autoref{figure:qqplot-2way}) und ein Shapiro-Wilk-Test (siehe \autoref{table:shapiro-2way}) deuten nicht darauf hin, dass diese Bedingung verletzt wurde.
+%                     Für eine zweifaktorielle Varianzanalyse müssen die einzelnen Faktorstufen der Daten normalverteilt sein.
+%                     Ein Plot der Korrelation zwischen den Faktorstufen (siehe \autoref{figure:qqplot-2way}) und ein Shapiro-Wilk-Test (siehe \autoref{table:shapiro-2way}) deuten nicht darauf hin, dass diese Bedingung verletzt wurde.
 
-                    \begin{table}[!h]
-                        \renewcommand\arraystretch{1.2}
-                        \centering
-        \begin{tabular}{lccc} \toprule
-            Bedingung    & Raumanzahl & Teststatistik& $p$   \\ \midrule
-            Real-Walking &  3         & 0,917      & 0,442 \\
-            Real-Walking &  6         & 0,918      & 0,445 \\
-            Real-Walking &  9         & 0,823      & 0,172 \\
-            Joystick     &  3         & 0,934      & 0,504 \\
-            Joystick     &  6         & 0,922      & 0,459 \\
-            Joystick     &  9         & 0,842      & 0,219 \\
-            Teleport     &  3         & 0,920      & 0,451 \\
-            Teleport     &  6         & 0,792      & 0,0959 \\
-            Teleport     &  9         & 0,981      & 0,738 \\ \bottomrule
-        \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Tests der Werte für das Verhältnis zwischen Schätzung und Messung von der fortbewegten Distanz, für die unterschiedlichen Fortbewegungsarten und Raumanzahlen}\label{table:shapiro-2way}
-                    \end{table}
+%                     \begin{table}[!h]
+%                         \renewcommand\arraystretch{1.2}
+%                         \centering
+%         \begin{tabular}{lccc} \toprule
+%             Bedingung    & Raumanzahl & Teststatistik& $p$   \\ \midrule
+%             Real-Walking &  3         & 0,917      & 0,442 \\
+%             Real-Walking &  6         & 0,918      & 0,445 \\
+%             Real-Walking &  9         & 0,823      & 0,172 \\
+%             Joystick     &  3         & 0,934      & 0,504 \\
+%             Joystick     &  6         & 0,922      & 0,459 \\
+%             Joystick     &  9         & 0,842      & 0,219 \\
+%             Teleport     &  3         & 0,920      & 0,451 \\
+%             Teleport     &  6         & 0,792      & 0,0959 \\
+%             Teleport     &  9         & 0,981      & 0,738 \\ \bottomrule
+%         \end{tabular}
+%                         \caption{Die Ergebnisse eines Shapiro-Wilk Tests der Werte für das Verhältnis zwischen Schätzung und Messung von der fortbewegten Distanz, für die unterschiedlichen Fortbewegungsarten und Raumanzahlen}\label{table:shapiro-2way}
+%                     \end{table}
 
-                    \begin{figure}[!h]
-                        \centering
-                        \includegraphics[width=0.5\textwidth]{plots/qqplot2way.png}
-                        \caption{Quantil-Quantil Diagramme der Korrelation zwischen den verschiedenen Kombinantionen der Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
-                    \end{figure}
+%                     \begin{figure}[!h]
+%                         \centering
+%                         \includegraphics[width=0.5\textwidth]{plots/qqplot2way.png}
+%                         \caption{Quantil-Quantil Diagramme der Korrelation zwischen den verschiedenen Kombinantionen der Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
+%                     \end{figure}
 
-                    Im Datensatz wurden keine extremen Ausreißer festgestellt.
+%                     Im Datensatz wurden keine extremen Ausreißer festgestellt.
 
-                    Es wurde eine zweifaktorielle Varianzanalyse mit Messwiederholung mit den Faktoren Fortbewegungsart und Raumanzahl des Levels zu einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt.
-                    Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren; $F(4,18) = 4,106$  $p = 0,015$
+%                     Es wurde eine zweifaktorielle Varianzanalyse mit Messwiederholung mit den Faktoren Fortbewegungsart und Raumanzahl des Levels zu einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt.
+%                     Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren; $F(4,18) = 4,106$  $p = 0,015$
 
-                    %Important TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
-                    Implizit wurden dabei auch einfaktorielle Varianzanalysen zu einem Signifikanzniveau von $\alpha = 5\%$ mit beiden Faktoren durchgeführt. Beide zeigten keine signifikanten Effekte. (Raumanzahl: $F(2,18) = 0,332$  $ p = 0,722$   Fortbewegungsart: $F(2,18) = 1,144$  $ p = 0.341$)
+%                     %Important TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
+%                     Implizit wurden dabei auch einfaktorielle Varianzanalysen zu einem Signifikanzniveau von $\alpha = 5\%$ mit beiden Faktoren durchgeführt. Beide zeigten keine signifikanten Effekte. (Raumanzahl: $F(2,18) = 0,332$  $ p = 0,722$   Fortbewegungsart: $F(2,18) = 1,144$  $ p = 0.341$)
 
-%ANOVA Table (type II tests)
-%
-%             Effect DFn DFd     F     p p<.05   ges
-% 1        bedingung   2  18 1.144 0.341       0.113
-% 2           laenge   2  18 0.332 0.722       0.036
-% 3 bedingung:laenge   4  18 4.106 0.015     * 0.477
+% %ANOVA Table (type II tests)
+% %
+% %             Effect DFn DFd     F     p p<.05   ges
+% % 1        bedingung   2  18 1.144 0.341       0.113
+% % 2           laenge   2  18 0.332 0.722       0.036
+% % 3 bedingung:laenge   4  18 4.106 0.015     * 0.477
 
-                    Daraufhin wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur bei einem Signifikanzniveau von $\alpha = 5\%$ auf die einzelnen Stufen des Faktors Raumanzahl mit dem Faktor Fortbewegungsart durchgeführt. Keine zeigte einen signifikanten Effekt. Des weiteren wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur auf die einzelnen Stufen des Faktors Fortbewegungsart, mit dem Faktor Raumanzahl bei einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt. Auch bei diesen wurden keine signifikanten Effekte gefunden. Die Ergebnisse aller dieser einfaktoriellen Varianzanalysen findet sich in der \autoref{table:2way-anova-ph}
+%                     Daraufhin wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur bei einem Signifikanzniveau von $\alpha = 5\%$ auf die einzelnen Stufen des Faktors Raumanzahl mit dem Faktor Fortbewegungsart durchgeführt. Keine zeigte einen signifikanten Effekt. Des weiteren wurden einfaktorielle Varianzanalysen mit Bonferroni-Korrektur auf die einzelnen Stufen des Faktors Fortbewegungsart, mit dem Faktor Raumanzahl bei einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt. Auch bei diesen wurden keine signifikanten Effekte gefunden. Die Ergebnisse aller dieser einfaktoriellen Varianzanalysen findet sich in der \autoref{table:2way-anova-ph}
 
-        \begin{table}[!h]
-            \renewcommand\arraystretch{1.2}
-            \centering
-\begin{tabular}{lcccccc} \toprule
-Faktorstufe    & Effekt-Faktor  & DFn & DFd & $F$    & $p$      & $p$ korrigiert  \\ \midrule
-Raumanzahl: 3  &  Fortbewegungsart & $2$ & $6$ & 1,11 & 0,389 & 1        \\
-Raumanzahl: 6  &  Fortbewegungsart & $2$ & $6$ & 4,60 & 0,061 & 0,183        \\
-Raumanzahl: 9  &  Fortbewegungsart & $2$ & $6$ & 3,99 & 0,079 & 0,237        \\
-Real-Walking   &  Raumanzahl       & $2$ & $6$ & 1,49 & 0,299 & 0,897       \\
-Joystick       &  Raumanzahl       & $2$ & $6$ & 3,86 & 0,084 & 0,252       \\
-Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
-\end{tabular}
-\caption{Die Ergebnisse der Post-Hoc Nachuntersuchung von der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten; Diese sind Form von einfaktoriellen Varianzanalysen, von den einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
-\end{table}
+%         \begin{table}[!h]
+%             \renewcommand\arraystretch{1.2}
+%             \centering
+% \begin{tabular}{lcccccc} \toprule
+% Faktorstufe    & Effekt-Faktor  & DFn & DFd & $F$    & $p$      & $p$ korrigiert  \\ \midrule
+% Raumanzahl: 3  &  Fortbewegungsart & $2$ & $6$ & 1,11 & 0,389 & 1        \\
+% Raumanzahl: 6  &  Fortbewegungsart & $2$ & $6$ & 4,60 & 0,061 & 0,183        \\
+% Raumanzahl: 9  &  Fortbewegungsart & $2$ & $6$ & 3,99 & 0,079 & 0,237        \\
+% Real-Walking   &  Raumanzahl       & $2$ & $6$ & 1,49 & 0,299 & 0,897       \\
+% Joystick       &  Raumanzahl       & $2$ & $6$ & 3,86 & 0,084 & 0,252       \\
+% Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
+% \end{tabular}
+% \caption{Die Ergebnisse der Post-Hoc Nachuntersuchung von der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten; Diese sind Form von einfaktoriellen Varianzanalysen, von den einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
+% \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
                 \subsection{Statistische Auswertung der Präsenz}
@@ -1242,9 +1233,9 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung       & $n$ & M       & SD     \\ \midrule
-                            Real-Walking    & $9$ & 2,33  & 1,80 \\
-                            Joystick        & $9$ & 0,889 & 1,36 \\
-                            Teleport        & $9$ & 0,667 & 0,866 \\ \bottomrule
+                            Real-Walking    & $9$ & 2,67 & 2  \\
+                            Joystick        & $9$ & 1,56 & 2,13  \\
+                            Teleport        & $9$ & 1    & 1,12 \\ \bottomrule
                         \end{tabular}
                         \caption{Arithmetische Mittel und Standartabweichungen der SUS-Scores der Teilnehmenden bei den verschiedenen Fortbewegungsbedingungen} \label{table:presence_means}
                     \end{table}
@@ -1258,7 +1249,7 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
                     \end{figure}
 
                     %no extreme outliers
-                    Auch für die Präsenz-Messdaten wurden keine Extremen Ausreißer gefunden.
+                    Auch für die Präsenz-Messdaten wurden keine extremen Ausreißer gefunden.
 
                     %qqplot
                     Die \autoref{figure:presence_normality} stellt die Korrelation zwischen den Daten und einer Normal-Verteilung für jede der Fortbewegungsarten dar.
@@ -1270,7 +1261,7 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
                         \caption{Quantil-Quantil-Diagram der Korrelationen von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
                     \end{figure}
 
-                    Um Klarheit zu schaffen wurde ein Shapiro-Wilk-Test zum $\alpha = 5\%$ Signifikanzniveau durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei Joystick ($p = 0,00316$) und Teleportation ($p = 0,00521$) nicht angenommen werden kann. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_shapiro} zu sehen.
+                    Um Klarheit zu schaffen wurde ein Shapiro-Wilk-Test zum $\alpha = 5\%$ Signifikanzniveau durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei der Bedingung Joystick ($p = 0,0125$) nicht angenommen werden kann. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_shapiro} zu sehen.
 
                     %shapiro
                     \begin{table}[!h]
@@ -1278,23 +1269,23 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
                         \centering
                         \begin{tabular}{lccc} \toprule
                             Bedingung    & Teststatistik    & $p$   \\ \midrule
-                            Real-Walking & 0,935            & 0,529 \\
-                            Joystick     & 0,730            & 0,00316 \\
-                            Teleport     & 0,748            & 0,00521 \\ \bottomrule
+                            Real-Walking & 0,894            & 0,221  \\
+                            Joystick     & 0,782            & 0,0125  \\
+                            Teleport     & 0,844            & 0,0648  \\ \bottomrule
                         \end{tabular}
                         \caption{Ergebnisse eines Shapiro-Wilk Tests der verschiedenen Faktorstufen}\label{table:presence_shapiro}
                     \end{table}
 
-                    Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt, da dieser nicht normalverteilte Daten vorraussetzt.
+                    Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt, da dieser keine normalverteilte Daten vorraussetzt.
                     %H0 erwähnen?
-                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 9,3  p = 0,00956$
+                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 6,95$  $p = 0,0309$
 
                     %friedman
                     %.y.           n statistic    df       p method
                     %* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
                     %1 sus_score     9       9.3     2 0.00956 Friedman test
-                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0.517, dies gilt nach J.Cohen %source? TODO: %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
-                    als starker Effekt.
+                    Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0,386, dies gilt nach J.Cohen %source? TODO: %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
+                    als moderater Effekt.
 
                     %effsize
                     %.y.           n effsize method    magnitude
@@ -1302,16 +1293,16 @@ Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
                     %1 sus_score     9   0.517 Kendall W large
 
                     Dennoch wurden bei einer paarweise durchgeführten Post-Hoc Analyse der Präsenzdaten mit einem
-                    Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der $p$-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0,174$, Real-Walking mit Teleport: $p = 0,105$, Joystick mit Teleport: $p = 1$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
+                    Wilcoxon-Vorzeichen-Rang-Test mit Bonferroni-Korrektur der $p$-Werte keine signifikanten Unterschiede zwischen den jeweiligen Paaren von Fortbewegungsarten festgestellt. (Real-Walking mit Joystick: $p = 0,402$, Real-Walking mit Teleport: $p = 0,105$, Joystick mit Teleport: $p = 0,807$) Die Ergebnisse sind in \autoref{table:post-hoc-presence} dargestellt.
 
 \begin{table}[!ht]
     \renewcommand\arraystretch{1.2}
     \centering
     \begin{tabular}{lcccc} \toprule
 Bedingung 1& Bedingung 2& Teststatistik &  $p$  & $p$ korrigiert \\ \midrule
-Real-Walking & Joystick & 15            & 0,058 & 0,174        \\
-Real-Walking & Teleport & 21            & 0,035 & 0,105        \\
-Joystick     & Teleport & 4,5           & 0,586 & 1    \\ \bottomrule
+Real-Walking & Joystick & 13,5          & 0,134 & 0,402         \\
+Real-Walking & Teleport & 21            & 0,035 & 0,105         \\
+Joystick     & Teleport & 8,5           & 0,269 & 0,807 \\ \bottomrule
     \end{tabular}
     \caption{Ergebnisse der Post-Hoc Analyse: Paarweise-Untersuchung mit Wilcoxon-Vorzeichen-Rang-Test für gepaarte Datensätze; Die korrigierten $p$-Werte sind mithilfe der Bonferroni Korrektur korrigiert}\label{table:post-hoc-presence}
 \end{table}
@@ -1329,7 +1320,7 @@ Joystick     & Teleport & 4,5           & 0,586 & 1    \\ \bottomrule
 
     \section{Diskussion und Ausblick}
         Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies könnte verschiedene Gründe haben. An dieser Stelle möchte ich versuchen die Ergebnisse einzuordnen und eben diese Gründe herauszuarbeiten.
-        Vorweg ist aber nochmal zu betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren, es ist zudem  durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten. Dies gilt im Besonderen für die zweifaktorielle Varianzanalyse, die für die Auswertung des Verhältnisses zwischen geschätzen und gemessenen fortbewegten Distanzen angewandt wurde. Die einzelnen kombinierten Faktorstufen konnten dabei nur auf einer Evidenzgrundlage von 3 Messungen basieren.
+        Vorweg möchte ich betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren, es ist zudem  durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten.
 
         \subsection{Schätzung der bewegten Distanz}
             Die oben formulierte Hypothese zur Schätzung der fortbewegten Distanz lautete wie folgt:
@@ -1337,12 +1328,6 @@ Joystick     & Teleport & 4,5           & 0,586 & 1    \\ \bottomrule
             Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
             Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzer und gemessender fortbewegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die den Alternativen. Es konnten keine signifikanten  Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
-
-            Genauso sieht es für die zweite Hypothese aus:
-
-            Nutzer:innen werden die fortbewegte Distanz bei kürzeren Leveln tendentiell eher unterschätzen, während sie sie bei längeren tendentiell überschätzen werden. Dieser Effekt wird bei Real-Walking Bedingungen geringer ausfallen, als bei den alternativen Fortbewegungsarten.
-
-            Es konnte zwar eine signifikante Wechselwirkung zwischen den Levellängen und den Fortbewegungsarten gefunden werden, allerdings lassen sich danach in den jeweiligen Untersuchungen keine signifikanten Effekte mehr zwischen den einzelnen Fortbewegungsarten, und den Levellängen in Bezug auf das Verhältnis von Schätzung und Messung feststellen. Bei keiner der Kombinationen, der beiden Faktoren konnte eine signifikante Abweichung von den jeweils anderen Kombinationen nachgewiesen werden.
 
             Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
 
@@ -1367,7 +1352,7 @@ Joystick     & Teleport & 4,5           & 0,586 & 1    \\ \bottomrule
 
             Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,33$) ist deutlich größer, als bei der Joystick-($0,889$) oder Teleportationsbedingung ($0,667$).
+            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,67$) ist deutlich größer, als bei der Joystick-($1,56$) oder Teleportationsbedingung ($1$).
             Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
 
             Ein möglicher Grund für diese ambivalenten Ergebnisse hat ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnte, konnten nur nicht-parametrische statistische Tests verwendet werden.
