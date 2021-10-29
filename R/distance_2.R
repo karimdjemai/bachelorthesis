@@ -94,13 +94,14 @@ anova_test(nadiff ~ bedingung*laenge, data=ff, wid=vp_id)
 
 #effect of bedingung on the different laenge values
 
-anova_test(data=ff, wid=vp_id, within=laenge, dv=nadiff )
-anova_test(nadiff ~ laenge, data=ff, wid=vp_id)
+anova_test(data=ff, wid=vp_id, within=laenge, dv=nadiff, type=2)
+anova_test(formula= nadiff ~ laenge, data=ff, wid=vp_id)
+anova_test(formula= nadiff ~ laenge | vp_id, data=ff)
 # anova_test(data=ff, wid=vp_id, within=bedingung, dv=nadiff )
 
 ff %>%
   group_by(laenge) %>%
-  anova_test(nadiff ~ bedingung, wid = vp_id) %>%
+  anova_test(nadiff ~ bedingung) %>%
   get_anova_table() %>%
   adjust_pvalue(method = "bonferroni")
 
