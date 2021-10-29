@@ -80,7 +80,7 @@ presence_df = data.frame(d$id, d$bedingung, d$A, d$B, d$C, d$D, d$E, d$F)
 presence_df
 
 #without 5?
-presence_df = subset(presence_df, d.id!=5)
+presence_df = subset(presence_df, d.id!=10)
 
 #calculate SUS-score
 scores = c()
@@ -143,6 +143,12 @@ presence_aov_df %>%
   group_by(bedingung) %>%
   get_summary_stats(sus_score, type = "mean_sd") #to Latex
 
+# bedingung variable      n  mean    sd
+#   <fct>     <chr>     <dbl> <dbl> <dbl>
+# 1 A         sus_score     9  2.67  2   
+# 2 B         sus_score     9  1.56  2.13
+# 3 C         sus_score     9  1     1.12
+
 #boxplot
 presence_bxp = ggboxplot(presence_aov_df, x = "bedingung", y = "sus_score", add = "point", xlab="Fortbewegungsart", ylab="SUS Präsenz Score")
 presence_bxp #toLatex
@@ -155,6 +161,11 @@ presence_aov_df %>%
 presence_aov_df %>%
   group_by(bedingung) %>%
   shapiro_test(sus_score) #to latex, normality may not be assumed -> friedmann #tolatex
+# bedingung variable  statistic      p
+#   <fct>       <chr>         <dbl> <dbl>
+#   1 A         sus_score     0.894 0.221 
+#   2 B         sus_score     0.782 0.0125
+#   3 C         sus_score     0.844 0.0648
 
 ggqqplot(presence_aov_df, "sus_score", facet.by = "bedingung") #tolatex
 
@@ -181,15 +192,8 @@ pairwise_presence = presence_aov_df %>%
  wilcox_test(sus_score ~ bedingung, paired=TRUE, p.adjust.method = "bonferroni", exact=T)
 pairwise_presence#tolatex very confused, how can a and b be equal, b and c be equal but a and c not???
 
-#test it thouroghly
-#GroupA = c(4,4,2,3,5,0,1,0,2)
-#GroupB = c(0,1,2,0,4,0,1,0,0)
-#GroupC = c(0,2,1,0,2,0,1,0,0)
-
-#wilcox.test(GroupA, GroupC, paired=T)
-
-#library(coin)
-#wilcoxsign_test(GroupA ~ GroupC, distribution="exact")
-
-#effektstärke von diff repeated measures anova
-
+#     .y.       group1 group2    n1    n2 statistic p p.adj p.adj.signif
+# * <chr>     <chr>  <chr>  <int> <int>     <dbl> <dbl> <dbl>      <chr>       
+#   1 sus_score A      B          9     9  13.5    0.134    0.402     ns          
+#   2 sus_score A      C          9     9  21      0.035    0.105     ns          
+#   3 sus_score B      C          9     9   8.5    0.269    0.807     ns   
