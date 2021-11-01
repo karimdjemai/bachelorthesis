@@ -303,7 +303,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     \hyphenation{Fire-base-Handler}
     Ist dafür zuständig den Fortschritt der Proband:in zu verfolgen und entsprechend zu reagieren wenn es notwendig ist. Beispielsweise öffnet er die entsprechenden Türen, wenn ein Raum abgeschlossen ist.
     Des weiteren hält diese Klasse Instanzen der GameObjects für die Räume, in einer Liste, sodass sie dazu in der Lage ist, an den zugehörigen RoomGenerator-Instanzen Methoden aufzurufen. Diese Klasse ist außerdem dafür verantwortlich, dass nur der Raum in dem die Nutzer:in sich gerade befindet, der Raum davor und 2 Räume danach eingeblendet und sichtbar sind, um sicher zu gehen, dass die Räume nicht von Elementen aus anderen Räumen überlappt werden. Auf ähnliche Weise verwaltet sie auch die Sichtbarkeit der Wände der einzelnen Räume, die für die Real-Walking Bedingung nur angezeigt werden, wenn die Nutzer:in in dem Raum ist.
-    Um später vergleichen zu können, wie gut die Einschätzung der Proband:innen war misst, diese Klasse außerdem die von der Proband:in fortbewegte Strecke. Wenn der letzte Raum des aktuellen Versuchs erreicht wurde, übergibt sie die entsprechenden Daten an den FirebaseHandler, der diese dann an eine Cloud-Datenbank verschickt, sodass der Versuchsdurchgang im Nachhinein ausgewertet werden kann.
+    Um später vergleichen zu können, wie gut die Einschätzung der Proband:innen war misst, diese Klasse außerdem die von der Proband:in zurückgelegte Strecke. Wenn der letzte Raum des aktuellen Versuchs erreicht wurde, übergibt sie die entsprechenden Daten an den FirebaseHandler, der diese dann an eine Cloud-Datenbank verschickt, sodass der Versuchsdurchgang im Nachhinein ausgewertet werden kann.
 
     \paragraph{RotationGainMechanism}
 
@@ -514,8 +514,8 @@ Das ganze funktioniert dann so, dass die Instanz der \textquote{SceneLoader}-Kla
 \section{Messmechanismen und Datenspeicherung} \label{sec:measure-distance}
 Um an späterer Stelle einschätzen zu können, wie gut die Proband:innen die zurückgelegte Strecke geschätzt haben, ist es erforderlich diese zu messen. Zusätzlich dazu ist es auch notwendig diese Daten zu speichern. Im Folgenden werde ich erläutern, wie dies implementiert ist.
 
-Da es nicht darum geht, die Luftlinie zwischen Start und Ende des Levels zu messen, sondern ihre konkret zurückgelegte Distanz zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Tick die Kopfposition des virtuellen Avatars der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis unerwartet groß, und insoweit inkorrekt, als dass damit dann nicht mehr die fortbewegte Distanz, wie sie wahrscheinlich intuitiv interpretiert werden würde gemeint wäre.
-Da nun jede Millimeterbewegung des Kopfes aufsummiert werden würde, würde eine einfache Kopfdrehung die fortbewegte Strecke schon um einen großen Teil erhöhen. Dies würde dazu führen, dass die Messung der fortbewegten Strecke nicht mehr intuitiv einzuschätzen wäre.
+Da es nicht darum geht, die Luftlinie zwischen Start und Ende des Levels zu messen, sondern ihre konkret zurückgelegte Distanz zu messen, ist diese Aufgabe nicht gänzlich trivial. Würde man einfach in jedem Tick die Kopfposition des virtuellen Avatars der Proband:in speichern, die Distanz zum vorherigen Punkt berechnen und aufsummieren, wäre das Ergebnis unerwartet groß, und insoweit inkorrekt, als dass damit dann nicht mehr die zurückgelegte Distanz, wie sie wahrscheinlich intuitiv interpretiert werden würde gemeint wäre.
+Da nun jede Millimeterbewegung des Kopfes aufsummiert werden würde, würde eine einfache Kopfdrehung die zurückgelegte Strecke schon um einen großen Teil erhöhen. Dies würde dazu führen, dass die Messung der zurückgelegten Distanz nicht mehr intuitiv einzuschätzen wäre.
 
 Um dem entgegenzuwirken habe ich die Auflösung dieser Messung deutlich veringert, indem nicht mehr jeder Tick, diesen Prozess durchläuft, sondern nur ein Tick etwa alle 2 Sekunden. So werden deutlich grobere Bewegungen gemessen und die gemessenen Ergebnisse passen deutlich besser zu der intuitiven Einschätzung der Entfernung. Es ist aber dennoch zu erwähnen, dass durch die verlorenen Details auch eine gewisse Strecke verloren geht, beispielsweise wenn die Nutzer:in zwischen den zwei Ticks eine Kurve gegangen ist.
 Es ist dennoch unumgänglich eine solche, oder ähnliche Messauflösungsveringerung vorzunehmen. Andernfalls wäre zusätzlich davon auszugehen, dass die Real-Walking Bedingung aufgrund von natürlichen Schwankungen beim Gehen deutlich längere gemessene Strecken produzieren würde, als die virtuellen Fortbewegungsarten.
@@ -868,28 +868,28 @@ Die Generierung der Wände wird als nächstes in die Wege geleitet, je nach Vari
 Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariablen zuständig. Diese müssen berechnet werden, weil der erste Teil der nächsten Iteration keinen Zugriff mehr auf die Objekte der aktuellen Iteration hat. Hier findet die in \autoref{subsection:calccorners} erklärte Eckenberechnung statt. So können die Richtungsvektoren und andere Informationen von dem Raum, der in der aktuellen Iteration generiert wurde, genutzt werden, um die Generation des nächsten Raumes vorzubereiten. Auch die in \autoref{sec:random} besprochenene Pseudozufallsvariablen und die in \autoref{subsec:realwallgen} besprochenen Punkte diagonal vor und hinter dem Punkt $\vec{P}$ des vorherigen Raumes werden hier berechnet, sodass sie in der nächsten Iteration schon feststehen und genutzt werden können.
 
 \chapter{Konzipierung der Pilotierungsstudie}\label{chapter:experiment}
-    Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie zum Vergleich von Fortbewegungsarten für das Raumverständnis und das Präsenzgefühl in der generierten virtuellen Umgebung. Untersucht werden soll dabei konkreter, ob die Fortbewegungsart \textquote{Real-Walking} in diesen Punkten bessere Effekte erzielt als vergleichbare alternative Fortbewegungsarten.
-    Um das Experiment vorzustellen werde ich zunächst die Hypothesen, denen ich mit dieser Arbeit auf den Grund gehen will, beschreiben um deutlich zu machen, was das Ziel des Experiments ist.
-    Im darauf folgenden Teil werde ich dann beschreiben wie die statistische Versuchsplanung der konzipierten Pilotierungsstudie aussieht. Dabei werde ich genauer auf die drei verschiedenen Fortbewegungsbedingungen die untersucht werden sollten eingehen und beschreiben wie diese für die Studie implementiert wurden.
+    Im folgenden Kapitel möchte ich das für diese Arbeit konzipierte Experiment vorstellen. Dabei handelt es sich um eine informelle Pilotierungsstudie zum Vergleich von Fortbewegungsarten für das Raumverständnis und das Präsenzgefühl in der generierten virtuellen Umgebung. Dabei soll konkreter untersucht werden, ob die Fortbewegungsart \textquote{Real-Walking} in diesen Punkten bessere Effekte erzielt als vergleichbare alternative Fortbewegungsarten.
+    Um das Experiment vorzustellen, werde ich zunächst die Hypothesen, denen ich mit dieser Arbeit auf den Grund gehen will, aufstellen um deutlich zu machen, was das Ziel des Experiments ist.
+    Im darauf folgenden Teil werde ich dann beschreiben wie die statistische Versuchsplanung der konzipierten Pilotierungsstudie aussieht. Dabei werde ich genauer auf die drei verschiedenen Fortbewegungsbedingungen eingehen, die untersucht werden sollten und beschreiben, wie diese für die Studie implementiert wurden.
 
     \section{Hypothesen und Messvariablen}
         An dieser Stelle möchste ich die in dem Experiment zu überprüfenden Hypothesen vorstellen.
 
         \begin{enumerate}
-            \item Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            %\item Nach dem, mit der \textquote{Real-Walking} Fortbewegungsart absolvieren eines, mit der, in dieser Arbeit vorgestellten Levelgenerierungmethode, generierten Levels,  ist die Schätzungsfähigkeit der zurückgelegten Strecke im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation} signifikant besser.
+            \item Nachdem ein, mit der hier vorgestellten Levelgenerierungmethode erstelltes, Level mit der Fortbewegungsart \textquote{Real-Walking} durchquert wurde, ist die Fähigkeit die darin zurückgelegte Strecke einzuschätzen besser, als wenn es mit den alternativen Fortbewegungsarten \textquote{Joystick} und \textquote{Teleportation} durchquert wurde.
 
-            \item Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            \item Beim durchqueren der, mit der hier vorgestellten Levelgenerierungmethode erstellten, Level mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden Alternativen \textquote{Joystick} und \textquote{Teleportation}.
         \end{enumerate}
 
         \subsection{Distanzschätzung}
-            %TODO: für einführung und related work: Kann Raumverständnis auch bei so generischen Leveln aufgebaut werden?
-            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis, im Vergleich zu anderen Fortbewegungsarten verbessert. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
+            Mehrere Forschungsergebnisse deuten darauf hin, dass natürliches Gehen das Raumverständnis im Vergleich zu anderen Fortbewegungsarten verbessert. \cite{langbehn-vergleich-2018,peck-vergleich-2011, walking-improves-map-building} %TODO: mehr?
 
-            Die hier vorgestellte Hypothese basiert auf zum Teil auf der Annahme, dass ein besseres Raumverständnis dazu führt, dass Nutzer:innen bereits gegangene, oder anderweitig fortbewegte Distanzen besser schätzen können. Dafür spricht die von Peck et al. \cite{peck-vergleich-2011} gefundene Untersuchung, dass Proband:innen in Real-Walking Fortbewegungsbedingungen die größe der virtuellen Umgebung nach dem Versuch siginifikant besser einschätzen konnten, als mit anderen virtuellen Fortbewegungsarten.
+            Die hier vorgestellte Hypothese basiert zum Teil auf der Annahme, dass ein besseres Raumverständnis dazu führt, dass Nutzer:innen bereits gegangene oder anderweitig zurückgelegte Distanzen besser schätzen können. Dafür spricht die von Peck et al. \cite{peck-vergleich-2011} gefundene Untersuchung, dass Proband:innen in Real-Walking Fortbewegungsbedingungen die größe der virtuellen Umgebung nach dem Versuch siginifikant besser einschätzen konnten, als mit anderen virtuellen Fortbewegungsarten.
 
             %gemessen ob es auch in generierten leveln gilt?
-            Wie gut die Nutzer:innen die bewegte Distanz schätzen wird hier gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade fortbewegten.\footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die gesamte fortbewegte Strecke.}
-            Neben der Schätzung wurde auch die vom virtuellen Avatar bewegte Strecke gemessen (siehe \autoref{sec:measure-distance}), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die fortbewegte Strecke einschätzen konnten.
+            Wie gut die Nutzer:innen die bewegte Distanz schätzen wird hier gemessen indem die Proband:innen nach jedem Durchlauf einer Versuchsbedingung schätzen sollen, wieviele Meter sie sich gerade zurückgelegt haben.\footnote{Dabei ist zu spezifizieren dass es nicht um die Euklidische Entfernung von Start und Ziel ging (die \textquote{Luftlinie}), sondern um die gesamte zurückgelegte Strecke.}
+            Neben der Schätzung wurde auch die vom virtuellen Avatar bewegte Strecke gemessen (siehe \autoref{sec:measure-distance}), sodass die absolute Differenz von Schätzung und Messung widerspiegelt wie gut die Proband:innen die zurückgelegte Strecke einschätzen konnten.
 
             Diese Art von Messung bietet sich für Level, die mit der hier vorgestellten Methode generiert werden an, weil diese sehr linear sind; Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt oder Abzweigungen geht.
 
@@ -934,7 +934,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
     Um aus der geringen Teilnehmerzahl der Studie (siehe \autoref{sec:circumstances})
     dennoch möglichst viele Daten zu sammeln und, weil nicht davon auszugehen ist, dass die Bedingungen der Fortbewegungsarten sich gegenseitig beeinflussen habe ich mich für ein \textquote{Within-Subjects Design} entschieden. Folglich haben alle Teilnehmenden alle 3 Konditionen durchlaufen. Um dabei zu vermeiden, dass die Reihenfolge der Konditionen die Ergebnisse beeinflusst (beispielsweise indem alle zuerst die Real-Walking Bedingung durchlaufen und zu diesem Zeitpunkt noch am besten einschätzen können wie weit sie gegangen sind, weil die Schätzungsfähigkeit mit der Zeit abnimmt), wurden die Teilnehmenden in 3 Gruppen eingeteilt, die die 3 möglichen unterschiedlichen Reihenfolgen der 3 Bedingungen abbilden.
 
-    Um die Schätzung der fortbewegten Strecke im generellen, sowohl bei mehr oder weniger vielen Räumen zwischen Start und Ziel, also bei längeren und kürzeren Leveln, zu messen wurden die Bedingungen in unterschiedlichen Raumlängen durchgeführt. Um diesen Effekt gleichmäßig auf alle Messergebnisse zu verteilen wurden die Raumlängen alternierend den unterschiedlichen Gruppen und den unterschiedlichen Fortbewegungsbedingungen zugewiesen, sodass jede Teilnehmer:in einmal jede der 3 Fortbewegungsarten und einmal jede der 3 Raumlängen 3, 6 und 9 durchlief. Außerdem so, sodass sich für jede Gruppe die Kombination aus Fortbewegungsart und Raumlänge bei allen 3 durchgeführten Bedingungen unterschied. Dank dieses Versuchdesigns, ist es mit den gesammelten Daten auch möglich mehrfaktorielle Varianzanalysen auszuführen um Wechspiele zwischen verschiedenen Faktoren zu untersuchen.
+    Um die Schätzung der zurückgelegten Strecke im generellen, sowohl bei mehr oder weniger vielen Räumen zwischen Start und Ziel, also bei längeren und kürzeren Leveln, zu messen wurden die Bedingungen in unterschiedlichen Raumlängen durchgeführt. Um diesen Effekt gleichmäßig auf alle Messergebnisse zu verteilen wurden die Raumlängen alternierend den unterschiedlichen Gruppen und den unterschiedlichen Fortbewegungsbedingungen zugewiesen, sodass jede Teilnehmer:in einmal jede der 3 Fortbewegungsarten und einmal jede der 3 Raumlängen 3, 6 und 9 durchlief. Außerdem so, sodass sich für jede Gruppe die Kombination aus Fortbewegungsart und Raumlänge bei allen 3 durchgeführten Bedingungen unterschied. Dank dieses Versuchdesigns, ist es mit den gesammelten Daten auch möglich mehrfaktorielle Varianzanalysen auszuführen um Wechspiele zwischen verschiedenen Faktoren zu untersuchen.
 
     \begin{figure}[!h]
         \centering
@@ -945,7 +945,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
     Dementsprechend bot sich als Versuchsplan ein Griechisch-Lateinisches Quadrat in der Größe $3 \times 3$ an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Versuchsnedingung \textquote{Joystick} und $C$ für die Bedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
-    Die Abhängige Variable ist also die jeweilige Messvariable der Bedingung, also die absolute Differenz von geschätzem und fortbewegten Weg, oder die mit dem SUS-Präsenz Questionaire gemessene Präsenz. Die unabhängige Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
+    Die Abhängige Variable ist also die jeweilige Messvariable der Bedingung, also die absolute Differenz von geschätzem und zurückgelegtem Weg, oder die mit dem SUS-Präsenz Questionaire gemessene Präsenz. Die unabhängige Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
 
     \section{Fortbewegungsbedingungen}\label{sec:conditions}
         Im folgenden werde ich die drei verschiedenen Fortbewegungsbedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich die beiden virtuellen Fortbewegungsartem, Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Versuchsbedingung, die die Fortbewegungsart des natürlichen Gehens nutzt.
@@ -1006,8 +1006,8 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
     \section{Ablauf der Studie}
         An dieser Stelle werde ich den genauen Ablauf der Studie beschreiben.
         Die Studie wurde zwischen dem 12.08.2021 und dem 20.08.2021 in einer geräumigen Wohnung in Hamburg/Stellingen ausgeführt. Nach Ankunft der Teilnehmer:innen wurden zunächst die notwendigen Covid-Sicherheitsmaßnahmen thematisiert.
-        Zunächst haben diese sich ihre Hände desinfiziert, danach führten sie einen Antigen-Schnelltest an sich aus. In der Zeit, bevor das Ergebnis davon festgestellt werden konnten wurden den Proband:innen die Steuerung von der Joystick- und Teleportationsbedingung erklärt.
-        Zudem wurde ihnen erklärt, dass ihre Aufgabe während des Experiments darin bestünde die fortbewegte Entfernung in jeder Bedingung einzuschätzen. Zudem sollen sie von Raum zu Raum gelangen indem sie an der Tür zum nächsten Raum die erforderlichen Zahlencodes eingeben, bis die Tür sich öffnet.
+        Zunächst haben diese sich ihre Hände desinfiziert, danach führten sie einen Antigen-Schnelltest an sich aus. In der Zeit, bevor das Ergebnis davon festgestellt werden konnte, wurden den Proband:innen die Steuerung von der Joystick- und Teleportationsbedingung erklärt.
+        Zudem wurde ihnen erklärt, dass ihre Aufgabe während des Experiments darin bestünde die zurückgelegte Entfernung in jeder Bedingung einzuschätzen. Dabei wurde betont, dass es nicht um die Luftlinie zwischen Start und Ziel ging, sondern um die Strecke, die sie insgesamt zurücklegten. Zudem sollen sie von Raum zu Raum gelangen indem sie an der Tür zum nächsten Raum die erforderlichen Zahlencodes eingeben, bis die Tür sich öffnet.
 
         Nachdem dann das negative Testergebnis abzulesen war (bei keiner Teilnehmer:in gab es ein positives Testergebnis), wurden die Proband:innen einer der Gruppen zugeteilt und ihnen wurde der erste Abschnitt des, im Anhang
         abgebildeten, \nameref{anhang:demo}s auf einem Laptop bereit gestellt. Nachdem dieser ausgefüllt war durften die Proband:innen das erste mal die für die Durchführung der Studie genutzte Oculus Quest 2 Datenbrille aufsetzen um sich kurz damit vertraut zu machen. Nebenbei wurde das Bild der Brille über einen Google-Chromecast angezeigt, sodass es von aussen möglich war zu sehen, was in der Datenbrill dargestellt wurde. Den Teilnehmer:innen wurde erklärt wie sie innerhalb des Oculus Startbildschirm navigieren können, sodass diese dann selber die APK für die Studie öffnen konnten (siehe \autoref{figure:oculus-menu}).
@@ -1044,8 +1044,8 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
             Alle Antworten aus den Fragebögen und die in der Datenbank gespeicherten Mess-Daten sind im \textquote{\nameref{anhang}} abgebildet. Letztere wurden von mir, der Übersicht wegen, vom $.json$ Format in ein Tabellenformat formatiert.
 
-                \subsection{Statistische Auswertung zur Schätzung der fortbewegten Distanz}
-                    Die Auswertung zur Schätzung der fortbewegten Distanz erfolgt in zwei Teilen.
+                \subsection{Statistische Auswertung zur Schätzung der zurückgelegten Strecke}
+                    Die Auswertung zur Schätzung der zurückgelegten Distanz erfolgt in zwei Teilen.
                     Der erste Teil untersucht die absolute Differenz zwischen Schätzung und gemessener Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
                     Darauf folgend wird die Schätzung relativ zur gemessenen Distanz mit einer zweifaktoriellen Varianzanalyse auf eine Wechselwirkung der Einflussfaktoren \textquote{Fortbewegungsart} und \textquote{Raumanzahl des Levels} untersucht.
 
@@ -1054,10 +1054,10 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     $$ \mid D_g - D_m \mid $$
                     Wobei $D_g$ für die geschätze Distanz und $D_m$ für die gemessene Distanz steht.
 
-                    Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen fortbewegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen bietet sich eine Varianzanalyse an.
+                    Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen zurückgelegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen bietet sich eine Varianzanalyse an.
                     Aufgrund des \textquote{Within-Subjects Design} wird eine einfaktorielle Varianzanalyse mit Messwiederholung durchgeführt.
 
-                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der fortbewegten Distanz sind in \autoref{table:diff_means} abgebildet.
+                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der zurückgelegten Distanz sind in \autoref{table:diff_means} abgebildet.
 
                     \begin{table}[!h]
                         \renewcommand\arraystretch{1.2}
@@ -1068,7 +1068,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                             Joystick        & $9$ & 16,0 & 16,8 \\
                             Teleport        & $9$ & 13,8 & 9,62 \\ \bottomrule
                         \end{tabular}
-                        \caption{Arithmetische Mittel und Standardabweichungen der absoluten Differenz zwischen gemessener und geschätzer fortbewegter Distanz}\label{table:diff_means}
+                        \caption{Arithmetische Mittel und Standardabweichungen der absoluten Differenz zwischen gemessener und geschätzer zurückgelegter Distanz}\label{table:diff_means}
                     \end{table}
 
                     Ein Boxplot der Messergebnisse findet sich in \autoref{figure:diff_plot}
@@ -1076,7 +1076,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/diff_plot.png}
-                        \caption{Box-Plot der absoluten Differenzen zwischen gemessener und geschätzer fortbewegter Distanz, aufgeteilt nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
+                        \caption{Box-Plot der absoluten Differenzen zwischen gemessener und geschätzer zurückgelegter Distanz, aufgeteilt nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
                     \end{figure}
 
                     Eine Varianzanalye mit Messwiederholung setzt vorraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in \autoref{figure:diff_normality} abgebildet.
@@ -1099,7 +1099,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                             Joystick     & 0,868            & 0,117 \\
                             Teleport     & 0,867            & 0,113 \\ \bottomrule
                         \end{tabular}
-                        \caption{Die Ergebnisse eines Shapiro-Wilk Tests der absoluten Differenz von Schätzung und Messung der fortbewegten Distanz für die unterschiedlichen Fortbewegungsarten}\label{table:norm_test_diff}
+                        \caption{Die Ergebnisse eines Shapiro-Wilk Tests der absoluten Differenz von Schätzung und Messung der zurückgelegten Distanz für die unterschiedlichen Fortbewegungsarten}\label{table:norm_test_diff}
                     \end{table}
 
                     Im Datensatz wurden keine extremen Ausreißer %grenze?
@@ -1337,11 +1337,11 @@ Joystick     & Teleport & 8,5           & 0,269 & 0,807 \\ \bottomrule
         Vorweg möchte ich betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren, es ist zudem  durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten.
 
         \subsection{Schätzung der bewegten Distanz}
-            Die oben formulierte Hypothese zur Schätzung der fortbewegten Distanz lautete wie folgt:
+            Die oben formulierte Hypothese zur Schätzung der zurückgelegten Distanz lautete wie folgt:
 
-            Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der fortbewegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der zurückgelegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzer und gemessender fortbewegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die den Alternativen. Es konnten keine signifikanten  Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
+            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzer und gemessender zurückgelegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die den Alternativen. Es konnten keine signifikanten  Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
 
             Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
 
@@ -1352,10 +1352,10 @@ Joystick     & Teleport & 8,5           & 0,269 & 0,807 \\ \bottomrule
             Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt werden konnten ist die Monotonität der generierten Räume.
             Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erstellen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dies ein Grundproblem von generierten (generischen) Leveln.
 
-            In diesem Fall könnte es also so sein, dass sich die Fähigkeit von Nutzer:innen, die fortbewegte Distanz einzuschätzen, zwischen von Menschen gestalteten und von Computern generierten Leveln signifikant unterscheidet. Diese Überlegung könnte einen Versuchaufbau gestalten, bei dem die kognitive Kartenbildung in menschlich gestalteten Leveln, mit der in prozedural generierten Leveln verglichen wird.
+            In diesem Fall könnte es also so sein, dass sich die Fähigkeit von Nutzer:innen, die zurückgelegte Distanz einzuschätzen, zwischen von Menschen gestalteten und von Computern generierten Leveln signifikant unterscheidet. Diese Überlegung könnte einen Versuchaufbau gestalten, bei dem die kognitive Kartenbildung in menschlich gestalteten Leveln, mit der in prozedural generierten Leveln verglichen wird.
 
-            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der fortbewegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft.
-            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre eigene fortbewegte Distanz über mehrere Räume hinweg besser einschätzen können, als in anderen Bedingungen.
+            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der zurückgelegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft.
+            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre eigene zurückgelegte Distanz über mehrere Räume hinweg besser einschätzen können, als in anderen Bedingungen.
 
             In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind. Aus diesem Grund sollte in zukünftigen Studien mit unterschiedlichen Methoden gemessen werden, wie gut das Raumverständnis der Proband:innen ist.
 
@@ -1377,7 +1377,7 @@ Joystick     & Teleport & 8,5           & 0,269 & 0,807 \\ \bottomrule
     \section{Konklusion}
         In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raum-Basierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen, mithilfe von Rotationgains und Impossible Spaces, ermöglicht wird sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der die Illusion entsteht sie würden die Grenzen des realen Trackingspaces verlassen und könnten unabhängig davon die virtuelle Umgebung erkunden. Diese Methodik ermöglicht potentiell unendlich lange Level, bei denen die Generierung während der Erkundung des Levels fortgeführt wird.
 
-        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung fortbewegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in mit dieser Methode prozedural generierten Leveln gegeben sind.
+        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung zurückgelegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in mit dieser Methode prozedural generierten Leveln gegeben sind.
 
 % \chapter*{Danksagungen}\label{chapter:acknowledgements}
 % \addcontentsline{toc}{chapter}{Danksagungen}
