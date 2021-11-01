@@ -24,37 +24,35 @@ Mit diesen Methoden lassen sich also einige Effekte erzielen, wie unter anderem 
 Im Folgenden werde ich nun zwei dieser Methoden genauer vorstellen.
 %%%%%%%%%%%%
 
-\subsection{Rotationgains}
-Rotationgains werden Kopfrotationen hinzugefügt, sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
+\subsection{Rotation-Gains}
+Rotation-Gains werden Kopfrotationen hinzugefügt, sodass sich die virtuelle Kamera leicht schneller oder langsamer dreht als der reale
 Kopf mit dem VR-Headset.
 Wie diese dargestellt werden können findet sich wie folgend bei Steinicke et al. \cite{detection-thresholds}:
 
 Kopfrotationen lassen sich mit der Schreibweise
 $$ R_{real} := (pitch_{real}, yaw_{real}, roll_{real}) $$
-darstellen, wobei $pitch$, $yaw$ und $roll$ die Eulerschen Winkel der Kopfrotation repräsentieren. Ein Rotationgain wird als Quotient des virtuellen Winkels und des realen Winkels einer Rotationsdimension definiert:
+darstellen, wobei $pitch$, $yaw$ und $roll$ die Eulerschen Winkel der Kopfrotation repräsentieren. Ein Rotation-Gain wird als Quotient des virtuellen Winkels und des realen Winkels einer Rotationsdimension definiert:
 $$ gR := \frac{R_{virtual}}{R_{real}} $$
-Für alle 3 Winkel kann ein Rotationgain angewandt werden.
-Statt der eigentlichen Kopfrotation $\alpha$, wird die Multiplikation aus $\alpha$ mit dem Rotationgain:
+Für alle 3 Winkel kann ein Rotation-Gain angewandt werden.
+Statt der eigentlichen Kopfrotation $\alpha$, wird die Multiplikation aus $\alpha$ mit dem Rotation-Gain:
 $$ gR * \alpha $$
 durchgeführt.
-Folglich rotieren virtuelle Kameras mit einem Rotationgain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotationgain von $gR < 1$ langsamer die Richtung drehen.
+Folglich rotieren virtuelle Kameras mit einem Rotation-Gain von $gR > 1$ schneller in die Richtung der realen Kopfdrehung als der reale Kopf, während solche mit einem Rotation-Gain von $gR < 1$ langsamer die Richtung drehen.
 %nochmal peck 11 angucken dazu
-Da für jeden Winkel der Kopfrotation ein Rotationgain definiert werden kann, können Rotationgains folgendermaßen dargestellt werden:
+Da für jeden Winkel der Kopfrotation ein Rotation-Gain definiert werden kann, können Rotation-Gains folgendermaßen dargestellt werden:
 $$(gR_{pitch}, gR_{yaw}, gR_{roll})$$
 
-Nach Steinicke et al. \cite{detection-thresholds} wird generell für Redirection-Zwecke ein Rotationgain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
+Nach Steinicke et al. \cite{detection-thresholds} wird generell für Redirection-Zwecke ein Rotation-Gain auf den $yaw_{real}$ Winkel der Kopfrotation angewandt.
 
-Durch Anwenden eines positiven Rotationgains auf Yaw-Rotationen nach rechts und eines neutralen oder sogar negativen Rotationgains für Rotationen nach links kann der virtuelle Bereich, der dem Trackingspace entspricht um den realen Trackingspace nach rechts rotiert werden, mit dem Drehpunkt der Nutzer:innenposition. Dies gilt auch für die andere Richtung. Indem im vorhinein ein Winkel $\beta$, für die Ziel-Verdrehung der beiden Realitäten definiert wird, lässt sich beim Erreichen dieses Winkels das Anwenden des Rotationgains beenden, sodass die Welten sich nun um genau $\beta$ Grad verdreht haben.
+Durch Anwenden eines positiven Rotation-Gains auf Yaw-Rotationen nach rechts und eines neutralen oder sogar negativen Rotation-Gains für Rotationen nach links kann der virtuelle Bereich, der dem Trackingspace entspricht um den realen Trackingspace nach rechts rotiert werden, mit dem Drehpunkt der Nutzer:innenposition. Dies gilt auch für die andere Richtung. Indem im vorhinein ein Winkel $\beta$, für die Ziel-Verdrehung der beiden Realitäten definiert wird, lässt sich beim Erreichen dieses Winkels das Anwenden des Rotation-Gains beenden, sodass die Welten sich nun um genau $\beta$ Grad verdreht haben.
 
-Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher \textquote{gerichteter} Rotationgain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte sichergestellt werden, dass sich die Kopfposition der Nutzer:in möglichst nah an diesem Drehpunkt befindet, da sonst nicht der Eindruck entsteht, die Rotation wäre mit der Kopfrotation der Nutzer:in identisch. Außerdem kann es für große Verwirrung sorgen, wenn sich die Welt auf einmal nicht um die eigene Achse dreht, aber dennoch genau dann, wenn der Kopf bewegt wird.} angewendet wird.
+Dies ermöglicht Prozesse, bei denen in bestimmten Bereichen der virtuellen Realität ein solcher \textquote{gerichteter} Rotation-Gain bis zu einem bestimmten Ziel-Winkel um einen vorher definierten Drehpunkt\footnote{Es sollte sichergestellt werden, dass sich die Kopfposition der Nutzer:in möglichst nah an diesem Drehpunkt befindet, da sonst nicht der Eindruck entsteht, die Rotation wäre mit der Kopfrotation der Nutzer:in identisch. Außerdem kann es für große Verwirrung sorgen, wenn sich die Welt auf einmal nicht um die eigene Achse dreht, aber dennoch genau dann, wenn der Kopf bewegt wird.} angewendet wird.
 
 In solchen Prozessen ist die Verdrehung zwischen den beiden Realitäten designbar, da sie so deterministisch wird. Da sich nun die Realitäten verdreht haben, liegen nun virtuelle Orte innerhalb des durch den realen Trackingspace begrenzten, für die Nutzer:in begehbaren Bereichs, die es vorher nicht taten.
-Für die Nutzer:in kann so die Illusion entstehen, sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun. %(Siehe grafik)
-%Optional TODO: grafik.
+Für die Nutzer:in kann so die Illusion entstehen, sie würde über die Grenzen des Trackingspaces hinaus schreiten können, ohne dies zu tun.
 
-\subsection{Impossible Spaces}
+\subsection{Impossible-Spaces}
 Um den begehbaren Bereich eines Trackingspace noch weiter zu vergrößern wurde eine Redirection Methode von Suma et al. \cite{impossible-spaces-suma} vorgestellt, bei der zwei oder mehr Räume in überlappenden Gebieten liegen, allerdings nur einer zur Zeit angezeigt wird. Es gibt dann unterschiedliche Bedingungen, wann welcher der Räume angezeigt wird. Beispielsweise wird Raum $A$ nur angezeigt wenn die Nutzer:in den überlappenden Raum durch Tür $a$ betritt und Raum $B$, wenn sie ihn durch Tür $b$ betritt.
-%OptionalTODO: grafik?
 Dafür ist es also notwendig, dass $x$ verschiedene Zustände programmatisch ermöglicht werden, sodass immer einer von $x$ verschiedenen möglichen Räumen angezeigt wird.
 Des Weiteren ist es notwendig ein Gebiet in der virtuellen Umgebung bereitzustellen, in dem zwischen den Zuständen gewechselt werden kann, ohne dass die Nutzer:in es merkt.
 
@@ -70,13 +68,16 @@ Mit Redirection-Maßnahmen ausgestattet, welche wiederholt angewendet werden kö
 \section{Infinite-Walking Methode}
 Die in dieser Arbeit vorgestellte Infinite-Walking Methode basiert darauf aufeinander folgende trackingspacegroße Räume zu generieren, die genau so angeordnet sind, dass ein
 90\textdegree, gerichteter
-Rotationgain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotationgains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich, viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren, zu generieren. %optional  TODO: genauer ausführen
+Rotation-Gain an einer bestimmten Stelle, in der Nähe einer der Ecken des Raumes, die virtuelle und die reale Umgebungen, so umeinander dreht, dass der reale Trackingspace nach Abschluss des gerichteten Rotation-Gains genau kongruent mit den Außenwänden des nächsten Raumes liegt. Die Nutzer:in kann diesen dann betreten und den gleichen Effekt an einer anderen Ecke des Raumes, in dem die sich nun befindet, wiederholen um den begehbaren Bereich auf den wieder nächsten Raum zu transformieren. Dies kann dann theoretisch endlos so wiederholt werden. Die Räume sind durch Korridore miteinander verbunden. Jeder Raum hat genau einen Korridor. Diese sind so gestaltet, dass der Drehpunkt die Mitte des Korridors kurz vor dessen Ende darstellt. Durch Zufallsfaktoren in der Levelgenerierung, ist es mit dieser Methode möglich, viele unterschiedliche Level, die auf dem eben genannten Prinzip basieren, zu generieren.
 
 Wie die Generierung solcher Level funktioniert, wird in \autoref{chapter:generate} genauer beschrieben.
 
+\section{Information}
+Bei allen in dieser Arbeit abgebildeten Grafiken, Bildern, Screenshots und Tabellen handelt es sich um Eigengrafiken, sofern nicht explizit eine Bildquelle dazu angegeben ist.
+
 \chapter{Verwandte Arbeiten}\label{chapter:relatedwork}
 
-In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene Redirection-Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in diesem Projekt sehr im Fokus liegenden Rotationgains ein, um danach die auch genutzten Impossible Spaces vorzustellen. Als nächstes stelle ich der Leser:in Arbeiten zu dem Thema der Prozeduralen Levelgenerierung vor. Dabei werde ich mich sowohl mit Artikeln über die genaue Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
+In diesem Kapitel werden wissenschaftliche Arbeiten vorgestellt mit denen diese Arbeit zusammenhängt. Dabei werde ich zunächst auf solche Arbeiten eingehen, die sich mit dem Thema Real-Walking in virtuellen Umgebungen beschäftigen, danach verschiedene Redirection-Techniken vorstellen und dann auf das Thema der Level-Generierung eingehen. Zunächst stelle ich generelle Arbeiten zu dem Thema Real-Walking und dann zu Redirection Techniken vor, danach gehe ich konkreter auf die in diesem Projekt sehr im Fokus liegenden Rotation-Gains ein, um danach die auch genutzten Impossible-Spaces vorzustellen. Als nächstes stelle ich der Leser:in Arbeiten zu dem Thema der Prozeduralen Levelgenerierung vor. Dabei werde ich mich sowohl mit Artikeln über die genaue Definition dieses Bereichs beschäftigen, als auch eine Taxonomie zur Einordnung von Prozeduren zur Inhaltsgenerierung zitieren. Die Kombination von generierten Leveln und Redirection-Techniken führen zu dem sogenannten \textquote{Infinite-Walking}. Mit den Arbeiten zu diesem Thema wird das Kapitel abgeschlossen.
 
 \section{Real-Walking}
 1995 zeigen Slater et al. \cite{taking-steps}, dass Proband:innen ein höheres Präsenzgefühl angaben, wenn sie die von ihnen vorgestellte Technik \textquote{Walking-In-Place} nutzten, als wenn sie sich per Knopfdruck durch die Welt bewegten. Hierbei handelte es sich um eine Virtual-Walking Technik, bei der die Proband:innen eine Gehbewegung simulierten die dann digital erfasst und in virtuelle Fortbewegung umgewandelt wurde. Dieses Experiment wurde 1999 von Usoh et al. \cite{usoh-vergleich-1999} repliziert, wobei nun die Option wirklich zu gehen (\textquote{Real-Walking}) gegeben war. Dabei hatten die Proband:innen nochmal ein signifikant höheres Präsenzgefühl, als bei den beiden anderen Optionen (Virtual-Walking und Push-Button-Fly).
@@ -102,7 +103,7 @@ Eine Taxonomie über die verschiedenen Redirection Techniken stellten 2012 Suma 
 
 \subsection{Rotation Gains}
 
-Bei Rotationgains handelt es sich nach Sumas Taxonomie \cite{taxonomy} um eine kontinuierliche, subtile Reorientierungstechnik. In der Arbeit \cite{detection-thresholds} untersuchten Steinicke et al. verschiedene subtile Redirection-Techniken darauf, wie stark die Manipulation sein darf, bevor Proband:innen erkennen, ob sie eingesetzt wurde oder nicht. Dazu teilten sie die verschiedenen Elemente, die für Redirected Walking eingesetzt werden, in drei verschiedene Gains ein: \textquote{Translation-Gains}, \textquote{Rotation-Gains} und \textquote{Curvature-Gains}. Es stellte sich heraus, dass Nutzer:innen physisch um bis zu 49\% mehr oder um bis zu 20\% weniger als die wahrgenommene virtuelle Rotation, rotiert werden können, ohne die Diskrepanz zu bemerken, also Rotationgains $0,8 < gR < 1,49$ unentdeckt bleiben.
+Bei Rotation-Gains handelt es sich nach Sumas Taxonomie \cite{taxonomy} um eine kontinuierliche, subtile Reorientierungstechnik. In der Arbeit \cite{detection-thresholds} untersuchten Steinicke et al. verschiedene subtile Redirection-Techniken darauf, wie stark die Manipulation sein darf, bevor Proband:innen erkennen, ob sie eingesetzt wurde oder nicht. Dazu teilten sie die verschiedenen Elemente, die für Redirected Walking eingesetzt werden, in drei verschiedene Gains ein: \textquote{Translation-Gains}, \textquote{Rotation-Gains} und \textquote{Curvature-Gains}. Es stellte sich heraus, dass Nutzer:innen physisch um bis zu 49\% mehr oder um bis zu 20\% weniger als die wahrgenommene virtuelle Rotation, rotiert werden können, ohne die Diskrepanz zu bemerken, also Rotation-Gains $0,8 < gR < 1,49$ unentdeckt bleiben.
 
 Des Weiteren wurde festgestellt, dass Geh-Distanzen unbemerkt um bis zu 14\% herunter- oder um bis zu 26\% heraufskaliert werden können und dass Nutzer:innen erst bemerken, dass sie in einem kreisförmigem Bogen durch den Trackingspace geleitet werden, wenn dessen Radius 22 Meter oder kleiner ist.
 
@@ -112,8 +113,7 @@ Bei \textquote{Impossible-Spaces} handelt es sich um eine von
 Suma et al. \cite{impossible-spaces-suma} vorgestellte Redirection-Technik, bei der sich die Architektur der virtuellen Umgebung auf nicht-euklidische Weise verändert, sodass solche Gebiete in der Realität nicht existieren könnten.
 Die Räume überlappen einander, allerdings wird jeweils nur einer der überlappenden Räume angezeigt. Hierbei handelt es sich nach der schon erwähnten Taxonomie um eine subtile diskrete Redirection-Technik.
 
-In einer Forschungsdemonstration \cite{redirected-spaces} stellten Langbehn et al. eine Weise vor mit der Impossible-Spaces mit traditionelleren Redirected-Walking Methoden %(in diesem Fall Curvature-Gains)TODO: nochmal anschauen
-kombiniert werden können, sodass beide Methoden ihren Effekt beitragen können.
+In einer Forschungsdemonstration \cite{redirected-spaces} stellten Langbehn et al. eine Weise vor mit der Impossible-Spaces mit traditionelleren Redirected-Walking Methoden kombiniert werden können, sodass beide Methoden ihren Effekt beitragen können.
 
 \section{Prozedural generierte Level}
 
@@ -163,7 +163,6 @@ In ihrer Arbeit \cite{sbpcg} stellen Togelius et al. eine Taxonomie für PCG vor
 Der in dieser Arbeit beschriebene PCG-Algorithmus lässt sich dementsprechend eher in diese Kategorien der Taxonomie einordnen, als in ihre jeweiligen Alternativen: Online, necessary, random seeds,
  %generic,
  stochastic and constructive. % and automatic.
-%TODO: übersetzen
 
 \section{Infinite walking}
 Viele der Redirection-Techniken simulieren die Vergrößerung des begehbaren Bereichs, doch dennoch bleibt die begehbare Fläche limitiert. Solange die virtuelle Umgebung von menschlichen Designern erschaffen werden muss, ist sie begrenzt. Wenn jedoch PCG genutzt wird um die virtuelle Umgebung zu erschaffen lässt sie sich theoretisch endlos weit durchschreiten, weil die Generierung während der Erkundung der Welt fortgeführt werden kann.
@@ -176,7 +175,7 @@ Ein Beispiel für eine solche Technik stellen Vasylevska et al. in ihrer Arbeit 
 Besonders bei Umgebungen in denen der Inhalt der Räume mehr im Fokus steht als das spezifische Layout der Räume (beispielsweise ein Museeum) ist Technik sehr geeignet.
 
 Einen sehr ähnlichen Ansatz nutzt das VR-Spiel \textquote{Tea for God} \cite{tea-for-god} bei dem die Nutzer:in durch ein endlos groß scheinendes Labyrinth von Korridoren gehen kann. Der Entwickler Jarosław (Void Room) Ciupiński erklärt in seinen Devlogs (beispielsweise \cite{tea-for-god-devlog-a} oder \cite{tea-for-god-devlog-b}) genauer wie der Ansatz funktioniert.
-Die Welt besteht aus einem prozedural generierten Netz von verbundenen Zellen, die jeweils einen Raum repräsentieren und mit Korridoren verbunden sind. Auch hier basieren die Räume auf den vorher erwähnten Impossible Spaces.
+Die Welt besteht aus einem prozedural generierten Netz von verbundenen Zellen, die jeweils einen Raum repräsentieren und mit Korridoren verbunden sind. Auch hier basieren die Räume auf den vorher erwähnten Impossible-Spaces.
 %In seinem devlog \cite{tea-for-god-devlog-b} erwähnt der Autor die eben erwähnte Arbeit von Vasylevska et al. \cite{flexible-spaces}, was darauf hindeuten könnte, das Spiel wäre von dem Ansatz der flexible spaces inspiriert.
 
 Einen anderen Ansatz verfolgt das in der Arbeit \cite{microsoft} von Cheng et al. vorgestellte Projekt \textquote{VRoamer}.
@@ -195,17 +194,13 @@ Das Kapitel wird mit einer Übersicht über die Beziehungen zwischen den verschi
 Danach stelle ich jede einzelne Klasse einmal vor.
 %Anschließend werden einzelne Bereiche der Implementierung genauer beschrieben.
 Anschließend beschreibe ich einzelne Bereiche der Implementierung genauer.
-Zuerst die Hierarchie der Unity-Szene, dann das Design der Level, der virtuelle Avatar, die Umsetzungen von Rotationgains und Impossible Space, die Umsetzung der für die später vorgestellte Pilotierungsstudie relevanten unterschiedlichen Fortbewegungsarten, der Mechanismus, der die Nutzer:in dazu anreizt, sich für die Rotationgains an der richtigen Stelle zu drehen, wie die Türen funktioneren, wie die unterschiedlichen Versuchsbedingungen ausgewählt und geladen werden können und wie die für die Studie gemessenen Daten gemessen und gespeichert werden.
+Zuerst die Hierarchie der Unity-Szene, dann das Design der Level, der virtuelle Avatar, die Umsetzungen von Rotation-Gains und Impossible Space, die Umsetzung der für die später vorgestellte Pilotierungsstudie relevanten unterschiedlichen Fortbewegungsarten, der Mechanismus, der die Nutzer:in dazu anreizt, sich für die Rotation-Gains an der richtigen Stelle zu drehen, wie die Türen funktioneren, wie die unterschiedlichen Versuchsbedingungen ausgewählt und geladen werden können und wie die für die Studie gemessenen Daten gemessen und gespeichert werden.
 
-Die gesamte Programmierung für dieses Projekt ist in der Entwicklungsumgebung Unity (Version: 2020.1.17f1) \cite{unity} und folglich mit der Programmiersprache \textquote{C\#} erfolgt. Um die Software während der Entwicklung testen zu können und um damit das Experiment durchführen zu können wurde mir freundlicherweise eine \textquote{Oculus Quest 2} \cite{quest} Datenbrille, vom Arbeitsbereich Mensch-Computer-Interaktion der Universität Hamburg zur Verfügung gestellt. Um mit der Schnittstelle davon zu interagieren nutzt das Projekt das, von Oculus frei zur Nutzung gestellte, \textquote{Oculus Integration SDK} für Unity \cite{integration}. Um die Rotationgains zu implementieren wurde mir ebenfalls die Library \textquote{Space-Extender} zur Verfügung gestellt, die diesen Prozess stark vereinfacht.
+Die gesamte Programmierung für dieses Projekt ist in der Entwicklungsumgebung Unity (Version: 2020.1.17f1) \cite{unity} und folglich mit der Programmiersprache \textquote{C\#} erfolgt. Um die Software während der Entwicklung testen zu können und um damit das Experiment durchführen zu können wurde mir freundlicherweise eine \textquote{Oculus Quest 2} \cite{quest} Datenbrille, vom Arbeitsbereich Mensch-Computer-Interaktion der Universität Hamburg zur Verfügung gestellt. Um mit der Schnittstelle davon zu interagieren nutzt das Projekt das, von Oculus frei zur Nutzung gestellte, \textquote{Oculus Integration SDK} für Unity \cite{integration}. Um die Rotation-Gains zu implementieren wurde mir freundlicherweise die Library \textquote{Space-Extender} von dem Unternehmen \textquote{Curvature-Games} zur Verfügung gestellt, welche diesen Prozess stark vereinfacht. Diese findet sich mittlerweile auch bei GitHub \cite{space-extender-git}.
 
 \section{Klassendiagramm}
-Um das Diagramm übersichtlich zu halten beschränkt es sich
-%TODO: fast?
-ausschließlich auf die Relationen zwischen den Klassen, es wird also nicht wie sonst in UML-Klassendiagrammen üblich die gesamte Schnittstelle aller Klassen inklusive ihren Attributen und ihren Methoden aufgelistet.
-%TODO: außer für sehr zentrale?
+Um das Diagramm übersichtlich zu halten beschränkt es sich ausschließlich auf die Relationen zwischen den Klassen, es wird also nicht wie sonst in UML-Klassendiagrammen üblich die gesamte Schnittstelle aller Klassen inklusive ihren Attributen und ihren Methoden aufgelistet.
 Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig in Unity gearbeitet wird (zum Beispiel \textquote{Vector3}, \textquote{MonoBehaviour} oder \textquote{GameObject}) weggelassen.
-
 
 \begin{figure}[H]
     \begin{center}
@@ -307,7 +302,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 
     \paragraph{RotationGainMechanism}
 
-    Diese Klasse implementiert den Mechanismus, der in der Real-Walking Bedingung bei den jeweiligen Räumen angewandt wird um den genauen Ablauf des Rotationgains zu definieren. Er zeigt die Zahlen auf der Tafel im Korridor an, verwertet die Eingabe des Eingabefelds, startet den Rotation-Gain und beendet ihn auch wieder. Er signalisiert dem RoomAndProgressManager wenn der Rotation-Gain vollständig ist. Dies ist der Fall wenn der Trackingspace um
+    Diese Klasse implementiert den Mechanismus, der in der Real-Walking Bedingung bei den jeweiligen Räumen angewandt wird um den genauen Ablauf des Rotation-Gains zu definieren. Er zeigt die Zahlen auf der Tafel im Korridor an, verwertet die Eingabe des Eingabefelds, startet den Rotation-Gain und beendet ihn auch wieder. Er signalisiert dem RoomAndProgressManager wenn der Rotation-Gain vollständig ist. Dies ist der Fall wenn der Trackingspace um
     90\textdegree\
     gedreht hat, und die Proband:in dann eine richtige Eingabe tätigt. Dies verursacht, dass sich die Tür in den nächsten Raum öffnet. In den anderen Bedingungen ist er dafür verantwortlich dies nach einer zufälligen, geringen, Anzahl richtiger Eingaben in das Nummerneingabefeld zu tun, sodass die Proband:in auch in diesen Bedingungen den selben Ablauf erlebt. Dieser Mechanismus wird in \autoref{sec:rotgaininc} genauer ausgeführt.
 
@@ -330,9 +325,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
     Dieses Script ist eine Komponente eines Nummerneingabefeldes und ist dafür zuständig die Eingabe zu verarbeiten und dann alle angemeldeten Observer über Änderungen zu informieren.
 
     \paragraph{NumberPadButton}
-    Verbessert die Knöpfe eines Nummerneingabefeldes, indem es ihnen eine \textquote{CoolDown}-Periode gibt,
-    % Cooldown englisch? MCI-QUelle?
-    sodass nicht unbeabsichtigt mehrere Eingaben entstehen und indem es einen Soundeffekt abspielt um der Nutzer:in als Feedback zu bestätigen, dass der Knopf gedrückt wurde. % OptionalTODO: Nach xyz steigerm solche maßnahmen steigern die Immersion
+    Verbessert die Knöpfe eines Nummerneingabefeldes, indem es ihnen eine \textquote{CoolDown}-Periode gibt, sodass nicht unbeabsichtigt mehrere Eingaben entstehen und indem es einen Soundeffekt abspielt um der Nutzer:in als Feedback zu bestätigen, dass der Knopf gedrückt wurde.
 
     \paragraph{FireBaseHandler}
     Bietet die Methode \textquote{PostResult} an, die die Daten des aktuellen Versuchs an eine Cloud-Datenbank verschickt. So werden dann die Anzahl an Räume des Levels, die gelaufene Strecke in Metern, die Fortbewegungsart, und das Datum, inklusive der genauen Uhrzeit des Abschickens gespeichert. Außerdem wird gespeichert ob das Verschicken im Unity-Editor, also zum Testen, geschehen ist, oder ob es wirklich von der Datenbrille aus versendet wurde.
@@ -348,7 +341,7 @@ Aus dem selben Grund wurden auch Grundklassen/-typen mit denen Standardmäßig i
 
 Der folgende Abschnitt beschreibt die Objekte in der Unity-Szene und ihre Beziehung untereinander.
 
-Das \textquote{Generator}-Objekt existiert um die Scripts, die ihm als Komponenten angehängt sind, in die Szene zu integrieren, sodass diese ausgeführt werden. Darauf folgt das \textquote{RedirectionObject}, welches, als effektiver Parent des \textquote{OVRCameraRig} später dafür genutzt wird, die Rotationgains auszuführen. Zwischen diesen beiden Objekten liegt aber noch der PlayerController. Dieser wird in den beiden Kontrollbedingungen für die Fortbewegungsarten genutzt.
+Das \textquote{Generator}-Objekt existiert um die Scripts, die ihm als Komponenten angehängt sind, in die Szene zu integrieren, sodass diese ausgeführt werden. Darauf folgt das \textquote{RedirectionObject}, welches, als effektiver Parent des \textquote{OVRCameraRig} später dafür genutzt wird, die Rotation-Gains auszuführen. Zwischen diesen beiden Objekten liegt aber noch der PlayerController. Dieser wird in den beiden Kontrollbedingungen für die Fortbewegungsarten genutzt.
 
 Das \textquote{OVRCameraRig} und die hierarchisch untergeordneten Elemente sind ein vom Oculus Integration SDK bereitgestelltes Prefab, es integriert die Funktionalität der virtuellen Umgebung in die Unity-Szene.
 
@@ -373,7 +366,7 @@ Im Folgenden werde ich die Designentscheidungen, die die Optik der Szene bestimm
 Ein generierter Raum ist in \autoref{figure:room} zu sehen.
 
 Die virtuelle Umgebung, die die Nutzer:in durchschreitet, ist der eines Dungeons nachempfunden. Dies ist in Computerspielen ein häufig eingesetztes Setting, weltbekannte Spiele wie
-\textquote{The Elder Scrolls V: Skyrim}, %TODO: sources?
+\textquote{The Elder Scrolls V: Skyrim},
 die \textquote{Final Fantasy} Spielreihe,
 die \textquote{The Legend of Zelda} Spielreihe,
 und besonders sogenannte \textquote{Roguelike}-Spiele, wie
@@ -417,27 +410,27 @@ Die Funktionalität der virtuellen Avatare wurde vom Oculus SDK bereit gestellt 
 Damit virtuelle Objekte innerhalb der Szene dem realen Körper der Nutzer:in folgen wurden diese hierarchisch den dafür bereit gestellten \textquote{Anchor}-Objekten unterstellt (siehe \autoref{figure:hierarchy}). Für die Hände wurden dafür die vom Oculus SDK bereiten gestellten Prefabs genutzt. %name of prefabs
 An den \textquote{CenterEyeAnchor} wurde die in \autoref{sec:scene-design} erwähnte Kopflampe angehangen, sodass diese der Blickrichtung der Nutzer:in folgt.
 
-\section{Implementierung der Rotationgains}
+\section{Implementierung der Rotation-Gains}
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\textwidth]{images/rotationredirector.png}
-    \caption{Screenshot eines instaziierten \textquote{RotatinRedirector}-Objekts von oben. Der rote Bereich repräsentiert den Trackingspace bevor der Rotationgain ausgeführt wurde, der Blaue den danach. Der grün umrandete Quader stellt den Collider dar, in dem die Nutzer:in sich befinden muss, damit der Rotationgain angewendet wird. Die grün nach oben steigende Linie repräsentiert den Punkt $\vec{P}$}\label{figure:rotredirector}
+    \caption{Screenshot eines instaziierten \textquote{RotatinRedirector}-Objekts von oben. Der rote Bereich repräsentiert den Trackingspace bevor der Rotation-Gain ausgeführt wurde, der Blaue den danach. Der grün umrandete Quader stellt den Collider dar, in dem die Nutzer:in sich befinden muss, damit der Rotation-Gain angewendet wird. Die grün nach oben steigende Linie repräsentiert den Punkt $\vec{P}$}\label{figure:rotredirector}
 \end{figure}
 
-Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender}. %TODO: important: quelle space-extender
-Dieses stellt das Prefab \textquote{RotationRedirector} zur Verfügung. Dieses kann im Code instanziiert werden und ist, nachdem es richtig positioniert wurde und einige Parameter übergeben bekommen hat, dazu in der Lage einen Rotationgain auf die Nutzer:in anzuwenden. Dafür benötigt es die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Koordinaten, des Punktes, um den der Trackingspace rotiert werden soll.
-Wie das generierte und konfigurierte RotationRedirector-Objekt im Unity-Editor aussieht ist in \autoref{figure:rotredirector} zu sehen. Der rote Bereich repräsentiert den innerhalb Trackingspaces begehbaren Bereich vor der Anwendung des Rotationgains und der Blaue den innerhalb des Trackingspace begehbaren Bereich nach der vollständigen Ausführung des Rotaiongains.
-Der RotationRedirector wird, nachdem das alles geschehen ist, für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist, übergeben. Sobald das Signal, dass die Nutzer:in sich über dem Rotationspunkt ($\vec{P}$) befindet, vom entsprechenden Collider kommt, wird der Prozess des Rotationgains am RotationRedirector aktiviert. (Auch der Collider ist in \autoref{figure:rotredirector} abgebildet.)
-Der Rotationgain verstärkt oder verringert die Drehung in jeweilige Richtung, um $10\%$. Damit liegt der Rotationgain noch innerhalb der in \cite{detection-thresholds} gefundenen Grenzen der Wahrnehmbarkeit (Detection-Thresholds), und sollte somit nicht von Nutzer:innen erkennbar sein.
-Des Weiteren sind die Rotationgains bei dieser Implementierung abhängig von der Kopf-Drehgeschwindigkeit, bei langsamen Kopfdrehungen wird ein schwächerer Effekt angewandt.
+Die Umsetzung der Rotaiongains erfolgt mithilfe des mir zur Verfügung gestellten Unity-Package \textquote{Space-Extender} \cite{space-extender-git}.
+Dieses stellt das Prefab \textquote{RotationRedirector} zur Verfügung. Dieses kann im Code instanziiert werden und ist, nachdem es richtig positioniert wurde und einige Parameter übergeben bekommen hat, dazu in der Lage einen Rotation-Gain auf die Nutzer:in anzuwenden. Dafür benötigt es die Dimensionen des Trackingspaces, den virtuellen Avatar der Nutzer:in und die Koordinaten, des Punktes, um den der Trackingspace rotiert werden soll.
+Wie das generierte und konfigurierte RotationRedirector-Objekt im Unity-Editor aussieht ist in \autoref{figure:rotredirector} zu sehen. Der rote Bereich repräsentiert den innerhalb Trackingspaces begehbaren Bereich vor der Anwendung des Rotation-Gains und der Blaue den innerhalb des Trackingspace begehbaren Bereich nach der vollständigen Ausführung des Rotaiongains.
+Der RotationRedirector wird, nachdem das alles geschehen ist, für jeden Raum, an die Instanz des RotationGainMechanism, die für eben jenen Raum zuständig ist, übergeben. Sobald das Signal, dass die Nutzer:in sich über dem Rotationspunkt ($\vec{P}$) befindet, vom entsprechenden Collider kommt, wird der Prozess des Rotation-Gains am RotationRedirector aktiviert. (Auch der Collider ist in \autoref{figure:rotredirector} abgebildet.)
+Der Rotation-Gain verstärkt oder verringert die Drehung in jeweilige Richtung, um $10\%$. Damit liegt der Rotation-Gain noch innerhalb der in \cite{detection-thresholds} gefundenen Grenzen der Wahrnehmbarkeit (Detection-Thresholds), und sollte somit nicht von Nutzer:innen erkennbar sein.
+Des Weiteren sind die Rotation-Gains bei dieser Implementierung abhängig von der Kopf-Drehgeschwindigkeit, bei langsamen Kopfdrehungen wird ein schwächerer Effekt angewandt.
 %left: 0.1
 %right: -0.1
 %use velocity dependet gain: true
 %rotation speed upper threshold: 350
 
-\section{Implementierung der Impossible Spaces}
-Die Wände der Räume werden für die Real-Walking Studienbedingung, wie später in \autoref{subsec:realwallgen} ausgeführt, auf eine Weise generiert, die in der realen Welt nicht möglich wäre, die Räume überlagern sich an den Grenzbereichen. Sie werden also zu Impossible Spaces. Das Ein- und Ausblenden der entsprechenden Wände wird von der \textquote{RoomAndProgressManager}-Klasse übernommen.
+\section{Implementierung der Impossible-Spaces}
+Die Wände der Räume werden für die Real-Walking Studienbedingung, wie später in \autoref{subsec:realwallgen} ausgeführt, auf eine Weise generiert, die in der realen Welt nicht möglich wäre, die Räume überlagern sich an den Grenzbereichen. Sie werden also zu Impossible-Spaces. Das Ein- und Ausblenden der entsprechenden Wände wird von der \textquote{RoomAndProgressManager}-Klasse übernommen.
 
 \section{Fortbewegungsarten}
 Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten implementiert wurden.
@@ -447,9 +440,8 @@ Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten 
 
     Die Joystick-Fortbewegung wurde mithilfe einiger, vom Oculus Integration SDK gelieferter Scripts, hauptsächlich dem \textquote{OVRPlayerController} umgesetzt. Dieser befindet sich dann auf dem in \autoref{sec:hierarchy} beschriebenen PlayerController und steuert so diesen und dessen Kindelemente, so auch den virtuellen Avatar der Nutzer:in.
 
-    Um das Aufkommen der Simulatorkrankheit möglichst gering zu halten (siehe x) %TODO: quelle
-    werden Drehungen nicht wie bei Joystick-Steuerung, beispielsweise in Konsolenspielen üblich, fließend auf die Kopfdrehungen übersetzt, sondern werden in festen
-    45\textdegree-Intervallen angewandt.
+    Um das Aufkommen der Simulatorkrankheit möglichst gering zu halten
+    werden Drehungen nicht wie bei Joystick-Steuerung, beispielsweise in Konsolenspielen üblich, fließend auf die Kopfdrehungen übersetzt, sondern werden in festen 45\textdegree\--Intervallen angewandt (siehe \cite{cybersickness-yasin}).
 
     Die Beschleunigung des Nutzer:innen-Avatars liegt bei $0,1$. Da die Fortbewegung über den OVRPlayerController geregelt wird, wird hier keine feste Geschwindigkeit, sondern eben nur die Beschleunigung festgelegt.
 
@@ -468,34 +460,34 @@ Im folgenden werde ich beschreiben wie die unterschiedlichen Fortbewegungsarten 
     Für die Real-Walking Fortbewegungsart bedarf es keiner besonderen Implementierung, es ist lediglich wichtig, dass die Einstellung \textquote{Tracking Origin Type} im, auf dem \textquote{OVR-CameraRig}-Objekt
     liegenden, Script \textquote{OVR Manager}, auf \textquote{Stage} gesetzt wird. Dies unterdrückt den Zentrierungsmechanismus, der standardmäßig ausgeführt wird wenn der \textquote{OculusButton} gehalten wird. Der Zentrierungsmechanismus ist für die anderen beiden Fortbewegungsarten wichtig, um die Position des Nutzer:innen-Avatars wieder mit der wahren Position der Nutzer:in abzugleichen.
 
-\section{Der Rotationgain-Anreiz-Mechanismus}
+\section{Der Rotation-Gain-Anreiz-Mechanismus}
 \label{sec:rotgaininc}
 
-Damit der Rotationgain zur Wirkung kommt muss sich die Nutzer:in ungefähr auf den Punkt $\vec{P}$ stellen und ihren Kopf um die Yaw-Achse drehen.
-Für das intuitivere Gefühl und um die Aufmerksamkeit nicht so konkret auf den Rotationgain zu lenken, habe ich mich dagegen entschieden den Punkt $\vec{P}$ zu markieren und die Nutzer:innen zu bitten dort ihren Kopf zu drehen, sondern habe mir einen Vorwand ausgedacht, wieso es zum einen notwendig ist an der Stelle zu stehen und zum anderen, wieso sie ihren Kopf drehen müssen.
+Damit der Rotation-Gain zur Wirkung kommt muss sich die Nutzer:in ungefähr auf den Punkt $\vec{P}$ stellen und ihren Kopf um die Yaw-Achse drehen.
+Für das intuitivere Gefühl und um die Aufmerksamkeit nicht so konkret auf den Rotation-Gain zu lenken, habe ich mich dagegen entschieden den Punkt $\vec{P}$ zu markieren und die Nutzer:innen zu bitten dort ihren Kopf zu drehen, sondern habe mir einen Vorwand ausgedacht, wieso es zum einen notwendig ist an der Stelle zu stehen und zum anderen, wieso sie ihren Kopf drehen müssen.
 
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/numpad.jpg}
-    \caption{Ein Nummerneingabefeld; Mit der \# Taste wird eine Eingabe bestätigt, die c-Taste löscht die aktuelle Eingabe}\label{figure:numpad}
+    \caption{Ein Nummerneingabefeld. Mit der \# Taste wird eine Eingabe bestätigt, die c-Taste löscht die aktuelle Eingabe}\label{figure:numpad}
 \end{figure}
 
 Um diesen Effekt zu erzielen wird ein Nummerneingabefeld (siehe \autoref{figure:numpad}), an der Korridorinnenwand in Richtung des Raumes aus dem die Nutzer:in gerade kommt, genau vor die Position $\vec{P}$ plaziert. In dieses Eingabefeld sollen dann mehrere zweistellige Nummern, die am anderen Ende des Korridors, auf einer digitalen Tafel angezeigt werden, eingegeben werden, bis die Tür sich öffnet. Auf der Tafel wird nur eine zweistellige Nummer zur Zeit angezeigt.
-Dies sorgt dann sowohl dafür, dass die Nutzer:in auf den Punkt $\vec{P}$ stellen, um möglichst einfach die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Yaw-Achse dreht, weil sie abwechselnd ablesen muss, welche Zahlen auf der Tafel hinter ihr angezeigt werden und die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotationgain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt, ist es wichtig, dass die Nutzer:in nicht versucht, zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
+Dies sorgt dann sowohl dafür, dass die Nutzer:in auf den Punkt $\vec{P}$ stellen, um möglichst einfach die Nummern eingeben zu können, als auch dafür, dass die Nutzer:in ihren Kopf wiederholt um die Yaw-Achse dreht, weil sie abwechselnd ablesen muss, welche Zahlen auf der Tafel hinter ihr angezeigt werden und die Zahlen in das Eingabefeld schräg vor ihr eingeben muss. Dies sorgt für einen intuitiven Grund den Kopf zu drehen und somit dafür den Rotation-Gain zu nutzen. Wenn der Fortschritt des Rotation-Gains abgeschlossen ist und ein weiteres Mal die korrekte Nummer in das Eingabefeld eingegeben wurde, öffnet sich die Tür vor der Nutzer:in (also die \textquote{Seitentür}) sodass die Nutzer:in in den nächsten Raum gehen kann. Da nun der Trackingspace genau den nächsten Raum umgibt, ist es wichtig, dass die Nutzer:in nicht versucht, zurück in den vorherigen Raum zu gehen. Aus diesem Grund schließt sich hinter der Nutzer:in eine vorher noch nicht zu erkennenende Tür.
 
 Im Programm-Code findet sich dieser ganze Vorgang in der Klasse \textquote{RotationGainMechanism}. Dieser wird für jeden Raum erstellt und auch dem Objekt des Raumes als Komponente hinzugefügt. Eine Instanz des RotationGainMechanisms ist also immer für den Raum zuständig, auf dem er sich befindet. Mit der \textquote{Init}-Funktion wird das Objekt direkt nach der Erstellung initialisiert, hier meldet sich die Instanz dann auch in der zugehörigen Eingabefeld-Klasse (\textquote{NumPadScript}) als Observer an. Sobald sich die Nutzer:in dann in den um die Position $\vec{P}$ herum platzierten Collider begibt, wird mit der Funktion \textquote{StartMechanism} die Prozedur gestartet. Zunächst wird eine neue zweistellige Zahl mithilfe des (von Unity bereitgestellten) Pseudozufallgenerators erstellt, dann wird diese Zahl auf der dem aktuellen Raum zugehörigen Tafel angezeigt. Sobald die Bestätigungstaste des Eingabefelds gedrückt wurde (\textquote{\#}), wird überprüft ob der Fortschritt des Rotation-Gains schon bei 100\% ist. Falls dem nicht so ist, beginnt der Vorgang von vorne und es wird eine neue Zahl erstellt. Wenn der Rotation-Gain vollständig abgeschlossen ist (also eine 90\textdegree\ Drehung stattgefunden hat) wird dem \textquote{RoomAndProgressManager} mitgeteilt dass der aktuelle Raum abgeschlossen ist und die Tür öffnet sich.
 
-In den Kontrollbedingungen wird kein Rotationgain angewandt. Dennoch müssen die Proband:innen auch hier Zahlen in das Eingabefeld eingeben. In diesen Szenarien wird die Türöffnung nicht von der Vervollständigung des Rotationgains abhängig gemacht, sondern wird eine Zufallszahl zwischen 4 und 8 bestimmt und mitgezählt, wie oft Zahlen bestätigt wurden. Wenn die Zufallszahl erreicht wird, öffnet sich die Tür. Durch Erfahrungen beim Testen hat sich gezeigt dass es etwa zwischen 4 und 8 Eingaben bedarf, bevor der Rotationgain abgeschlossen ist.
+In den Kontrollbedingungen wird kein Rotation-Gain angewandt. Dennoch müssen die Proband:innen auch hier Zahlen in das Eingabefeld eingeben. In diesen Szenarien wird die Türöffnung nicht von der Vervollständigung des Rotation-Gains abhängig gemacht, sondern wird eine Zufallszahl zwischen 4 und 8 bestimmt und mitgezählt, wie oft Zahlen bestätigt wurden. Wenn die Zufallszahl erreicht wird, öffnet sich die Tür. Durch Erfahrungen beim Testen hat sich gezeigt dass es etwa zwischen 4 und 8 Eingaben bedarf, bevor der Rotation-Gain abgeschlossen ist.
 
 \section{Seitentür Mechanismen}
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.4\textwidth]{vrscreenshots/dissolve.jpg}
     \includegraphics[width=0.4\textwidth]{vrscreenshots/reverseddoor.jpg}
-    \caption{Links: Eine sich gerade mit einem Auflösungseffekt öffnende Seitentür; Rechts: Die nun verschlossene Tür, die verhindert, dass die Nutzer:in nach der Ausführung des Rotationgains in den vorherigen Raum zurück geht}\label{figure:doors}
+    \caption{Links: Eine sich gerade mit einem Auflösungseffekt öffnende Seitentür. Rechts: Die nun verschlossene Tür, die verhindert, dass die Nutzer:in nach der Ausführung des Rotation-Gains in den vorherigen Raum zurück geht}\label{figure:doors}
 \end{figure}
 
-Um die Nutzer:in daran zu hindern in Bereiche zu gehen, die ihr noch nicht zugänglich sind, weil beispielsweise der Rotationgain noch nicht abgeschlossen ist, wird ihr dies durch eine verschlossene Tür suggeriert. Nach abgeschlossenem Rotationgain öffnet die Tür sich mit einem auflösenden optischen Effekt (siehe \autoref{figure:doors}, links) und einem Erfolg andeutenden Geräusch. Damit sie nun aber nicht auf die Idee kommt, in den vorherigen Raum zurück zu gehen (dieser läge nun außerhalb des begehbaren Bereichs) wird hinter ihr eine weitere Tür mit dem selben Effekt verschlossen (siehe \autoref{figure:doors} rechts).
+Um die Nutzer:in daran zu hindern in Bereiche zu gehen, die ihr noch nicht zugänglich sind, weil beispielsweise der Rotation-Gain noch nicht abgeschlossen ist, wird ihr dies durch eine verschlossene Tür suggeriert. Nach abgeschlossenem Rotation-Gain öffnet die Tür sich mit einem auflösenden optischen Effekt (siehe \autoref{figure:doors}, links) und einem Erfolg andeutenden Geräusch. Damit sie nun aber nicht auf die Idee kommt, in den vorherigen Raum zurück zu gehen (dieser läge nun außerhalb des begehbaren Bereichs) wird hinter ihr eine weitere Tür mit dem selben Effekt verschlossen (siehe \autoref{figure:doors} rechts).
 
 Der visuelle Effekt entsteht durch einen Fragmentshader, der auf der Tür liegt. Dieser kontrolliert die Durchsichtigkeit der Bereiche der Tür mithilfe einer animierbaren Variable und einer Wolkentextur. Die dunklen Bereiche der Wolkentextur werden bei ansteigen der Variable zuerst ausgeblendet, bis irgendwann die ganze Tür unsichtbar geworden ist. Bei der schließenden Tür geschieht dies genau umgekehrt.
 
@@ -505,7 +497,7 @@ Um zu verhindern, dass in andere Räume hinragende Korridore betreten werden kö
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/better_chooserpad.jpg}
-    \caption{Das Eingabefeld, mit dem die verschiedenen Versuchsbedingungen ausgewählt werden können; Die c-Taste löscht die aktuelle Eingabe, mit der \#-Taste wird das aktuell ausgewählte Level gestartet}\label{figure:chooserpad-menu}
+    \caption{Das Eingabefeld, mit dem die verschiedenen Versuchsbedingungen ausgewählt werden können. Die c-Taste löscht die aktuelle Eingabe, mit der \#-Taste wird das aktuell ausgewählte Level gestartet}\label{figure:chooserpad-menu}
 \end{figure}
 Damit die Versuchspersonen der später vorgestellten Studie die Level mit den unterschiedlichen Bedingungen ausführen können, gibt es ein Menü, in dem diese ausgewählt werden können. Darin befindet sich nur der Boden, die Decke und das Bedingungsauswahlfeld (siehe \autoref{figure:chooserpad-menu}). Auf diesem kann die Nutzer:in auf einem $3 \times 3$ Eingabefeld auswählen, welche Versuchsbedingung sie starten möchte. In der späteren Studie wird vorgegeben, welche die Proband:in auswählen soll. Die einzelnen Bedingungen sind folgendermaßen kodiert. $A$ steht für die Real-Walking Fortbewegungsart-Bedingungen, $B$ für Joystick-Steuerung, $C$ für Teleportation, $1$ für eine Raumanzahl von 3 Räumen, $2$ für 6 und $3$ für 9 Räume. Die Auswahl erfolgt per Tastendruck, allerdings wird das Level erst generiert und gestartet, sobald anschließend die Bestätigungstaste \# gedrückt wird. Diese Kodierung ist den Versuchspersonen nicht bekannt.
 
@@ -527,7 +519,7 @@ Sobald das Level der Versuchsbedingung abgeschlossen ist, wird diese Kummulation
 \chapter{Levelgenerierung}
 \label{chapter:generate}
 Dieses Kapitel beschreibt, wie genau die Generierung eines mit der Methode, die diese Arbeit vorstellt, generierten Levels funktioniert. Nacheinander werde ich die grundlegenden Ideen hinter der Levelgenerierung erörtern und dabei jeweils genauer auf ihre Implementierung eingehen. Anschließend werde ich den Algorithmus, der die unterschiedlichen Codeblöcke nutzt um die Levelstruktur zu generieren beschreiben und vorstellen.
-Zuerst bespreche ich, wie die Räume angeordnet werden müssen damit, sie durch den Rotationgain verbunden werden können. Dann stell ich vor, wie die Korridore, die in den Räumen generiert werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten, erstellt werden. Als nächstes beschreibe ich die Vorgänge, die für die Generierung der Wände der Räume verantwortlich sind und erkläre wie die entsprechenden Berechnungen stattfinden.
+Zuerst bespreche ich, wie die Räume angeordnet werden müssen damit, sie durch den Rotation-Gain verbunden werden können. Dann stell ich vor, wie die Korridore, die in den Räumen generiert werden um der Nutzer:in einen klaren Weg voran zu präsentieren und den Übergang zwischen den Räumen intuitiver zu gestalten, erstellt werden. Als nächstes beschreibe ich die Vorgänge, die für die Generierung der Wände der Räume verantwortlich sind und erkläre wie die entsprechenden Berechnungen stattfinden.
 Anschließend werde ich beschreiben, an welchen Stellschrauben manipuliert werden kann um heterogene Ergebnisse bei der Levelgenerierung zu bekommen, erst hier können (Pseudo-)Zufallsfaktoren eine Rolle spielen.
 Mit der Erklärung der Zusammensetzung des Algorithmus schließe ich dieses Kapitel ab.
 
@@ -537,7 +529,7 @@ Um zu verstehen, wie die Ecken eines Raumes berrechnet werden, ist es zunächst 
 
 \begin{figure}[H]
     \ctikzfig{2rooms_a}
-    \caption{Darstellung davon, wie die Räume für den antizipierten Effekt angeordnet sein müssen. Wenn an Punkt $\vec{P}$ ein Rotationgain über 90\textdegree\ ausgeführt wird liegt der Trackingspace vor der Ausführung des Rotationgains über dem Bereich $A$ und danach über dem Bereich $B$; $O$ bezeichnet den Bereich, bei dem sich die beiden Räume überlagern}\label{figure:two_rooms}
+    \caption{Darstellung davon, wie die Räume für den antizipierten Effekt angeordnet sein müssen. Wenn an Punkt $\vec{P}$ ein Rotation-Gain über 90\textdegree\ ausgeführt wird liegt der Trackingspace vor der Ausführung des Rotation-Gains über dem Bereich $A$ und danach über dem Bereich $B$. $O$ bezeichnet den Bereich, bei dem sich die beiden Räume überlagern}\label{figure:two_rooms}
     %TODO: P Point size in tikz
 \end{figure}
 
@@ -547,17 +539,17 @@ Um zu verstehen, wie die Ecken eines Raumes berrechnet werden, ist es zunächst 
 %Um die durchgehende Weiterführung des Levels zu ermöglichen werden zwei Räume immer genau so angeordnet, dass ein Rotation-Gain, der genau bis zu einer Verdrehung der beiden Realitäten von 90\textdegree\ angewandt wird, während die Nutzer:in an einem bestimmten Punkt in der Ecke des Raumes steht,
 Wenn ein Rotation-Gain angewandt wird, verdrehen sich virtuelle und reale Realität umeinander, um einen konkreten Drehpunkt. In der Regel stellt dieser die Position der Nutzer:in dar, damit der Effekt allerdings genau plan- und vorhersagbar ist, findet die Drehung der Umgebung nicht um den Kopf der Nutzer:in, sondern um einen bestimmten vordefinierten Punkt $\vec{P}$ statt.
 
-Wenn diese Position $\vec{P}$ sich in einer Ecke des (rechteckigen) Trackingspace-Raumes befindet, zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist und dann ein gerichteter Rotationgain angewandt wird,
+Wenn diese Position $\vec{P}$ sich in einer Ecke des (rechteckigen) Trackingspace-Raumes befindet, zudem genau gleich weit von beiden Wänden, die diese Ecke bilden, entfernt ist und dann ein gerichteter Rotation-Gain angewandt wird,
 bis genau 90\textdegree\ Verdrehung erreicht sind, dann steht der aktuelle begehbare Bereich in der virtuellen Umgebung $B$, dem vorherigen begehbaren virtuellen Bereich, der ebenfalls durch den Trackingspace definiert war $A$, genau orthogonal gegenüber.
 
-Vorher hat der Bereich $A$ genau den virtuellen Bereich innerhalb des Trackingspaces dargestellt. Die beiden Areale $A$ und $B$ überlappen sich zwar in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotationgains dann auch gerade steht $O$, aber ein Großteil von $A$ ist nun Teil des Bereiches der virtuellen Umgebung geworden, der, begrenzt durch den Trackingspace, nicht zugänglich ist. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der virtuellen Umgebung begehbar geworden.
-Wenn der Rotationgain subtil genug angewandt wurde hat die Nutzer:in (idealerweise) nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie anschließend geradeaus geht, entsteht der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
+Vorher hat der Bereich $A$ genau den virtuellen Bereich innerhalb des Trackingspaces dargestellt. Die beiden Areale $A$ und $B$ überlappen sich zwar in einem gewissen Bereich, in dem die Nutzer:in nach Beendigung des Rotation-Gains dann auch gerade steht $O$, aber ein Großteil von $A$ ist nun Teil des Bereiches der virtuellen Umgebung geworden, der, begrenzt durch den Trackingspace, nicht zugänglich ist. Auf diese Weise ist also für die Nutzer:in ein neuer Bereich der virtuellen Umgebung begehbar geworden.
+Wenn der Rotation-Gain subtil genug angewandt wurde hat die Nutzer:in (idealerweise) nicht bewusst wahrgenommen, dass die Welten sich verdreht haben. Wenn sie anschließend geradeaus geht, entsteht der Eindruck, dass nun ein weiterer Teil der Welt zugänglich geworden ist.
 
 Ziel des Algorithmus ist es eine Reihe von aufeinander folgenden Räumen zu generieren, sodass die Nutzer:in sich durch ein Dungeon-artiges Level bewegen kann um vom ersten zum letzten Raum zu gelangen.
 Die Grundidee hinter der Raumgenerierung ist es also, dass genau die beiden Areale $A$ und $B$ von Wänden umgeben werden. %TODO: formulierung
 In \autoref{figure:two_rooms} wird ersichtlich, wie die beiden Räume zueinander stehen müssen, um diesen Effekt zu ermöglichen.
 
-Um dann also von Raum $A$ zu Raum $B$ zu gelangen, muss die Nutzer:in sich an der Position $\vec{P}$ oft genug drehen und dann muss ein Rotationgain bis zu 90\textdegree\ in die jeweilige Richtung angewandt werden. Bei dem Beispiel in \autoref{figure:two_rooms} muss der Rotationgain bei Yaw-Kopfdrehungen nach links positiv und nach rechts negativ verlaufen um den gewünschten Effekt möglichst effizient zu erzielen.
+Um dann also von Raum $A$ zu Raum $B$ zu gelangen, muss die Nutzer:in sich an der Position $\vec{P}$ oft genug drehen und dann muss ein Rotation-Gain bis zu 90\textdegree\ in die jeweilige Richtung angewandt werden. Bei dem Beispiel in \autoref{figure:two_rooms} muss der Rotation-Gain bei Yaw-Kopfdrehungen nach links positiv und nach rechts negativ verlaufen um den gewünschten Effekt möglichst effizient zu erzielen.
 % Andersherum wäre auch möglich, dann müssten sich die Welten aber nicht um
 % 90 \textdegree sondern um 270 \textdegree
 % drehen.
@@ -571,7 +563,7 @@ Der reale Trackingspace umschließt bei der hier vorgestellten Methode also imme
 
 \begin{figure}[H]
     \centering
-    \input{calculateCorners.tikz}%TODO: um richtungsvektoren ergänzen
+    \input{calculateCorners.tikz}
     \caption{Die Pfeile repräsentieren die zur Eckenberechnung genutzten Vektoren. Mit $\vec{C_0}, ..., \vec{C_3}$ werden die Ecken bezeichnet, mit $S_{0}, ...,  S_3$ die Seiten des Raumes}
     \label{figure:calculateCornersFig}
 \end{figure}
@@ -617,7 +609,10 @@ In der \textquote{GeneratorOculusInterface} Klasse werden diese zu Beginn der Le
     %         r ={}& s + t (u + v + w)\label{eq:3}
     %     \end{align}
 Auch zu sehen ist diese Berechnung in dem in der \autoref{figure:calculateNewCornersScript} gezeigen Quelltext.
-Wie die hier genutzen Variablen $\vec{cP}$, $\hat{sDD}$, $\hat{btF}$, $width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. %TODO: figure erweitern
+Wie die hier genutzen Variablen
+$\vec{cP}$,
+%$\hat{sDD}$, $\hat{btF}$,
+$width$ und $length$ definiert sind wird aus \autoref{figure:calculateCornersFig} ersichtlich. %TODO: figure erweitern
         %weiteres dP nach rechts
         %sDD
         %btF
@@ -633,7 +628,7 @@ $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreib
 \begin{figure}[H]%TODO: frisieren und kommentieren
     \centering
     \sourcecode{calculateNewCorners.cs}
-    \caption{Funktion zur Berechnung der virtuellen Eckkoordinaten des nächsten Raumes, TODO:  refactoring und Kommentieren für lesbarkeit}
+    \caption{Funktion zur Berechnung der virtuellen Eckkoordinaten des nächsten Raumes}
     \label{figure:calculateNewCornersScript}
 \end{figure}
 
@@ -645,7 +640,7 @@ $width$ beschreibt die Breite der Räume, während $length$ die Länge beschreib
 \begin{figure}[!h]
     \centering
     \includegraphics[width=0.5\textwidth]{vrscreenshots/korridorheraus.jpg}
-    \caption{Ein Korridor von innen; Links im Bild, am Ende des Ganges befindet sich die Seitentür, an der Wand daneben das Nummerneingabefeld; Rechts im Bild lässt sich aus der Tür hinaus in den Raum blicken}\label{figure:corridor-out}
+    \caption{Ein Korridor von innen. Links im Bild, am Ende des Ganges befindet sich die Seitentür, an der Wand daneben das Nummerneingabefeld. Rechts im Bild lässt sich aus der Tür hinaus in den Raum blicken}\label{figure:corridor-out}
 \end{figure}
 Damit die Nutzer:in versteht, wie sie in den nächsten Raum kommt, sind die Räume so gestaltet, dass es einen offensichtlichen Weg voran gibt. Um dies zu erreichen, wird in die Räume jeweils ein Korridor, also ein kleiner Flur, der auf die Tür zum nächsten Raum zuläuft, generiert. Wie ein solcher Korridor von innen aussieht ist in \autoref{figure:corridor-out} zu sehen. In der hier vorgestellten Implementierung der Levelgenerierungmethode wird der Korridor für jeden Raum generiert, bevor mit der Eckenberechnung für den nächsten Raum begonnen wird, und wie in \autoref{sec:random} beschrieben wird, hängt diese sogar von dem Korridor ab. Sie sind also wichtiger Bestandteil dieser Implementierung, die Levelgenerierungmethode ließe sich aber auch ohne sie realisieren. In diesem Abschnitt wird die Generierung dieser Korridore für ihre jeweiligen Räume erläutert.
 
@@ -653,7 +648,7 @@ Zunächst wird eine Kante des Grundecks des Raumes ausgewählt, an der ein Korri
 
 Der Korridor hat zwei Türen: Eine \textquote{Haupttür}, durch die die Nutzer:in in den Korridor hineinkommt und eine \textquote{Seitentür}, die anfangs noch verschlossen ist und in den nächsten Raum führt. %optional todo: figure mit korridor aus topansicht
 
-In diesem Korridor werden dann Elemente platziert, die gemeinsam für einen Mechanismus sorgen, der es der Nutzer:in nahelegt, sich genug um die Yaw-Achse zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotationgains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt. Dieser Mechanismus wurde in
+In diesem Korridor werden dann Elemente platziert, die gemeinsam für einen Mechanismus sorgen, der es der Nutzer:in nahelegt, sich genug um die Yaw-Achse zu drehen, dass die wirkliche und die virtuelle Realität sich dank des Rotation-Gains genug umeinander drehen, dass der nächste Raum nun mit dem realen Tracking-Space übereinstimmt. Dieser Mechanismus wurde in
 \autoref{sec:rotgaininc}
 genauer beschrieben.
 
@@ -763,7 +758,7 @@ Wie in \autoref{subsec:roomplaceidea} besprochen, sollen die Räume von Wänden 
     \centering
 
     \scalebox{0.4}{\input{wallCompare.tikz}}
-    \caption{Vergleich der zwei Wandgenerierungsvarianten. Oben: Die \textquote{realistische} Variante, die in Joystick- und Teleportationsbedingung eingesetzt wird. Unten: \textquote{unmögliche} Variante, die in der Real-Walking Bedingung die Wände generiert; Gestrichelte Linien repräsentieren Wände, die erst unter bestimmten Umständen sichtbar werden}
+    \caption{Vergleich der zwei Wandgenerierungsvarianten. Oben: Die \textquote{realistische} Variante, die in Joystick- und Teleportationsbedingung eingesetzt wird. Unten: \textquote{unmögliche} Variante, die in der Real-Walking Bedingung die Wände generiert. Gestrichelte Linien repräsentieren Wände, die erst unter bestimmten Umständen sichtbar werden}
     \label{figure:wallCompare}
 \end{figure}
 
@@ -776,7 +771,7 @@ In dem hier vorgestellten Projekt werden die Wände auf zwei verschiedene Arten 
 %bedingung a (JS, TP)
 \subsection{Realistische Wandgenerierung}\label{subsec:realwallgen}
 Die erste Art, fortlaufend \textquote{realistische} Variante genannt, generiert die Wände zwischen den Räumen so, wie sie auch real existieren könnten.
-Dazu gibt es einen ausgefeilten Algorithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Kontrollbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil Versuchsbedingungen mit ihnen keine Impossible Spaces beinhalten.
+Dazu gibt es einen ausgefeilten Algorithmus, der alle Eventualitäten der Raumgenerierung kennt und die Wände so zwischen den Räumen platziert, dass die Räume noch möglichst viel Platz bieten, aber auch rundherum von Wänden umgeben sind. Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWallsLegacy}-Methoden ausgeführt. Diese Variante wird in den beiden Kontrollbedingungen \textquote{Teleport} und \textquote{Joystick} verwendet, weil Versuchsbedingungen mit ihnen keine Impossible-Spaces beinhalten.
 
 Bei der realistischen Wandgenerierung ist die Idee, dass die Wände genau so zwischen die Korridore platziert werden, dass der nachfolgende Raum die Priotität über den Platz hat. Der Bereich $O$, der in der \autoref{figure:two_rooms} zu sehen war, gehört bei dieser Variante also immer zu dem Raum $B$ und nicht zu dem Raum $A$.
 
@@ -786,7 +781,7 @@ Um die Wände generieren zu können, ist es wichtig, die Punkte diagnonal vor un
 
 %bedingung b (RDW)
 \subsection{Unmögliche Wandgenerierung}
-Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante genannt, umschließt alle Räume mit drei Wänden, zeigt aber immer nur die Wände des Raums, in dem sich die Nutzer:in gerade befindet an und hat dementsprechend die Freiheit, die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. Im Experiment wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible Spaces, da die Räume sich nun überlappen.
+Die andere Variante der Levelgenerierung, hier \textquote{unmögliche} Variante genannt, umschließt alle Räume mit drei Wänden, zeigt aber immer nur die Wände des Raums, in dem sich die Nutzer:in gerade befindet an und hat dementsprechend die Freiheit, die gesamte Raumgröße zu umschließen, weil keine Kompromisse für den sich überlappenden Bereich $O$ gemacht werden müssen (siehe \autoref{figure:two_rooms}). Der Code für diese Generierung wird in der \textquote{RoomGenerator}-Klasse in den beiden \textquote{GenerateWalls}-Methoden ausgeführt. Im Experiment wird diese Variante ausschließlich in der Real-Walking Bedingung eingesetzt. Durch sie werden die Räume erst zu Impossible-Spaces, da die Räume sich nun überlappen.
 
 Die Umsetzung der unmöglichen Wandgenerierung erfolgt recht ähnlich, wenn auch um einiges minimalistischer als die der realistischen. Anstatt die Wandgenerierung auf die verschiedenen Räume aufzuteilen, werden die Wände so generiert, dass sie abgesehen von den Korridoren, des aktuellen, und des vorherigen Raumes den ganzen Raum umschließen. Das Ein- und Ausblenden, der Wände wird dann vom \textquote{RoomAndProgressManager}, der ja Überblick darüber hat, wo die Nutzer:in sich gerade befindet, geregelt. Es werden immer nur die Wände des aktuellen Raumes, angezeigt.
 
@@ -858,8 +853,8 @@ Eine Iteration besteht aus zwei Bereichen. Im ersten wird zunächst der Raum anh
 
 \paragraph*{Generierungs-Teil}
 Darin werden dann zunächst die Meshs des Korridors erzeugt (siehe \autoref{subsec:corridormesh}) und als GameObjects instanziiert. Zudem werden diese mit den entprechenden Materialien für die Optik und den entsprechenden Scripts versehen.
-Dann werden die für den Rotationgain erforderlichen Objekte instanziiert, positioniert und die entsprechenden Mechanismen in die Wege geleitet, indem die Eigenschaften des zuständigen \textquote{RotationRedirector} gesetzt werden.
-Zudem wird die Innenausstattung des Korridors instanziiert, positioniert, mit den entsprechenden Scripts ausgestattet und mit den eben erzeugten Mechanismen, die den Rotationgain überwachen, verknüpft.
+Dann werden die für den Rotation-Gain erforderlichen Objekte instanziiert, positioniert und die entsprechenden Mechanismen in die Wege geleitet, indem die Eigenschaften des zuständigen \textquote{RotationRedirector} gesetzt werden.
+Zudem wird die Innenausstattung des Korridors instanziiert, positioniert, mit den entsprechenden Scripts ausgestattet und mit den eben erzeugten Mechanismen, die den Rotation-Gain überwachen, verknüpft.
 
 Die Generierung der Wände wird als nächstes in die Wege geleitet, je nach Variante wird zwischen den verschiedenen Methoden unterschieden, die danach aufgerufen werden, um die Wandpunkte zu berechnen und dann Wandobjekte zu initialisieren. Hierfür ist zudem erforderlich, das in \autoref{sec:genwalls} besprochene Prefab zur Verfügung zu stellen, das vorher von der Designer:in erstellt werden muss.
 
@@ -877,9 +872,9 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
         \begin{enumerate}
             %\item Nach dem, mit der \textquote{Real-Walking} Fortbewegungsart absolvieren eines, mit der, in dieser Arbeit vorgestellten Levelgenerierungmethode, generierten Levels,  ist die Schätzungsfähigkeit der zurückgelegten Strecke im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation} signifikant besser.
-            \item Nachdem ein, mit der hier vorgestellten Levelgenerierungmethode erstelltes, Level mit der Fortbewegungsart \textquote{Real-Walking} durchquert wurde, ist die Fähigkeit die darin zurückgelegte Strecke einzuschätzen besser, als wenn es mit den alternativen Fortbewegungsarten \textquote{Joystick} und \textquote{Teleportation} durchquert wurde.
+            \item Nachdem ein mit der hier vorgestellten Levelgenerierungmethode erstelltes Level mit der Fortbewegungsart \textquote{Real-Walking} durchquert wurde, ist die Fähigkeit, die darin zurückgelegte Strecke einzuschätzen, besser als wenn es mit den alternativen Fortbewegungsarten \textquote{Joystick} und \textquote{Teleportation} durchquert wurde.
 
-            \item Beim Durchqueren der, mit der hier vorgestellten Levelgenerierungmethode erstellten, Level mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden Alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            \item Beim Durchqueren der mit der hier vorgestellten Levelgenerierungmethode erstellten Level mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden Alternativen \textquote{Joystick} und \textquote{Teleportation}.
         \end{enumerate}
 
         \subsection{Distanzschätzung}
@@ -893,7 +888,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
             Diese Art von Messung bietet sich für Level an, die mit der hier vorgestellten Methode generiert werden, weil diese sehr linear sind. Ein Raum folgt auf den nächsten, ohne dass die Nutzer:in Richtungsentscheidungen tätigt oder Abzweigungen geht.
 
-            Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebung,  nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
+            Zwar gibt es in der Literatur viele Hinweise darauf, dass Menschen in virtuellen Umgebungen die Entfernung zwischen ihnen und Objekten in der Umgebung, verglichen mit der realen Umgebung, nicht besonders gut einschätzen können \cite{meta-distance-perception, bruder-distance}, % TODO: \cite, RVH 13 and others TODO: all?
             %schlechter, jeh schlechter die qualität
             allerdings werden in der hier vorgestellten Studie alle drei Fortbewegungsarten in einer (sich auch nicht grundlegend zwischen den Versuchsbedingungen unterscheidenden) virtuellen Umgebung durchgeführt, sodass dieser Effekt ausgeglichen wird.
 
@@ -908,10 +903,10 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                 % \item Consistency of the displayed environment across all sensory modalities.
                 \item Die dargestellte Realität ist über alle Sinnesmodalitäten hinweg konsistent.
 
-                % \item  The possibility of the individual being able to navigate through and interact with objects in the environment, including interaction with other actors which may spontaneously react to the indi- vidual;
+                % \item  The possibility of the individual being able to navigate through and interact with objects in the environment, including interaction with other actors which may spontaneously react to the indi- vidual.
                 \item  Die Möglichkeit der Nutzer:in durch die Umgebung zu navigieren und mit Objekten oder anderen Agenten zu interagieren.
 
-                % \item Theindividual’svirtualbody,theirself-representationwithintheenvironment,shouldbesimi- lar in appearance or functionality to the individual’s own body, and respond appropriately to the movements of their head, eyes, and limbs;
+                % \item Theindividual’svirtualbody,theirself-representationwithintheenvironment,shouldbesimi- lar in appearance or functionality to the individual’s own body, and respond appropriately to the movements of their head, eyes, and limbs.
                 \item Der virtuelle Avatar der Nutzer:in sollte sich äußerlich oder funktionell dem echten Körper dieser ähneln und angemessen auf Kopf-, Augen- und Gliedmaßenbewegungen reagieren.
 
                 % \item Theconnectionbetweenindividual’sactionsandeffectsofthoseactionsshouldbesimple enough for the individual to quickly learn.
@@ -940,12 +935,12 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
         \centering
         \input{graeco-latin-square.tex}
 
-        \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3), der verschiedenen Gruppen (G1-3) darstellt, $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ repräsentieren die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
+        \caption{Das Griechisch-Lateinische Quadrat, das die Reihenfolge der Versuchsbedingungen (Schritt 1-3) der verschiedenen Gruppen (G1-3) darstellt. $A$ steht dabei für Real-Walking, $B$ für Joystick Steuerung und $C$ für Teleportation. $1-3$ repräsentieren die verschiedenen Raumlängen $3$, $6$ und $9$}\label{figure:graecolatin}
     \end{figure}
 
     Dementsprechend bot sich als Versuchsplan ein Griechisch-Lateinisches Quadrat in der Größe $3 \times 3$ an. \autoref{figure:graecolatin} stellt das für die Studie genutzte Griechisch-Lateinische Quadrat dar, wobei $A$ für die Versuchsbedingung \textquote{Real-Walking}, $B$ für die Versuchsbedingung \textquote{Joystick} und $C$ für die Bedingung \textquote{Teleportation} steht, während $1$ für eine Raumlänge von 3 Räumen, $2$ von 6, und $3$ für eine Raumlänge von 9 Räumen steht.
 
-    Die abhängige Variable ist die jeweilige Messvariable der Bedingung, also die absolute Differenz von Messung und Schätzung des zurückgelegten Wegs, oder das mit dem SUS-Präsenz Questionaire gemessene Präsenzgefühl. Die unabhängige Variablen ist die Fortbewegungsart ($A-C$) und die Variablen Gruppenzugehörigkeit, Schritt der durchgeführten Bedingung (Wurde sie zuerst, als zweites, oder drittes durchgeführt?) und Raumlänge sind blockiert. %??
+    Die abhängige Variable ist die jeweilige Messvariable der Bedingung, also die absolute Differenz von Messung und Schätzung des zurückgelegten Wegs, oder das mit dem SUS-Präsenz Questionaire gemessene Präsenzgefühl. Die unabhängige Variable ist die Fortbewegungsart ($A-C$).
 
     \section{Fortbewegungsbedingungen}\label{sec:conditions}
         Im Folgenden werde ich die drei verschiedenen Fortbewegungsbedingungen vorstellen, diese stellen die unterschiedlichen Fortbewegungsarten dar. Zunächst beschreibe ich die beiden virtuellen Fortbewegungsarten: Joystick und Teleportation. Diese repräsentieren klassische Fortbewegungsarten in VR. Im Kontrast dazu steht dann die Fortbewegungsart des natürlichen Gehens.
@@ -968,8 +963,8 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
             Auch bei dieser Bedingung wird die realistische Wandgenerierung genutzt.
 
         \subsection{Versuchsbedingung Real-Walking}\label{subsec:realwalk}
-            In der Versuchsbedingung Real-Walking können die Proband:innen sich durch natürliches Gehen im Raum bewegen. Nur in dieser Bedingung wird ein Rotationgain angewandt.
-            Des Weiteren wird in dieser Bedingung die in \autoref{subsec:realwallgen} besprochene unmögliche Wandgenerierung verwendet, sodass die Proband:innen mehr Platz innerhalb der Räume haben. Dafür eine Raumstruktur genutzt wird, die darauf basiert, dass Wände von Räumen, in denen sich die Nutzer:in gerade nicht befindet, ausgeblendet werden. Die Räume sich also überlagern sich folglich werden und somit zu Impossible Spaces.
+            In der Versuchsbedingung Real-Walking können die Proband:innen sich durch natürliches Gehen im Raum bewegen. Nur in dieser Bedingung wird ein Rotation-Gain angewandt.
+            Des Weiteren wird in dieser Bedingung die in \autoref{subsec:realwallgen} besprochene unmögliche Wandgenerierung verwendet, sodass die Proband:innen mehr Platz innerhalb der Räume haben. Dafür eine Raumstruktur genutzt wird, die darauf basiert, dass Wände von Räumen, in denen sich die Nutzer:in gerade nicht befindet, ausgeblendet werden. Die Räume sich also überlagern sich folglich werden und somit zu Impossible-Spaces.
 
 \chapter{Durchführung und Ergebnisse}\label{}
     Nachdem das vorherige Kapitel die Versuchsplanung zur Pilotierungsstudie beschrieben hat, wird dieses davon handeln, wie die Studie durchgeführt und die Datenevaluation mitsamt der Berechnung der statistischen Tests verlaufen ist. Dementsprechend werden zunächst Umstände und Teilnehmer:innen des Experiments vorgestellt, dann der genaue Ablauf der Studie beschrieben, um danach die Methoden der Datenevaluation vorzustellen und diese, zu guter letzt, durchzuführen. Die Fragebögen wurden mit \textquote{Google-Forms} implementiert und sind im \textquote{\nameref{anhang}} mitsamt allen Daten und Antworten zu finden.
@@ -1040,7 +1035,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     Dabei untersuche ich die Unterschiede zwischen geschätzter und gemessener Distanz mit einer einfaktoriellen Varianzanalyse auf den Einfluss der Fortbewegungsart.
 
                     %%part absolute difference
-                    Die Qualität der Schätzung der Proband:innen wird über die absolute Differenz zwischen gemessener Strecke und geschätzer Strecke folgendermaßen, berechnet:
+                    Die Qualität der Schätzung der Proband:innen wird über die absolute Differenz zwischen gemessener Strecke und geschätzter Strecke folgendermaßen, berechnet:
                     \begin{align}
                         \begin{split}
                             \mid D_g - D_m \mid \label{eq:dist} %TODO: formel,
@@ -1052,7 +1047,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     Um die Unterschiede der errechneten Differenzen zwischen geschätzten und gemessenen zurückgelegten Distanzen zu vergleichen und auf ihre Signifikanz zu testen, bietet sich eine Varianzanalyse an.
                     Aufgrund des \textquote{Within-Subjects Design} wird eine einfaktorielle Varianzanalyse mit Messwiederholung durchgeführt.
 
-                    Durchschnittswerte der absoluten Differenz von Messung und Schätzung der zurückgelegten Distanz sind in \autoref{table:diff_means} abgebildet.
+                    Arithmetische Mittel und Standardabweichungen der absoluten Differenz von Messung und Schätzung der zurückgelegten Distanz sind in \autoref{table:diff_means} abgebildet.
 
                     \begin{table}[!h]
                         \renewcommand\arraystretch{1.2}
@@ -1071,7 +1066,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/diff_plot.png}
-                        \caption{Box-Plot der absoluten Differenzen zwischen gemessener und geschätzter zurückgelegter Distanz, aufgeteilt nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
+                        \caption{Box-Plot der absoluten Differenzen zwischen gemessener und geschätzter zurückgelegter Distanz, aufgeteilt nach Fortbewegungsart. A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_plot}
                     \end{figure}
 
                     Eine Varianzanalye mit Messwiederholung setzt voraus, dass die einzelnen Stufen des \textquote{Within-Subject Factor}, in diesem Fall die Fortbewegungsart, normalverteilt sind. Diese sind in in Form eines Quantil-Quantil-Diagramms in \autoref{figure:diff_normality} abgebildet.
@@ -1079,7 +1074,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/diff_normality.png}
-                        \caption{Korrelation zwischen Messergebnissen und einer Normalverteilung in einem Quantil-Quantil-Diagramm, nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
+                        \caption{Korrelation zwischen Messergebnissen und einer Normalverteilung in einem Quantil-Quantil-Diagramm, nach Fortbewegungsart getrennt. A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:diff_normality}
                     \end{figure}
 
                     Zudem wurde ein Shapiro-Wilk Test für die einzelnen Faktorstufen durchgeführt (Ergebnisse in \autoref{table:norm_test_diff}). Dieser deutete nicht darauf hin, dass die Annahme der Normalverteilung verletzt worden sei.
@@ -1117,7 +1112,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
                     Ein Mauchly's Test auf Sphärizität zeigte keine Verletzung dieser Bedingung auf.
 
-                    Die Varianzanalyse erfasste keine signifikanten Unterschiede zwischen den Fortbewegungsarten: $F(2,16) = 0,207$  $p = 0,815$
+                    Die Varianzanalyse erfasste keine signifikanten Unterschiede zwischen den Fortbewegungsarten: $F(2,16) = 0,207$  $p = 0,815$ $\eta^{2} = 0,0104$
                     %anova diff
                     % 5% alpha, not significant F(2,16) = 0.207 p=0.815 ges = 0.01
 
@@ -1161,7 +1156,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 % 9  & 0,546 / 0,183 & 0,370  / 0,298 & 0,836 / 0,051 & 0,584 / 0,200   \\ \hline
 %    & 0,591 / 0,305 & 0,770 / 0,459 & 0,586 / 0,274 & 0,649 / 0,352
 % \end{tabular}
-%                         \caption{Arithmetische Mittel und Standardabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen; Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standardabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
+%                         \caption{Arithmetische Mittel und Standardabweichungen des Verhältnisses zwischen gemessener und geschätzer fortbewegter Distanz, in allen möglichen Kombinationen. Die letzte Zelle einer Zeile oder Spalte zeigt das Arithmetische Mittel und die Standardabweichung für alle Daten zum jeweiligen Faktor}\label{table:ratio_means}
 %                     \end{table}
 
 %                     Diese Ergebnisse werden auch in Form eines Boxplots in \autoref{figure:ratio-boxplot} abgebildet.
@@ -1169,7 +1164,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 %                     \begin{figure}[!h]
 %                         \centering
 %                         \includegraphics[width=0.5\textwidth]{plots/2wayboxplot.png}
-%                         \caption{Zweifaktorieller Box-Plot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz; \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
+%                         \caption{Zweifaktorieller Box-Plot der Verhältnisse von geschätzer und gemessener fortbewegter Distanz. \textquote{laenge} meint die Raumanzahl der Level bei einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ Räume pro Level}\label{figure:ratio-boxplot}
 %                     \end{figure}
 
 %                     Für eine zweifaktorielle Varianzanalyse müssen die einzelnen Faktorstufen der Daten normalverteilt sein.
@@ -1196,13 +1191,13 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 %                     \begin{figure}[!h]
 %                         \centering
 %                         \includegraphics[width=0.5\textwidth]{plots/qqplot2way.png}
-%                         \caption{Quantil-Quantil Diagramme der Korrelation zwischen den verschiedenen Kombinantionen der Faktorstufen und einer Normalverteilung; Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
+%                         \caption{Quantil-Quantil Diagramme der Korrelation zwischen den verschiedenen Kombinantionen der Faktorstufen und einer Normalverteilung. Mit laenge ist die Raumanzahl der Level mit einer Kodierung von $1 = 3, 2 = 6$ und $3 = 9$ gemeint, mit bedingung die Fortbewegungsart bei einer Kodierung von A = Real-Walking, B = Joystick und C = Teleport}\label{figure:qqplot-2way}
 %                     \end{figure}
 
 %                     Im Datensatz wurden keine extremen Ausreißer festgestellt.
 
 %                     Es wurde eine zweifaktorielle Varianzanalyse mit Messwiederholung mit den Faktoren Fortbewegungsart und Raumanzahl des Levels zu einem Signifikanzniveau von $\alpha = 5\%$ durchgeführt.
-%                     Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren; $F(4,18) = 4,106$  $p = 0,015$
+%                     Diese zeigte eine signifikante Wechselwirkung zwischen den beiden Faktoren. $F(4,18) = 4,106$  $p = 0,015$
 
 %                     %Important TODO: wieso dann Dfd 18, somst wars ja 16 ? irgendwas stimmt da nicht, recherchieren
 %                     Implizit wurden dabei auch einfaktorielle Varianzanalysen zu einem Signifikanzniveau von $\alpha = 5\%$ mit beiden Faktoren durchgeführt. Beide zeigten keine signifikanten Effekte. (Raumanzahl: $F(2,18) = 0,332$  $ p = 0,722$   Fortbewegungsart: $F(2,18) = 1,144$  $ p = 0.341$)
@@ -1228,14 +1223,14 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 % Joystick       &  Raumanzahl       & $2$ & $6$ & 3,86 & 0,084 & 0,252       \\
 % Teleportation  &  Raumanzahl       & $2$ & $6$ & 2,63 & 0,151 & 0,453       \\
 % \end{tabular}
-% \caption{Die Ergebnisse der Post-Hoc Nachuntersuchung von der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten; Diese sind Form von einfaktoriellen Varianzanalysen, von den einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
+% \caption{Die Ergebnisse der Post-Hoc Nachuntersuchung von der zweifaktoriellen Varianzanalyse über die beiden Faktoren Raumanzahl und Fortbewegungsarten. Diese sind Form von einfaktoriellen Varianzanalysen, von den einzelnen Faktorstufen, des jeweils anderen Faktors}\label{table:2way-anova-ph}
 % \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%presence
                 \subsection{Präsenzgefühl}
                     Ob die Unterschiede der Ergebnisse des SUS-Präsenz-Questionaire signfikant sind wird im Folgenden ermittelt werden. Dabei werden die \textquote{SUS-Scores} der Durchläufe verglichen. Der SUS-Score ermittelt sich über die Anzahl der Fragen, die mit einem der Werte $6$ oder $7$, also den beiden Werten, die am meisten erlebte Präsenz beschreiben, beantwortet wurden.
 
-                    Für jeden Versuchsdurchlauf wurde der SUS-Score berechnet. Die Durchschnittswerte für die einzelnen Fortbewegungsarten sind in \autoref{table:presence_means} ersichtlich.
+                    Für jeden Versuchsdurchlauf wurde der SUS-Score berechnet. Die arithmetischen Mittel für die einzelnen Fortbewegungsarten sind in \autoref{table:presence_means} ersichtlich.
 
                     \begin{table}[!h]
                         \renewcommand\arraystretch{1.2}
@@ -1254,7 +1249,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/presence_plot.png}
-                        \caption{Box-Plot der SUS-Scores nach Fortbewegungsart; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:presence_plot}
+                        \caption{Box-Plot der SUS-Scores nach Fortbewegungsart. A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation}\label{figure:presence_plot}
                     \end{figure}
 
                     %no extreme outliers
@@ -1267,7 +1262,7 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
                     \begin{figure}[!h]
                         \centering
                         \includegraphics[width=0.5\textwidth]{plots/presence_normality.png}
-                        \caption{Quantil-Quantil-Diagram der Korrelationen von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt; A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
+                        \caption{Quantil-Quantil-Diagram der Korrelationen von SUS-Scores und Normalverteilung, nach Fortbewegungsart getrennt. A steht für Real-Walking, B für Joystick Steuerung und C für Teleportation }\label{figure:presence_normality}
                     \end{figure}
 
                     Um Klarheit zu schaffen, wurde ein Shapiro-Wilk-Test zum $\alpha = 5\%$ Signifikanzniveau durchgeführt. Dieser weist darauf hin, dass eine Normalverteilung bei der Bedingung Joystick ($p = 0,0125$) nicht angenommen werden kann. Die Ergebnisse des Shapiro-Wilk Tests sind in \autoref{table:presence_shapiro} zu sehen.
@@ -1287,14 +1282,14 @@ Der zweite Teil einer Iteration ist dann für die Berechnung der Zustandsvariabl
 
                     Da die Bedingungen einer Varianzanalyse für die Daten zur Präsenzerhebung nicht eingehalten werden können, wurde stattdessen ein Friedmann Test zur Feststellung signifikanter Unterschiede zwischen den Fortbewegungsarten zum $\alpha = 5\%$ Niveau durchgeführt, da dieser keine normalverteilte Daten voraussetzt.
                     %H0 erwähnen?
-                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten; $\chi^2(2) = 6,95$  $p = 0,0309$
+                    Dieser zeigte signifikante Unterschiede zwischen den Fortbewegungsarten: $\chi^2(2) = 6,95$  $p = 0,0309$
 
                     %friedman
                     %.y.           n statistic    df       p method
                     %* <chr>     <int>     <dbl> <dbl>   <dbl> <chr>
                     %1 sus_score     9       9.3     2 0.00956 Friedman test
                     Die Effektstärke wurde mithilfe einer  Kendall’schen Konkordanzanalyse errechnet. Dabei ergab sich eine Effektstärke von 0,386, dies gilt nach J.Cohen %source? TODO: %Cohen, J. (1988). Statistical Power Analysis for the Behavioral Sciences. Hoboken: Taylor and Francis.
-                    als moderater Effekt.
+                    als moderater Effekt \cite{cohen}.
 
                     %effsize
                     %.y.           n effsize method    magnitude
@@ -1325,64 +1320,62 @@ Joystick     & Teleport & 8,5           & 0,269 & 0,807 \\ \bottomrule
 
 
 \chapter{Diskussion, Ausblick und Konklusion}\label{chapter:discussion-conclusion}
-    In diesem letzten Kapitel werde ich die im vorherigen Kapitel errechneten Ergebnisse diskutieren und einordnen, damit verbunden werde ich einen Ausblick formulieren, wie zukünftige Forschungsarbeiten auf dieser Arbeit aufbauen sollten. Anschließend werde ich eine abschließende Zusammenfassung der in dieser Arbeit vorgestellten Ideen, Umsetzungen und Erkenntnissen geben.
+    In diesem letzten Kapitel werde ich die im vorherigen Kapitel errechneten Ergebnisse diskutieren und einordnen. Damit verbunden werde ich einen Ausblick formulieren, wie zukünftige Forschungsarbeiten auf diese Arbeit aufbauen sollten. Anschließend werde ich eine abschließende Zusammenfassung der in dieser Arbeit vorgestellten Ideen, Umsetzungen und Erkenntnissen geben.
 
     \section{Diskussion und Ausblick}
-        Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies könnte verschiedene Gründe haben. An dieser Stelle möchte ich versuchen die Ergebnisse einzuordnen und eben diese Gründe herauszuarbeiten.
-        Vorweg möchte ich betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren, es ist zudem  durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten.
+        Die Ergebnisse liefern leider keine Unterstützung der vorgestellten Hypothesen. Dies kann verschiedene Gründe haben. An dieser Stelle werde ich die Ergebnisse einordnen und die Gründe herauszuarbeiten.
+        Vorweg möchte ich betonen, dass die für diese Pilotierungsstudie erfasste Datenlage, nicht hinreichend gewesen wäre um konfidente Ergebnisse zu präsentieren. Es ist zudem durchaus möglich, dass mit einer größeren Teilnehmerzahl Effekte feststellbar gewesen wären, die die Hypothesen bestätigt hätten.
 
-        \subsection{Schätzung der bewegten Distanz}
+        \subsection{Schätzung der zurückgelegten Distanz}
             Die oben formulierte Hypothese zur Schätzung der zurückgelegten Distanz lautete wie folgt:
 
-            Die \textquote{Real-Walking} Fortbewegungsart vereinfacht die Schätzung der zurückgelegten Distanz im Vergleich zu den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            Nachdem ein mit der hier vorgestellten Levelgenerierungmethode erstelltes Level mit der Fortbewegungsart \textquote{Real-Walking} durchquert wurde, ist die Fähigkeit, die darin zurückgelegte Strecke einzuschätzen, besser als wenn es mit den alternativen Fortbewegungsarten \textquote{Joystick} und \textquote{Teleportation} durchquert wurde.
 
-            Die, in der hier vorgestellten Pilotierungsstudie, erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzer und gemessender zurückgelegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} ist nicht geringer, als die den Alternativen. Es konnten keine signifikanten  Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
+            Die in der hier vorgestellten Pilotierungsstudie erhobenen Daten konnten diese Hypothese leider nicht stützen, die Gegenhypothese konnte nicht verworfen werden. Die absolute Differenz zwischen geschätzter und gemessener zurückgelegter Distanz ist bei der Fortbewegungsart \textquote{Real-Walking} nicht geringer als bei den Alternativen. Es konnten keine signifikanten Unterschiede bei den Fortbewegungsbedingungen erfasst werden.
 
-            Ich möchte versuchen dafür einige mögliche Gründe herauszuarbeiten.
+            Im Folgenden arbeite ich einige mögliche Gründe dafür heraus.
 
-            In jedem der Räume ist es notwendig mithilfe eines Rotationgains die virtuelle Umgebung um
-            90\textdegree
-            um die reale Umgebung zu rotieren. Auch wenn dieser Effekt aufgrund der Subtilität des Rotationgains nicht bemerkt wird, könnte dieser Effekt dennoch für eine starke Beeinträchtigung der Orientierungsfähigkeit der Nutzer:innen sorgen. Mehrere Proband:innen gaben wärend der Real-Walking Fortbewegungsbedingung an, schon nach einem Raum die Orientierung, wo im realen Trackingspace sie sich gerade befänden verloren zu haben. Dies sollte nicht überraschen, da der virtuell bewegte Pfad ohne Redirection-Maßnahmen so ja aufgrund der Trackingspace-Grenzen garnicht in der realen Umgebung möglich gewesen wäre. Ob dieser Effekt tatsächlich das kognitive Raumverständnis der virtuellen Umgebung erschwert sollte in zukünftigen Arbeiten konkreter Untersucht werden. Dabei sollte dann die zusätzliche Redirection Komponente, der durch die Wandgenerierung entstehenden Impossible Spaces herausgenommen werden, da diese für zusätzliche Verwirrung sorgen könnten.
+            In jedem der Räume ist es notwendig, mithilfe eines Rotation-Gains die virtuelle Umgebung
+            90\textdegree\
+            um die reale Umgebung zu rotieren. Auch wenn dieser Effekt aufgrund der Subtilität des Rotation-Gains nicht bemerkt wird, könnte dieser Effekt dennoch für eine starke Beeinträchtigung der Orientierungsfähigkeit der Nutzer:innen sorgen. Mehrere Proband:innen gaben während der Real-Walking Versuchsbedingung mit der Fortbewegungsmethode \textquote{Real-Walking} verbal an, schon nach einem Raum die Orientierung verloren zu haben, wo im realen Trackingspace sie sich gerade befinden. Dies sollte nicht überraschen, da der virtuell zurückgelegte Pfad ohne Redirection-Maßnahmen aufgrund der Trackingspace-Grenzen nicht in der realen Umgebung möglich gewesen wäre. Ob dieser Effekt tatsächlich das kognitive Raumverständnis der virtuellen Umgebung erschwert, sollte in zukünftigen Arbeiten konkreter untersucht werden. Dabei sollte die zusätzliche Redirection Komponente der durch die Wandgenerierung entstehenden Impossible-Spaces herausgenommen werden, da diese für zusätzliche Verwirrung sorgen könnten.
 
-            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt werden konnten ist die Monotonität der generierten Räume.
-            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erstellen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern könnten. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dies ein Grundproblem von generierten (generischen) Leveln.
+            Ein weiterer möglicher Grund dafür, wieso diese Hypothesen nicht unterstützt werden konnten, ist die Monotonie der generierten Räume.
+            Die Räume unterscheiden sich voneinander nur unwesentlich, nämlich in Form der Seite des Raumes, an die der Korridor zum nächsten Raum generiert wird. Es liegt nahe, dass Nutzer:innen eine bessere kognitive Karte der Umgebung erstellen könnten, wenn sie gewisse Anhaltspunkte hätten, an die sie sich erinnern können. Dies lässt sich begrenzt verbessern, indem bei der Levelgenerierung in die Räume vordefinierte Objekte platziert werden. Dies ist ein Grundproblem von generierten (generischen) Leveln.
 
-            In diesem Fall könnte es also so sein, dass sich die Fähigkeit von Nutzer:innen, die zurückgelegte Distanz einzuschätzen, zwischen von Menschen gestalteten und von Computern generierten Leveln signifikant unterscheidet. Diese Überlegung könnte einen Versuchaufbau gestalten, bei dem die kognitive Kartenbildung in menschlich gestalteten Leveln, mit der in prozedural generierten Leveln verglichen wird.
+            In diesem Fall könnte es also so sein, dass sich die Fähigkeit von Nutzer:innen, die zurückgelegte Distanz einzuschätzen, zwischen von Menschen gestalteten und von Computern generierten Leveln signifikant unterscheidet. Vor dem Hintergrund dieser Überlegung könnte ein Versuchsaufbau gestaltet werden, bei dem die kognitive Kartenbildung in menschlich gestalteten Leveln mit der in prozedural generierten Leveln verglichen wird.
 
-            Ein weiterer möglicher Grund dafür wieso diese Hypothesen nicht unterstützt wird könnte sein, dass die vorher getroffene Annahme, die Schätzung der zurückgelegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft.
-            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung, die Größe der virtuellen Umgebung besser einschätzen können, als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre eigene zurückgelegte Distanz über mehrere Räume hinweg besser einschätzen können, als in anderen Bedingungen.
+            Ein weiterer möglicher Grund dafür, wieso diese Hypothesen nicht unterstützt wird, kann sein, dass die vorher getroffene Annahme, die Schätzung der zurückgelegten Distanz nähme mit besserem Raumverständnis zu, nicht zutrifft.
+            Zwar weist eine Post-Hoc Untersuchung von Peck et al. \cite{peck-vergleich-2011} darauf hin, dass Versuchspersonen bei einer Real-Walking Fortbewegungsbedingung die Größe der virtuellen Umgebung besser einschätzen können als bei alternativen virtuellen Fortbewegungsarten, allerdings bedeutet dies auch nicht zwingend, dass die Versuchspersonen ihre eigene zurückgelegte Distanz über mehrere Räume hinweg besser einschätzen können, als in anderen Bedingungen.
 
-            In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hätte, wie gut die Schätzungen sind. Aus diesem Grund sollte in zukünftigen Studien mit unterschiedlichen Methoden gemessen werden, wie gut das Raumverständnis der Proband:innen ist.
+            In diesem Fall gäbe es mit der Real-Walking Fortbewegungsart zwar ein besseres Raumverständnis der Nutzer:innen, allerdings wäre diese von der hier angewandten Methode unentdeckt geblieben, da sie keine Auswirkungen darauf hat, wie gut die Schätzungen sind. Aus diesem Grund sollte in zukünftigen Studien mit unterschiedlichen Methoden gemessen werden, wie gut das Raumverständnis der Proband:innen ist.
 
-            Alternative Möglichkeiten das Raumverständnis zu Messen sind beispielsweise, die Nutzer:innen zu bitten nach dem Durchschreiten des Levels eine Karte von diesem zu zeichnen, und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen, oder wärend des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen, und dann die Differenz der gezeigten Winkel mit den gemessenen Winkeln zu vergleichen. (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}). Es wäre dann sinnvoll die prozudural generierten Level zu Speichern und zu exportieren, sodass die Beschreibungen der Proband:innen mit den wirklich generierten Leveln verglichen werden können. Bei Leveln, die mit der hier vorgestellten Levelgeneierungsmethode erstellt wurden, wäre es simpel dies zu lösen, indem der Algorithmus so erweitert würde, dass die in \autoref{sec:random} beschriebenen Variablen ex- und importierbar gemacht würden.
+            Alternative Möglichkeiten, das Raumverständnis zu messen, sind beispielsweise, die Nutzer:innen zu bitten, nach dem Durchschreiten des Levels eine Karte von diesem zu zeichnen und die Genauigkeit der Karte dann von einer Jury bewerten zu lassen. Eine andere Möglichkeit wäre es, während des Levels Objekte zu platzieren, auf die, die Proband:innen später zeigen müssen und dann die Differenz der gezeigten Winkel mit den gemessenen Winkeln zu vergleichen. (siehe \cite{peck-vergleich-2011, langbehn-vergleich-2018}). Es wäre dann sinnvoll, die prozedural generierten Level zu speichern und zu exportieren, sodass die Beschreibungen der Proband:innen mit den wirklich generierten Leveln verglichen werden können. Bei Leveln, die mit der hier vorgestellten Levelgenerierungsmethode erstellt wurden, wäre es simpel, dies zu lösen, indem der Algorithmus so erweitert würde, dass die in \autoref{sec:random} beschriebenen Variablen ex- und importierbar gemacht würden.
 
         \subsection{Präsenzgefühl in der virtuellen Umgebung}
             Die oben formulierte Hypothese zum Präsenzgefühl lautete:
 
-            Mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden alternativen \textquote{Joystick} und \textquote{Teleportation}.
+            Beim Durchqueren der mit der hier vorgestellten Levelgenerierungmethode erstellten Level mit der \textquote{Real-Walking} Fortbewegungsart haben Nutzer:innen ein größeres Präsenzgefühl als mit den beiden Alternativen \textquote{Joystick} und \textquote{Teleportation}.
 
-            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,67$) ist deutlich größer, als bei der Joystick-($1,56$) oder Teleportationsbedingung ($1$).
-            Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede, sogar mit starker Effektstärke hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
+            Der Durchschnittswert der SUS-Präsenz-Scores ist bei der Real-Walking Testbedingung ($2,67$) ist deutlich größer als bei der Joystick-($1,56$) oder Teleportationsbedingung ($1$).
+            Leider kann für diese Hypothese in den hier erhobenen Daten dennoch keine Unterstützung gefunden werden. Zwar weist ein statistischer Test der Präsenz-Scores der drei Fortbewegungsarten auf signifikante Unterschiede hin, allerdings lassen sich in den darauf folgenden Tests, in denen die 3 Fortbewegungsarten paarweise miteinander verglichen werden keine signifikanten Unterschiede feststellen.
 
-            Ein möglicher Grund für diese ambivalenten Ergebnisse hat ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnte, konnten nur nicht-parametrische statistische Tests verwendet werden.
-            Es ist davon auszugehen, dass die Ergebnisse im Falle einer größeren Datenmenge um einiges klarer gewesen wären.
+            Ein möglicher Grund für diese ambivalenten Ergebnisse ist die Datenlage, aus der diese Ergebnisse entstanden, die um einiges weniger gut ist, als sie in einer offiziellen Studie gewesen wäre. Da eine Normalverteilung der Daten nicht angenommen werden konnte, konnten nur nicht-parametrische statistische Tests verwendet werden.
+            Es ist davon auszugehen, dass die Ergebnisse im Falle einer größeren Datenmenge deutlich klarer gewesen wären.
 
-            Folglich ist es wünschenswert diese Frage in einem größerem Kontext genauer zu untersuchen.
+            Folglich ist es wünschenswert, diese Frage in einem größerem Kontext genauer zu untersuchen.
 
     \section{Konklusion}
-        In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raum-Basierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen, mithilfe von Rotationgains und Impossible Spaces, ermöglicht wird sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der die Illusion entsteht sie würden die Grenzen des realen Trackingspaces verlassen und könnten unabhängig davon die virtuelle Umgebung erkunden. Diese Methodik ermöglicht potentiell unendlich lange Level, bei denen die Generierung während der Erkundung des Levels fortgeführt wird.
+        In dieser Arbeit wurde eine Methode zur prozeduralen Generierung von Raumbasierten Leveln für virtuelle Umgebungen vorgestellt, bei der  Nutzer:innen mithilfe von den Redirection-Techniken \textquote{Rotation-Gains} und \textquote{Impossible-Spaces} ermöglicht wird, sich mit natürlichem Gehen auf eine Weise von Raum zu Raum fortzubewegen, bei der der nicht begehbare Bereich der virtuellen Umgebung immer wieder transformiert wird, ohne dass einem dies bewusst wird. Es entsteht die Illusion, die Nutzer:in könnte unabhängig von ihrem realen Trackingspace die virtuelle Umgebung erkunden. Diese Methodik ermöglicht potentiell endlos lange Level, bei denen die Generierung während der Erkundung des Levels fortgeführt wird.
 
-        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht Vorteile, die die Ermöglichung echten Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung zurückgelegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen, zu zeigen. Dies könnte sowohl an der, den Umständen geschuldeten geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in mit dieser Methode prozedural generierten Leveln gegeben sind.
+        Anschließend wurde eine informelle Pilotierungsstudie vorgestellt und durchgeführt, bei der drei verschiedene Fortbewegungsarten (Joysticksteuerung, Teleportierung und Real-Walking mit den eben genannten Redirection-Techniken) in, mit dieser Methode generierten, Leveln verglichen wurden. Dabei wurde versucht Vorteile zu zeigen, die die Ermöglichung natürlichen Gehens in virtuellen Umgebungen bieten könnte, nämlich eine vereinfachte Schätzung zurückgelegter Distanzen und ein erhöhtes Präsenzgefühl für Nutzer:innen. Dies könnte sowohl an der - den Umständen geschuldeten - geringen Datenlage von 10 Versuchspersonen liegen, als auch daran, dass diese Vorteile nicht in mit dieser Methode prozedural generierten Leveln gegeben sind.
 
-% \chapter*{Danksagungen}\label{chapter:acknowledgements}
-% \addcontentsline{toc}{chapter}{Danksagungen}
-%     An dieser Stelle möchte ich mich bei allen bedanken, die mich während diesem Projekt unterstützt und motiviert haben.
-%     Ganz herzlicher Dank gebürt bei all meinen Freunden und Verwandten, die freundlicherweise an der Studie teilgenommen haben! Ganz besonderer Dank geht dabei an meine Eltern, Jutta Dalladas-Djemai und Chaffok Djemai, für die vielen Jahre Unterstützung, die mir ermöglicht haben zu Studieren und abzuschließen, und an meine Freundin Nora Schwerdtfeger, die mich in schwierigen Phasen stets motiviert hat.
-%     Außerdem möchte ich mich bei meinem Betreuer Dr. Eike Langbehn bedanken, dessen Expertise und Gedult mir die Arbeit an diesem Projekt erleichtert hat.
-%und am fachbereich
+        Weiterführende Studien auf Basis einer größeren Datenmenge sind notwendig, um die Vorteile der Ermöglichung natürlichen Gehens in zufallsgenerierten virtuellen Umgebungen mithilfe von Redirection-Techniken realistisch einzuschätzen und um in dieser Arbeit eröffneten Fragen weiter auf den Grund zu gehen.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %TODO: auf peck verweisen ===>
-        %Moreover, RFED participants were able to more accurately estimate VE size.
+\chapter*{Danksagungen}\label{chapter:acknowledgements}
+\addcontentsline{toc}{chapter}{Danksagungen}
+    An dieser Stelle möchte ich mich bei Allen bedanken, die mich während diese Projekts unterstützt und motiviert haben.
+    Herzlicher Dank gebürht bei all meinen Freunden und Verwandten, die freundlicherweise an der Studie teilgenommen haben!
+    Ganz besonderes dankbar bin ich Jutta Dalladas-Djemai, für das ausgiebige Korrekturlesen dieser Arbeit.
+    Außerdem möchte ich mich bei meinem Betreuer Dr. Eike Langbehn bedanken, dessen Expertise und Gedult mir die Arbeit an diesem Projekt erleichtert hat.
 
 % keep an blank line above

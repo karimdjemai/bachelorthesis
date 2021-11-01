@@ -12,8 +12,6 @@ Vector2[] GenerateUV(Vector3[] vertices, int[] triangles)
 
             if (VectorsAreParallel(normal, toFrontWall))
             {
-                //DebugHighlightFace(vertices[vi0], vertices[vi1], vertices[vi2], Color.magenta);
-
                 Vector3 v0 = vertices[vi0];
                 Vector3 v1 = vertices[vi1];
                 Vector3 v2 = vertices[vi2];
@@ -34,8 +32,6 @@ Vector2[] GenerateUV(Vector3[] vertices, int[] triangles)
             }
             else if (VectorsAreParallel(normal, leftToRight))
             {
-                // DebugHighlightFace(vertices[vi0], vertices[vi1], vertices[vi2], Color.magenta);
-
                 Vector3 v0 = vertices[vi0];
                 Vector3 v1 = vertices[vi1];
                 Vector3 v2 = vertices[vi2];
